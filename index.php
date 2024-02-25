@@ -1,15 +1,8 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-  <link href="./src/tailwind.css" rel="stylesheet">
-</head>
-<body>
-  <h1 class="text-xl  items-center font-bold  bg-red-900  hover:text-green-500">
-   banana
-  </h1>
+<!-- <!doctype html>
 
-</body>
-</html>
+<?php 
+require_once './router.php';
+require_once './public/group1/routes.php';
+
+// echo $_SERVER['REQUEST_URI'];
+// Router::handle('GET', '/','./src/index.php');
