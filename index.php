@@ -1,8 +1,23 @@
-<!-- <!doctype html>
-
 <?php 
 require_once './router.php';
-require_once './public/group1/routes.php';
 
-// echo $_SERVER['REQUEST_URI'];
-// Router::handle('GET', '/','./src/index.php');
+// Group #
+require_once './public/delivery/routes.php';
+
+// Group #
+require_once './public/finance/routes.php';
+
+// Group #
+require_once './public/humanResources/routes.php';
+
+// Group #
+require_once './public/inventory/routes.php';
+
+// Group #
+require_once './public/productOrder/routes.php';
+
+// Group #
+require_once './public/sales/routes.php';
+
+
+
