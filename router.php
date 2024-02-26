@@ -6,7 +6,7 @@ class Router
         // print_r($_SERVER);
         $currentMethod = $_SERVER['REQUEST_METHOD'];
         $currentUri = $_SERVER['REQUEST_URI'];
-        // echo $path;
+        // echo $path; 
         if($currentMethod != $method ){
             require $filename;
         }
