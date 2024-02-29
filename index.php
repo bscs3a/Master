@@ -30,7 +30,7 @@ require_once './public/delivery/routes.php';
     <link href="./src/tailwind.css" rel="stylesheet">
 </head>
 
-<body class="bg-slate-100">
+<body class="bg-gray-100">
     <div class="flex flex-col items-center justify-center h-screen">
         <br>
         <button onclick="location.href='/Master/sls/sample'"
