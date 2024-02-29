@@ -2,7 +2,7 @@
 require_once './router.php';
 
 // Group #1
-require_once './public/productOrder/routes.php';
+require_once './public/admin/routes.php';
 
 // Group #2
 require_once './public/humanResources/routes.php';
@@ -33,10 +33,10 @@ require_once './public/delivery/routes.php';
 <body class="bg-gray-100">
     <div class="flex flex-col items-center justify-center h-screen">
         <br>
+        <button onclick="location.href='/Master/adm/sample'"
+            class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Admin Page</button><br>
         <button onclick="location.href='/Master/sls/sample'"
             class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Sales Page</button><br>
-        <button onclick="location.href='/Master/po/sample'"
-            class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Product Order Page</button><br>
         <button onclick="location.href='/Master/inv/sample'"
             class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Inventory Page</button><br>
         <button onclick="location.href='/Master/hr/sample'"
