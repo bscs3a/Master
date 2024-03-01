@@ -7,3 +7,6 @@ For Tailwind to work
 `npm run build`
 
 Try to understand how the Routing works at `routes.php` of your system folder and check `sample.php` & `test-link.php` for sample usage.
+
+Edgar pogi
+g
