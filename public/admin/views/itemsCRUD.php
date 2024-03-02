@@ -84,7 +84,7 @@
                 <div class="row" style="margin-top:1%">
                     <div class="col-md-12">
                        <input type="submit" name="insert" class="btn btn-success" value="submit">
-                       <a href="dashboard.php" class="btn btn-danger">Back</a>
+                       <a href="adm.sample.php" class="btn btn-danger">Back</a>
                     </div>
                 </div>
             </form>
