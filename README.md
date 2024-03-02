@@ -14,10 +14,11 @@ cp .env.example .env
 ```
 
 ### For Tailwind to work
+> run this command first and try to open other browsers if changes are not shown before proceeding
 ```
 npm run build
 ```
-> run npm run build command first and try to open other browsers if changes are not shown before proceeding
+
 
 ### For Gulp Live Server
 ```
