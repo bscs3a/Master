@@ -6,7 +6,8 @@
     "tailwindcss": "^3.4.1"
   },
   "scripts": {
-    "build": "npx tailwindcss -i ./src/input.css -o ./src/tailwind.css --watch"
+    "build": "npx tailwindcss -i ./src/input.css -o ./src/tailwind.css --watch",
+    "serve": "gulp serve"
   },
   "dependencies": {
     "dotenv": "^16.4.5"
