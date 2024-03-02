@@ -22,7 +22,7 @@ npm run build
 
 ### For Gulp Live Server
 ```
-gulp serve
+npm run serve
 ```
 
 ### Routing
