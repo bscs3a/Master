@@ -1,10 +1,13 @@
 # READ ME
 
 For Newly Cloned Files
-`npm install`
+```npm install```
+
+Clone enviroment variables
+```cp .env.example .env```
 
 For Tailwind to work
-`npm run build`
+```npm run build```
 > run npm run build command first and try to open other browsers if changes are not shown before proceeding
 
 For Gulp Live Server
