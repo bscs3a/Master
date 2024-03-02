@@ -10,7 +10,8 @@ class Router
         if($currentMethod != $method ){
             require $filename;
         }
-        $root = '/Master';
+        // $root = '/Master';
+        $root = '/Human-Resources';
         $pattern = '#^'.$root.$path.'$#sD';
         if(preg_match($pattern, $currentUri)){
             require_once $filename;
