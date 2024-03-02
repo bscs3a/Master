@@ -20,7 +20,7 @@
                 <ul> <!-- either these orrrr straight up departments nalang then when clicked, dun na lilitaw employees for each
                             department -->
                     <li>
-                        <a href="hr.employees.php">
+                        <a href="#">
                             <span 
                                 class="text-blue-500 ">
                                 Employees
@@ -28,12 +28,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="hr.departments.php">
+                        <a href="#">
                             <span>Departments</span>
                         </a>
                     </li>
                     <li>
-                        <a href="hr.payroll.php">
+                        <a href="#">
                             <span>Payroll</span>
                         </a>
                     </li>
