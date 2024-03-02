@@ -1,5 +1,6 @@
 var gulp        = require('gulp');
 var browserSync = require('browser-sync').create();
+require('dotenv').config();
 
 // Array of directories
 var directories = ['admin', 'delivery', 'finance', 'humanResources', 'inventory', 'sales'];
@@ -7,7 +8,7 @@ var directories = ['admin', 'delivery', 'finance', 'humanResources', 'inventory'
 // Static server
 gulp.task('serve', function() {
     browserSync.init({
-        proxy: process.env.PROXY_ADDRESS || "localhost/Master",
+        proxy: process.env.PROXY_ADDRESS,
         browser: "chrome",
         middleware: function (req, res, next) {
             res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
