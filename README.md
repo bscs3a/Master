@@ -4,6 +4,9 @@
 ```
 npm install
 ```
+```
+composer install
+```
 
 ### Clone enviroment variables and insert your own accounts and dir
 ```
