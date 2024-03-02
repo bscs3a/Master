@@ -33,7 +33,7 @@ require_once './public/delivery/routes.php';
 <body class="bg-gray-100">
     <div class="flex flex-col items-center justify-center h-screen">
         <br>
-        <button onclick="location.href='./public/admin/views/adm.sample.php'"
+        <button onclick="location.href='/Master/sls/sample'"
             class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Admin Page</button><br>
         <button onclick="location.href='/Master/sls/sample'"
             class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Sales Page</button><br>
