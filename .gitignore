@@ -1,4 +1,4 @@
 node_modules/
 vendor/
-src/tailwind.css/
+src/tailwind.css
 .env
