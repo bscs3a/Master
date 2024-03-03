@@ -1909,11 +1909,6 @@ video {
   background-color: rgb(226 232 240 / var(--tw-bg-opacity));
 }
 
-.bg-yellow-700{
-  --tw-bg-opacity: 1;
-  background-color: rgb(161 98 7 / var(--tw-bg-opacity));
-}
-
 .decoration-slice{
   -webkit-box-decoration-break: slice;
           box-decoration-break: slice;
@@ -2115,6 +2110,10 @@ video {
 
 .align-super{
   vertical-align: super;
+}
+
+.font-sans{
+  font-family: Montserrat, sans-serif;
 }
 
 .text-3xl{
