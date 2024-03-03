@@ -12,6 +12,8 @@
     class="px-6 py-3 text-white bg-blue-500 rounded hover:bg-blue-700">Go to Link Test</button>
     <button onclick="location.href='/Master/sls/transaction-history'"
     class="px-6 py-3 text-white bg-blue-500 rounded hover:bg-blue-700">Go to Transaction History</button>
+    <button onclick="location.href='/Master/sls/catalog'"
+    class="px-6 py-3 text-white bg-blue-500 rounded hover:bg-blue-700">Go to Catalog</button>
 </div>
 
 </html>
