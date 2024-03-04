@@ -39,7 +39,7 @@ require_once './public/delivery/routes.php';
             class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Sales Page</button><br>
         <button onclick="location.href='/Master/inv/sample'"
             class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Inventory Page</button><br>
-        <button onclick="location.href='/Master/hr/sample'"
+        <button onclick="location.href='/Master/hr/dashboard'"
             class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Human Resources Page</button><br>
         <button onclick="location.href='/Master/fin/sample'"
             class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Finance Page</button><br>
