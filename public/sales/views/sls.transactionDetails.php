@@ -13,9 +13,9 @@
         <h1 class="mb-3 text-xl font-bold text-gray-700">Transaction Details</h1>
         <div class="w-full bg-white rounded-lg overflow-hidden shadow-lg p-4">
             <div class="p-6 rounded">
-                <h2 class="mb-2 text-lg font-semibold text-gray-600">Name: John Doe</h2>
-                <h2 class="mb-2 text-lg font-semibold text-gray-600">Address: 123 Main St, Anytown, USA</h2>
-                <h2 class="mb-2 text-lg font-semibold text-gray-600">Delivery Status: Delivered</h2>
+                <h2 class="mb-2 text-medium font-semibold text-gray-600">Name: John Doe</h2>
+                <h2 class="mb-2 text-medium font-semibold text-gray-600">Address: 123 Main St, Anytown, USA</h2>
+                <h2 class="mb-2 text-medium font-semibold text-gray-600">Delivery Status: Delivered</h2>
             </div>
             <hr class="my-4 border-gray-300">
             <h2 class="text-lg font-semibold text-center my-3 text-gray-700">Items</h2>
@@ -53,8 +53,8 @@
                 </div>
             </div>
             <div class="p-6">
-                <h2 class="mb-2 text-lg font-semibold text-gray-600">Quantity: 3</h2>
-                <h2 class="mb-2 text-lg font-semibold text-gray-600">Total Amount: &#8369;1500.00</h2>
+                <h2 class="mb-2 text-medium font-semibold text-gray-600">Quantity: 3</h2>
+                <h2 class="mb-2 text-medium font-semibold text-gray-600">Total Amount: &#8369;1500.00</h2>
             </div>
         </div>
         <button onclick="window.history.back();" class="px-4 py-2 mt-4 text-white bg-black rounded hover:bg-gray-800 transition-colors">Back</button>
