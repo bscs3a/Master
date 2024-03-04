@@ -91,12 +91,13 @@
             <!-- Stocks Chart Card -->
             <div class="bg-white rounded-md border p-6 shadow-md shadow-black/5 h-full">
                 <!-- Card header -->
-                <div class="flex justify-between">
+                <div class="flex justify-between mb-2">
                     <!-- Card title -->
-                    <div class="mb-8">
+                    <div class="">
                         <div class="text-lg font-semibold text-gray-800" style="color: #262261;">
-                            <i class="ri-box-3-fill" style="font-size: 1.2em;"></i> Stocks
+                            <i class="ri-box-3-fill" style="font-size: 1.2em;"></i> Stocks: <span class="font-bold text-gray-400">200/500</span>
                         </div>
+
                     </div>
                     <!-- Card options -->
                     <div>
@@ -104,10 +105,11 @@
                     </div>
                 </div>
                 <!-- Stocks Chart -->
-                <div class="">
+                <div class="border border-dashed p-2 py-5 px-5">
                     <canvas id="stocksChart" class="w-full h-full"></canvas>
                 </div>
             </div>
+
         </div>
 
         <div>
@@ -179,7 +181,7 @@
 
 
         <!-- Go to Sales Button -->
-        <button onclick="location.href='/Master/sls/sample'" class="mt-6 px-6 py-3 text-white bg-blue-500 rounded hover:bg-blue-700">Go to Sales</button>
+        <button onclick="location.href='/Master/sls/sample'" class="mt-6 px-6 py-3 text-white bg-black rounded">Go to Sales</button>
     </div>
 
 
@@ -193,13 +195,13 @@
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 datasets: [{
                     label: 'Sales',
-                    data: [120, 60, 50, 180, 120, 200, 300, 400, 1000, 600, 700, 800],
+                    data: [60, 30, 25, 90, 60, 100, 150, 200, 500, 300, 350, 400],
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 2
                 }, {
                     label: 'Target',
-                    data: [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200],
+                    data: [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 400],
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 2
@@ -221,12 +223,19 @@
         var stocksChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Sold', 'Remaining'],
+                labels: ['Stocks'],
                 datasets: [{
-                    label: 'Stocks',
-                    data: [24, 76],
-                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(75, 192, 192, 0.2)'],
-                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)'],
+                    label: 'Sold',
+                    data: [300],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2
+                },
+                {
+                    label: 'Remaining',
+                    data: [200],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 2
                 }]
             },
@@ -234,7 +243,8 @@
                 responsive: true,
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        max: 500 // Set the maximum value of the y-axis to 500
                     }
                 }
             }
