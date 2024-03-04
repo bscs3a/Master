@@ -36,15 +36,15 @@ require_once './public/delivery/routes.php';
     <!-- Start: Sidebar -->
 
     <div class="fixed  hover:bg-purple-950 left-0 top-0 w-64 h-full p-4 z-50 sidebar-menu transition-transform">
-        
+
         <div href="#" class="flex items-center pb-4">
-        <img src="https://placehold.co/50x50" alt="" class="w-10 h-10 rounded object-cover">
+            <img src="https://placehold.co/50x50" alt="" class="w-10 h-10 rounded object-cover">
 
             <span class="text-4xl font-bold ml-3">BSCS 3A</span>
         </div>
 
         <ul class="mt-3">
-           
+
             <li class="mb-1 group active">
                 <a href="#" class="flex items-center py-2 px-4 bg-violet-950 text-black">
                     <i class="ri-speed-up-line mr-3 text-lg"></i>
@@ -130,123 +130,126 @@ require_once './public/delivery/routes.php';
 
     <div class="fixed top-0 left-0 w-full h-full z-40 md:hidden sidebar-overlay"></div>
     <!-- End: Sidebar -->
-    
+
     <!-- Start: Dashboard -->
 
     <main class="w-full md:w-[calc(100%-256px)] md:ml-64 min-h-screen transition-all main">
 
-    <!-- Start: Header -->
+        <!-- Start: Header -->
 
-    <div class="py-2 px-6 bg-white flex items-center shadow-md sticky top-0 left-0 z-30">
-    
-        <!-- Start: Active Menu -->
+        <div class="py-2 px-6 bg-white flex items-center shadow-md sticky top-0 left-0 z-30">
 
-        <button type="button" class="text-lg sidebar-toggle">
-            <i class="ri-menu-line"></i>
-        </button>
+            <!-- Start: Active Menu -->
 
-        <ul class="flex items-center text-md ml-4">
+            <button type="button" class="text-lg sidebar-toggle">
+                <i class="ri-menu-line"></i>
+            </button>
 
-            <li class="mr-2">
-                <p class="text-black font-medium">Finance</p>
-            </li>
+            <ul class="flex items-center text-md ml-4">
 
-        </ul>
-        
-        <!-- End: Active Menu -->
+                <li class="mr-2">
+                    <p class="text-black font-medium">Finance</p>
+                </li>
 
-        <!-- Start: Profile -->
+            </ul>
 
-        <ul class="ml-auto flex items-center">
-            <div class="text-black font-medium">Sample User</div>
-            <li class="dropdown ml-3">
-                <i class="ri-arrow-down-s-line"></i>
-            </li>
-        </ul>
+            <!-- End: Active Menu -->
 
-        <!-- End: Profile -->
+            <!-- Start: Profile -->
 
-    </div>
+            <ul class="ml-auto flex items-center">
+                <div class="text-black font-medium">Sample User</div>
+                <li class="dropdown ml-3">
+                    <i class="ri-arrow-down-s-line"></i>
+                </li>
+            </ul>
 
-    <!-- End: Header -->
-
-    <!-- Start: Dashboard Analytics -->
-
-    <div class="w-full min-h-screen p-6 bg-white">
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-            
-            <!-- Start: Dashboard Analytics: Total Items -->
-
-            <div class="bg-white rounded-md border border-gray-100 p-4 shadow-md">
-                
-                <div class="flex justify-between mb-4">
-                    <div>
-                        <div class="flex items-center mb-1">
-                            <div class="text-2xl font-semibold">0</div>                    </div>
-                        <div class="text-sm font-medium text-black">Total Items</div>
-                    </div>
-                </div>
-
-            </div>
-            
-            <!-- End: Dashboard Analytics: Total Items -->
-            
-            <!-- Start: Dashboard Analytics: Total Invoice -->
-
-            <div class="bg-white rounded-md border border-gray-100 p-4 shadow-md">
-                
-                <div class="flex justify-between mb-4">
-                    <div>
-                        <div class="flex items-center mb-1">
-                            <div class="text-2xl font-semibold">0</div>                    </div>
-                        <div class="text-sm font-medium text-black">Total Invoice</div>
-                    </div>
-                </div>
-
-            </div>
-            
-            <!-- End: Dashboard Analytics: Total Invoice -->
-
-            <!-- Start: Dashboard Analytics: Total Revenue-->
-
-            <div class="bg-white rounded-md border p-6 shadow-md">
-                <div class="flex justify-between mb-4">
-                    <div>
-                        <div class="flex items-center mb-1">
-                            <div class="text-2xl font-semibold">0</div>
-                        </div>
-                        <div class="text-sm font-medium text-black">Total Revenue</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- End: Dashboard Analytics: Total Revenue -->
-
-            <!-- Start: Dashboard Analytics: Total Expense -->
-
-            <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md">
-                <div class="flex justify-between mb-6">
-                    <div>
-                        <div class="text-2xl font-semibold mb-1">0</div>
-                        <div class="text-sm font-medium text-black">Total Expense</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- End: Dashboard Analytics: Total Expense -->
+            <!-- End: Profile -->
 
         </div>
-    
-        <!-- Start: Sales Value -->
 
-            <div class="bg-white border border-gray-100 shadow-md p-6 rounded-md border border-gray-100 p-6 shadow-md  p-6">
+        <!-- End: Header -->
+
+        <!-- Start: Dashboard Analytics -->
+
+        <div class="w-full min-h-screen p-6 bg-white">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+
+                <!-- Start: Dashboard Analytics: Total Items -->
+
+                <div class="bg-white rounded-md border border-gray-100 p-4 shadow-md">
+
+                    <div class="flex justify-between mb-4">
+                        <div>
+                            <div class="flex items-center mb-1">
+                                <div class="text-2xl font-semibold">0</div>
+                            </div>
+                            <div class="text-sm font-medium text-black">Total Items</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- End: Dashboard Analytics: Total Items -->
+
+                <!-- Start: Dashboard Analytics: Total Invoice -->
+
+                <div class="bg-white rounded-md border border-gray-100 p-4 shadow-md">
+
+                    <div class="flex justify-between mb-4">
+                        <div>
+                            <div class="flex items-center mb-1">
+                                <div class="text-2xl font-semibold">0</div>
+                            </div>
+                            <div class="text-sm font-medium text-black">Total Invoice</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- End: Dashboard Analytics: Total Invoice -->
+
+                <!-- Start: Dashboard Analytics: Total Revenue-->
+
+                <div class="bg-white rounded-md border p-6 shadow-md">
+                    <div class="flex justify-between mb-4">
+                        <div>
+                            <div class="flex items-center mb-1">
+                                <div class="text-2xl font-semibold">0</div>
+                            </div>
+                            <div class="text-sm font-medium text-black">Total Revenue</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- End: Dashboard Analytics: Total Revenue -->
+
+                <!-- Start: Dashboard Analytics: Total Expense -->
+
+                <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md">
+                    <div class="flex justify-between mb-6">
+                        <div>
+                            <div class="text-2xl font-semibold mb-1">0</div>
+                            <div class="text-sm font-medium text-black">Total Expense</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- End: Dashboard Analytics: Total Expense -->
+
+            </div>
+
+            <!-- Start: Sales Value -->
+
+            <div
+                class="bg-white border border-gray-100 shadow-md p-6 rounded-md border border-gray-100 p-6 shadow-md  p-6">
                 <div class="flex justify-between mb-4 items-start">
                     <div class="font-medium"><i class="ri-line-chart-line mr-3"></i>Sales Value</div>
                 </div>
             </div>
-        </div>   
-        <!-- End: Sales Value -->    
+        </div>
+        <!-- End: Sales Value -->
     </main>
 
     <!-- End: Dashboard -->
@@ -265,6 +268,10 @@ require_once './public/delivery/routes.php';
             class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Finance Page</button><br>
         <button onclick="location.href='/Master/dlv/sample'"
             class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Delivery Page</button><br>
+
+        <!-- Test Dashboard href -->
+        <button onclick="location.href='/Master/fin/dashboard'"
+            class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Finance Dashboard Page</button><br>
     </div>
 
 </body>
