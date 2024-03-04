@@ -112,7 +112,7 @@
 </ul>
 </div>
 <!-- end: Sidebar -->
-<script src="Again/js/script.js"></script>
+<script src="./../hr/js/script.js"></script> <!-- fix the path -->
  
 <!-- Start Main Bar -->
 <main class="w-[calc(100%-256px)] ml-64 bg-gray-50 min-h-screen">
