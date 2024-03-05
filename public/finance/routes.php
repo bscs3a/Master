@@ -12,3 +12,10 @@ Router::handle(
     '/fin/dashboard',
     "$path/fin.dashboard.php",
 );
+
+
+Router::handle(
+    'GET',
+    '/fin/charts',
+    "$path/fin.charts.php",
+);

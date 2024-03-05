@@ -9,8 +9,8 @@ var directories = ['admin', 'delivery', 'finance', 'humanResources', 'inventory'
 gulp.task('serve', function() {
     browserSync.init({
         // proxy: 'localhost/' + process.env.PROXY_ADDRESS,
-        proxy: 'localhost/master',
-        browser: "chrome",
+        proxy: 'localhost/Master',
+        browser: "msedge",
         middleware: function (req, res, next) {
             res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
             next();
