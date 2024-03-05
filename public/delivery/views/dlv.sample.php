@@ -44,6 +44,13 @@ $result = mysqli_query($con, $query);
         <!-- Table -->
         <div class="bg-white p-4 rounded-lg shadow-md">
             <h2 class="text-lg font-bold mb-4">Delivery Orders</h2>
+                <select class="float-right">
+                    <option value="default" selected>Default</option>
+                    <option>Preparing</option>
+                    <option>In Transit</option>
+                    <option>Delivered</option>
+                </select>
+            </h2>
             <table class="w-full">
                 <thead>
                     <tr>
