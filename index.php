@@ -28,11 +28,10 @@ require_once './public/delivery/routes.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="./src/tailwind.css" rel="stylesheet">
-   
+
 </head>
 
 <body>
-
 
     <div class="flex flex-col items-center justify-center h-screen">
         <br>
@@ -48,6 +47,10 @@ require_once './public/delivery/routes.php';
             class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Finance Page</button><br>
         <button onclick="location.href='/Master/dlv/sample'"
             class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Delivery Page</button><br>
+
+        <!-- Test Dashboard href -->
+        <button onclick="location.href='/Master/fin/dashboard'"
+            class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Finance Dashboard Page</button><br>
     </div>
 
 </body>
