@@ -112,8 +112,9 @@
 </ul>
 </div>
 <!-- end: Sidebar -->
-<script src="../js/script.js"></script> <!-- fix the path -->
- 
+<!-- <script src="./../js/script.js"></script> -->
+<script type="module" src="../public/humanResources/js/script.js"></script>
+
 <!-- Start Main Bar -->
 <main class="w-[calc(100%-256px)] ml-64 bg-gray-50 min-h-screen">
   <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/10">
