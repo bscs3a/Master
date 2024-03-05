@@ -6,6 +6,10 @@ Router::handle('GET', '/fin/sample', "$path/fin.sample.php");
 Router::handle('GET', '/fin/link', "$path/fin.test-link.php");
 Router::handle('GET', '/fin/link2', "$path/fin.test-link2.php");
 
+// Route for Ledger General Page
+Router::handle('GET', '/fin/ledger', "$path/fin.ledger.php");
+
+
 // Route for Dashboard Page
 Router::handle(
     'GET',
@@ -14,8 +18,3 @@ Router::handle(
 );
 
 
-Router::handle(
-    'GET',
-    '/fin/charts',
-    "$path/fin.charts.php",
-);
