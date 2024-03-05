@@ -4,6 +4,9 @@
 ```
 npm install
 ```
+```
+composer install
+```
 
 ### Clone enviroment variables and insert your own accounts and dir
 ```
@@ -19,7 +22,7 @@ npm run build
 
 ### For Gulp Live Server
 ```
-gulp serve
+npm run serve
 ```
 
 ### Routing
