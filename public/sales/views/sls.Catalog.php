@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./../src/tailwind.css" rel="stylesheet">
+    <title>POS</title>
     <script src="./tailwind3.js"></script>
     <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
@@ -26,7 +27,7 @@
 </head>
 
 <body>
-<div class="min-h-screen" x-data="{ sidebarOpen: false, cartOpen: false }" :class="{ 'sidebar-open': sidebarOpen, 'sidebar-closed': !sidebarOpen }">
+    <div class="min-h-screen" x-data="{ sidebarOpen: false, cartOpen: false }" :class="{ 'sidebar-open': sidebarOpen, 'sidebar-closed': !sidebarOpen }">
         <div class="flex justify-between items-center w-full pt-10 pl-10">
             <div class="relative mb-3 flex items-center border-2 border-gray-300 rounded-lg w-2/5 bg-gray-200">
                 <div class="flex items-center">
@@ -45,7 +46,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-6a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
             </div>
-            <div class="relative mb-3 flex items-center border-2 border-gray-300 rounded-l-md bg-gray-200" x-show="!sidebarOpen">
+            <div class=" right-0 fixed flex items-center border-2 border-gray-300 rounded-l-md bg-gray-200" x-show="!sidebarOpen">
                 <div class="flex items-center">
                     <button type="button" @click="sidebarOpen = !sidebarOpen; cartOpen = !cartOpen" class="items-center flex bg-gray-200  py-2 w-full justify-between">
                         <i class="ri-arrow-left-s-line ml-5 mr-5 text-xl"></i>
@@ -60,66 +61,145 @@
 
         </div>
 
-        <div>
+        <div class="flex flex-col items-center min-h-screen w-full" :class="{ 'w-full': !sidebarOpen, 'w-9/12': sidebarOpen }">
+            <div>
+                <div class="text-xl font-bold divide-y ml-3">Most Sold</div>
+                <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
+                <div :class="cartOpen ? 'grid grid-cols-4 gap-4' : 'grid grid-cols-6 gap-4'">
+                    <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
+                        <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
+                            <!-- SVG icon -->
+                        </div>
+                        <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
+                        <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
+                        <div class="font-normal text-sm text-gray-500">Pliers</div>
+                        <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
+                        <div class="text-gray-500 text-sm">Stocks: 1</div>
+                    </div>
+                    <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
+                        <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
+                            <!-- SVG icon -->
+                        </div>
+                        <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
+                        <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
+                        <div class="font-normal text-sm text-gray-500">Pliers</div>
+                        <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
+                        <div class="text-gray-500 text-sm">Stocks: 1</div>
+                    </div>
+                    <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
+                        <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
+                            <!-- SVG icon -->
+                        </div>
+                        <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
+                        <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
+                        <div class="font-normal text-sm text-gray-500">Pliers</div>
+                        <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
+                        <div class="text-gray-500 text-sm">Stocks: 1</div>
+                    </div>
+                    <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
+                        <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
+                            <!-- SVG icon -->
+                        </div>
+                        <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
+                        <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
+                        <div class="font-normal text-sm text-gray-500">Pliers</div>
+                        <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
+                        <div class="text-gray-500 text-sm">Stocks: 1</div>
+                    </div>
+                    <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
+                        <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
+                            <!-- SVG icon -->
+                        </div>
+                        <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
+                        <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
+                        <div class="font-normal text-sm text-gray-500">Pliers</div>
+                        <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
+                        <div class="text-gray-500 text-sm">Stocks: 1</div>
+                    </div>
+                    <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
+                        <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
+                            <!-- SVG icon -->
+                        </div>
+                        <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
+                        <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
+                        <div class="font-normal text-sm text-gray-500">Pliers</div>
+                        <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
+                        <div class="text-gray-500 text-sm">Stocks: 1</div>
+                    </div>
+                </div>
+            </div>
 
-            <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100 w-full" :class="{ 'w-full': !sidebarOpen, 'w-4/5': sidebarOpen }">
-                <div>
-                    <div class="text-3xl font-bold divide-y mb-10">Items</div>
-                    <div :class="cartOpen ? 'grid grid-cols-4 gap-4' : 'grid grid-cols-6 gap-4'">
-                        <div class="w-62 h-74 p-10 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                            <div class="size-32 rounded-full shadow-md bg-yellow-200 mb-4"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path>
-                                </svg></div>
-                            <div class="font-bold text-xl">Example Name</div>
-                            <div class="mt-8 text-xl font-semibold">Php500</div>
-                            <div class="text-gray-500">Stocks:</div>
+            <div>
+                <div class="text-xl font-bold divide-y ml-3 mt-3">Category 1</div>
+                <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
+                <div :class="cartOpen ? 'grid grid-cols-4 gap-4' : 'grid grid-cols-6 gap-4'">
+                    <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
+                        <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
+                            <!-- SVG icon -->
                         </div>
-                        <div class="w-62 h-74 p-10 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                            <div class="size-32 rounded-full shadow-md bg-yellow-200 mb-4"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path>
-                                </svg></div>
-                            <div class="font-bold text-xl">Example Name</div>
-                            <div class="mt-8 text-xl font-semibold">Php500</div>
-                            <div class="text-gray-500">Stocks:</div>
+                        <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
+                        <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
+                        <div class="font-normal text-sm text-gray-500">Pliers</div>
+                        <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
+                        <div class="text-gray-500 text-sm">Stocks: 1</div>
+                    </div>
+                    <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
+                        <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
+                            <!-- SVG icon -->
                         </div>
-                        <div class="w-62 h-74 p-10 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                            <div class="size-32 rounded-full shadow-md bg-yellow-200 mb-4"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path>
-                                </svg></div>
-                            <div class="font-bold text-xl">Example Name</div>
-                            <div class="mt-8 text-xl font-semibold">Php500</div>
-                            <div class="text-gray-500">Stocks:</div>
+                        <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
+                        <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
+                        <div class="font-normal text-sm text-gray-500">Pliers</div>
+                        <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
+                        <div class="text-gray-500 text-sm">Stocks: 1</div>
+                    </div>
+                    <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
+                        <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
+                            <!-- SVG icon -->
                         </div>
-                        <div class="w-62 h-74 p-10 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                            <div class="size-32 rounded-full shadow-md bg-yellow-200 mb-4"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path>
-                                </svg></div>
-                            <div class="font-bold text-xl">Example Name</div>
-                            <div class="mt-8 text-xl font-semibold">Php500</div>
-                            <div class="text-gray-500">Stocks:</div>
+                        <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
+                        <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
+                        <div class="font-normal text-sm text-gray-500">Pliers</div>
+                        <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
+                        <div class="text-gray-500 text-sm">Stocks: 1</div>
+                    </div>
+                    <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
+                        <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
+                            <!-- SVG icon -->
                         </div>
-                        <div class="w-62 h-74 p-10 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                            <div class="size-32 rounded-full shadow-md bg-yellow-200 mb-4"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path>
-                                </svg></div>
-                            <div class="font-bold text-xl">Example Name</div>
-                            <div class="mt-8 text-xl font-semibold">Php500</div>
-                            <div class="text-gray-500">Stocks:</div>
+                        <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
+                        <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
+                        <div class="font-normal text-sm text-gray-500">Pliers</div>
+                        <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
+                        <div class="text-gray-500 text-sm">Stocks: 1</div>
+                    </div>
+                    <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
+                        <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
+                            <!-- SVG icon -->
                         </div>
-                        <div class="w-62 h-74 p-10 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                            <div class="size-32 rounded-full shadow-md bg-yellow-200 mb-4"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path>
-                                </svg></div>
-                            <div class="font-bold text-xl">Example Name</div>
-                            <div class="mt-8 text-xl font-semibold">Php500</div>
-                            <div class="text-gray-500">Stocks:</div>
+                        <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
+                        <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
+                        <div class="font-normal text-sm text-gray-500">Pliers</div>
+                        <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
+                        <div class="text-gray-500 text-sm">Stocks: 1</div>
+                    </div>
+                    <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
+                        <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
+                            <!-- SVG icon -->
                         </div>
+                        <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
+                        <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
+                        <div class="font-normal text-sm text-gray-500">Pliers</div>
+                        <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
+                        <div class="text-gray-500 text-sm">Stocks: 1</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="fixed right-0 top-10 h-screen w-96 overflow-auto sidebar rounded-lg border-2 border-gray-300 bg-white shadow" x-show="sidebarOpen">
+        <!-- Sidebar -->
+        <div class="fixed right-0 top-10 w-96 overflow-auto sidebar rounded-l-lg border-2 border-gray-300 bg-white shadow" style="height: 94vh;" x-show="sidebarOpen">
+            <!-- Close Sidebar Button -->
             <div @click="sidebarOpen = false; cartOpen = !cartOpen" class="flex items-center py-2 text-black no-underline bg-gray-200 border-b border-gray-300 cursor-pointer">
                 <i class="ri-arrow-right-s-line text-xl ml-5 mr-5"></i>
                 <div class="border-r border-gray-400 h-6"></div>
@@ -130,7 +210,7 @@
             </div>
             <!-- Add Order and Delete buttons -->
             <div class="flex justify-between px-3 py-2 ">
-                <button class=" py-1 px-4 rounded bg-gray-100 border-2 border-gray-300">
+                <button class="py-1 px-4 rounded bg-gray-100 border-2 border-gray-300">
                     <i class="ri-add-circle-fill text-xl"></i> Add Order
                 </button>
                 <button class="py- px-3 rounded bg-gray-100 border-2 border-gray-300">
@@ -142,29 +222,32 @@
             <div class="flex justify-between px-3 py-2">
                 <table class="w-full text-right p-3">
                     <tbody>
-                        <tr class="bg-gray-200">
+                        <!-- Cart item rows -->
+                        <tr class="bg-gray-100">
                             <td class="text-left px-3 py-2 rounded-l-lg">2</td>
                             <td class="text-left border-l border-gray-400 pl-2 px-3 py-2">Hammer</td>
                             <td class="px-3 py-2">$15.99</td>
                             <td class="px-3 py-2 rounded-r-lg"><i class="ri-close-circle-fill"></i></td>
                         </tr>
-                        <tr class="bg-white">
-                            <td class="text-left px-3 py-2 rounded-l-lg">1</td>
-                            <td class="text-left border-l border-gray-400 pl-2 px-3 py-2">Screwdriver Set</td>
-                            <td class="px-3 py-2">$9.99</td>
+                        <tr class="">
+                            <td class="text-left px-3 py-2 rounded-l-lg">2</td>
+                            <td class="text-left border-l border-gray-400 pl-2 px-3 py-2">Hammer</td>
+                            <td class="px-3 py-2">$15.99</td>
                             <td class="px-3 py-2 rounded-r-lg"><i class="ri-close-circle-fill"></i></td>
                         </tr>
-                        <tr class="bg-gray-200">
-                            <td class="text-left px-3 py-2 rounded-l-lg">3</td>
-                            <td class="text-left border-l border-gray-400 pl-2 px-3 py-2">Drill Bits</td>
-                            <td class="px-3 py-2">$7.99</td>
+                        <tr class="bg-gray-100">
+                            <td class="text-left px-3 py-2 rounded-l-lg">2</td>
+                            <td class="text-left border-l border-gray-400 pl-2 px-3 py-2">Hammer</td>
+                            <td class="px-3 py-2">$15.99</td>
                             <td class="px-3 py-2 rounded-r-lg"><i class="ri-close-circle-fill"></i></td>
                         </tr>
+                        <!-- Add more item rows as needed -->
                     </tbody>
                 </table>
             </div>
 
-            <div class="absolute bottom-60 w-full p-3">
+            <!-- Add Coupon Section -->
+            <div class="absolute bottom-48 w-full p-3">
                 <div class="flex items-center justify-between bg-gray-200 p-3 rounded-lg" style="background-color: #FFEEA5;">
                     <label for="coupon" class="mr-2 font-bold">Add</label>
                     <label for="coupon" class="mr-2 font-bold" style="color: #C91F41;">Discount Coupon</label>
@@ -172,8 +255,9 @@
             </div>
 
             <!-- Order details -->
-            <div class="absolute bottom-0 w-full bg-gray-200">
-                <div class="py-2 px-1 ml-2 border-t border-gray-300">
+            <div class="absolute bottom-0 w-full bg-gray-100">
+                <div class="py-2 px-1 ml-2 border-t border-gray-100">
+                    <!-- Order detail rows -->
                     <div class="grid grid-cols-2 items-center mb-2">
                         <span class="text-right pr-16">Order Subtotal:</span>
                         <span class="text-right pr-16">$Subtotal</span>
@@ -186,10 +270,11 @@
                         <span class="text-right pr-16">Tax:</span>
                         <span class="text-right pr-16">$Tax</span>
                     </div>
-                    <div class="grid grid-cols-2 items-center mb-2 font-bold">
-                        <span class="text-right pr-16">Order Total:</span>
-                        <span class="text-right pr-16">$Total</span>
+                    <div class="grid grid-cols-2 items-center mb-2">
+                        <span class="text-right pr-16 font-bold">Order Total:</span>
+                        <span class="text-right pr-16">$Ordertotal</span>
                     </div>
+                    <!-- Add more order detail rows as needed -->
                 </div>
                 <!-- Hold and Proceed buttons -->
                 <style>
@@ -202,8 +287,7 @@
                         background-color: #FFA500;
                     }
                 </style>
-
-                <div class="flex justify-between px-5 py-1 mb-12 space-x-4">
+                <div class="flex justify-between px-5 py-1 mb-1 space-x-4">
                     <button class="flex items-center justify-center font-bold py-1 px-4 rounded w-1/2 border border-black shadow custom-button">
                         <i class="ri-pause-line text-lg mr-2"></i>
                         Hold
@@ -213,7 +297,6 @@
                         Proceed
                     </button>
                 </div>
-
             </div>
         </div>
 
