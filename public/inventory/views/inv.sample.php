@@ -12,9 +12,9 @@
   HELLO WORLD
   MENU
   <div>
-    <a href="/Master/inv/prod_ord" class="px-6 py-3 text-white bg-blue-500 rounded hover:bg-blue-700">product order</a>
-    <a href="/Master/inv/view" class="px-6 py-3 text-white bg-blue-500 rounded hover:bg-blue-700">VIEW</a>
-    <a href="/Master/inv/product&order" class="px-6 py-3 text-white bg-blue-500 rounded hover:bg-blue-700">Product Order</a>
+    <a href="/inventory/inv/prod_ord" class="px-6 py-3 text-white bg-blue-500 rounded hover:bg-blue-700">product order</a>
+    <a href="/inventory/inv/view" class="px-6 py-3 text-white bg-blue-500 rounded hover:bg-blue-700">VIEW</a>
+    <a href="/inventory/inv/product&order" class="px-6 py-3 text-white bg-blue-500 rounded hover:bg-blue-700">Product Order</a>
   </div>
 </body>
 

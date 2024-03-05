@@ -41,7 +41,7 @@ gulp.task("serve", function () {
 
   directories.forEach((dir) => {
     gulp
-      .watch(`C:\laragon\www\Master\${dir}/**/*.*`, { usePolling: true })
+      .watch(`C:\laragon\www\Inventory\${dir}/**/*.*`, { usePolling: true })
       .on("change", browserSync.reload);
   });
 });
