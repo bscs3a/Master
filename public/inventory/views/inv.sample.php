@@ -13,6 +13,7 @@
   MENU
   <div>
     <a href="/Master/inv/view" class="px-6 py-3 text-white bg-blue-500 rounded hover:bg-blue-700">VIEW</a>
+    <a href="/Master/inv/product&order" class="px-6 py-3 text-white bg-blue-500 rounded hover:bg-blue-700">Product Order</a>
   </div>
 </body>
 
