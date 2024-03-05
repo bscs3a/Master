@@ -14,7 +14,7 @@ class Router
             require $filename;
         }
         // $root = $_ENV['PROXY_ADDRESS'];
-        $root = "/Master";
+        $root = "/Inventory";
         $pattern = '#^'.$root.$path.'$#sD';
         if(preg_match($pattern, $currentUri)){
             require_once $filename;
