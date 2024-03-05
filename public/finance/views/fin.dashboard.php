@@ -146,13 +146,13 @@
 
         <!-- End: Header -->
 
-        <!-- Start: Dashboard Analytics V1-->
+        <!-- Start: Inner Dashboard Analytics-->
         <div class="w-full min-h-screen p-6 bg-white">
             <!-- Start: Top Section -->
             <div class="grid grid-cols-1 md:grid-cols-2  gap-6 mb-6">
                 <!-- Start: Top Left-Side Section -->
                 <div
-                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 border-solid border-2 border-black px-5 py-4">
+                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  border-solid border-gray-400 shadow-md rounded-md px-5 py-4">
                     <div class="border-solid col-span-2 ">
                         <!-- Start: Welcome Message -->
                         <h1 class="font-sans font-bold  text-5xl">Hello, Sample User!</h1>
@@ -161,9 +161,9 @@
                         <!-- End: Welcome Message -->
 
                         <!-- Start: Mini-Dashboard Analytics -->
-                        <div class="mt-10 grid grid-cols-1  md:grid-cols-2 md:grid-rows-2 gap-4">
+                        <div id="mini-dashboard" class="mt-10 grid grid-cols-1  md:grid-cols-2 md:grid-rows-2 gap-4">
                             <!-- Start: Dashboard Analytics: Total Items -->
-                            <div class="bg-white rounded-md border border-gray-100 p-4 shadow-md">
+                            <div class="bg-white rounded-md border border-gray-300 p-4 shadow-lg">
                                 <div class="flex justify-between mb-4">
                                     <div>
                                         <div class="flex items-center mb-1">
@@ -179,39 +179,69 @@
                             <!-- End: Dashboard Analytics: Total Items -->
                         </div>
                         <!-- End: Mini-Dashboard Analytics -->
+
+                        <!-- Start Script: mini-dashboard item repeater -->
+                        <script>
+                            var miniDashboard = document.getElementById('mini-dashboard');
+                            // Array of mini-dashboard items
+                            var mini_dash_items = [
+                                "?",
+                                "Total Expense",
+                                "Balance"
+                            ];
+                            // Loop through the mini_dash_items array and display the mini-dashboard items
+                            for (let index = 0; index < mini_dash_items.length; index++) {
+                                // const element = array[index];
+                                miniDashboard.innerHTML += `
+                                <div class="bg-white rounded-md border border-gray-300 p-4 shadow-lg">
+                                    <div class="flex justify-between mb-4">
+                                        <div>
+                                            <div class="flex items-center mb-1">
+                                                <div class="text-2xl font-semibold">0</div>
+                                            </div>
+                                            <div class="text-sm font-medium text-gray-400">${mini_dash_items[index]}</div>
+                                            </div>
+                                            <div>
+                                            <i class="ri-file-text-line mr-3 text-4xl"></i>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            `;
+                            }
+                        </script>
+                        <!-- End Script: mini-dashboard item repeater -->
                     </div>
+
                     <div class="text-right col-span-1">
                         <a href="#" class="font-sans font-bold text-xl">View Details(?) ></a>
                     </div>
+
+
+
                 </div>
                 <!-- End: Top Left-Side Section -->
 
+                <!-- Start: Top Right-Side Section -->
                 <div class="text-center border-2 border-solid border-black">
                     <h1 class="font-russo text-2xl mt-10">Chart</h1>
                 </div>
-                <!-- <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-6">
-                    <div class="bg-white rounded-md border border-gray-100 p-4 shadow-md">
-
-                        <div class="flex justify-between mb-4">
-                            <div>
-                                <div class="flex items-center mb-1">
-                                    <div class="text-2xl font-semibold">0</div>
-                                </div>
-                                <div class="text-sm font-medium text-black">Total Items</div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <h3>sda</h3>
-                </div> -->
+                <!-- End: Top Right-Side Section -->
             </div>
             <!-- End: Top Section -->
+
+
+            <!-- Start: Second Section -->
+            <div class="mt-10 border-solid border-2 border-black py-28 px-36">
+
+                <h1 class="font-russo text-4xl">Chart</h1>
+            </div>
+            <!-- End: Second Section -->
         </div>
-        <!-- End: Dashboard Analytics V1-->
+        <!-- End: Inner Dashboard Analytics-->
+
+
     </main>
-
     <!-- End: Dashboard -->
-
 </body>
 
 </html>
