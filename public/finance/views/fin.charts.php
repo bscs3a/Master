@@ -154,10 +154,14 @@
         <!-- End: Header -->
 
         <!-- Start Charts -->
+        <!-- bar chart -->
         <div style="width: 800px;"><canvas id="acquisitions"></canvas></div>
 
+        <!-- line chart -->
         <div style="width: 800px;"><canvas id="lineChart"></canvas></div>
     
+        <!-- pie chart -->
+        <div style="width: 800px;"><canvas id="pieChart"></canvas></div>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script type="module" src="../public/finance/javascript/charts.js"></script>
         <!-- End Charts -->
