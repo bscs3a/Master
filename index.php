@@ -1,9 +1,6 @@
 <?php
 require_once './router.php';
 
-// Temp Menu
-require_once './public/menu/routes.php';
-
 // Group #1
 require_once './public/admin/routes.php';
 
@@ -23,7 +20,6 @@ require_once './public/finance/routes.php';
 require_once './public/delivery/routes.php';
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,26 +91,45 @@ require_once './public/delivery/routes.php';
       </div>
     </div>
 
-    <!-- temp script for the login form needeed to be fill out before going to the menu -->
-    <script>
-      document.getElementById("temp-login").addEventListener("submit", function (event) {
-      event.preventDefault();
+    <!-- temp menu -->
+    <div id="temp-menu" class="hidden flex flex-col items-center justify-center h-screen">
+        <br>
+        <button onclick="location.href='/Master/adm/sample'"
+            class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Admin Page</button><br>
+        <button onclick="location.href='/Master/sls/sample'"
+            class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Sales Page</button><br>
+        <button onclick="location.href='/Master/inv/sample'"
+            class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Inventory Page</button><br>
+        <button onclick="location.href='/Master/hr/sample'"
+            class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Human Resources Page</button><br>
+        <button onclick="location.href='/Master/fin/sample'"
+            class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Finance Page</button><br>
+        <button onclick="location.href='/Master/dlv/sample'"
+            class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Delivery Page</button><br>
+        <button id="temp-logout" class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Log out</button>
+    </div>
 
-      // Get the values from the form
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+      <!-- temp script for login func and log out func -->
+      <script>
+        document.getElementById("temp-login").addEventListener("submit", function (event) {
+        event.preventDefault();
 
-      // Check if both email and password are filled
-      if (email.trim() !== "" && password.trim() !== "") {
-        // Clear the input fields
-        document.getElementById("email").value = "";
-        document.getElementById("password").value = "";
+        const isValid = true;
+    
+        if (isValid) {
+            // Show the temp menu and hide the temp-login
+            document.getElementById("temp-menu").classList.remove("hidden");
+            document.getElementById("temp-login").classList.add("hidden");
+        };
+        });
 
-        // Redirect to the menu page
-        window.location.href = "/Master/menu/temp";
-      }
-    });
-</script>
+        document.getElementById("temp-logout").addEventListener("click", function () {
+            // Show the temp-login and hide the temp menu
+            document.getElementById("temp-login").classList.remove("hidden");
+            document.getElementById("temp-menu").classList.add("hidden");
+        });
+      </script>
+
 </body>
 
 </html>
