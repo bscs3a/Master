@@ -11,7 +11,7 @@
     <ul class="mt-3">
 
         <li class="mb-1 hover:bg-slate-400 rounded-xl">
-            <a href="#" class="flex items-center py-2 px-4 text-white hover:text-black">
+            <a href="/Master/fin/dashboard" class="flex items-center py-2 px-4 text-white hover:text-black">
                 <i class="ri-speed-up-line mr-3 text-lg"></i>
                 <span class="text-sm font-medium">Dashboard</span>
                 <i class="ri-arrow-down-s-line ml-auto"></i>

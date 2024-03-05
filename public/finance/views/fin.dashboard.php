@@ -11,7 +11,8 @@
 
 <body>
     <!-- Start: Sidebar -->
-    <div class="fixed bg-sidebar left-0 top-0 w-64 h-full p-4 z-50 sidebar-menu transition-transform">
+    <?php include "components/sidebar.php" ?>
+    <!-- <div class="fixed bg-sidebar left-0 top-0 w-64 h-full p-4 z-50 sidebar-menu transition-transform">
 
         <div href="#" class="flex items-center pb-4">
             <img src="https://placehold.co/50x50" alt="" class="w-10 h-10 rounded object-cover">
@@ -104,7 +105,7 @@
 
     </div>
 
-    <div class="fixed top-0 left-0 w-full h-full z-40 md:hidden sidebar-overlay"></div>
+    <div class="fixed top-0 left-0 w-full h-full z-40 md:hidden sidebar-overlay"></div> -->
     <!-- End: Sidebar -->
 
     <!-- Start: Dashboard -->
