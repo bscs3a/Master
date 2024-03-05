@@ -112,7 +112,7 @@
 </ul>
 </div>
 <!-- end: Sidebar -->
-<script src="./../hr/js/script.js"></script> <!-- fix the path -->
+<script type="module" src="../public/humanResources/js/script.js"></script>
  
 <!-- Start Main Bar -->
 <main class="w-[calc(100%-256px)] ml-64 bg-gray-50 min-h-screen">
