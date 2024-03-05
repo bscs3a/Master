@@ -10,103 +10,8 @@
 </head>
 
 <body>
-
-
-    <div class="fixed  hover:bg-purple-950 left-0 top-0 w-64 h-full p-4 z-50 sidebar-menu transition-transform">
-
-        <div href="#" class="flex items-center pb-4">
-            <img src="https://placehold.co/50x50" alt="" class="w-10 h-10 rounded object-cover">
-
-            <span class="text-4xl font-bold ml-3">BSCS 3A</span>
-        </div>
-
-        <ul class="mt-3">
-
-            <li class="mb-1 group active">
-                <a href="#" class="flex items-center py-2 px-4 bg-violet-950 text-black">
-                    <i class="ri-speed-up-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Dashboard</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-violet-950 text-black">
-                    <i class="ri-file-text-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Invoices</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-violet-950 text-black">
-                    <i class="ri-menu-search-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Expense Category</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-violet-950 text-black">
-                    <i class="ri-file-history-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Expense Record</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-violet-950 text-black">
-                    <i class="ri-box-3-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Items</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-violet-950 text-black">
-                    <i class="ri-bank-card-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Payments</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-violet-950 text-black">
-                    <i class="ri-funds-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Revenue Record</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-violet-950 text-black">
-                    <i class="ri-scales-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Balance Sheet</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-violet-950 text-black">
-                    <i class="ri-database-2-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Database</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-violet-950 text-black">
-                    <i class="ri-group-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Users</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-        </ul>
-
-    </div>
-
-    <div class="fixed top-0 left-0 w-full h-full z-40 md:hidden sidebar-overlay"></div>
-    <!-- End: Sidebar -->
+    
+    <?php include "components/sidebar.php" ?>
 
     <!-- Start: Dashboard -->
 
@@ -165,8 +70,7 @@
                     <div class="bg-white rounded shadow-lg w-1/3">
                         <div class="border-b pl-3 pr-3 pt-3 flex">
                             <h5 class="font-bold uppercase text-gray-600">New Transactions</h5>
-                            <button id="closeModal"
-                                class="ml-auto mb-10 text-gray-600 hover:text-gray-800 cursor-pointer">
+                            <button id="closeModal" class="ml-auto text-gray-600 hover:text-gray-800 cursor-pointer">
                                 <i class="ri-close-line"></i>
                             </button>
                         </div>
@@ -196,15 +100,15 @@
                                     class="absolute left-2 top-6 transform -translate-y-0.5 text-gray-400">&#8369;</span>
                             </div>
                             <div class="mb-4 relative">
-                                <label for="credit" class="block text-xs font-medium text-gray-900"> Credit </label>
-                                <input type="text" id="credit" placeholder="0.00"
+                                <label for="debit" class="block text-xs font-medium text-gray-900"> Debit </label>
+                                <input type="text" id="debit" placeholder="0.00"
                                     class="mt-1 py-1 px-7 w-full rounded-md border border-gray-400 shadow-md sm:text-sm" />
                                 <span
                                     class="absolute left-2 top-6 transform -translate-y-0.5 text-gray-400">&#8369;</span>
                             </div>
                             <div class="mb-4 relative">
-                                <label for="debit" class="block text-xs font-medium text-gray-900"> Debit </label>
-                                <input type="text" id="debit" placeholder="0.00"
+                                <label for="credit" class="block text-xs font-medium text-gray-900"> Credit </label>
+                                <input type="text" id="credit" placeholder="0.00"
                                     class="mt-1 py-1 px-7 w-full rounded-md border border-gray-400 shadow-md sm:text-sm" />
                                 <span
                                     class="absolute left-2 top-6 transform -translate-y-0.5 text-gray-400">&#8369;</span>
