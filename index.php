@@ -20,7 +20,6 @@ require_once './public/finance/routes.php';
 require_once './public/delivery/routes.php';
 
 ?>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -67,3 +66,4 @@ require_once './public/delivery/routes.php';
 </body>
 
 </html>
+
