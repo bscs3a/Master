@@ -90,7 +90,7 @@
                 </div>
                 <div class=" right-0 fixed flex items-center border-2 border-gray-300 rounded-l-md bg-gray-200" x-show="!sidebarOpen">
                     <div class="flex items-center">
-                        <button type="button" @click="sidebarOpen = !sidebarOpen; cartOpen = !cartOpen" class="items-center flex bg-gray-200  py-2 w-full justify-between">
+                        <button type="button" @click="sidebarOpen = !sidebarOpen; cartOpen = !cartOpen" class="items-center flex bg-gray-200  py-2 w-full justify-between sidebar-toggle2">
                             <i class="ri-arrow-left-s-line ml-5 mr-5 text-xl"></i>
                             <div class="border-r border-gray-400 h-6"></div>
                             <div class="px-5">
@@ -104,82 +104,10 @@
             </div>
 
             <div class="flex flex-col items-center min-h-screen w-full" :class="{ 'w-full': !sidebarOpen, 'w-9/12': sidebarOpen }">
-                <!-- Close Cart and Sidebar Button -->
-                <button @click="sidebarOpen = false; cartOpen = false">
-                    <i class="ri-close-line"></i>
-                </button>
-
                 <div>
                     <div class="text-xl font-bold divide-y ml-3">Most Sold</div>
                     <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                    <div :class="cartOpen ? 'grid grid-cols-5 gap-4' : 'grid grid-cols-6 gap-4'">
-                        <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                            <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
-                                <!-- SVG icon -->
-                            </div>
-                            <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                            <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
-                            <div class="font-normal text-sm text-gray-500">Pliers</div>
-                            <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
-                            <div class="text-gray-500 text-sm">Stocks: 1</div>
-                        </div>
-                        <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                            <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
-                                <!-- SVG icon -->
-                            </div>
-                            <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                            <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
-                            <div class="font-normal text-sm text-gray-500">Pliers</div>
-                            <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
-                            <div class="text-gray-500 text-sm">Stocks: 1</div>
-                        </div>
-                        <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                            <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
-                                <!-- SVG icon -->
-                            </div>
-                            <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                            <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
-                            <div class="font-normal text-sm text-gray-500">Pliers</div>
-                            <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
-                            <div class="text-gray-500 text-sm">Stocks: 1</div>
-                        </div>
-                        <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                            <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
-                                <!-- SVG icon -->
-                            </div>
-                            <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                            <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
-                            <div class="font-normal text-sm text-gray-500">Pliers</div>
-                            <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
-                            <div class="text-gray-500 text-sm">Stocks: 1</div>
-                        </div>
-                        <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                            <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
-                                <!-- SVG icon -->
-                            </div>
-                            <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                            <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
-                            <div class="font-normal text-sm text-gray-500">Pliers</div>
-                            <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
-                            <div class="text-gray-500 text-sm">Stocks: 1</div>
-                        </div>
-                        <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                            <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
-                                <!-- SVG icon -->
-                            </div>
-                            <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                            <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
-                            <div class="font-normal text-sm text-gray-500">Pliers</div>
-                            <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
-                            <div class="text-gray-500 text-sm">Stocks: 1</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="text-xl font-bold divide-y ml-3 mt-3">Category 1</div>
-                    <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                    <div :class="cartOpen ? 'grid grid-cols-4 gap-4' : 'grid grid-cols-6 gap-4'">
+                    <div id="grid" :class="sidebarOpen || cartOpen ? 'grid grid-cols-5 gap-4' : 'grid grid-cols-6 gap-4'">
                         <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
                             <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
                                 <!-- SVG icon -->
@@ -366,6 +294,30 @@
             document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
             document.getElementById('mainContent').classList.toggle('md:w-full');
             document.getElementById('mainContent').classList.toggle('md:ml-64');
+
+            var sidebarMenu = document.getElementById('sidebar-menu');
+            var grid = document.querySelector('.grid');
+
+            if (!sidebarMenu.classList.contains('hidden')) {
+                grid.classList.remove('grid-cols-6');
+                grid.classList.add('grid-cols-5');
+            } else {
+                grid.classList.remove('grid-cols-5');
+                grid.classList.add('grid-cols-6');
+            }
+        });
+
+        document.querySelector('.sidebar-toggle2').addEventListener('click', function() {
+            var sidebarMenu = document.getElementById('sidebar-menu');
+            var mainContent = document.getElementById('mainContent');
+
+            if (!sidebarMenu.classList.contains('hidden')) {
+                sidebarMenu.classList.toggle('hidden');
+                sidebarMenu.classList.toggle('transform');
+                sidebarMenu.classList.toggle('-translate-x-full');
+                mainContent.classList.toggle('md:w-full');
+                mainContent.classList.toggle('md:ml-64');
+            }
         });
     </script>
 </body>
