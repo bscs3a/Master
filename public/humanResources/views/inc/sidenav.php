@@ -30,19 +30,19 @@
 <!-- View Order -> View Employees -->
 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
   <li class="mb-4">
-    <a href="/Master/hr/employees" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">View 
+    <a href="/Master/hr/employees" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">View List
         <i class="ri-arrow-right-s-line ml-auto"></i>
     </a>
   </li>
   <!-- Add Employees -->
   <li class="mb-4">
-    <a href="/Master/hr/add" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Add 
+    <a href="/Master/hr/add" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Add New
         <i class="ri-arrow-right-s-line ml-auto"></i>
     </a>
   </li>
 <!-- Edit Order -> Update Employees-->
   <li class="mb-4">
-    <a href="#" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Update 
+    <a href="#" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Update List
         <i class="ri-arrow-right-s-line ml-auto"></i>
     </a>
   </li>
