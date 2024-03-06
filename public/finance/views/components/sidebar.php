@@ -98,14 +98,14 @@
             </button>
             <ul id="ledger" class="ml-8 hidden">
                 <li>
-                    <a href="#" class="flex items-center py-2 px-4 text-white hover:text-black">
+                    <a onclick="location.href='/Master/fin/ledger'" class="flex items-center py-2 px-4 text-white hover:text-black">
 
                         <span class="text-sm font-medium">General</span>
                         <i class="ri-arrow-right-s-line ml-auto"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center py-2 px-4 text-white hover:text-black">
+                    <a onclick="location.href='/Master/fin/ledger/accounts/investors'" class="flex items-center py-2 px-4 text-white hover:text-black">
 
                         <span class="text-sm font-medium">Account</span>
                         <i class="ri-arrow-right-s-line ml-auto"></i>
