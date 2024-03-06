@@ -53,16 +53,6 @@ require_once './public/delivery/routes.php';
 
         </div>
 
-        <!-- Test Ledger General -->
-        <div class="flex">
-            <button onclick="location.href='/Master/fin/ledger'"
-                class="px-6 py-3 mb-2 mr-2 text-white bg-blue-500 rounded hover:bg-blue-700">Finance Ledger/General Page</button><br>
-            <!-- Test Dashboard href -->
-            <button onclick="location.href='/Master/fin/dashboard'"
-                class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Finance Dashboard
-                Page</button><br>
-        </div>
-
     </div>
 
 </body>
