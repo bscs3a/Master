@@ -5,7 +5,7 @@
     <!-- Meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sales Dashboard</title>
+    <title>Point of Sale (POS)</title>
 
     <!-- Stylesheets -->
     <link href="./../src/tailwind.css" rel="stylesheet">
@@ -24,9 +24,9 @@
             grid-template-columns: 1fr;
         }
 
-        .sidebar {
+        /* .sidebar {
             background-color: #f7f7f7;
-        }
+        } */
     </style>
 </head>
 
@@ -55,7 +55,7 @@
             <ul class="flex items-center text-md ml-4">
 
                 <li class="mr-2">
-                    <p class="text-black font-medium">Sales/Dashboard</p>
+                    <p class="text-black font-medium">Sales / Point of Sale(POS)</p>
                 </li>
 
             </ul>
@@ -78,23 +78,60 @@
         <div class="min-h-screen" x-data="{ sidebarOpen: false, cartOpen: false }" :class="{ 'sidebar-open': sidebarOpen, 'sidebar-closed': !sidebarOpen }">
 
             <div class="flex justify-between items-center w-full pt-10 pl-10">
-                <div class="relative mb-3 flex items-center border-2 border-gray-300 rounded-lg w-2/5 bg-gray-200">
-                    <div class="flex items-center">
-                        <i class="ri-equalizer-line mr-1 ml-5 text-xl"></i>
-                        <select class="appearance-none border-r border-gray-300 px-3 py-2 bg-gray-200 text-medium font-semibold">
-                            <option value="">
-                                Filter
-                            </option>
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <!-- Add more options as needed -->
-                        </select>
+
+                <form class="max-w-lg mb-3 w-2/5 pl-10">
+                    <div class="flex">
+                        <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only">Your Email</label>
+                        <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100" type="button">All categories <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg></button>
+                        <div id="dropdown" class="absolute z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 mt-10">
+                            <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdown-button">
+                                <li>
+                                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Mockups</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Templates</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Design</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Logos</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="relative w-full">
+                            <input type="search" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Search Hardware, Tools, Supplies..." required /> <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                </svg>
+                                <span class="sr-only">Search</span>
+                            </button>
+                        </div>
                     </div>
-                    <input type="text" placeholder="Search by Category..." class="px-3 py-2 flex-grow bg-gray-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="text-gray-700 h-6 px-3">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-6a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                </div>
+                </form>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const dropdownButton = document.getElementById('dropdown-button');
+                        const dropdown = document.getElementById('dropdown');
+
+                        dropdownButton.addEventListener('click', function() {
+                            dropdown.classList.toggle('hidden');
+                        });
+
+                        document.addEventListener('click', function(event) {
+                            const isDropdownButton = event.target.matches('#dropdown-button');
+                            const isDropdown = event.target.closest('#dropdown');
+                            if (!isDropdownButton && !isDropdown) {
+                                dropdown.classList.add('hidden');
+                            }
+                        });
+                    });
+                </script>
+
+
                 <div class=" right-0 fixed flex items-center border-2 border-gray-300 rounded-l-md bg-gray-200" x-show="!sidebarOpen">
                     <div class="flex items-center">
                         <button type="button" @click="sidebarOpen = !sidebarOpen; cartOpen = !cartOpen" class="items-center flex bg-gray-200  py-2 w-full justify-between sidebar-toggle2">
@@ -229,7 +266,7 @@
                 </div>
 
                 <!-- Add Coupon Section -->
-                <div class="absolute bottom-48 w-full p-3">
+                <div class="absolute bottom-52 w-full p-3">
                     <div class="flex items-center justify-between bg-gray-200 p-3 rounded-lg" style="background-color: #FFEEA5;">
                         <label for="coupon" class="mr-2 font-bold">Add</label>
                         <label for="coupon" class="mr-2 font-bold" style="color: #C91F41;">Discount Coupon</label>
@@ -350,8 +387,7 @@
                     document.getElementById('mainContent').classList.toggle('md:w-full');
                     document.getElementById('mainContent').classList.toggle('md:ml-64');
                 }
-                grid.classList.remove('grid-cols-6');
-                grid.classList.add('grid-cols-5');
+
             } else {
                 header.style.display = 'none';
                 if (!sidebarMenu.classList.contains('hidden')) {

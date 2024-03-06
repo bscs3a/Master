@@ -28,7 +28,7 @@
             <ul class="flex items-center text-md ml-4">
 
                 <li class="mr-2">
-                    <p class="text-black font-medium">Dashboard</p>
+                    <p class="text-black font-medium">Sales / Transaction History</p>
                 </li>
 
             </ul>

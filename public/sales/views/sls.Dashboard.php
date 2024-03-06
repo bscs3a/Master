@@ -35,7 +35,7 @@
             <ul class="flex items-center text-md ml-4">
 
                 <li class="mr-2">
-                    <p class="text-black font-medium">Sales/Dashboard</p>
+                    <p class="text-black font-medium">Sales / Dashboard</p>
                 </li>
 
             </ul>
@@ -142,8 +142,8 @@
                         </div>
                     </div>
                     <!-- Stocks Chart -->
-                    <div class="border border-dashed p-2 py-5 px-5">
-                        <canvas id="stocksChart" class="w-full h-full"></canvas>
+                    <div class="border border-dashed p-2 py-5 px-5 mt-10">
+                        <canvas id="stocksChart" class="w-full h-96"></canvas>
                     </div>
                 </div>
 
