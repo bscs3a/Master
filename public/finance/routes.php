@@ -21,4 +21,31 @@ Router::handle(
     "$path/fin.dashboard.php",
 );
 
+Router::handle(
+    'GET',
+    '/fin/charts',
+    "$path/fin.charts.php",
+);
+
+Router::handle(
+    'GET',
+    '/fin/reportIncome',
+    "$path/fin.reportIncome.php",
+);
+Router::handle(
+    'GET',
+    '/fin/reportCash',
+    "$path/fin.reportCash.php",
+);
+Router::handle(
+    'GET',
+    '/fin/reportEquity',
+    "$path/fin.reportEquity.php",
+);
+Router::handle(
+    'GET',
+    '/fin/reportBalance',
+    "$path/fin.reportBalance.php",
+);
+
 
