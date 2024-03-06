@@ -85,7 +85,7 @@
         document.getElementById("password").value = "";
 
         // Redirect to the menu page
-        window.location.href = "/Master/adm/sample";
+        window.location.href = "/Master/adm/dashboard";
       }
     });
     </script>
