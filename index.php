@@ -30,40 +30,39 @@ require_once './public/delivery/routes.php';
 
 </head>
 
-<body>
+<body class="bg-slate-400">
 
     <div class="flex flex-col items-center justify-center h-screen">
         <br>
-        <div class="flex">
-            <button onclick="location.href='/Master/adm/login'"
-                class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Admin Page</button><br>
-            <button onclick="location.href='/Master/sls/sample'"
-                class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Sales Page</button><br>
-            <button onclick="location.href='/Master/inv/sample'"
-                class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Inventory Page</button><br>
-            <button onclick="location.href='/Master/hr/dashboard'"
-                class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Human Resources
-                Page</button><br>
-            <button onclick="location.href='/Master/fin/sample'"
-                class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Finance Page</button><br>
-            <button onclick="location.href='/Master/dlv/sample'"
-                class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Delivery Page</button><br>
-
+        <div class="flex flex-wrap -mx-2">
+            <div class="w-1/2 px-2">
+                <p>Group1</p>
+                <button onclick="location.href='/Master/adm/login'"
+                    class="px-6 py-3 mb-2 text-white bg-sidebar rounded hover:bg-blue-700">Admin Page</button><br>
+                <p>Group3</p>
+                <button onclick="location.href='/Master/sls/Dashboard'"
+                    class="px-6 py-3 mb-2 text-white  bg-sidebar rounded hover:bg-blue-700">Sales Page</button><br>
+                <p>Group5</p>
+                <button onclick="location.href='/Master/fin/dashboard'"
+                    class="px-6 py-3 mb-2 text-white  bg-sidebar rounded hover:bg-blue-700">Finance Page</button><br>
+            </div>
+            <div class="w-1/2 px-2">
+                <p>Group2</p>
+                <button onclick="location.href='/Master/hr/dashboard'"
+                    class="px-6 py-3 mb-2 text-white bg-sidebar rounded hover:bg-blue-700 whitespace-nowrap">Human Resources Page</button><br>
+                <p>Group4</p>
+                <button onclick="location.href='/Master/inv/sample'"
+                    class="px-6 py-3 mb-2 text-white  bg-sidebar rounded hover:bg-blue-700 whitespace-nowrap">Inventory & Product Order Page</button><br>
+                <p>Group6</p>
+                <button onclick="location.href='/Master/dlv/sample'"
+                    class="px-6 py-3 mb-2 text-white  bg-sidebar rounded hover:bg-blue-700">Delivery Page</button><br>
+            </div>
         </div>
 
-        <!-- Test Ledger General -->
-        <div class="flex">
-            <button onclick="location.href='/Master/fin/ledger'"
-                class="px-6 py-3 mb-2 mr-2 text-white bg-blue-500 rounded hover:bg-blue-700">Finance Ledger/General Page</button><br>
-            <!-- Test Dashboard href -->
-            <button onclick="location.href='/Master/fin/dashboard'"
-                class="px-6 py-3 mb-2 text-white bg-blue-500 rounded hover:bg-blue-700">Finance Dashboard
-                Page</button><br>
-        </div>
+        
 
     </div>
 
 </body>
 
 </html>
-
