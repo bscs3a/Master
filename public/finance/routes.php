@@ -17,4 +17,10 @@ Router::handle(
     "$path/fin.dashboard.php",
 );
 
+Router::handle(
+    'GET',
+    '/fin/charts',
+    "$path/fin.charts.php",
+);
+
 
