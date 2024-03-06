@@ -11,7 +11,7 @@
       <!-- sidebar -->
       <div class="md:flex flex-col w-64 bg-gray-800">
         <div class="flex items-center justify-end h-16 bg-violet-950 p-6">
-          <span class="text-white font-bold uppercase text-4xl">BSCS 3A</span>
+          <span onclick="location.href='/Master'" class="text-white font-bold uppercase text-4xl">BSCS 3A</span>
         </div>
         <div class="flex flex-col flex-1 overflow-y-auto">
           <nav class="flex-1 px-2 py-4 bg-violet-950">

@@ -5,7 +5,7 @@
     <div href="#" class="flex items-center pb-4">
         <img src="https://placehold.co/50x50" alt="" class="w-10 h-10 rounded object-cover">
 
-        <span class="text-4xl font-russo text-white ml-3">BSCS 3A</span>
+        <span onclick="location.href='/Master'" class="cursor-pointer text-4xl font-russo text-white ml-3">BSCS 3A</span>
     </div>
 
     <ul class="mt-3">
@@ -124,14 +124,14 @@
             </button>
             <ul id="request" class="ml-8 hidden">
                 <li>
-                    <a href="#" class="flex items-center py-2 px-4 text-white hover:text-black">
+                    <a href="/Master/fin/request" class="flex items-center py-2 px-4 text-white hover:text-black">
 
                         <span class="text-sm font-medium">Inventory</span>
                         <i class="ri-arrow-right-s-line ml-auto"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center py-2 px-4 text-white hover:text-black">
+                    <a href="/Master/fin/salary" class="flex items-center py-2 px-4 text-white hover:text-black">
 
                         <span class="text-sm font-medium">Salary</span>
                         <i class="ri-arrow-right-s-line ml-auto"></i>

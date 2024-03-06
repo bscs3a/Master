@@ -12,6 +12,9 @@ Router::handle('GET', '/fin/ledger', "$path/fin.ledger.gen.php");
 Router::handle('GET', '/fin/ledger/accounts/investors', "$path/fin.ledger.investors.php");
 Router::handle('GET', '/fin/ledger/accounts/payable', "$path/fin.ledger.payable.php");
 
+// Routes for Reques Page
+Router::handle('GET', '/fin/request', "$path/fin.requestInventory.php");
+Router::handle('GET', '/fin/salary', "$path/fin.requestSalary.php");
 
 
 // Route for Dashboard Page

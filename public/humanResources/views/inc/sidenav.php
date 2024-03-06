@@ -1,6 +1,6 @@
  <!-- start: Sidebar -->
  <div class="fixed left-0 top-0 w-64 h-full bg-[#262261] p-4 z-50 sidebar-menu transition-transform">
-  <a href="#" class="flex items-center pb-4 border-b border-b-white ">
+  <a href="/Master" class="flex items-center pb-4 border-b border-b-white ">
     <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded object-cover">
     <span class="text-xl font-bold text-white ml-28">BSCS 3A</span>
 </a>  
