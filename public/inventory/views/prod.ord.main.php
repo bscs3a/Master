@@ -350,10 +350,16 @@
     </table>
     </div>
     <!--End: Table-->
-    <div class="flex place-content-end mt-10">
-        <button class="items-end rounded-lg w- px-2 py-1 border border-black bg-white text-black duration-300">
+    <div class="flex justify-end px-6 mt-0">
+    <div class="flex place-content-end mt-10 mr-2">
+        <button onclick="location.href='/Master/inv/'" class="items-end rounded-lg w- px-2 py-1 border border-black bg-yellow text-black duration-300">
         Back </button>
     </div>
+    <div class="flex place-content-end mt-10">
+        <button onclick="location.href='/Master/inv/Product_Order_Shop'" class="items-end rounded-lg w- px-2 py-1 border border-black bg-white text-black duration-300">
+        Shop </button>
+    </div>
+</div>
     </div>
     </body>
 </html>
