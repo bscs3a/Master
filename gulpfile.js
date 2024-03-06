@@ -16,7 +16,7 @@ var directories = [
 gulp.task("serve", function () {
   browserSync.init({
     // proxy: 'localhost/' + process.env.PROXY_ADDRESS,
-    proxy: "localhost/inventory",
+    proxy: "localhost/Master",
     browser: "chrome",
     middleware: function (req, res, next) {
       res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -41,7 +41,7 @@ gulp.task("serve", function () {
 
   directories.forEach((dir) => {
     gulp
-      .watch(`C:\laragon\www\Inventory\${dir}/**/*.*`, { usePolling: true })
+      .watch(`C:/laragon/www/Master/${dir}/**/*.*`, { usePolling: true })
       .on("change", browserSync.reload);
   });
 });
