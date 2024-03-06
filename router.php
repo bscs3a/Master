@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__)->load();
+// $dotenv = Dotenv\Dotenv::createImmutable(__DIR__)->load();
 
 class Router
 {
