@@ -36,6 +36,12 @@
     <!-- Main container -->
     <main id="mainContent" class="w-full md:w-[calc(100%-256px)] md:ml-64 min-h-screen transition-all main">
 
+        <!-- Start: Full Screen Icon -->
+        <div class="absolute top-0 right-0 p-4 mt-10">
+            <i class="fas fa-expand"></i>
+        </div>
+        <!-- End: Full Screen Icon -->
+
         <!-- Start: Header -->
 
         <div class="py-2 px-6 bg-white flex items-center shadow-md sticky top-0 left-0 z-30">
@@ -107,7 +113,7 @@
                 <div>
                     <div class="text-xl font-bold divide-y ml-3">Most Sold</div>
                     <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                    <div id="grid" :class="sidebarOpen || cartOpen ? 'grid grid-cols-5 gap-4' : 'grid grid-cols-6 gap-4'">
+                    <div id="grid" :class="!cartOpen ? 'grid grid-cols-6 gap-4' : 'grid grid-cols-5 gap-4'">
                         <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
                             <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
                                 <!-- SVG icon -->
@@ -320,6 +326,15 @@
             }
         });
     </script>
+
+    <script>
+        window.onload = function() {
+            var grid = document.getElementById('grid');
+            grid.classList.remove('grid-cols-6');
+            grid.classList.add('grid-cols-5');
+        };
+    </script>
+
 </body>
 
 </html>
