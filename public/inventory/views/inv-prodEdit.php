@@ -226,7 +226,7 @@
     <div class="flex place-content-end mr-3">  
             <div class="flex justify-end px-4 mt-0">
                 <div class="flex place-content-end mt-10 mr-2">
-                    <button  class="items-end rounded-lg w-24 px-2 py-1 border border-black bg-yellow text-black duration-300">
+                    <button onclick="location.href='/Master/inv/main'" class="items-end rounded-lg w-24 px-2 py-1 border border-black bg-yellow text-black duration-300">
                     Cancel </button>
                 </div>
             </div>

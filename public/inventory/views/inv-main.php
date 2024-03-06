@@ -238,7 +238,7 @@
         </div>
 
         <div class="flex place-content-end mt-2 m-3">
-            <button class="items-end rounded-full px-2 py-1 bg-violet-950 text-white">
+            <button onclick="location.href='/Master/inv/prod-edit'" class="items-end rounded-full px-2 py-1 bg-violet-950 text-white">
             <i class="ri-add-circle-line"></i>
             <span>Add Product</span> 
             </button>
