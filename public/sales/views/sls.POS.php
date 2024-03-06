@@ -104,6 +104,11 @@
             </div>
 
             <div class="flex flex-col items-center min-h-screen w-full" :class="{ 'w-full': !sidebarOpen, 'w-9/12': sidebarOpen }">
+                <!-- Close Cart and Sidebar Button -->
+                <button @click="sidebarOpen = false; cartOpen = false">
+                    <i class="ri-close-line"></i>
+                </button>
+
                 <div>
                     <div class="text-xl font-bold divide-y ml-3">Most Sold</div>
                     <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
@@ -240,7 +245,7 @@
             </div>
 
             <!-- Sidebar -->
-            <div class="fixed right-0 top-10 w-96 overflow-auto sidebar rounded-l-lg border-2 border-gray-300 bg-white shadow" style="height: 94vh;" x-show="sidebarOpen">
+            <div id="sidebar sidebar-toggle" class="fixed right-0 top-10 w-96 overflow-auto sidebar rounded-l-lg border-2 border-gray-300 bg-white shadow mt-12" style="height: 88vh;" x-show="sidebarOpen">
                 <!-- Close Sidebar Button -->
                 <div @click="sidebarOpen = false; cartOpen = !cartOpen" class="flex items-center py-2 text-black no-underline bg-gray-200 border-b border-gray-300 cursor-pointer">
                     <i class="ri-arrow-right-s-line text-xl ml-5 mr-5"></i>
