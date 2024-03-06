@@ -37,14 +37,14 @@
     <main id="mainContent" class="w-full md:w-[calc(100%-256px)] md:ml-64 min-h-screen transition-all main">
 
         <!-- Start: Full Screen Icon -->
-        <div class="absolute top-0 right-0 p-4 mt-10">
-            <i class="fas fa-expand"></i>
+        <div class="absolute top-0 right-0">
+            <i id="fullscreenIcon" class="fas fa-expand" x-data="{ isFullScreen: false }" @click="isFullScreen = !isFullScreen" :class="{ 'p-3 text-lg': isFullScreen, 'pt-14 pr-3 text-lg': !isFullScreen }"></i>
         </div>
         <!-- End: Full Screen Icon -->
 
         <!-- Start: Header -->
 
-        <div class="py-2 px-6 bg-white flex items-center shadow-md sticky top-0 left-0 z-30">
+        <div id="header" class="py-2 px-6 bg-white flex items-center shadow-md sticky top-0 left-0 z-30">
 
             <!-- Start: Active Menu -->
 
@@ -76,6 +76,7 @@
         </div>
 
         <div class="min-h-screen" x-data="{ sidebarOpen: false, cartOpen: false }" :class="{ 'sidebar-open': sidebarOpen, 'sidebar-closed': !sidebarOpen }">
+
             <div class="flex justify-between items-center w-full pt-10 pl-10">
                 <div class="relative mb-3 flex items-center border-2 border-gray-300 rounded-lg w-2/5 bg-gray-200">
                     <div class="flex items-center">
@@ -178,8 +179,8 @@
                 </div>
             </div>
 
-            <!-- Sidebar -->
-            <div id="sidebar sidebar-toggle" class="fixed right-0 top-10 w-96 overflow-auto sidebar rounded-l-lg border-2 border-gray-300 bg-white shadow mt-12" style="height: 88vh;" x-show="sidebarOpen">
+            <!-- Cart -->
+            <div id="sidebar sidebar-toggle cart" class="fixed right-0 top-10 w-96 overflow-auto sidebar rounded-l-lg border-2 border-gray-300 bg-white shadow mt-12" style="height: 88vh;" x-show="sidebarOpen">
                 <!-- Close Sidebar Button -->
                 <div @click="sidebarOpen = false; cartOpen = !cartOpen" class="flex items-center py-2 text-black no-underline bg-gray-200 border-b border-gray-300 cursor-pointer">
                     <i class="ri-arrow-right-s-line text-xl ml-5 mr-5"></i>
@@ -334,6 +335,38 @@
             grid.classList.add('grid-cols-5');
         };
     </script>
+
+    <script>
+        document.getElementById('fullscreenIcon').addEventListener('click', function() {
+            var header = document.getElementById('header');
+            var sidebarMenu = document.getElementById('sidebar-menu');
+            var cart = document.getElementById('cart');
+            if (header.style.display === 'none') {
+                header.style.display = 'flex';
+                if (!sidebarMenu.classList.contains('hidden')) {
+                    sidebarMenu.classList.toggle('hidden');
+                    sidebarMenu.classList.toggle('transform');
+                    sidebarMenu.classList.toggle('-translate-x-full');
+                    document.getElementById('mainContent').classList.toggle('md:w-full');
+                    document.getElementById('mainContent').classList.toggle('md:ml-64');
+                }
+                grid.classList.remove('grid-cols-6');
+                grid.classList.add('grid-cols-5');
+            } else {
+                header.style.display = 'none';
+                if (!sidebarMenu.classList.contains('hidden')) {
+                    sidebarMenu.classList.toggle('hidden');
+                    sidebarMenu.classList.toggle('transform');
+                    sidebarMenu.classList.toggle('-translate-x-full');
+                    document.getElementById('mainContent').classList.toggle('md:w-full');
+                    document.getElementById('mainContent').classList.toggle('md:ml-64');
+                }
+                grid.classList.remove('grid-cols-5');
+                grid.classList.add('grid-cols-6');
+            }
+        });
+    </script>
+
 
 </body>
 
