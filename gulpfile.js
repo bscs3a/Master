@@ -10,9 +10,11 @@ gulp.task('serve', function() {
     browserSync.init({
 
         // proxy: 'localhost/' + process.env.PROXY_ADDRESS,
+
         proxy: 'localhost/master',
 
         browser: "chrome",
+
         middleware: function (req, res, next) {
             res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
             next();
