@@ -55,14 +55,14 @@
             </button>
             <ul id="reports" class="ml-8 hidden">
                 <li>
-                    <a href="#" class="flex items-center py-2 px-4 text-white hover:text-black">
+                    <a href ="/Master/fin/reportIncome"class="flex items-center py-2 px-4 text-white hover:text-black">
 
                         <span class="text-sm font-medium">Income</span>
                         <i class="ri-arrow-right-s-line ml-auto"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center py-2 px-4 text-white hover:text-black">
+                    <a href="/Master/fin/reportCash" class="flex items-center py-2 px-4 text-white hover:text-black">
 
                         <span class="text-sm font-medium">Cash Flow</span>
                         <i class="ri-arrow-right-s-line ml-auto"></i>
@@ -70,7 +70,7 @@
                 </li>
 
                 <li>
-                    <a href="#" class="flex items-center py-2 px-4 text-white hover:text-black">
+                    <a href="/Master/fin/reportEquity" class="flex items-center py-2 px-4 text-white hover:text-black">
 
                         <span class="text-sm font-medium">Equity</span>
                         <i class="ri-arrow-right-s-line ml-auto"></i>
@@ -78,7 +78,7 @@
                 </li>
 
                 <li>
-                    <a href="#" class="flex items-center py-2 px-4 text-white hover:text-black">
+                    <a href="/Master/fin/reportBalance" class="flex items-center py-2 px-4 text-white hover:text-black">
 
                         <span class="text-sm font-medium">Balance Sheet</span>
                         <i class="ri-arrow-right-s-line ml-auto"></i>
