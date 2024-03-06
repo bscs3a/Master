@@ -142,7 +142,7 @@
 
 
         <li class="mb-1 hover:bg-slate-400 rounded-xl">
-            <a href="#" class="flex items-center py-2 px-4 text-white hover:text-black">
+            <a href="/Master/fin/charts" class="flex items-center py-2 px-4 text-white hover:text-black">
                 <i class="ri-line-chart-line mr-3 text-lg"></i>
                 <span class="text-sm font-medium">Charts</span>
                 <i class="ri-arrow-down-s-line ml-auto"></i>
