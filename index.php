@@ -51,7 +51,7 @@ require_once './public/delivery/routes.php';
                 <button onclick="location.href='/Master/hr/dashboard'"
                     class="px-6 py-3 mb-2 text-white bg-sidebar rounded hover:bg-blue-700 whitespace-nowrap">Human Resources Page</button><br>
                 <p>Group4</p>
-                <button onclick="location.href='/Master/inv/sample'"
+                <button onclick="location.href='/Master/inv/main'"
                     class="px-6 py-3 mb-2 text-white  bg-sidebar rounded hover:bg-blue-700 whitespace-nowrap">Inventory & Product Order Page</button><br>
                 <p>Group6</p>
                 <button onclick="location.href='/Master/dlv/sample'"
