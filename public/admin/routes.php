@@ -1,9 +1,18 @@
-<?php 
+<?php
 
 $path = './public/admin/views';
+$basePath = "$path/adm.";
 
-Router::handle('GET', '/adm/dashboard', "$path/dashboard.php");
-Router::handle('GET', '/adm/edit-employee', "$path/edit-employee.php");
-Router::handle('GET', '/adm/product', "$path/product.php");
-Router::handle('GET', '/adm/login', "$path/adm.login.php");
+$routes = [
+    // Dashboard
+    '/adm/dashboard' => $basePath . "dashboard.php",
 
+    // Edit Employee
+    '/adm/edit-employee' => $basePath . "edit-employee.php",
+
+    // Product
+    '/adm/product' => $basePath . "product.php",
+
+    // Login
+    '/adm/login' => $basePath . "login.php",
+];
