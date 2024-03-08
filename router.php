@@ -1,27 +1,39 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
-
+require_once "./public/finance/routes.php";
 // $dotenv = Dotenv\Dotenv::createImmutable(__DIR__)->load();
 
 class Router
 {
-    public static function handle($method = 'GET', $path = '/', $filename =''){
-        // print_r($_SERVER);
+    public static $validRoutes = [];
+
+    public static function setRoutes($routes)
+    {
+        self::$validRoutes = $routes;
+    }
+
+    public static function handle($method = 'GET', $path = '/')
+    {
         $currentMethod = $_SERVER['REQUEST_METHOD'];
         $currentUri = $_SERVER['REQUEST_URI'];
-        // echo $path; 
-        if($currentMethod != $method ){
-            require $filename;
-        }
-        // $root = getenv('PROXY_ADDRESS');
-        $root = "/Master";
-        $pattern = '#^'.$root.$path.'$#sD';
-        if(preg_match($pattern, $currentUri)){
-            require_once $filename;
-            exit();
+
+        if ($currentMethod != $method) {
+            return;
         }
 
-        return false;
+        $root = "/Master";
+        $currentUri = str_replace($root, '', $currentUri);
+
+        $validRoutes = self::$validRoutes;
+
+        if (array_key_exists($currentUri, $validRoutes)) {
+            require_once $validRoutes[$currentUri];
+            exit();
+        } else {
+            // The route is not valid
+            require_once './src/error.php';
+            exit();
+        }
     }
 }
 
