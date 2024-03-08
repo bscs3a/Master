@@ -12,100 +12,6 @@
 <body>
     <!-- Start: Sidebar -->
     <?php include "components/sidebar.php" ?>
-    <!-- <div class="fixed bg-sidebar left-0 top-0 w-64 h-full p-4 z-50 sidebar-menu transition-transform">
-
-        <div href="#" class="flex items-center pb-4">
-            <img src="https://placehold.co/50x50" alt="" class="w-10 h-10 rounded object-cover">
-
-            <span class="text-4xl  font-russo ml-3 text-white">BSCS 3A</span>
-        </div>
-
-        <ul class="mt-3">
-
-            <li class="mb-1 group active ">
-                <a href="#" class="flex items-center py-2 px-4 bg-fuchsia-200 bg-opacity-30 rounded-lg text-white ">
-                    <i class="ri-speed-up-line mr-3 text-lg  "></i>
-                    <span class="text-sm font-medium ">Dashboard</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-sidebar text-white">
-                    <i class="ri-file-text-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Invoices</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-sidebar text-white">
-                    <i class="ri-menu-search-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Expense Category</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-sidebar text-white">
-                    <i class="ri-file-history-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Expense Record</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-sidebar text-white">
-                    <i class="ri-box-3-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Items</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-sidebar text-white">
-                    <i class="ri-bank-card-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Payments</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-sidebar text-white">
-                    <i class="ri-funds-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Revenue Record</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-sidebar text-white">
-                    <i class="ri-scales-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Balance Sheet</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-sidebar text-white">
-                    <i class="ri-database-2-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Database</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-
-            <li class="mb-1 group">
-                <a href="#" class="flex items-center py-2 px-4 bg-sidebar text-white">
-                    <i class="ri-group-line mr-3 text-lg"></i>
-                    <span class="text-sm font-medium">Users</span>
-                    <i class="ri-arrow-right-s-line ml-auto"></i>
-                </a>
-            </li>
-        </ul>
-
-    </div>
-
-    <div class="fixed top-0 left-0 w-full h-full z-40 md:hidden sidebar-overlay"></div> -->
     <!-- End: Sidebar -->
 
     <!-- Start: Dashboard -->
@@ -152,70 +58,96 @@
             <!-- Start: Top Section -->
             <div class=" mb-6">
                 <!-- Start: Top Left-Side Section -->
-                <div
-                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  border-solid border-gray-400 shadow-md rounded-md px-5 py-4">
-                    <div class="border-solid col-span-2 ">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  ">
+                    <div
+                        class="col-span-2 border-solid border-gray-400 shadow-md rounded-md px-5 py-10 bg-wave bg-cover bg-right-top bg-no-repeat">
                         <!-- Start: Welcome Message -->
-                        <h1 class="font-sans font-bold  text-5xl">Hello, Sample User!</h1>
-                        <p class="line-clamp-2 w-3/4 mt-3 font-sans text-xl text-gray-400 ">Welcome back! Ready to gear
-                            up for another productive day?</p>
-                        <!-- End: Welcome Message -->
+                        <div class="flex justify-between">
+                            <div>
 
+                                <h1 class="font-sans font-bold  text-5xl">Hello, Sample User!</h1>
+                                <p class="line-clamp-2 w-3/4 mt-3 font-sans text-xl text-gray-400 ">Welcome back! Ready
+                                    to gear
+                                    up for another productive day?</p>
+                            </div>
+                            <div>
+
+                                <p class="font-sans font-bold text-xl text-gray-400">Today, March 04, 2024</p>
+                            </div>
+                        </div>
+                        <!-- End: Welcome Message -->
                         <!-- Start: Mini-Dashboard Analytics -->
-                        <div id="mini-dashboard" class="mt-10 grid grid-cols-1  md:grid-cols-2 md:grid-rows-2 gap-4">
-                            <!-- Start: Dashboard Analytics: Total Items -->
+                        <div id="mini-dashboard" class="mt-10 grid grid-cols-1  md:grid-cols-2  gap-4">
+                            <!-- Start: Dashboard Analytics: Total Sales -->
                             <div class="bg-white rounded-md border border-gray-300 p-4 shadow-lg">
                                 <div class="flex justify-between mb-4">
                                     <div>
                                         <div class="flex items-center mb-1">
                                             <div class="text-2xl font-semibold">0</div>
                                         </div>
-                                        <div class="text-sm font-medium text-gray-400">Total Items</div>
+                                        <div class="text-sm font-medium text-gray-400">Total Sales</div>
                                     </div>
                                     <div>
-                                        <i class="ri-file-text-line mr-3 text-4xl"></i>
+                                        <!-- <i class="ri-file-text-line mr-3 text-4xl"></i> -->
+                                        <i class="ri-funds-box-line text-4xl"></i>
+                                        <!-- <img src="Profit.jpg" alt="Profit.png"> -->
                                     </div>
                                 </div>
                             </div>
-                            <!-- End: Dashboard Analytics: Total Items -->
+                            <!-- End: Dashboard Analytics: Total Sales -->
+                            <!-- Start: Dashboard Analytics: Total Expense -->
+                            <div class="bg-white rounded-md border border-gray-300 p-4 shadow-lg">
+                                <div class="flex justify-between mb-4">
+                                    <div>
+                                        <div class="flex items-center mb-1">
+                                            <div class="text-2xl font-semibold">0</div>
+                                        </div>
+                                        <div class="text-sm font-medium text-gray-400">Total Expense</div>
+                                    </div>
+                                    <div>
+                                        <i class="ri-exchange-funds-line text-4xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End: Dashboard Analytics: Total Expense -->
                         </div>
                         <!-- End: Mini-Dashboard Analytics -->
 
                         <!-- Start Script: mini-dashboard item repeater -->
                         <script>
-                            var miniDashboard = document.getElementById('mini-dashboard');
-                            // Array of mini-dashboard items
-                            var mini_dash_items = [
-                                "?",
-                                "Total Expense",
-                                "Balance"
-                            ];
-                            // Loop through the mini_dash_items array and display the mini-dashboard items
-                            for (let index = 0; index < mini_dash_items.length; index++) {
-                                // const element = array[index];
-                                miniDashboard.innerHTML +=
-                                    `
-                                    <div class="bg-white rounded-md border border-gray-300 p-4 shadow-lg">
-                                        <div class="flex justify-between mb-4">
-                                            <div>
-                                                <div class="flex items-center mb-1">
-                                                    <div class="text-2xl font-semibold">0</div>
-                                                </div>
-                                                <div class="text-sm font-medium text-gray-400">${mini_dash_items[index]}</div>
-                                            </div>
-                                            <div>
-                                            <i class="ri-file-text-line mr-3 text-4xl"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `;
-                            }
+                            // var miniDashboard = document.getElementById('mini-dashboard');
+                            // // Array of mini-dashboard items
+                            // var mini_dash_items = [
+                            //     "?",
+                            //     "Total Expense",
+                            //     "Balance"
+                            // ];
+                            // // Loop through the mini_dash_items array and display the mini-dashboard items
+                            // for (let index = 0; index < mini_dash_items.length; index++) {
+                            //     // const element = array[index];
+                            //     miniDashboard.innerHTML +=
+                            //         `
+                            //         <div class="bg-white rounded-md border border-gray-300 p-4 shadow-lg">
+                            //             <div class="flex justify-between mb-4">
+                            //                 <div>
+                            //                     <div class="flex items-center mb-1">
+                            //                         <div class="text-2xl font-semibold">0</div>
+                            //                     </div>
+                            //                     <div class="text-sm font-medium text-gray-400">${mini_dash_items[index]}</div>
+                            //                 </div>
+                            //                 <div>
+                            //                 <i class="ri-file-text-line mr-3 text-4xl"></i>
+                            //                 </div>
+                            //             </div>
+                            //         </div>
+                            //     `;
+                            // }
                         </script>
                         <!-- End Script: mini-dashboard item repeater -->
                     </div>
 
                     <div class="text-right col-span-1">
-                        <p class="font-sans font-bold text-xl">Today, March 04, 2024</p>
+                        <h1>asdas</h1>
                     </div>
 
 
@@ -237,15 +169,26 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="px-3 pt-5 border-solid border-2 border-gray-200 shadow-md">
 
-                        <h2 class="font-sans font-bold text-xl">Income Statement</h2>
+                        <div class="flex justify-between">
+                            <h2 class="font-sans font-bold text-xl">Income Statement</h2>
+                            <a href="#" class="text-sm text-gray-900 font-semibold ">View Details</a>
 
+                        </div>
+                        <p class="text-gray-600 my-3">Net Sales 0</p>
                         <canvas id="incomeBarChart"></canvas>
 
                     </div>
-                    <div class="px-3 pt-5 border-solid border-2 border-gray-200 shadow-md">
-                        <h2 class="font-sans font-bold text-xl">Balance</h2>
+                    <div class="px-5 pt-5 border-solid border-2 border-gray-200 shadow-md">
+                        <div class="flex justify-between">
+                            <h2 class="font-sans font-bold text-xl">Balance</h2>
+                            <a href="#" class="text-sm text-gray-900 font-semibold ">View Details</a>
+
+                        </div>
                         <!-- Balance Sheet in Pie Graph -->
-                        <canvas id="balancePie" class="mx-auto my-auto"></canvas>
+                        <div class="w-full h-3/4 flex justify-center">
+
+                            <canvas id="balancePie" class="px-3 py-3"></canvas>
+                        </div>
                     </div>
                 </div>
 
@@ -264,8 +207,11 @@
                             datasets: [{
                                 label: 'Income',
                                 data: [12000, 19000, 3000, 5000, 2000, 3000, 7000, 8000, 9000, 10000, 11000, 12000], // Replace with your income data
-                                backgroundColor: 'rgba(255, 165, 0, 0.2)',
+                                backgroundColor: ' #F8B721',
                                 borderColor: 'rgba(255, 165, 0, 1)',
+                                // rgba(255, 165, 0, 0.2),
+                                //F8B721 orange
+                                // F6D95D pale orange
                                 borderWidth: 1
                             }]
                         },
@@ -273,6 +219,11 @@
                             scales: {
                                 y: {
                                     beginAtZero: true
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    position: 'bottom'
                                 }
                             }
                         }
@@ -292,7 +243,14 @@
                         },
                         options: {
                             responsive: true,
+
+                            plugins: {
+                                legend: {
+                                    position: 'bottom'
+                                }
+                            }
                         }
+
                     });
 
 
@@ -308,9 +266,13 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="col-span-1 px-3 pt-5 border-solid border-2 border-gray-200 shadow-md">
-                        <h2 class="font-sans text-xl font-bold">Equity</h2>
+                    <div class="flex justify-between">
+                            <h2 class="font-sans font-bold text-xl">Equity</h2>
+                            <a href="#" class="text-sm text-gray-900 font-semibold ">View Details</a>
+
+                        </div>
                         <!-- Donut Chart for Equity -->
-                        <div>
+                        <div class="flex justify-center w-3/4">
                             <canvas id="equityDonutChart"></canvas>
                         </div>
                     </div>
@@ -338,7 +300,13 @@
                         },
                         options: {
                             responsive: true,
-                            maintainAspectRatio: true
+                            maintainAspectRatio: true,
+
+                            plugins: {
+                                legend: {
+                                    position: 'left'
+                                }
+                            }
                         }
                     });
 
@@ -353,9 +321,11 @@
                             datasets: [{
                                 label: 'Sales Growth',
                                 data: [12, 19, 3, 5, 2, 3, 7], // Replace with your data
-                                backgroundColor: 'rgba(255, 165, 0, 0.2)',
+                                backgroundColor: 'rgba(255, 165, 0, 0.7)',
+                                fill: true,
                                 borderColor: 'rgba(255, 165, 0, 1)',
                                 borderWidth: 1
+
                             }]
                         },
                         options: {
@@ -363,7 +333,13 @@
                                 y: {
                                     beginAtZero: true
                                 }
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
                             }
+                            
                         }
                     });
                 </script>

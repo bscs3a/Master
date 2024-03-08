@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./**/**/**/*.{html,js,php}"],
+  safelist: [
+    'bg-wave', 
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -10,6 +13,10 @@ module.exports = {
       colors: {
         'sidebar': '#262261', // Sidebar color
         // 'primary': '#FFA500', // Primary color
+      },
+
+      backgroundImage: {
+        'wave': "url('../public/finance/img/wave.png')",
       },
     },
   },
