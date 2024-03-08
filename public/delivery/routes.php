@@ -1,8 +1,13 @@
-<?php 
+<?php
 
 $path = './public/delivery/views';
+$basePath = "$path/dlv.";
 
-Router::handle('GET', '/dlv/sample', "$path/dlv.sample.php");
-Router::handle('GET', '/dlv/link', "$path/dlv.test-link.php");
+$dlv = [
+    // Sample (can remove)
+    '/dlv/sample' => $basePath . "sample.php",
+    '/dlv/link' => $basePath . "test-link.php",
 
-Router::handle('GET', '/dlv/details', "$path/dlv.details.php");
+    // Details
+    '/dlv/details' => $basePath . "details.php",
+];

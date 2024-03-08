@@ -3,7 +3,7 @@ $path = './public/finance/views';
 
 $basePath = "$path/fin.";
 
-$routes = [
+$fin = [
     //dashboard
     '/fin/dashboard' => $basePath . "dashboard.php",
 
@@ -23,12 +23,13 @@ $routes = [
     '/fin/salary' => $basePath . "requestSalary.php",
     
     //charts
-    '/fin/charts' => $basePath . "charts.php",   
+    '/fin/charts' => $basePath . "charts.php", 
+
+    '/' => "C:/xampp/htdocs/Master/index.php",
+    
 ];
 
-Router::setRoutes($routes);
-$currentUri = $_SERVER['REQUEST_URI'];
-Router::handle('GET', $currentUri);
+
 
 
 

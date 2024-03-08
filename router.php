@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
-require_once "./public/finance/routes.php";
+require "./web.php";
 // $dotenv = Dotenv\Dotenv::createImmutable(__DIR__)->load();
 
 class Router
@@ -21,19 +21,27 @@ class Router
             return;
         }
 
-        $root = "/Master";
-        $currentUri = str_replace($root, '', $currentUri);
+        // Get the base path of the application
+        $basePath = dirname($_SERVER['SCRIPT_NAME']);
+
+        // Replace the base path in the current URI
+        $currentUri = str_replace($basePath, '', $currentUri);
+
+        // If the current URI is an empty string, set it to "/"
+        if ($currentUri === '') {
+            $currentUri = '/';
+        }
 
         $validRoutes = self::$validRoutes;
 
         if (array_key_exists($currentUri, $validRoutes)) {
             require_once $validRoutes[$currentUri];
-            exit();
         } else {
             // The route is not valid
-            require_once './src/error.php';
-            exit();
+            require_once __DIR__ . "/src/error.php";
         }
+
+        exit();
     }
 }
 
