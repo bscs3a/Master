@@ -33,7 +33,7 @@ gulp serve
 > Bug Fix: Rootfolder and Routing issue <br>
 
 ### Try to understand how the Routing works at `routes.php` of your system folder<br><br>
-Add this script at the buttom of your page before the end of the `</body>` tag
+Add this script at the bottom of your page before the end of the `</body>` tag
 > the number of dots may vary on your route namings
 ```
 <script  src="./../src/route.js"></script>
