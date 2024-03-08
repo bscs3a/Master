@@ -1,3 +1,3 @@
 <?php 
 
-echo 'Route Does not Exist';
+echo "Route Does not Exist";
