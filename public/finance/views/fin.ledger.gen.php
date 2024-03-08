@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    
+
     <?php include "components/sidebar.php" ?>
 
     <!-- Start: Dashboard -->
@@ -52,17 +52,82 @@
 
         <!-- End: Header -->
 
-        <div class="w-full min-h-screen p-6 bg-white">
+        <div class="w-full p-6 bg-white">
 
             <div class="justify-between items-start mb-4">
                 <!-- Button -->
-                <div class="flex justify-end items-start mb-2">
-                    <button id="openModal"
-                        class="bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium text-sm py-1 px-3 rounded-lg border border-gray-500">
-                        <i class="ri-add-box-line"></i>
-                        New Transactions
-                    </button>
+                <div class="flex justify-between">
+                    <div class="items-start mb-2">
+                        <div class="relative">
+                            <div class="inline-flex items-center overflow-hidden rounded-lg  border border-gray-500">
+                                <!-- bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium text-sm  -->
+                                <button
+                                    class="border-e px-4 py-2 text-sm/none bg-gray-200 hover:bg-gray-300 text-gray-900 border-gray-500">
+                                    <i class="ri-calendar-2-fill"></i>
+                                </button>
+
+                                <button
+                                    class="border-e px-4 py-2 text-sm/none bg-gray-200 hover:bg-gray-300 text-gray-900">                   
+                                    Recent
+                                </button>
+                            </div>
+
+                            <div class="hidden absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
+                                role="menu">
+                                <div class="p-2">
+                                    <a href="#"
+                                        class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                                        role="menuitem">
+                                        View on Storefront
+                                    </a>
+
+                                    <a href="#"
+                                        class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                                        role="menuitem">
+                                        View Warehouse Info
+                                    </a>
+
+                                    <a href="#"
+                                        class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                                        role="menuitem">
+                                        Duplicate Product
+                                    </a>
+
+                                    <a href="#"
+                                        class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                                        role="menuitem">
+                                        Unpublish Product
+                                    </a>
+                                </div>
+
+                                <div class="p-2">
+                                    <form method="POST" action="#">
+                                        <button type="submit"
+                                            class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
+                                            role="menuitem">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+
+                                            Delete Product
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="items-start mb-2">
+                        <button id="openModal"
+                            class="bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium text-sm py-1 px-3 rounded-lg border border-gray-500">
+                            <i class="ri-add-box-line"></i>
+                            New Transactions
+                        </button>
+                    </div>
                 </div>
+
 
                 <!-- Modal -->
                 <div id="myModal"
@@ -144,7 +209,7 @@
                     });
                 </script>
 
-
+                <!-- Table -->
                 <div class="overflow-x-auto rounded-lg border border-gray-400">
                     <table class="min-w-full divide-y-2 divide-gray-400 bg-white text-sm">
                         <thead class="ltr:text-left rtl:text-right bg-gray-200">
@@ -182,7 +247,58 @@
                 </div>
             </div>
         </div>
-        <!-- End: Sales Value -->
+
+
+        <ol class="flex justify-end mr-8 gap-1 text-xs font-medium">
+            <li>
+                <a href="#"
+                    class="inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180">
+                    <span class="sr-only">Prev Page</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </li>
+
+            <li>
+                <a href="#"
+                    class="block size-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900">
+                    1
+                </a>
+            </li>
+
+            <li class="block size-8 rounded border-blue-600 bg-blue-600 text-center leading-8 text-white">
+                2
+            </li>
+
+            <li>
+                <a href="#"
+                    class="block size-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900">
+                    3
+                </a>
+            </li>
+
+            <li>
+                <a href="#"
+                    class="block size-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900">
+                    4
+                </a>
+            </li>
+
+            <li>
+                <a href="#"
+                    class="inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180">
+                    <span class="sr-only">Next Page</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </li>
+        </ol>
     </main>
 
     <!-- Start: Sidebar -->
