@@ -1,4 +1,8 @@
 <?php
+// database conncetion
+require_once './src/dbconn.php';
+
+// router
 require_once './router.php';
 
 // Group #1
@@ -57,6 +61,7 @@ require_once './public/delivery/routes.php';
                 <button onclick="location.href='/Master/dlv/details'"
                     class="px-6 py-3 mb-2 text-white  bg-sidebar rounded hover:bg-blue-700">Delivery Page</button><br>
             </div>
+            
         </div>
 
         
