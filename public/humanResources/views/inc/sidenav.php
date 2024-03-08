@@ -1,13 +1,13 @@
  <!-- start: Sidebar -->
  <div class="fixed left-0 top-0 w-64 h-full bg-red-900 p-4 z-50 sidebar-menu transition-transform">
-  <a href="/Master" class="flex items-center pb-4 border-b border-b-white ">
+  <a route="/" class="flex items-center pb-4 border-b border-b-white ">
     <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded object-cover">
     <span class="text-xl font-bold text-white ml-28">BSCS 3A</span>
 </a>  
 <!-- Dashboard -->
 <ul class="mt-4">
   <li class="mb-1 group active">
-    <a href="/Master/hr/dashboard" class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+    <a route='/hr/dashboard' class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
       <i class="ri-dashboard-3-line mr-3 text-lg"></i>
       <span class="text-sm">Dashboard</span>
     </a>
@@ -108,4 +108,3 @@
 </div>
 <!-- end: Sidebar -->
 <!-- <script src="./../js/script.js"></script> -->
-<script type="module" src="../public/humanResources/js/script.js"></script>

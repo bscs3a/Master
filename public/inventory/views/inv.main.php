@@ -110,7 +110,7 @@
         </div>
 
         <div class="flex place-content-end mt-2 m-3">
-            <button onclick="location.href='/Master/inv/prod-edit'" class="items-end rounded-full px-2 py-1 bg-violet-950 text-white">
+            <button route='/inv/prod-edit' class="items-end rounded-full px-2 py-1 bg-violet-950 text-white">
             <i class="ri-add-circle-line"></i>
             <span>Add Product</span> 
             </button>
@@ -161,7 +161,7 @@
                     Php 500
                 </td>
                 <td class="px-6 py-4 font-semibold text-black">
-                    <a  onclick="location.href='/Master/inv/prod-edit'" class="font-medium hover:underline">Edit</a>
+                    <a route='/inv/prod-edit' class="font-medium hover:underline">Edit</a>
                 </td>
             </tr>
             <tr class="bg-white">
@@ -181,14 +181,14 @@
                     Php 500
                 </td>
                 <td class="px-6 py-4 font-semibold text-black">
-                    <a onclick="location.href='/Master/inv/prod-edit'" class="font-medium hover:underline">Edit</a>
+                    <a route='/inv/prod-edit' class="font-medium hover:underline">Edit</a>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
     <!--End: Table-->
-  
+    <script  src="./../src/route.js"></script>
     
 </body>
 </html>

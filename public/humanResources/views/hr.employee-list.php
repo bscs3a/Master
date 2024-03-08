@@ -14,5 +14,6 @@
   require 'inc/sidenav.php';
 ?>
 <!-- end of sidenav -->
+<script  src="./../src/route.js"></script>
 </body>
 </html> 
