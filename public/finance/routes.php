@@ -1,5 +1,4 @@
 <?php 
-
 $path = './public/finance/views';
 
 Router::handle('GET', '/fin/sample', "$path/fin.sample.php");
@@ -16,6 +15,7 @@ Router::handle('GET', '/fin/ledger/accounts/payable', "$path/fin.ledger.payable.
 Router::handle('GET', '/fin/request', "$path/fin.requestInventory.php");
 Router::handle('GET', '/fin/salary', "$path/fin.requestSalary.php");
 
+Router::handle('GET', '/fin/test', "$path/test.php");
 
 // Route for Dashboard Page
 Router::handle(
