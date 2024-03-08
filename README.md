@@ -41,7 +41,7 @@ Add this script at the buttom of your page before the end of the `</body>` tag
 
 ### Sample Usage
 no need to include the root folder name just the route
-> it only works on given example html elements
+> it only works on the given example html elements
 
 ```
 <span route ='/po/sampleRoute'>
