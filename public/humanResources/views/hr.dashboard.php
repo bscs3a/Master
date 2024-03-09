@@ -135,6 +135,7 @@
 </div>
 </main>
 <!-- End Main Bar-->
+<script  src="./../src/route.js"></script>
 </body>
 
 </html>

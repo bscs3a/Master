@@ -8,9 +8,9 @@ $hr = [
     '/hr/dashboard' => $basePath . "dashboard.php",
 
     // employee profile
-    '/hr/employees' => $basePath . "employee.php",
-    '/hr/employees/add' => $basePath . "employee.add.php",
-    '/hr/employees/update' => $basePath . "employee.add.php",
+    '/hr/employees' => $basePath . "employees.php",
+    '/hr/employees/add' => $basePath . "employees.add.php",
+    '/hr/employees/update' => $basePath . "employees.add.php",
 
     // departments
     '/hr/employees/departments' => $basePath . "departments.php", // 'departments.php

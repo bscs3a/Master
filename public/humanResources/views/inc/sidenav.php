@@ -7,7 +7,7 @@
 <!-- Dashboard -->
 <ul class="mt-4">
   <li class="mb-1 group">
-    <a href="/hr/dashboard" class="flex items-center py-2 px-4 text-gray-50 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+    <a route="/hr/dashboard" class="flex items-center py-2 px-4 text-gray-50 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
       <i class="ri-dashboard-3-line mr-3 text-lg"></i>
       <span class="text-sm">Dashboard</span>
       <i class="ri-arrow-right-s-line ml-auto"></i>
@@ -15,7 +15,7 @@
   </li>
 <!-- Calendar -->
 <li class="mb-1 group">
-  <a href="/Master/hr/schedule" class="flex items-center py-2 px-4 text-gray-50 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+  <a route="/hr/schedule" class="flex items-center py-2 px-4 text-gray-50 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
     <i class="ri-line-chart-line mr-3 text-lg"></i>
     <span class="text-sm">Schedule</span>
     <i class="ri-arrow-right-s-line ml-auto"></i>
@@ -23,7 +23,7 @@
 </li>
 <!-- Applicants -->
 <li class="mb-1 group">
-  <a href="/Master/hr/applicants" class="flex items-center py-2 px-4 text-gray-50 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+  <a route="/hr/applicants" class="flex items-center py-2 px-4 text-gray-50 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
     <i class="ri-line-chart-line mr-3 text-lg"></i>
     <span class="text-sm">Applicants</span>
     <i class="ri-arrow-right-s-line ml-auto"></i>
@@ -31,7 +31,7 @@
 </li>
 <!-- Employees -->
   <li class="mb-1 group">
-    <a href="#" class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+    <a route="#" class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
       <i class="ri-shopping-cart-line mr-3 text-lg"></i>
       <span class="text-sm">Employees</span>
       <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
@@ -39,13 +39,13 @@
 <!-- All Employees -->
 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
   <li class="mb-4">
-  <a href="/Master/hr/employees" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">All Employees
+  <a route="/hr/employees" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">All Employees
         <i class="ri-arrow-right-s-line ml-auto"></i>
     </a>
   </li>
   <!-- Departments -->
   <li class="mb-4">
-    <a href="/Master/hr/employees/departments/product-order" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Departments
+    <a route="/hr/employees/departments/product-order" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Departments
         <i class="ri-arrow-right-s-line ml-auto"></i>
     </a>
   </li>
@@ -53,7 +53,7 @@
   </li>
 <!-- Leave Requests -->
 <li class="mb-1 group">
-  <a href="/Master/hr/leave-requests" class="flex items-center py-2 px-4 text-gray-50 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+  <a route="/hr/leave-requests" class="flex items-center py-2 px-4 text-gray-50 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
     <i class="ri-survey-line mr-3 text-lg"></i>
     <span class="text-sm">Leave Requests</span>
     <i class="ri-arrow-right-s-line ml-auto"></i>
@@ -61,7 +61,7 @@
 </li>
 <!-- Payroll -->
 <li class="mb-1 group">
-  <a href="/Master/hr/payroll" class="flex items-center py-2 px-4 text-gray-50 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+  <a route="/hr/payroll" class="flex items-center py-2 px-4 text-gray-50 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
     <i class="ri-line-chart-line mr-3 text-lg"></i>
     <span class="text-sm">Payroll</span>
     <i class="ri-arrow-right-s-line ml-auto"></i>
