@@ -87,7 +87,7 @@
             </div>
 
             <div class="flex place-content-end mt-2 m-3">
-                 <button onclick="location.href='/Master/inv/product_order'" class="items-end rounded-lg w-full py-2 bg-primary text-black border">
+                 <button route='/inv/product_order' class="items-end rounded-lg w-full py-2 bg-primary text-black border">
                      <span class="font-bold">Order</span></button>
             </div>
 
@@ -98,12 +98,12 @@
     <div class="flex place-content-end mr-3">  
             <div class="flex justify-end px-4 mt-0">
                 <div class="flex place-content-end mt-10 mr-2">
-                    <button onclick="location.href='/Master/inv/main'" class="items-end rounded-lg w-24 px-2 py-1 border border-black bg-yellow text-black duration-300">
+                    <button route='/inv/inv/main' class="items-end rounded-lg w-24 px-2 py-1 border border-black bg-yellow text-black duration-300">
                     Cancel </button>
                 </div>
             </div>
             <div class="flex place-content-end mt-10">
-                <button onclick="location.href='/Master/inv/" class="items-end rounded-lg w-24 px-2 py-1 border border-black bg-white text-black duration-300">
+                <button  class="items-end rounded-lg w-24 px-2 py-1 border border-black bg-white text-black duration-300">
                 Save </button>
             </div>
     </div>

@@ -1,29 +1,29 @@
-<?php 
+<?php
 
 $path = './public/humanResources/views';
+$basePath = "$path/hr.";
 
-Router::handle('GET', '/hr/sample', "$path/hr.sample.php");
-Router::handle('GET', '/hr/link', "$path/hr.test-link.php");
+$hr = [
+    // Dashboard
+    '/hr/dashboard' => $basePath . "dashboard.php",
 
-// dashboard
-Router::handle('GET', '/hr/dashboard', "$path/hr.dashboard.php");
+    // employee profile
+    '/hr/employees' => $basePath . "employee.php",
+    '/hr/employees/add' => $basePath . "employee.add.php",
+    '/hr/employees/update' => $basePath . "employee.add.php",
 
-// employee profile
-Router::handle('GET', '/hr/employees', "$path/hr.employees.php");
-Router::handle('GET', '/hr/employees/add', "$path/hr.employee.add.php");
-Router::handle('GET', '/hr/employees/update', "$path/hr.employee.add.php");
+    // departments
+    '/hr/employees/departments' => $basePath . "departments.php", // 'departments.php
+    '/hr/employees/departments/product-order' => $basePath . "departments.PO.php", // 'departments.PO.php
+    '/hr/employees/departments/inventory' => $basePath . "departments.inv.php", // 'departments.inv.php
+    '/hr/employees/departments/sales' => $basePath . "departments.POS.php", // 'departments.POS.php
+    '/hr/employees/departments/finance' => $basePath . "departments.fin.php", // 'departments.fin.php
+    '/hr/employees/departments/delivery' => $basePath . "departments.dlv.php", // 'departments.dlv.php
+    '/hr/employees/departments/human-resources' => $basePath . "departments.HR.php", // 'departments.HR.php
 
-// departments
-Router::handle('GET', '/hr/employees/departments/product-order', "$path/hr.departments.PO.php");
-Router::handle('GET', '/hr/employees/departments/inventory', "$path/hr.departments.inv.php");
-Router::handle('GET', '/hr/employees/departments/sales', "$path/hr.departments.POS.php");
-Router::handle('GET', '/hr/employees/departments/finance', "$path/hr.departments.fin.php");
-Router::handle('GET', '/hr/employees/departments/delivery', "$path/hr.departments.dlv.php");
-Router::handle('GET', '/hr/employees/departments/human-resources', "$path/hr.departments.HR.php");
-
-
-Router::handle('GET', '/hr/schedule', "$path/hr.schedule.php");
-Router::handle('GET', '/hr/applicants', "$path/hr.applicants.php");
-Router::handle('GET', '/hr/payroll', "$path/hr.payroll.php");
-Router::handle('GET', '/hr/leave-requests', "$path/hr.leave-requests.php");
+    '/hr/schedule' => $basePath . "schedule.php",
+    '/hr/applicants' => $basePath . "applicants.php",
+    '/hr/payroll' => $basePath . "payroll.php",
+    '/hr/leave-requests' => $basePath . "leave-requests.php",
+];
 

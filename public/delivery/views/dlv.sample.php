@@ -15,7 +15,7 @@
         <!-- Sidebar Content -->
         <div class="flex flex-col h-full">
             <!-- Logo/Header -->
-            <div class="flex justify-end bg-violet-950 text-white p-4">
+            <div route='/' class="flex justify-end bg-violet-950 text-white p-4">
                 <h1 class="text-3xl font-bold">BSCS 3A</h1>
             </div>
             <!-- Navigation -->
@@ -65,7 +65,7 @@
                             <td class="border px-4 py-2">12</td>
                             <td class="border px-4 py-2">Delivered</td>
                             <td class="border px-4 py-2 flex justify-center">
-                                <button onclick="location.href='/Master/dlv/details'" class="viewDetailsBtn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                <button route='/dlv/details' class="viewDetailsBtn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                     View Details
                                 </button>
                             </td>
@@ -76,5 +76,6 @@
         </div>
     </div>
 </div>
+<script  src="./../src/route.js"></script>
 </body>
 </html>

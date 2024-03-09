@@ -283,7 +283,7 @@
         });
     </script>
 
-
+<script  src="./../src/route.js"></script>
 </body>
 
 </html>

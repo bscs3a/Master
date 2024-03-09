@@ -1,17 +1,19 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
   <link href="./../src/tailwind.css" rel="stylesheet">
   <title>Dashboard</title>
 </head>
+
 <body class="text-gray-800 font-sans">
  
 <!-- sidenav -->
 <?php 
-  include 'inc/sidenav.php';
+  require_once 'inc/sidenav.php';
 ?>
 <!-- end of sidenav -->
 
@@ -23,7 +25,7 @@
    </button>
    <ul class="flex items-center text-sm ml-4">  
   <li class="mr-2">
-    <a href="/Master/hr/dashboard" class="text-[#151313] hover:text-gray-600 font-medium">Human Resources</a>
+    <a href="#" class="text-[#151313] hover:text-gray-600 font-medium">Human Resources</a>
   </li>
   <li class="text-[#151313] mr-2 font-medium">/</li>
   <a href="#" class="text-[#151313] mr-2 font-medium hover:text-gray-600">Analytics</a>
@@ -134,4 +136,5 @@
 </main>
 <!-- End Main Bar-->
 </body>
-</html>          
+
+</html>
