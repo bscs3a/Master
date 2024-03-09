@@ -156,6 +156,7 @@
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  border-solid border-gray-400 shadow-md rounded-md px-5 py-4">
                     <div class="border-solid col-span-2 ">
                         <!-- Start: Welcome Message -->
+                        <a route='/'>ye</a>
                         <h1 class="font-sans font-bold  text-5xl">Hello, Sample User!</h1>
                         <p class="line-clamp-2 w-3/4 mt-3 font-sans text-xl text-gray-400 ">Welcome back! Ready to gear
                             up for another productive day?</p>
@@ -526,6 +527,7 @@
 
     </main>
     <!-- End: Dashboard -->
+    <script  src="./../src/route.js"></script>
 </body>
 
 </html>

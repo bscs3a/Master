@@ -93,6 +93,7 @@
             document.getElementById('mainContent').classList.toggle('md:ml-64');
         });
     </script>
+    <script  src="./../src/route.js"></script>
 </body>
 
 </html>

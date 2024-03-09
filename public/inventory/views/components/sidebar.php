@@ -1,7 +1,7 @@
     <!--Start: Sidebar -->
     <div class="fixed bg-violet-950 left-0 top-0 w-64 h-screen p-4 z-50 sidebar-menu">
         
-        <div  onclick="location.href='/Master/index.php'" class="flex items-center pb-4">
+        <div  route='/' class="flex items-center pb-4">
         <img src="" alt="sample image" class="w-10 h-10 rounded object-cover">
 
             <span class="text-4xl font-bold ml-3 text-white">BSCS 3A</span>

@@ -16,7 +16,7 @@
         <div class="w-full max-w-4xl">
             <h2 class="p-3 bg-violet-950 text-2xl font-bold mb-4 text-white flex justify-between items-center">
                 Order Details
-                <a onclick="location.href='/Master/dlv/sample'" class="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <a route='/dlv/sample' class="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Back
                 </a>
             </h2>
@@ -74,5 +74,6 @@
 
     </div>
 </div>
+<script  src="./../src/route.js"></script>
 </body>
 </html>
