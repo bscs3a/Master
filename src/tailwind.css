@@ -1291,6 +1291,10 @@ video {
   min-height: 100vh;
 }
 
+.min-h-full{
+  min-height: 100%;
+}
+
 .w-1{
   width: 0.25rem;
 }
@@ -1437,6 +1441,10 @@ video {
 
 .max-w-lg{
   max-width: 32rem;
+}
+
+.max-w-full{
+  max-width: 100%;
 }
 
 .flex-1{

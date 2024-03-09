@@ -67,6 +67,14 @@
     <i class="ri-arrow-right-s-line ml-auto"></i>
   </a>
 </li>
+<!-- Daily Time Record -->
+<li class="mb-1 group">
+  <a route="/hr/dtr" class="flex items-center py-2 px-4 text-gray-50 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+    <i class="ri-line-chart-line mr-3 text-lg"></i>
+    <span class="text-sm">Daily Time Record</span>
+    <i class="ri-arrow-right-s-line ml-auto"></i>
+  </a>
+</li>
 </ul>
 </div>
 <!-- end: Sidebar -->
