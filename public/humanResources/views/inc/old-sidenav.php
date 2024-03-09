@@ -102,4 +102,4 @@
 </ul>
 </div>
 <!-- end: Sidebar -->
-<script type="module" src="../public/humanResources/js/script.js"></script>
+<script type="module" src="../public/humanResources/js/sidenav-dropdown.js"></script>
