@@ -191,6 +191,7 @@
 
     </main>
     <!-- End: Dashboard -->
+    <script  src="./../src/route.js"></script>
 </body>
 
 </html>

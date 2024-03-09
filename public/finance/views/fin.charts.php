@@ -205,7 +205,7 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script type="module" src="../public/finance/javascript/charts.js"></script>
         <!-- End Charts -->
-
+        <script  src="./../src/route.js"></script>
 </body>
 
 </html>

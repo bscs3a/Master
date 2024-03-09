@@ -204,7 +204,7 @@
             </li>
         </ol>
     </main>
-
+    <script  src="./../src/route.js"></script>
     <!-- Start: Sidebar -->
     <!-- End: Dashboard -->
 </body>

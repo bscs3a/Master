@@ -63,11 +63,11 @@
                         <div class="border-b border-gray-200">
                             <nav class="-mb-px flex gap-6" aria-label="Tabs">
                                
-                                <a onclick="location.href='/Master/fin/ledger/accounts/investors'"
+                                <a route='/fin/ledger/accounts/investors'
                                     class="cursor-pointer shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
                                     Investors
                                 </a>
-                                <a onclick="location.href='/Master/fin/ledger/accounts/payable'"
+                                <a route='/fin/ledger/accounts/payable'
                                     class="cursor-pointer shrink-0 border-b-2 border-sidebar px-1 pb-4 text-sm font-medium text-sidebar"
                                     aria-current="page">
                                     Accounts Payable 
@@ -260,9 +260,8 @@
                 </div>
             </div>
     </main>
+    <script  src="./../../../src/route.js"></script>
 
-    <!-- Start: Sidebar -->
-    <!-- End: Dashboard -->
 </body>
 
 </html>
