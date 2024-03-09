@@ -79,22 +79,22 @@
               <div class="flex items-center">
                 <div class="flex-shrink-0 w-10 h-10">
                   <img class="w-10 h-10 rounded-full object-cover object-center"
-                    src="https://pbs.twimg.com/profile_images/1679743561200463872/2XNOMV6V_400x400.jpg"
+                    src="https://pbs.twimg.com/profile_images/1720500138106585088/8aqYRQ3D_400x400.jpg"
                     alt="">
                 </div>
                 <div class="ml-4">
-                  <div class="text-sm font-medium leading-5 text-gray-900">Mysta Rias
+                  <div class="text-sm font-medium leading-5 text-gray-900">Claude Clawmark
                   </div>
-                  <div class="text-sm leading-5 text-gray-500">mystarias@example.com</div>
+                  <div class="text-sm leading-5 text-gray-500">claudeclawmark@example.com</div>
                 </div>
               </div>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              <span class="text-sm leading-5 text-gray-900">10284</span>
+              <span class="text-sm leading-5 text-gray-900">10122</span>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              <div class="text-sm leading-5 text-gray-900">Inventory</div>
-              <div class="text-sm leading-5 text-gray-500">Inventory Manager</div>
+              <div class="text-sm leading-5 text-gray-900">Points of Sale</div>
+              <div class="text-sm leading-5 text-gray-500">Sales Associate</div>
             </td>
             <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
               <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
@@ -105,22 +105,48 @@
               <div class="flex items-center">
                 <div class="flex-shrink-0 w-10 h-10">
                   <img class="w-10 h-10 rounded-full object-cover object-center"
-                    src="https://pbs.twimg.com/profile_images/1649848448689086464/rkJG00b4_400x400.jpg"
+                    src="https://pbs.twimg.com/profile_images/1727459524808970240/aDMHxOQC_400x400.jpg"
                     alt="">
                 </div>
                 <div class="ml-4">
-                  <div class="text-sm font-medium leading-5 text-gray-900">Shu Yamino
+                  <div class="text-sm font-medium leading-5 text-gray-900">Victoria Brightshield
                   </div>
-                  <div class="text-sm leading-5 text-gray-500">shuyamino@example.com</div>
+                  <div class="text-sm leading-5 text-gray-500">vivibrightshield@example.com</div>
                 </div>
               </div>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              <span class="text-sm leading-5 text-gray-900">10472</span>
+              <span class="text-sm leading-5 text-gray-900">10318</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Inventory</div>
+              <div class="text-sm leading-5 text-gray-500">Materials Manager</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1720542381903081472/Fo37UVMt_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Kunai Nakasato
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">kunainakasato@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">10709</span>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
               <div class="text-sm leading-5 text-gray-900">Accounting</div>
-              <div class="text-sm leading-5 text-gray-500">Financial Analyst</div>
+              <div class="text-sm leading-5 text-gray-500">Auditor</div>
             </td>
             <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
               <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
@@ -132,8 +158,10 @@
   </div>
 </div>
 </div>
-</div><!-- Payroll --> 
-<h4 class="ml-6 mt-4 text-xl font-bold"> Payroll </h4>  
+</div>
+<!-- Payroll --> 
+<h4 class="ml-6 mt-4 text-xl font-bold"> Payroll </h4>
+<!-- Chart -->
 <div>
   <div class="flex items-center min-h-full max-w-full">
     <canvas id="myChart" style="height:400px;"></canvas>
@@ -163,13 +191,9 @@
     </script>  
   </div>
 </div>
-</main>
-
-<!-- End Main Bar-->
-<!-- Chart -->
-
-
 <!-- End Chart -->
+</main>
+<!-- End Main Bar-->
 <script  src="./../src/route.js"></script>
 </body>
 

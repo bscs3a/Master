@@ -40,6 +40,39 @@
   </div>
   <!-- End Top Bar -->
 
+<!-- Payroll --> 
+<h4 class="ml-6 mt-4 text-xl font-bold"> Payroll </h4>
+<!-- Chart -->
+<div>
+  <div class="flex items-center min-h-full max-w-full">
+    <canvas id="myChart" style="height:400px;"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const ctx = document.getElementById('myChart');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          datasets: [{
+            label: '# Employees Payroll',
+            data: [25, 50, 10, 24, 100, 95, 85],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>  
+  </div>
+</div>
+<!-- End Chart -->
 </main>
 <!-- End Main Bar -->
 <script  src="./../src/route.js"></script>

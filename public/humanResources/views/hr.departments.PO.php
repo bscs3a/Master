@@ -45,7 +45,7 @@
   <!-- End Top Bar -->
 
 <!-- department tabs -->
-<div class="mt-4 ml-4 mb-4">
+<div class="mt-4 ml-4 mb-4 mr-4">
     <div class="hidden sm:block">
         <div class="border-b border-gray-200">
             <nav class="-mb-px flex gap-6" aria-label="Tabs">
@@ -80,6 +80,7 @@
 </div>
 <!-- end department tabs -->
 
+<h3 class="ml-6 mt-4 text-xl font-bold">Employees</h3>
   <!-- Employees -->
   <div class="ml-6 flex flex-col mt-8 mr-6">
   <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-300 shadow-md sm:rounded-lg">
