@@ -44,8 +44,6 @@ no need to include the root folder name just the route
 > it only works on the given example html elements
 
 ```
-<span route ='/po/sampleRoute'>
-
 <a route='/fin/sampleRoute'>
 
 <button route='/sls/sampleRoute'>
