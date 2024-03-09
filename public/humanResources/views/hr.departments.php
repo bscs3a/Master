@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
   <link href="./../src/tailwind.css" rel="stylesheet">
-  <title>Payroll</title>
+  <title>Departments</title>
 </head>
 <body class="text-gray-800 font-sans">
 
 <!-- sidenav -->
 <?php 
-    include 'inc/sidenav.php';
+  include 'inc/sidenav.php';
 ?>
 <!-- end of sidenav -->
 
@@ -27,7 +27,11 @@
     <a href="/Master/hr/dashboard" class="text-[#151313] hover:text-gray-600 font-medium">Human Resources</a>
   </li>
   <li class="text-[#151313] mr-2 font-medium">/</li>
-  <a href="#" class="text-[#151313] mr-2 font-medium hover:text-gray-600">Payroll</a>
+  <a href="#" class="text-[#151313] mr-2 font-medium hover:text-gray-600">Departments</a>
+  <!-- test -->
+  <li class="text-[#151313] mr-2 font-medium">/</li>
+  <a href="#" class="text-[#151313] mr-2 font-medium hover:text-gray-600">Product Order</a>
+  <!-- end test -->
    </ul>
    <ul class="ml-auto flex items-center">
   <li class="mr-1">
@@ -39,6 +43,32 @@
    </ul>
   </div>
   <!-- End Top Bar -->
+
+  <!-- test tab -->
+  
+<div class="mb-4">
+
+
+    <div class="hidden sm:block">
+        <div class="border-b border-gray-200">
+            <nav class="-mb-px flex gap-6" aria-label="Tabs">
+                <a onclick="location.href='/Master/hr/departments/product-order'"
+                    class="cursor-pointer shrink-0 border-b-2 border-sidebar px-1 pb-4 text-sm font-medium text-sidebar"
+                    aria-current="page">
+                    Product Order
+                </a>
+                <a onclick="location.href='/Master/hr/departments/inventory'"
+                    class="cursor-pointer shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
+                    Inventory
+                </a>
+
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- end test tab -->
 
 </main>
 <!-- End Main Bar -->

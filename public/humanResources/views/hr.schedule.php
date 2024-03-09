@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
   <link href="./../src/tailwind.css" rel="stylesheet">
-  <title>Payroll</title>
+  <title>Schedule</title>
 </head>
 <body class="text-gray-800 font-sans">
 
@@ -27,7 +27,7 @@
     <a href="/Master/hr/dashboard" class="text-[#151313] hover:text-gray-600 font-medium">Human Resources</a>
   </li>
   <li class="text-[#151313] mr-2 font-medium">/</li>
-  <a href="#" class="text-[#151313] mr-2 font-medium hover:text-gray-600">Payroll</a>
+  <a href="#" class="text-[#151313] mr-2 font-medium hover:text-gray-600">Schedule</a>
    </ul>
    <ul class="ml-auto flex items-center">
   <li class="mr-1">
