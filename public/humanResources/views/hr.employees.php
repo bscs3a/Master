@@ -1,10 +1,18 @@
-<?php 
-require __DIR__ . '/../db/dbconn-test.php';
+<?php
+try {
+  require_once 'dbconn-test.php';
 
-$sql = "SELECT * FROM employees";
-$stmt = $pdo->query($sql);
+  $query = "SELECT * FROM employees;";
+  $stmt = $conn->prepare($query);
+  $stmt->execute();
+  $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$employees = $stmt->fetchAll();
+  $pdo = null;
+  $stmt = null;
+}
+catch (PDOException $e) {
+    echo 'Database connection failed: ' . $e->getMessage();
+}
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +89,7 @@ $employees = $stmt->fetchAll();
                 <div class="ml-4">
                   <div class="text-sm font-medium leading-5 text-gray-900"><?php echo $employee['first_name'] . ' ' . $employee['last_name']; ?>
                   </div>
-                  <div class="text-sm leading-5 text-gray-500"><?php echo $employee['email']; ?>/div>
+                  <div class="text-sm leading-5 text-gray-500"><?php echo $employee['email']; ?></div>
                 </div>
               </div>
             </td>
@@ -89,8 +97,8 @@ $employees = $stmt->fetchAll();
               <span class="text-sm leading-5 text-gray-900"><?php echo $employee['id']; ?></span>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              <div class="text-sm leading-5 text-gray-900"><?php echo $employee['position_name']; ?></div>
-              <div class="text-sm leading-5 text-gray-500"><?php echo $employee['department_name']; ?></div>
+              <div class="text-sm leading-5 text-gray-900"><?php echo $employee['position']; ?></div>
+              <div class="text-sm leading-5 text-gray-500"><?php echo $employee['department']; ?></div>
             </td>
             <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
               <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
@@ -101,6 +109,7 @@ $employees = $stmt->fetchAll();
       </table>
     </div>
   </div>
+<!-- END Employees -->
 
   <!-- TEST Employees -->
   <!-- <h3 class="ml-6 mt-4 text-xl font-bold">All Employees</h3>

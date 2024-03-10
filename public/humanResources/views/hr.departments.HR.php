@@ -1,3 +1,20 @@
+<?php
+try {
+  require_once 'dbconn-test.php';
+
+  $query = "SELECT * FROM employees WHERE department = 'Human Resources';";
+  $stmt = $conn->prepare($query);
+  $stmt->execute();
+  $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  $pdo = null;
+  $stmt = null;
+}
+catch (PDOException $e) {
+    echo 'Database connection failed: ' . $e->getMessage();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,7 +98,60 @@
 
   <!-- Employees -->
   <h3 class="ml-6 mt-4 text-xl font-bold">Employees</h3>
-  <div class="ml-6 flex flex-col mt-8 mr-6">
+<div class="ml-6 flex flex-col mt-8 mr-6">
+  <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-300 shadow-md sm:rounded-lg">
+    <table class="min-w-full">
+      <!-- START HEADER -->
+      <thead>
+        <tr>
+          <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+            Name</th>
+          <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+            ID</th>
+          <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+            Department</th>
+          <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+            Action</th>
+        </tr>
+      </thead>
+      <!-- END HEADER -->
+      <?php foreach ($employees as $employee): ?>
+        <tbody class="bg-white">
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="<?php echo $employee['image_url']; ?>"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900"><?php echo $employee['first_name'] . ' ' . $employee['last_name']; ?>
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500"><?php echo $employee['email']; ?></div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900"><?php echo $employee['id']; ?></span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900"><?php echo $employee['position']; ?></div>
+              <div class="text-sm leading-5 text-gray-500"><?php echo $employee['department']; ?></div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<!-- end employees -->
+
+<!-- TEST Employees -->
+  <!-- <div class="ml-6 flex flex-col mt-8 mr-6">
   <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-300 shadow-md sm:rounded-lg">
     <table class="min-w-full">
       <thead>
@@ -152,8 +222,8 @@
         </tbody>
       </table>
     </div>
-  </div>
-<!-- End Employees -->
+  </div> -->
+<!-- End TEST Employees -->
 </main>
 <!-- End Main Bar -->
     <script  src="./../../../src/route.js"></script>
