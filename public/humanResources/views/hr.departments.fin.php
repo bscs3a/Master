@@ -47,7 +47,7 @@
 <div class="mt-4 ml-4 mb-4">
     <div class="hidden sm:block">
         <div class="border-b border-gray-200">
-            <nav class="-mb-px flex gap-6" aria-label="Tabs">
+            <nav class="-mb-px flex flex-wrap gap-6" aria-label="Tabs">
                 <a route="/hr/employees/departments/product-order"
                     class="cursor-pointer shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
                     Product Order
@@ -79,6 +79,107 @@
 </div>
 <!-- end department tabs -->
 
+  <!-- Employees -->
+  <h3 class="ml-6 mt-4 text-xl font-bold">Employees</h3>
+  <div class="ml-6 flex flex-col mt-8 mr-6">
+  <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-300 shadow-md sm:rounded-lg">
+    <table class="min-w-full">
+      <thead>
+        <tr>
+          <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+            Name</th>
+          <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+            ID</th>
+          <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+            Department</th>
+          <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+            Action</th>
+        </tr>
+      </thead>
+        <tbody class="bg-white">
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1766500898807906304/PE7lteVJ_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Luca Kaneshiro
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">lucaPOOOOG@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">10410</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Accounting</div>
+              <div class="text-sm leading-5 text-gray-500">Tax Accountant</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1649848448689086464/rkJG00b4_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Shu Yamino
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">shuyamino@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">10502</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Accounting</div>
+              <div class="text-sm leading-5 text-gray-500">Financial Analyst</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1720542381903081472/Fo37UVMt_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Kunai Nakasato
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">kunainakasato@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">10709</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Accounting</div>
+              <div class="text-sm leading-5 text-gray-500">Auditor</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<!-- End Employees -->
 </main>
 <!-- End Main Bar -->
     <script  src="./../../../src/route.js"></script>

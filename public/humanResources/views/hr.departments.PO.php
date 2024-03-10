@@ -45,10 +45,10 @@
   <!-- End Top Bar -->
 
 <!-- department tabs -->
-<div class="mt-4 ml-4 mb-4 mr-4">
+<div class="mt-4 ml-4 mb-4">
     <div class="hidden sm:block">
         <div class="border-b border-gray-200">
-            <nav class="-mb-px flex gap-6" aria-label="Tabs">
+            <nav class="-mb-px flex flex-wrap gap-6" aria-label="Tabs">
                 <a route="/hr/employees/departments/product-order"
                     class="cursor-pointer shrink-0 border-b-2 border-sidebar px-1 pb-4 text-sm font-medium text-sidebar"
                     aria-current="page">
@@ -154,7 +154,7 @@
       </table>
     </div>
   </div>
-  
+  <!-- End Employees -->
 </main>
 <!-- End Main Bar -->
     <script  src="./../../../src/route.js"></script>

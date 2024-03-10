@@ -74,11 +74,37 @@
               </div>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              <span class="text-sm leading-5 text-gray-900">10284</span>
+              <span class="text-sm leading-5 text-gray-900">10120</span>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
               <div class="text-sm leading-5 text-gray-900">Inventory</div>
               <div class="text-sm leading-5 text-gray-500">Inventory Manager</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1669355498234318849/Kg3mWUFZ_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Ike Eveland
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">ikeymikumiku@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">10612</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Point of Sale</div>
+              <div class="text-sm leading-5 text-gray-500">Business Analyst</div>
             </td>
             <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
               <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
@@ -100,7 +126,7 @@
               </div>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              <span class="text-sm leading-5 text-gray-900">10472</span>
+              <span class="text-sm leading-5 text-gray-900">10502</span>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
               <div class="text-sm leading-5 text-gray-900">Accounting</div>
@@ -110,11 +136,323 @@
               <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
             </td>
           </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1766500898807906304/PE7lteVJ_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Luca Kaneshiro
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">lucaPOOOOG@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">10410</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Accounting</div>
+              <div class="text-sm leading-5 text-gray-500">Tax Accountant</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1721950599900545024/YORUE-T0_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Vox Akuma
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">voxakuma@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">10425</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Inventory</div>
+              <div class="text-sm leading-5 text-gray-500">Purchasing Manager</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1714840577592754176/_H3V5-uQ_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Uki Violeta
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">ukistargazer@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">10717</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Human Resources</div>
+              <div class="text-sm leading-5 text-gray-500">HR Manager</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1758239990809595904/GmISpEfo_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Alban Knox
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">albanknox@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">10526</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Product Order</div>
+              <div class="text-sm leading-5 text-gray-500">Procurement Specialist</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1609173500933337090/OFGa9ue-_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Sonny Brisko
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">sonnybrisko@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">10406</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Product Order</div>
+              <div class="text-sm leading-5 text-gray-500">Quality Control Inspector</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1749515406451048448/C2dv4EJ3_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Fulgur Ovid
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">fuuchan@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">10326</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Human Resources</div>
+              <div class="text-sm leading-5 text-gray-500">HR Coordinator</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1755015588332924928/qzjWAFLe_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Vantacrow Bringer
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">vanta@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">10206</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Delivery</div>
+              <div class="text-sm leading-5 text-gray-500">Courier</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1739918648146534400/KCJLXc0S_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Vezalius Bandage
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">zali@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">11117</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Delivery</div>
+              <div class="text-sm leading-5 text-gray-500">Delivery Driver</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1715391269617201152/jIFuPqn9_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Yu Q Wilson
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">yuyuwilly@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">10904</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Delivery</div>
+              <div class="text-sm leading-5 text-gray-500">Parcel Sorter</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1720542381903081472/Fo37UVMt_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Kunai Nakasato
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">kunainakasato@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">10709</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Accounting</div>
+              <div class="text-sm leading-5 text-gray-500">Auditor</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1727459524808970240/aDMHxOQC_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Victoria Brightshield
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">vivibrightshield@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">10318</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Inventory</div>
+              <div class="text-sm leading-5 text-gray-500">Materials Manager</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="https://pbs.twimg.com/profile_images/1720500138106585088/8aqYRQ3D_400x400.jpg"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Claude Clawmark
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">claudeclawmark@example.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">10122</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Points of Sale</div>
+              <div class="text-sm leading-5 text-gray-500">Sales Associate</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
   </div>
-
+<!-- End Employees -->
 </main>
 <!-- End Main Bar -->
 <script  src="./../src/route.js"></script>
