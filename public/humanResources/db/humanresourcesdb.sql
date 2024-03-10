@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2024 at 09:37 AM
+-- Generation Time: Mar 10, 2024 at 12:11 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `humanresourcesdb`
 --
+
 CREATE DATABASE IF NOT EXISTS `humanresourcesdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `humanresourcesdb`;
 
@@ -33,9 +34,7 @@ CREATE TABLE `account_info` (
   `id` int(10) NOT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` enum('Product Order','Inventory','Point of Sales','Human Resources','Finance','Delivery') NOT NULL,
-  `login_time` timestamp NOT NULL DEFAULT current_timestamp(),
-  `logout_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `role` enum('Product Order','Human Resources','Point of Sale','Inventory','Finance','Delivery') NOT NULL,
   `employees_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -108,7 +107,7 @@ CREATE TABLE `contact_info` (
 
 CREATE TABLE `departments` (
   `id` int(10) NOT NULL,
-  `department_name` varchar(30) NOT NULL
+  `department_name` enum('Product Order','Human Resources','Point of Sale','Inventory','Finance','Delivery') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -121,7 +120,7 @@ CREATE TABLE `employees` (
   `id` int(10) NOT NULL,
   `first_name` varchar(30) NOT NULL,
   `last_name` varchar(30) NOT NULL,
-  `dateofbirth` datetime NOT NULL,
+  `dateofbirth` date NOT NULL,
   `gender` enum('male','female') NOT NULL,
   `nationality` varchar(30) NOT NULL,
   `civil_status` enum('single','married','divorced','widowed') NOT NULL,
@@ -136,12 +135,12 @@ CREATE TABLE `employees` (
 
 CREATE TABLE `employment_info` (
   `id` int(10) NOT NULL,
-  `position_title` varchar(30) NOT NULL,
   `dateofhire` datetime NOT NULL,
   `startdate` datetime NOT NULL,
   `enddate` datetime NOT NULL,
   `departments_id` int(10) NOT NULL,
-  `employees_id` int(10) NOT NULL
+  `employees_id` int(10) NOT NULL,
+  `positions_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -164,6 +163,18 @@ CREATE TABLE `leave_requests` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `positions`
+--
+
+CREATE TABLE `positions` (
+  `id` int(10) NOT NULL,
+  `position_title` varchar(30) DEFAULT NULL,
+  `departments_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `salary_info`
 --
 
@@ -173,6 +184,20 @@ CREATE TABLE `salary_info` (
   `bonus` decimal(10,2) NOT NULL,
   `total_salary` decimal(10,2) NOT NULL,
   `employees_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `session`
+--
+
+CREATE TABLE `session` (
+  `id` int(10) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `login_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `logout_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `role` enum('Product Order','Human Resources','Point of Sale','Inventory','Finance','Delivery') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -197,6 +222,7 @@ CREATE TABLE `tax_info` (
 --
 ALTER TABLE `account_info`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD KEY `employees_id` (`employees_id`);
 
 --
@@ -224,6 +250,7 @@ ALTER TABLE `benefit_info`
 --
 ALTER TABLE `contact_info`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD KEY `employees_id` (`employees_id`);
 
 --
@@ -245,7 +272,8 @@ ALTER TABLE `employees`
 ALTER TABLE `employment_info`
   ADD PRIMARY KEY (`id`),
   ADD KEY `departments_id` (`departments_id`),
-  ADD KEY `employees_id` (`employees_id`);
+  ADD KEY `employees_id` (`employees_id`),
+  ADD KEY `positions_id` (`positions_id`);
 
 --
 -- Indexes for table `leave_requests`
@@ -255,11 +283,25 @@ ALTER TABLE `leave_requests`
   ADD KEY `employees_id` (`employees_id`);
 
 --
+-- Indexes for table `positions`
+--
+ALTER TABLE `positions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `departments_id` (`departments_id`);
+
+--
 -- Indexes for table `salary_info`
 --
 ALTER TABLE `salary_info`
   ADD PRIMARY KEY (`id`),
   ADD KEY `employees_id` (`employees_id`);
+
+--
+-- Indexes for table `session`
+--
+ALTER TABLE `session`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `tax_info`
@@ -327,9 +369,21 @@ ALTER TABLE `leave_requests`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `positions`
+--
+ALTER TABLE `positions`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `salary_info`
 --
 ALTER TABLE `salary_info`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `session`
+--
+ALTER TABLE `session`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
@@ -377,13 +431,20 @@ ALTER TABLE `employees`
 --
 ALTER TABLE `employment_info`
   ADD CONSTRAINT `employment_info_ibfk_1` FOREIGN KEY (`departments_id`) REFERENCES `departments` (`id`),
-  ADD CONSTRAINT `employment_info_ibfk_2` FOREIGN KEY (`employees_id`) REFERENCES `employees` (`id`);
+  ADD CONSTRAINT `employment_info_ibfk_2` FOREIGN KEY (`employees_id`) REFERENCES `employees` (`id`),
+  ADD CONSTRAINT `employment_info_ibfk_3` FOREIGN KEY (`positions_id`) REFERENCES `positions` (`id`);
 
 --
 -- Constraints for table `leave_requests`
 --
 ALTER TABLE `leave_requests`
   ADD CONSTRAINT `leave_requests_ibfk_1` FOREIGN KEY (`employees_id`) REFERENCES `employees` (`id`);
+
+--
+-- Constraints for table `positions`
+--
+ALTER TABLE `positions`
+  ADD CONSTRAINT `positions_ibfk_1` FOREIGN KEY (`departments_id`) REFERENCES `departments` (`id`);
 
 --
 -- Constraints for table `salary_info`
