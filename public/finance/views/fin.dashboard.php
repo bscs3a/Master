@@ -62,8 +62,11 @@
                     <div
                         class="col-span-2 border-solid border-gray-400 shadow-md rounded-md px-5 py-10 bg-wave bg-cover bg-right-top bg-no-repeat">
                         <!-- Start: Welcome Message -->
-                        <div class="flex justify-between">
-                            <div>
+                        <a route='/'>ye</a>
+                        <h1 class="font-sans font-bold  text-5xl">Hello, Sample User!</h1>
+                        <p class="line-clamp-2 w-3/4 mt-3 font-sans text-xl text-gray-400 ">Welcome back! Ready to gear
+                            up for another productive day?</p>
+                        <!-- End: Welcome Message -->
 
                                 <h1 class="font-sans font-bold  text-5xl">Hello, Sample User!</h1>
                                 <p class="line-clamp-2 w-3/4 mt-3 font-sans text-xl text-gray-400 ">Welcome back! Ready
@@ -502,6 +505,7 @@
 
     </main>
     <!-- End: Dashboard -->
+    <script  src="./../src/route.js"></script>
 </body>
 
 </html>

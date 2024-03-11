@@ -1,7 +1,16 @@
-<?php 
+<?php
 
 $path = './public/humanResources/views';
+$basePath = "$path/hr.";
 
-Router::handle('GET', '/hr/sample', "$path/hr.sample.php");
-Router::handle('GET', '/hr/link', "$path/hr.test-link.php");
+$hr = [
+    // Dashboard
+    '/hr/dashboard' => $basePath . "dashboard.php",
+
+    // Edit Employee
+    '/hr/employees' => $basePath . "employee-list.php",
+
+    // Add Employee
+    '/hr/add' => $basePath . "add-employee.php",
+];
 

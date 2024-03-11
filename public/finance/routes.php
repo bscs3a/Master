@@ -1,20 +1,36 @@
 <?php 
-
 $path = './public/finance/views';
 
-Router::handle('GET', '/fin/sample', "$path/fin.sample.php");
-Router::handle('GET', '/fin/link', "$path/fin.test-link.php");
-Router::handle('GET', '/fin/link2', "$path/fin.test-link2.php");
+$basePath = "$path/fin.";
 
-// Route for Ledger General Page
-Router::handle('GET', '/fin/ledger', "$path/fin.ledger.php");
+$fin = [
+    //dashboard
+    '/fin/dashboard' => $basePath . "dashboard.php",
+
+    //reports
+    '/fin/reportIncome' => $basePath . "reportIncome.php",
+    '/fin/reportCash' => $basePath . "reportCash.php",
+    '/fin/reportEquity' => $basePath . "reportEquity.php",
+    '/fin/reportBalance' => $basePath . "reportBalance.php",
+
+    //ledger
+    '/fin/ledger' => $basePath . "ledger.gen.php",
+    '/fin/ledger/accounts/investors' => $basePath . "ledger.investors.php",
+    '/fin/ledger/accounts/payable' => $basePath . "ledger.payable.php",
+    
+    //request
+    '/fin/request' => $basePath . "requestInventory.php",
+    '/fin/salary' => $basePath . "requestSalary.php",
+    
+    //charts
+    '/fin/charts' => $basePath . "charts.php", 
+
+    '/' => "C:/xampp/htdocs/Master/index.php",
+    
+];
 
 
-// Route for Dashboard Page
-Router::handle(
-    'GET',
-    '/fin/dashboard',
-    "$path/fin.dashboard.php",
-);
+
+
 
 
