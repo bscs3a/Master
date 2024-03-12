@@ -11,6 +11,7 @@ $hr = [
     '/hr/employees' => $basePath . "employees.php",
     '/hr/employees/add' => $basePath . "employees.add.php",
     '/hr/employees/update' => $basePath . "employees.add.php",
+    '/hr/employees/profile' => $basePath . "employees.profile.php",
 
     // departments
     '/hr/employees/departments' => $basePath . "departments.php", // 'departments.php
@@ -25,6 +26,5 @@ $hr = [
     '/hr/applicants' => $basePath . "applicants.php",
     '/hr/payroll' => $basePath . "payroll.php",
     '/hr/leave-requests' => $basePath . "leave-requests.php",
-    '/hr/dtr' => $basePath . "daily-time-record.php",
 ];
 

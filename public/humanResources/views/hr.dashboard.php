@@ -20,7 +20,7 @@
 <!-- Start Main Bar -->
 <main class="w-[calc(100%-256px)] ml-64 bg-gray-50 min-h-screen">
   <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/10">
-   <button type="button" class="text-lg text-gray-600">
+   <button type="button" class="text-lg text-gray-600 sidebar-toggle">
   <i class="ri-menu-line"></i>
    </button>
    <ul class="flex items-center text-sm ml-4">  

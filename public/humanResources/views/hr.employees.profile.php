@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
-  <link href="./../src/tailwind.css" rel="stylesheet">
+  <link href="./../../src/tailwind.css" rel="stylesheet">
   <title>Profile</title>
 </head>
 <body class="text-gray-800 font-sans">
@@ -39,6 +39,8 @@
    </ul>
   </div>
   <!-- End Top Bar -->
+
+  <h3 class="ml-6 mt-8 text-xl font-bold">Profile</h3>
 
 </main>
 <!-- End Main Bar -->

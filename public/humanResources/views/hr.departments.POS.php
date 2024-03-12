@@ -78,9 +78,16 @@
     </div>
 </div>
 <!-- end department tabs -->
-<h3 class="ml-6 mt-4 text-xl font-bold">Employees</h3>
+
+<div class="flex flex-wrap">
+    <h3 class="ml-6 mt-8 text-xl font-bold">Employees</h3>
+    <form action="/search" method="get" class="mt-6 ml-auto mr-4 flex">
+      <input type="search" id="search" name="q" placeholder="Search" class="w-40 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+      <button type="submit" class="ml-2 bg-blue-500 text-white px-4 py-1 rounded-md hover:bg-blue-600"><i class="ri-search-line"></i></button>
+    </form>
+  </div> 
   <!-- Employees -->
-  <div class="ml-6 flex flex-col mt-8 mr-6">
+  <!-- <div class="ml-6 flex flex-col mt-8 mr-6">
   <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-300 shadow-md sm:rounded-lg">
     <table class="min-w-full">
       <thead>
@@ -151,7 +158,7 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </div> -->
   <!-- End Employees -->
 
 </main>

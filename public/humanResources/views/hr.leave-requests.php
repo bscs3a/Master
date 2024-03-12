@@ -39,7 +39,8 @@
    </ul>
   </div>
   <!-- End Top Bar -->
-
+  
+  <h3 class="ml-6 mt-4 text-xl font-bold">Leave Requests</h3>
 </main>
 <!-- End Main Bar -->
 <script  src="./../src/route.js"></script>

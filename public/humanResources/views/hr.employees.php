@@ -58,7 +58,14 @@ catch (PDOException $e) {
   <!-- End Top Bar -->
 
   <!-- Employees -->
-  <h3 class="ml-6 mt-4 text-xl font-bold">All Employees</h3>
+  <div class="flex items-center flex-wrap">
+    <h3 class="ml-6 mt-8 text-xl font-bold">All Employees</h3>
+    <button type="submit" class="mt-9 mr-4 flex ml-2 bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600"><i class="ri-add-line"></i></button>
+    <form action="/search" method="get" class="mt-6 ml-auto mr-4 flex">
+      <input type="search" id="search" name="q" placeholder="Search" class="w-40 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+      <button type="submit" class="ml-2 bg-blue-500 text-white px-4 py-1 rounded-md hover:bg-blue-600"><i class="ri-search-line"></i></button>
+    </form>
+  </div> 
   <div class="ml-6 flex flex-col mt-8 mr-6">
   <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-300 shadow-md sm:rounded-lg">
     <table class="min-w-full">
@@ -101,7 +108,7 @@ catch (PDOException $e) {
               <div class="text-sm leading-5 text-gray-500"><?php echo $employee['department']; ?></div>
             </td>
             <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
-              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+              <a href="../hr/employees/profile" class="text-indigo-600 hover:text-indigo-900">View</a>
             </td>
           </tr>
           <?php endforeach; ?>
