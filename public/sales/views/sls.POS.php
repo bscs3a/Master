@@ -22,18 +22,38 @@
             grid-template-columns: 1fr;
         }
     </style>
+
+    <?php
+    // Database connection
+    $host = 'localhost';
+    $db   = 'sales';
+    $user = 'root';
+    $pass = '';
+    $charset = 'utf8mb4';
+
+    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+    $pdo = new PDO($dsn, $user, $pass);
+
+    // Query
+    $sql = "SELECT * FROM products";
+    $stmt = $pdo->query($sql);
+
+    // Fetch all products
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Query for categories
+    $sql = "SELECT DISTINCT Category FROM products";
+    $stmt = $pdo->query($sql);
+
+    // Fetch all categories
+    $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    ?>
 </head>
 
-<body x-data="{ sidebarOpen: true, cartOpen: false, isFullScreen: false }">
+<body x-data="{ sidebarOpen: true, cartOpen: false, isFullScreen: false, cart: [], addToCart(product) { this.cart.push(product); }}">
     <?php include "components/sidebar.php" ?>
 
     <main id="mainContent" class="w-full md:w-[calc(100%-256px)] md:ml-64 min-h-screen transition-all main">
-
-        <!-- Start: Full Screen Icon -->
-        <div class="absolute top-0 right-0">
-            <i id="fullscreenIcon" class="fas fa-expand" @click="isFullScreen = !isFullScreen" :class="{ 'p-3 text-lg': isFullScreen, 'pt-14 pr-3 text-lg': !isFullScreen }"></i>
-        </div>
-        <!-- End: Full Screen Icon -->
 
         <div id="header" class="py-2 px-6 bg-white flex items-center shadow-md sticky top-0 left-0 z-30">
 
@@ -55,6 +75,12 @@
             </ul>
         </div>
 
+        <!-- Start: Full Screen Icon -->
+        <div class="absolute top-0 right-0">
+            <i id="fullscreenIcon" class="fas fa-expand" @click="isFullScreen = !isFullScreen; sidebarOpen = false;" :class="{ 'p-3 text-lg': isFullScreen, 'pt-14 pr-3 text-lg': !isFullScreen }"></i>
+        </div>
+        <!-- End: Full Screen Icon -->
+
         <div class="flex justify-between items-center w-full pt-10 pl-10">
 
             <form class="max-w-lg mb-3 w-2/5 pl-10">
@@ -65,18 +91,11 @@
                         </svg></button>
                     <div id="dropdown" class="absolute z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 mt-10">
                         <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdown-button">
-                            <li>
-                                <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Tools</button>
-                            </li>
-                            <li>
-                                <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Paint</button>
-                            </li>
-                            <li>
-                                <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Plumbing</button>
-                            </li>
-                            <li>
-                                <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Electrical</button>
-                            </li>
+                            <?php foreach ($categories as $category) : ?>
+                                <li>
+                                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100"><?= $category ?></button>
+                                </li>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                     <div class="relative w-full">
@@ -148,28 +167,17 @@
                 </div>
 
                 <!-- Cart items -->
-                <div class="flex justify-between px-3 py-2">
+                <div class="flex justify-between px-3 py-2 overflow-y-auto max-h-72">
                     <table class="w-full text-right p-3">
                         <tbody>
                             <!-- Cart item rows -->
-                            <tr class="bg-gray-100">
-                                <td class="text-left px-3 py-2 rounded-l-lg">2</td>
-                                <td class="text-left border-l border-gray-400 pl-2 px-3 py-2">Hammer</td>
-                                <td class="px-3 py-2">$15.99</td>
-                                <td class="px-3 py-2 rounded-r-lg"><i class="ri-close-circle-fill"></i></td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-left px-3 py-2 rounded-l-lg">2</td>
-                                <td class="text-left border-l border-gray-400 pl-2 px-3 py-2">Hammer</td>
-                                <td class="px-3 py-2">$15.99</td>
-                                <td class="px-3 py-2 rounded-r-lg"><i class="ri-close-circle-fill"></i></td>
-                            </tr>
-                            <tr class="bg-gray-100">
-                                <td class="text-left px-3 py-2 rounded-l-lg">2</td>
-                                <td class="text-left border-l border-gray-400 pl-2 px-3 py-2">Hammer</td>
-                                <td class="px-3 py-2">$15.99</td>
-                                <td class="px-3 py-2 rounded-r-lg"><i class="ri-close-circle-fill"></i></td>
-                            </tr>
+                            <template x-for="(item, index) in cart" :key="index">
+                                <tr class="bg-gray-100">
+                                    <td class="text-left px-3 py-2 rounded-l-lg" x-text="item.name"></td>
+                                    <td class="text-left border-l border-gray-400 pl-2 px-3 py-2" x-text="item.price"></td>
+                                    <td class="px-3 py-2 rounded-r-lg"><i class="ri-close-circle-fill"></i></td>
+                                </tr>
+                            </template>
                             <!-- Add more item rows as needed -->
                         </tbody>
                     </table>
@@ -231,70 +239,39 @@
         </div>
 
         <div class="flex flex-col items-center min-h-screen w-full" :class="{ 'w-full': !cartOpen, 'w-9/12': cartOpen }">
-            <div class="text-xl font-bold divide-y ml-3">Most Sold</div>
-            <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-            <div id="grid" x-bind:class="cartOpen ? 'grid grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? 'grid grid-cols-5 gap-4' : (!cartOpen && !sidebarOpen) ? 'grid grid-cols-6 gap-4' : 'grid grid-cols-5 gap-4'">
-                <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                    <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
-                        <!-- SVG icon -->
-                    </div>
-                    <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                    <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
-                    <div class="font-normal text-sm text-gray-500">Pliers</div>
-                    <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
-                    <div class="text-gray-500 text-sm">Stocks: 1</div>
+            <?php
+            // Assuming $products is an array of arrays where each inner array contains the product details including category
+            $categories = array_unique(array_column($products, 'Category')); // Extracting unique categories from products
+            ?>
+            <?php foreach ($categories as $category) : ?>
+                <div class="text-xl font-bold divide-y ml-3 mt-5"><?= $category ?></div> <!-- Display category name -->
+                <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
+                <div id="grid" x-bind:class="cartOpen ? 'grid grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? 'grid grid-cols-5 gap-4' : (!cartOpen && !sidebarOpen) ? 'grid grid-cols-6 gap-4' : 'grid grid-cols-5 gap-4'">
+                    <?php foreach ($products as $product) : ?>
+                        <?php if ($product['Category'] === $category) : ?> <!-- Show products only for the current category -->
+                            <div class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg" @click="addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?> }); 
+                                        if (sidebarOpen) {
+                                            document.getElementById('sidebar-menu').classList.toggle('hidden');
+                                            document.getElementById('sidebar-menu').classList.toggle('transform');
+                                            document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
+                                            document.getElementById('mainContent').classList.toggle('md:w-full');
+                                            document.getElementById('mainContent').classList.toggle('md:ml-64');
+                                        }
+                                        cartOpen = true; 
+                                        sidebarOpen = false;">
+                                <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
+                                    <!-- SVG icon -->
+                                </div>
+                                <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
+                                <div class="font-bold text-lg text-gray-700 text-center"><?= $product['ProductName'] ?></div>
+                                <div class="font-normal text-sm text-gray-500"><?= $product['Category'] ?></div>
+                                <div class="mt-6 text-lg font-semibold text-gray-700"><?= $product['Price'] ?></div>
+                                <div class="text-gray-500 text-sm">Stocks: <?= $product['Quantity'] ?></div>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
-                <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                    <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
-                        <!-- SVG icon -->
-                    </div>
-                    <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                    <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
-                    <div class="font-normal text-sm text-gray-500">Pliers</div>
-                    <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
-                    <div class="text-gray-500 text-sm">Stocks: 1</div>
-                </div>
-                <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                    <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
-                        <!-- SVG icon -->
-                    </div>
-                    <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                    <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
-                    <div class="font-normal text-sm text-gray-500">Pliers</div>
-                    <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
-                    <div class="text-gray-500 text-sm">Stocks: 1</div>
-                </div>
-                <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                    <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
-                        <!-- SVG icon -->
-                    </div>
-                    <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                    <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
-                    <div class="font-normal text-sm text-gray-500">Pliers</div>
-                    <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
-                    <div class="text-gray-500 text-sm">Stocks: 1</div>
-                </div>
-                <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                    <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
-                        <!-- SVG icon -->
-                    </div>
-                    <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                    <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
-                    <div class="font-normal text-sm text-gray-500">Pliers</div>
-                    <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
-                    <div class="text-gray-500 text-sm">Stocks: 1</div>
-                </div>
-                <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                    <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
-                        <!-- SVG icon -->
-                    </div>
-                    <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                    <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
-                    <div class="font-normal text-sm text-gray-500">Pliers</div>
-                    <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
-                    <div class="text-gray-500 text-sm">Stocks: 1</div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </main>
 
@@ -366,6 +343,7 @@
                 sidebarMenu.classList.toggle('-translate-x-full');
                 document.getElementById('mainContent').classList.toggle('md:w-full');
                 document.getElementById('mainContent').classList.toggle('md:ml-64');
+
             }
         }
     });
