@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2024 at 11:26 AM
+-- Generation Time: Mar 12, 2024 at 03:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -26,112 +26,52 @@ USE `bscs3a`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `account`
---
-
-CREATE TABLE `account` (
-  `AccountNo` int(11) NOT NULL,
-  `AccountType_Ext` varchar(2) NOT NULL,
-  `EntityType` varchar(1) NOT NULL,
-  `LastName` varchar(255) NOT NULL,
-  `FirstName` varchar(255) NOT NULL,
-  `ContactInformation` varchar(255) DEFAULT NULL,
-  `Email` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accountstatement`
---
-
-CREATE TABLE `accountstatement` (
-  `AccountStaID` int(11) NOT NULL,
-  `AccountNo` int(11) NOT NULL,
-  `Date` date NOT NULL,
-  `ClosingBalance` double NOT NULL,
-  `TotalDebit` double NOT NULL,
-  `TotalCredit` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accounttransaction`
---
-
-CREATE TABLE `accounttransaction` (
-  `AccountXactID` int(11) NOT NULL,
-  `LedgerNo` int(11) NOT NULL,
-  `DateTime` datetime NOT NULL,
-  `XactTypeCode` varchar(2) NOT NULL,
-  `XactTypeCode_Ext` varchar(2) NOT NULL,
-  `AccountNo` int(11) NOT NULL,
-  `Amount` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `accounttype`
 --
 
 CREATE TABLE `accounttype` (
-  `AccountType` varchar(2) NOT NULL,
-  `Description` varchar(255) NOT NULL
+  `AccountType` int(11) NOT NULL,
+  `Description` varchar(255) NOT NULL,
+  `grouptype` varchar(2) NOT NULL,
+  `XactTypeCode` varchar(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `accounttype`
 --
 
-INSERT INTO `accounttype` (`AccountType`, `Description`) VALUES
-('AA', 'Asset'),
-('CR', 'Contra-Revenue'),
-('EX', 'Expenses'),
-('LA', 'Liability'),
-('RV', 'Revenue');
+INSERT INTO `accounttype` (`AccountType`, `Description`, `grouptype`, `XactTypeCode`) VALUES
+(1, 'Fixed assets', 'AA', 'DR'),
+(2, 'Current assets', 'AA', 'DR'),
+(3, 'Capital Accounts', 'LE', 'CR'),
+(4, 'Accounts Payable', 'LE', 'CR'),
+(5, 'Sales', 'IC', 'CR'),
+(6, 'Contra-Revenue', 'IC', 'DR'),
+(7, 'Direct Expense', 'EP', 'DR'),
+(8, 'Indirect Expense', 'EP', 'DR'),
+(9, 'Purchases', 'EP', 'DR');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accounttype_ext`
+-- Table structure for table `grouptype`
 --
 
-CREATE TABLE `accounttype_ext` (
-  `AccountType_Ext` varchar(2) NOT NULL,
-  `XactTypeCode` varchar(2) NOT NULL,
-  `Description` varchar(255) NOT NULL
+CREATE TABLE `grouptype` (
+  `grouptype` varchar(2) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `requiresinfo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `accounttype_ext`
+-- Dumping data for table `grouptype`
 --
 
-INSERT INTO `accounttype_ext` (`AccountType_Ext`, `XactTypeCode`, `Description`) VALUES
-('AP', 'CR', 'Accounts Payable'),
-('AR', 'DR', 'Accounts Receivable'),
-('IT', 'CR', 'Investor'),
-('TP', 'CR', 'Tax Payable');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `entitytype`
---
-
-CREATE TABLE `entitytype` (
-  `EntityType` varchar(1) NOT NULL,
-  `Name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `entitytype`
---
-
-INSERT INTO `entitytype` (`EntityType`, `Name`) VALUES
-('O', 'Organization'),
-('P', 'Person');
+INSERT INTO `grouptype` (`grouptype`, `description`, `requiresinfo`) VALUES
+('AA', 'Asset', 0),
+('EP', 'Expenses', 0),
+('IC', 'Income', 0),
+('LE', 'liabilities and owner\'s equity', 1);
 
 -- --------------------------------------------------------
 
@@ -140,33 +80,42 @@ INSERT INTO `entitytype` (`EntityType`, `Name`) VALUES
 --
 
 CREATE TABLE `ledger` (
-  `LedgerNo` int(11) NOT NULL,
-  `AccountType` varchar(2) NOT NULL,
-  `Name` varchar(255) NOT NULL
+  `ledgerno` int(11) NOT NULL,
+  `AccountType` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `contactIfLE` varchar(255) DEFAULT NULL,
+  `contactName` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `ledger`
 --
 
-INSERT INTO `ledger` (`LedgerNo`, `AccountType`, `Name`) VALUES
-(101, 'AA', 'Cash'),
-(102, 'AA', 'Equipment'),
-(103, 'AA', 'Insurance'),
-(104, 'AA', 'Inventory'),
-(301, 'EX', 'Cost of Goods Sold'),
-(302, 'EX', 'Rent'),
-(303, 'EX', 'Tax'),
-(304, 'EX', 'Insurance Expense'),
-(305, 'EX', 'Payroll'),
-(306, 'EX', 'Utilities'),
-(307, 'EX', 'Theft Expense'),
-(308, 'EX', 'Interest Expense'),
-(309, 'EX', 'Other Operating Expense'),
-(401, 'CR', 'Discount'),
-(402, 'CR', 'Allowance'),
-(403, 'CR', 'Returns\r\n'),
-(501, 'RV', 'Sales');
+INSERT INTO `ledger` (`ledgerno`, `AccountType`, `name`, `contactIfLE`, `contactName`) VALUES
+(1, 1, 'Equipment', NULL, NULL),
+(2, 1, 'Land', NULL, NULL),
+(3, 2, 'Cash on hand', NULL, NULL),
+(4, 2, 'Cash on bank', NULL, NULL),
+(5, 2, 'Insurance', NULL, NULL),
+(6, 2, 'Inventory', NULL, NULL),
+(7, 3, 'A account', NULL, NULL),
+(8, 3, 'B account', NULL, NULL),
+(9, 4, 'C account', NULL, NULL),
+(10, 4, 'D account', NULL, NULL),
+(11, 5, 'Sales', NULL, NULL),
+(12, 6, 'Discount', NULL, NULL),
+(13, 6, 'Allowance', NULL, NULL),
+(14, 6, 'Returns', NULL, NULL),
+(15, 7, 'Payroll', NULL, NULL),
+(16, 7, 'Fuel/Gas', NULL, NULL),
+(17, 8, 'Rent', NULL, NULL),
+(18, 8, 'Tax', NULL, NULL),
+(19, 8, 'Insurance Expense', NULL, NULL),
+(20, 8, 'Utilities', NULL, NULL),
+(21, 8, 'Theft Expense', NULL, NULL),
+(22, 8, 'Interest Expense', NULL, NULL),
+(23, 8, 'Other Operating Expense', NULL, NULL),
+(24, 9, 'Cost of Goods Sold', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -177,7 +126,7 @@ INSERT INTO `ledger` (`LedgerNo`, `AccountType`, `Name`) VALUES
 CREATE TABLE `ledgerstatement` (
   `StatementID` int(11) NOT NULL,
   `LedgerNo` int(11) NOT NULL,
-  `Date` date NOT NULL DEFAULT current_timestamp(),
+  `date` date NOT NULL,
   `ClosingBalance` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -190,9 +139,26 @@ CREATE TABLE `ledgerstatement` (
 CREATE TABLE `ledgertransaction` (
   `LedgerXactID` int(11) NOT NULL,
   `LedgerNo` int(11) NOT NULL,
-  `Date_Time` datetime NOT NULL DEFAULT current_timestamp(),
+  `DateTime` datetime NOT NULL DEFAULT current_timestamp(),
   `LedgerNo_Dr` int(11) NOT NULL,
-  `Amount` double NOT NULL
+  `amount` double NOT NULL,
+  `details` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `requestexpense`
+--
+
+CREATE TABLE `requestexpense` (
+  `re_id` int(11) NOT NULL,
+  `payusing` int(11) NOT NULL,
+  `amount` double NOT NULL,
+  `payfor` int(11) NOT NULL,
+  `proofofinvoice` text NOT NULL,
+  `status` enum('pending','confirm','deny') NOT NULL,
+  `details` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -203,92 +169,40 @@ CREATE TABLE `ledgertransaction` (
 
 CREATE TABLE `transactiontype_de` (
   `XactTypeCode` varchar(2) NOT NULL,
-  `Name` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `transactiontype_de`
 --
 
-INSERT INTO `transactiontype_de` (`XactTypeCode`, `Name`) VALUES
-('CR', 'Credit'),
-('DR', 'Debit');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `transactiontype_ext`
---
-
-CREATE TABLE `transactiontype_ext` (
-  `XactTypeCode_Ext` varchar(2) NOT NULL,
-  `Description` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `transactiontype_ext`
---
-
-INSERT INTO `transactiontype_ext` (`XactTypeCode_Ext`, `Description`) VALUES
-('BR', 'Borrow'),
-('IV', 'Invest'),
-('LL', 'Lend'),
-('PD', 'Paid'),
-('RP', 'Receive Payment'),
-('WD', 'Withdraw');
+INSERT INTO `transactiontype_de` (`XactTypeCode`, `name`) VALUES
+('Cr', 'Credit'),
+('Dr', 'Debit');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `account`
---
-ALTER TABLE `account`
-  ADD PRIMARY KEY (`AccountNo`),
-  ADD KEY `AccountType_Ext` (`AccountType_Ext`),
-  ADD KEY `EntityType` (`EntityType`);
-
---
--- Indexes for table `accountstatement`
---
-ALTER TABLE `accountstatement`
-  ADD PRIMARY KEY (`AccountStaID`),
-  ADD KEY `AccountNo` (`AccountNo`);
-
---
--- Indexes for table `accounttransaction`
---
-ALTER TABLE `accounttransaction`
-  ADD PRIMARY KEY (`AccountXactID`),
-  ADD KEY `LedgerNo` (`LedgerNo`),
-  ADD KEY `WhatAction` (`XactTypeCode_Ext`),
-  ADD KEY `DebOrCred?` (`XactTypeCode`);
-
---
 -- Indexes for table `accounttype`
 --
 ALTER TABLE `accounttype`
-  ADD PRIMARY KEY (`AccountType`);
-
---
--- Indexes for table `accounttype_ext`
---
-ALTER TABLE `accounttype_ext`
-  ADD PRIMARY KEY (`AccountType_Ext`),
+  ADD PRIMARY KEY (`AccountType`),
+  ADD KEY `grouptype` (`grouptype`),
   ADD KEY `XactTypeCode` (`XactTypeCode`);
 
 --
--- Indexes for table `entitytype`
+-- Indexes for table `grouptype`
 --
-ALTER TABLE `entitytype`
-  ADD PRIMARY KEY (`EntityType`);
+ALTER TABLE `grouptype`
+  ADD PRIMARY KEY (`grouptype`);
 
 --
 -- Indexes for table `ledger`
 --
 ALTER TABLE `ledger`
-  ADD PRIMARY KEY (`LedgerNo`),
+  ADD PRIMARY KEY (`ledgerno`),
   ADD KEY `AccountType` (`AccountType`);
 
 --
@@ -307,38 +221,34 @@ ALTER TABLE `ledgertransaction`
   ADD KEY `LedgerNo_Dr` (`LedgerNo_Dr`);
 
 --
+-- Indexes for table `requestexpense`
+--
+ALTER TABLE `requestexpense`
+  ADD PRIMARY KEY (`re_id`),
+  ADD KEY `payusing` (`payusing`),
+  ADD KEY `payfor` (`payfor`);
+
+--
 -- Indexes for table `transactiontype_de`
 --
 ALTER TABLE `transactiontype_de`
   ADD PRIMARY KEY (`XactTypeCode`);
 
 --
--- Indexes for table `transactiontype_ext`
---
-ALTER TABLE `transactiontype_ext`
-  ADD PRIMARY KEY (`XactTypeCode_Ext`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `account`
+-- AUTO_INCREMENT for table `accounttype`
 --
-ALTER TABLE `account`
-  MODIFY `AccountNo` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `accounttype`
+  MODIFY `AccountType` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `accountstatement`
+-- AUTO_INCREMENT for table `ledger`
 --
-ALTER TABLE `accountstatement`
-  MODIFY `AccountStaID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `accounttransaction`
---
-ALTER TABLE `accounttransaction`
-  MODIFY `AccountXactID` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `ledger`
+  MODIFY `ledgerno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `ledgerstatement`
@@ -353,54 +263,47 @@ ALTER TABLE `ledgertransaction`
   MODIFY `LedgerXactID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `requestexpense`
+--
+ALTER TABLE `requestexpense`
+  MODIFY `re_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `account`
+-- Constraints for table `accounttype`
 --
-ALTER TABLE `account`
-  ADD CONSTRAINT `EntityType` FOREIGN KEY (`EntityType`) REFERENCES `entitytype` (`EntityType`),
-  ADD CONSTRAINT `WhatsTheAccountFor?` FOREIGN KEY (`AccountType_Ext`) REFERENCES `accounttype_ext` (`AccountType_Ext`);
-
---
--- Constraints for table `accountstatement`
---
-ALTER TABLE `accountstatement`
-  ADD CONSTRAINT `WhosAccountIsThis?` FOREIGN KEY (`AccountNo`) REFERENCES `account` (`AccountNo`);
-
---
--- Constraints for table `accounttransaction`
---
-ALTER TABLE `accounttransaction`
-  ADD CONSTRAINT `DebOrCred?` FOREIGN KEY (`XactTypeCode`) REFERENCES `transactiontype_de` (`XactTypeCode`),
-  ADD CONSTRAINT `LedgerNo c` FOREIGN KEY (`LedgerNo`) REFERENCES `ledger` (`LedgerNo`),
-  ADD CONSTRAINT `WhatAction` FOREIGN KEY (`XactTypeCode_Ext`) REFERENCES `transactiontype_ext` (`XactTypeCode_Ext`);
-
---
--- Constraints for table `accounttype_ext`
---
-ALTER TABLE `accounttype_ext`
-  ADD CONSTRAINT `DebitOrCredit` FOREIGN KEY (`XactTypeCode`) REFERENCES `transactiontype_de` (`XactTypeCode`);
+ALTER TABLE `accounttype`
+  ADD CONSTRAINT `grp` FOREIGN KEY (`grouptype`) REFERENCES `grouptype` (`grouptype`),
+  ADD CONSTRAINT `xactcode` FOREIGN KEY (`XactTypeCode`) REFERENCES `transactiontype_de` (`XactTypeCode`);
 
 --
 -- Constraints for table `ledger`
 --
 ALTER TABLE `ledger`
-  ADD CONSTRAINT `Ledger Classification` FOREIGN KEY (`AccountType`) REFERENCES `accounttype` (`AccountType`);
+  ADD CONSTRAINT `acctype` FOREIGN KEY (`AccountType`) REFERENCES `accounttype` (`AccountType`);
 
 --
 -- Constraints for table `ledgerstatement`
 --
 ALTER TABLE `ledgerstatement`
-  ADD CONSTRAINT `LedgerNo` FOREIGN KEY (`LedgerNo`) REFERENCES `ledger` (`LedgerNo`);
+  ADD CONSTRAINT `ledgerCon` FOREIGN KEY (`LedgerNo`) REFERENCES `ledger` (`ledgerno`);
 
 --
 -- Constraints for table `ledgertransaction`
 --
 ALTER TABLE `ledgertransaction`
-  ADD CONSTRAINT `Dr Ledge no to Ledger` FOREIGN KEY (`LedgerNo_Dr`) REFERENCES `ledger` (`LedgerNo`),
-  ADD CONSTRAINT `Ledger no to Ledger` FOREIGN KEY (`LedgerNo`) REFERENCES `ledger` (`LedgerNo`);
+  ADD CONSTRAINT `creditLedger` FOREIGN KEY (`LedgerNo`) REFERENCES `ledger` (`ledgerno`),
+  ADD CONSTRAINT `debitLedger` FOREIGN KEY (`LedgerNo_Dr`) REFERENCES `ledger` (`ledgerno`);
+
+--
+-- Constraints for table `requestexpense`
+--
+ALTER TABLE `requestexpense`
+  ADD CONSTRAINT `payfor` FOREIGN KEY (`payfor`) REFERENCES `ledger` (`ledgerno`),
+  ADD CONSTRAINT `payusing` FOREIGN KEY (`payusing`) REFERENCES `ledger` (`ledgerno`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
