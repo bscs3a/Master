@@ -13,7 +13,6 @@
     <!-- Start: Sidebar -->
     <?php include "components/sidebar.php" ?>
     <!-- End: Sidebar -->
-
     <!-- Start: Dashboard -->
     <main class="w-full md:w-[calc(100%-256px)] md:ml-64 min-h-screen transition-all main font-sans">
 
@@ -228,38 +227,60 @@
                 <!-- End: Request -->
 
                 <!-- Start: Salary Request -->
-                <div class="px-5 border-2 border-solid border-gray-300 shadow-lg">
+                <div class="px-5 border-2 border-solid border-gray-300 shadow-lg flex flex-col">
                     <!-- Start: Header -->
                     <div class="flex justify-between mt-5 ">
                         <div>
                             <h1 class="font-sans text-xl font-bold">
-                                Salary Request
+                                General Ledger
+                                <i class="ri-arrow-down-wide-line mx-3"></i>
                             </h1>
                         </div>
                         <div>
-                            <a href="#" class="text-sm font-sans font-semibold">View All</a>
+                        <a href="#" class="text-sm font-sans font-semibold">
+                                <i class="ri-more-line text-3xl text-[#F8B721]"></i>
+                            </a>
                         </div>
                     </div>
                     <!-- End: Header -->
-                    <!-- Start: Search Bar -->
-                    <form action="#" method="get">
-                        <div
-                            class="mt-5 px-5 flex justify-between border-2 border-gray-200 bg-gray-200 rounded-xl transition-colors text-black">
-                            <input type="text" name="search"
-                                class="w-full pl-3 pr-10 py-2 text-black focus:outline-none bg-transparent transition-colors"
-                                placeholder="Search by ID...">
-                            <button class="block text-center text-xl">
-                                <!-- Search -->
-                                <i class="ri-search-line"></i>
-                            </button>
+                    <div class="h-full">
+                        <table class="table-fixed my-5 w-full text-center border-spacing-y-4" id="general_ledger">
+                            <thead class="text-xl font-semibold">
+                                <td>Date</td>
+                                <td>Cash</td>
+                                <td>Debit</td>
+                                <td>Credit</td>
+                            </thead>
+                            <tr class="text-md font-medium">
+                                <td>March 4, 2024</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                        </table>
+                    </div>
 
-                            <!-- <i class="ri-search-line">sdasd</i> -->
-                        </div>
-                    </form>
-                    <!-- End: Search Bar -->
-                    <br><br><br><br>
-                    <br><br><br><br>
-                    <br><br><br><br>
+
+                    <div class="text-center mb-5">
+                            <button class="border-2 border-[#F8B721] w-full">
+                                <p class="text-[#F8B721] py-2 px-2 font-bold text-xl"> <i class="ri-add-line"> </i> New Transaction</p>
+                            </button>
+                    </div>
+
+                    <script>
+                        let general_ledger = document.getElementById('general_ledger');
+
+                        for (let index = 0; index < 9; index++) {
+                            general_ledger.innerHTML += `
+                            <tr class="text-md font-medium">
+                                <td>March 4, 2024</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            `;
+                        }
+                    </script>
                 </div>
                 <!-- End: Salary Request -->
 
@@ -280,23 +301,28 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="px-3 pt-5 border-solid border-2 border-gray-200 shadow-md">
+                    <div class="px-3 pt-5 border-solid border-2 border-gray-200 shadow-md rounded-lg">
 
                         <div class="flex justify-between">
                             <h2 class="font-sans font-bold text-xl">Income Statement</h2>
-                            <a href="#" class="text-sm text-gray-900 font-semibold ">View Details</a>
+                            <a href="#" class="text-sm font-sans font-semibold">
+                                <i class="ri-more-line text-3xl text-[#F8B721]"></i>
+                            </a>
 
                         </div>
-                        <p class="text-gray-600 my-3">Net Sales 0</p>
+                        <p class="text-gray-600 my-3 text-lg ">Net Sales 0</p>
                         <canvas id="incomeBarChart"></canvas>
 
                     </div>
-                    <div class="px-5 pt-5 border-solid border-2 border-gray-200 shadow-md">
+                    <div class="px-5 pt-5 border-solid border-2 border-gray-200 shadow-md rounded-lg">
                         <div class="flex justify-between">
                             <h2 class="font-sans font-bold text-xl">Balance</h2>
-                            <a href="#" class="text-sm text-gray-900 font-semibold ">View Details</a>
+                            <a href="#" class="text-sm font-sans font-semibold">
+                                <i class="ri-more-line text-3xl text-[#F8B721]"></i>
+                            </a>
 
                         </div>
+                        <p class="text-gray-600 my-3 text-lg">Total: 0</p>
                         <!-- Balance Sheet in Pie Graph -->
                         <div class="w-full h-3/4 flex justify-center">
 
@@ -320,8 +346,11 @@
                             datasets: [{
                                 label: 'Income',
                                 data: [12000, 19000, 3000, 5000, 2000, 3000, 7000, 8000, 9000, 10000, 11000, 12000], // Replace with your income data
-                                backgroundColor: ' #F8B721',
+                                backgroundColor: ['#F8B721' , '#F6D95D'],
+                                
                                 borderColor: 'rgba(255, 165, 0, 1)',
+                                borderColor: 'rgba(248, 183, 33, 1)',
+                               
                                 // rgba(255, 165, 0, 0.2),
                                 //F8B721 orange
                                 // F6D95D pale orange
@@ -336,8 +365,24 @@
                             },
                             plugins: {
                                 legend: {
-                                    position: 'bottom'
+                                    position: 'bottom',
+                                    labels: {
+                                        font: {
+                                            size: 20,
+                                            weight: 'bold'
+                                        }
+                                    }
                                 }
+                            },
+
+                            layout: {
+                                padding: {
+                                    left: 20,
+                                    right: 20,
+                                    top: 50,
+                                    bottom: 0
+                                }
+                            
                             }
                         }
                     });
@@ -359,7 +404,22 @@
 
                             plugins: {
                                 legend: {
-                                    position: 'bottom'
+                                    position: 'bottom',
+                                    labels: {
+                                        font: {
+                                            size: 20,
+                                            weight: 'bold'
+                                        }
+                                    }
+                                }
+                            },
+
+                            layout: {
+                                padding: {
+                                    left: 20,
+                                    right: 20,
+                                    top: 0,
+                                    bottom: 0
                                 }
                             }
                         }
@@ -378,22 +438,33 @@
             <div class=" mt-10">
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="col-span-1 px-3 pt-5 border-solid border-2 border-gray-200 shadow-md">
+                    <div class="col-span-1 px-5 pt-5 border-solid border-2 border-gray-200 shadow-md rounded-lg">
                     <div class="flex justify-between">
                             <h2 class="font-sans font-bold text-xl">Equity</h2>
-                            <a href="#" class="text-sm text-gray-900 font-semibold ">View Details</a>
+                            <a href="#" class="text-sm font-sans font-semibold">
+                                <i class="ri-more-line text-3xl text-[#F8B721]"></i>
+                            </a>
 
                         </div>
+                        <p class="text-gray-600 my-3 text-lg">Total: 0</p>
                         <!-- Donut Chart for Equity -->
                         <div class="flex justify-center w-3/4">
                             <canvas id="equityDonutChart"></canvas>
                         </div>
                     </div>
-                    <div class="col-span-2 px-3 pt-5 border-solid border-2 border-gray-200 shadow-md">
+                    <div class="col-span-2 px-5 pt-5 border-solid border-2 border-gray-200 shadow-md rounded-lg">
+                        <div class="flex justify-between">
 
-                        <h2 class="mt-5  font-sans  font-bold text-xl">Cash Flow</h2>
-                        <!-- Create a canvas element -->
-                        <canvas id="salesGrowthChart"></canvas>
+                            <h2 class="mt-5  font-sans  font-bold text-xl">Cash Flow</h2>
+                            <a href="#" class="text-sm font-sans font-semibold">
+                                    <i class="ri-more-line text-3xl text-[#F8B721]"></i>
+                                </a>
+                        </div>
+                        <div>
+
+                            <!-- Create a canvas element -->
+                            <canvas id="salesGrowthChart"></canvas>
+                        </div>
                     </div>
                 </div>
 
@@ -408,18 +479,37 @@
                             labels: ['Equity1', 'Equity2', 'Equity3'],
                             datasets: [{
                                 data: [10, 20, 30], // Replace with your equity data
-                                backgroundColor: ['rgba(255, 165, 0, 0.5)', 'rgba(255, 165, 0, 0.7)', 'rgba(255, 165, 0, 0.9)']
+                                backgroundColor: ['rgba(255, 165, 0, 0.5)', 'rgba(255, 165, 0, 0.7)', 'rgba(255, 165, 0, 0.9)'],
+                                borderWidth: 2
                             }]
                         },
                         options: {
+                            cutout: '70%',
                             responsive: true,
                             maintainAspectRatio: true,
 
                             plugins: {
                                 legend: {
-                                    position: 'left'
+                                    position: 'left',
+                                    labels: {
+                                        font: {
+                                            size: 20,
+                                            weight: 'bold'
+                                        }
+                                    
+                                    }
+                                }
+                            },
+
+                            layout: {
+                                padding: {
+                                    left: 20,
+                                    right: 50   ,
+                                    top: 50,
+                                    bottom: 0
                                 }
                             }
+
                         }
                     });
 
@@ -434,10 +524,10 @@
                             datasets: [{
                                 label: 'Sales Growth',
                                 data: [12, 19, 3, 5, 2, 3, 7], // Replace with your data
-                                backgroundColor: 'rgba(255, 165, 0, 0.7)',
+                                backgroundColor: 'rgba(255, 165, 0, 0.4)',
                                 fill: true,
                                 borderColor: 'rgba(255, 165, 0, 1)',
-                                borderWidth: 1
+                                borderWidth: 2
 
                             }]
                         },

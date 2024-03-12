@@ -3,6 +3,7 @@ module.exports = {
   content: ["./**/**/**/*.{html,js,php}"],
   safelist: [
     'bg-wave',
+    'bg-request-money',
   ],
   theme: {
     extend: {
@@ -17,6 +18,7 @@ module.exports = {
 
       backgroundImage: {
         'wave': "url('../public/finance/img/wave.png')",
+        'request-money': "url('../public/finance/img/RequestMoney.png')",
       },
     },
   },
