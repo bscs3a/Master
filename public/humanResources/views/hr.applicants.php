@@ -1,3 +1,20 @@
+<?php
+try {
+  require_once 'dbconn-test.php';
+
+  $query = "SELECT * FROM applicants;";
+  $stmt = $conn->prepare($query);
+  $stmt->execute();
+  $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  $pdo = null;
+  $stmt = null;
+}
+catch (PDOException $e) {
+    echo 'Database connection failed: ' . $e->getMessage();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
