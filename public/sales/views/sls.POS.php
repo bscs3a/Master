@@ -48,9 +48,11 @@
     // Fetch all categories
     $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
     ?>
+
+    <script src="app.js" defer></script>
 </head>
 
-<body x-data="{ sidebarOpen: true, cartOpen: false, isFullScreen: false, cart: [], addToCart(product) { this.cart.push(product); }}">
+<body x-data="main">
     <?php include "components/sidebar.php" ?>
 
     <main id="mainContent" class="w-full md:w-[calc(100%-256px)] md:ml-64 min-h-screen transition-all main">
@@ -167,15 +169,17 @@
                 </div>
 
                 <!-- Cart items -->
-                <div class="flex justify-between px-3 py-2 overflow-y-auto max-h-72">
+                <div class="flex justify-between px-3 py-2 overflow-y-auto max-h-80">
                     <table class="w-full text-right p-3">
                         <tbody>
                             <!-- Cart item rows -->
                             <template x-for="(item, index) in cart" :key="index">
                                 <tr class="bg-gray-100">
-                                    <td class="text-left px-3 py-2 rounded-l-lg" x-text="item.name"></td>
+                                    <td class="text-left px-3 py-2 rounded-l-lg" x-text="item.quantity + ' x ' + item.name"></td>
                                     <td class="text-left border-l border-gray-400 pl-2 px-3 py-2" x-text="item.price"></td>
-                                    <td class="px-3 py-2 rounded-r-lg"><i class="ri-close-circle-fill"></i></td>
+                                    <td class="px-3 py-2 rounded-r-lg">
+                                        <i class="ri-close-circle-fill cursor-pointer" @click="removeFromCart(index)"></i>
+                                    </td>
                                 </tr>
                             </template>
                             <!-- Add more item rows as needed -->
@@ -183,33 +187,21 @@
                     </table>
                 </div>
 
-                <!-- Add Coupon Section -->
-                <div class="absolute bottom-52 w-full p-3">
-                    <div class="flex items-center justify-between bg-gray-200 p-3 rounded-lg" style="background-color: #FFEEA5;">
-                        <label for="coupon" class="mr-2 font-bold">Add</label>
-                        <label for="coupon" class="mr-2 font-bold" style="color: #C91F41;">Discount Coupon</label>
-                    </div>
-                </div>
-
                 <!-- Order details -->
-                <div class="absolute bottom-0 w-full bg-gray-100">
-                    <div class="py-2 px-1 ml-2 border-t border-gray-100">
+                <div class="absolute bottom-0 w-full">
+                    <div class="py-2 px-1 ml-2 border-t">
                         <!-- Order detail rows -->
-                        <div class="grid grid-cols-2 items-center mb-2">
-                            <span class="text-right pr-16">Order Subtotal:</span>
-                            <span class="text-right pr-16">$Subtotal</span>
+                        <div class="grid grid-cols-2 gap-4 items-center mb-2 bg-gray-100 p-4 rounded-lg shadow-md">
+                            <span class="font-bold text-base">Subtotal:</span>
+                            <span class="text-base ml-0" x-text="'$' + cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)"></span>
                         </div>
-                        <div class="grid grid-cols-2 items-center mb-2">
-                            <span class="text-right pr-16">Shipping:</span>
-                            <span class="text-right pr-16">$Shipping</span>
+                        <div class="grid grid-cols-2 gap-4 items-center mb-2 bg-gray-100 p-4 rounded-lg shadow-md">
+                            <span class="font-bold text-base">Tax (10%):</span>
+                            <span class="text-base" x-text="'$' + (cart.reduce((total, item) => total + (item.price * item.quantity), 0) * 0.1).toFixed(2)"></span>
                         </div>
-                        <div class="grid grid-cols-2 items-center mb-2">
-                            <span class="text-right pr-16">Tax:</span>
-                            <span class="text-right pr-16">$Tax</span>
-                        </div>
-                        <div class="grid grid-cols-2 items-center mb-2">
-                            <span class="text-right pr-16 font-bold">Order Total:</span>
-                            <span class="text-right pr-16">$Ordertotal</span>
+                        <div class="grid grid-cols-2 gap-4 items-center mb-2 bg-gray-100 p-4 rounded-lg shadow-md">
+                            <span class="font-bold text-base">Order Total:</span>
+                            <span class="text-base" x-text="'$' + (cart.reduce((total, item) => total + (item.price * item.quantity), 0) * 1.1).toFixed(2)"></span>
                         </div>
                         <!-- Add more order detail rows as needed -->
                     </div>
@@ -250,15 +242,7 @@
                     <?php foreach ($products as $product) : ?>
                         <?php if ($product['Category'] === $category) : ?> <!-- Show products only for the current category -->
                             <div class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg" @click="addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?> }); 
-                                        if (sidebarOpen) {
-                                            document.getElementById('sidebar-menu').classList.toggle('hidden');
-                                            document.getElementById('sidebar-menu').classList.toggle('transform');
-                                            document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
-                                            document.getElementById('mainContent').classList.toggle('md:w-full');
-                                            document.getElementById('mainContent').classList.toggle('md:ml-64');
-                                        }
-                                        cartOpen = true; 
-                                        sidebarOpen = false;">
+                                cartOpen = true;">
                                 <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
                                     <!-- SVG icon -->
                                 </div>
@@ -277,6 +261,31 @@
 
     <script src="./../src/route.js"></script>
 </body>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('main', () => ({
+            sidebarOpen: true,
+            cartOpen: false,
+            isFullScreen: false,
+            cart: [],
+            addToCart(product) {
+                let item = this.cart.find(i => i.id === product.id);
+                if (item) {
+                    item.quantity++;
+                } else {
+                    this.cart.push({
+                        ...product,
+                        quantity: 1
+                    });
+                }
+            },
+            removeFromCart(index) {
+                this.cart.splice(index, 1);
+            }
+        }));
+    });
+</script>
 
 <script>
     document.querySelector('.sidebar-toggle').addEventListener('click', function() {
