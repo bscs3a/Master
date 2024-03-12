@@ -16,15 +16,15 @@
 <!-- end of sidenav -->
 
 <!-- Start Main Bar -->
-<main class="w-[calc(100%-256px)] ml-64 bg-gray-50 min-h-screen">
+<main id="mainContent" class="w-full md:w-[calc(100%-256px)] md:ml-64 min-h-screen transition-all main">
   <!-- Top Bar -->
   <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/10">
-   <button type="button" class="text-lg text-gray-600">
+   <button type="button" class="text-lg text-gray-600 sidebar-toggle">
   <i class="ri-menu-line"></i>
    </button>
    <ul class="flex items-center text-sm ml-4">  
   <li class="mr-2">
-    <a href="/Master/hr/dashboard" class="text-[#151313] hover:text-gray-600 font-medium">Human Resources</a>
+    <a href="/hr/dashboard" class="text-[#151313] hover:text-gray-600 font-medium">Human Resources</a>
   </li>
   <li class="text-[#151313] mr-2 font-medium">/</li>
   <a href="#" class="text-[#151313] mr-2 font-medium hover:text-gray-600">Departments</a>
@@ -189,5 +189,16 @@
 </main>
 <!-- End Main Bar -->
     <script  src="./../../../src/route.js"></script>
+    
+<!-- Sidebar active/inactive -->
+<script>
+  document.querySelector('.sidebar-toggle').addEventListener('click', function() {
+    document.getElementById('sidebar-menu').classList.toggle('hidden');
+    document.getElementById('sidebar-menu').classList.toggle('transform');
+    document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
+    document.getElementById('mainContent').classList.toggle('md:w-full');
+    document.getElementById('mainContent').classList.toggle('md:ml-64');
+  });
+</script>
 </body>
 </html> 

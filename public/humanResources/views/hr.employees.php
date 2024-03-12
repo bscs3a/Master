@@ -33,10 +33,10 @@ catch (PDOException $e) {
 <!-- end of sidenav -->
 
 <!-- Start Main Bar -->
-<main class="w-[calc(100%-256px)] ml-64 bg-gray-50 min-h-screen">
+<main id="mainContent" class="w-full md:w-[calc(100%-256px)] md:ml-64 min-h-screen transition-all main">
   <!-- Top Bar -->
   <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/10">
-   <button type="button" class="text-lg text-gray-600">
+   <button type="button" class="text-lg text-gray-600 sidebar-toggle">
   <i class="ri-menu-line"></i>
    </button>
    <ul class="flex items-center text-sm ml-4">  
@@ -60,7 +60,7 @@ catch (PDOException $e) {
   <!-- Employees -->
   <div class="flex items-center flex-wrap">
     <h3 class="ml-6 mt-8 text-xl font-bold">All Employees</h3>
-    <button type="submit" class="mt-9 mr-4 flex ml-2 bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600"><i class="ri-add-line"></i></button>
+    <button type="submit" route="/hr/employees/add" class="mt-9 mr-4 flex ml-2 bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600"><i class="ri-add-line"></i></button>
     <form action="/search" method="get" class="mt-6 ml-auto mr-4 flex">
       <input type="search" id="search" name="q" placeholder="Search" class="w-40 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
       <button type="submit" class="ml-2 bg-blue-500 text-white px-4 py-1 rounded-md hover:bg-blue-600"><i class="ri-search-line"></i></button>
@@ -534,5 +534,6 @@ catch (PDOException $e) {
 </main>
 <!-- End Main Bar -->
 <script  src="./../src/route.js"></script>
+<script type="module" src="../public/humanResources/js/sidenav-active-inactive.js"></script>
 </body>
 </html> 

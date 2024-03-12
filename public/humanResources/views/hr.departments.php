@@ -16,10 +16,10 @@
 <!-- end of sidenav -->
 
 <!-- Start Main Bar -->
-<main class="w-[calc(100%-256px)] ml-64 bg-gray-50 min-h-screen">
+<main id="mainContent" class="w-full md:w-[calc(100%-256px)] md:ml-64 min-h-screen transition-all main">
   <!-- Top Bar -->
   <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/10">
-   <button type="button" class="text-lg text-gray-600">
+   <button type="button" class="text-lg text-gray-600 sidebar-toggle">
   <i class="ri-menu-line"></i>
    </button>
    <ul class="flex items-center text-sm ml-4">  
@@ -48,5 +48,6 @@
 </main>
 <!-- End Main Bar -->
 <script  src="./../src/route.js"></script>
+<script type="module" src="../public/humanResources/js/sidenav-active-inactive.js"></script>
 </body>
 </html> 

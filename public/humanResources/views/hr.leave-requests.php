@@ -16,10 +16,10 @@
 <!-- end of sidenav -->
 
 <!-- Start Main Bar -->
-<main class="w-[calc(100%-256px)] ml-64 bg-gray-50 min-h-screen">
+<main id="mainContent" class="w-full md:w-[calc(100%-256px)] md:ml-64 min-h-screen transition-all main">
   <!-- Top Bar -->
   <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/10">
-   <button type="button" class="text-lg text-gray-600">
+   <button type="button" class="text-lg text-gray-600 sidebar-toggle">
   <i class="ri-menu-line"></i>
    </button>
    <ul class="flex items-center text-sm ml-4">  
@@ -94,6 +94,62 @@
               <a href="#" class="text-indigo-600 hover:text-indigo-900">Reject Button</a>
             </td>
           </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="#"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Employee Name
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">Employee Position</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">YYYY-MM-DD</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Reason ulit dito bakit di ka crush ng crush mo siguro</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">Accept Button</a>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">Reject Button</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="#"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900">Employee Name
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">Employee Position</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">YYYY-MM-DD</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900">Reason ulit dito bakit di ka crush ng crush mo siguro Reason ulit dito bakit di ka crush ng crush mo siguro Reason ulit dito bakit di ka crush ng crush mo siguro Reason ulit dito bakit di ka crush ng crush mo siguro Reason ulit dito bakit di ka crush ng crush mo siguro Reason ulit dito bakit di ka crush ng crush mo siguro Reason ulit dito bakit di ka crush ng crush mo siguro Reason ulit dito bakit di ka crush ng crush mo siguro Reason ulit dito bakit di ka crush ng crush mo siguro Reason ulit dito bakit di ka crush ng crush mo siguro Reason ulit dito bakit di ka crush ng crush mo siguro</div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">Accept Button</a>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="#" class="text-indigo-600 hover:text-indigo-900">Reject Button</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -103,5 +159,6 @@
 </main>
 <!-- End Main Bar -->
 <script  src="./../src/route.js"></script>
+<script type="module" src="../public/humanResources/js/sidenav-active-inactive.js"></script>
 </body>
 </html> 
