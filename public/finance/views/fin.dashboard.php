@@ -15,7 +15,7 @@
     <!-- End: Sidebar -->
 
     <!-- Start: Dashboard -->
-    <main class="w-full md:w-[calc(100%-256px)] md:ml-64 min-h-screen transition-all main">
+    <main class="w-full md:w-[calc(100%-256px)] md:ml-64 min-h-screen transition-all main font-sans">
 
 
         <!-- Start: Header -->
@@ -60,11 +60,11 @@
                 <!-- Start: Top Left-Side Section -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 ">
                     <div
-                        class="col-span-1 border-solid border-gray-400 shadow-md rounded-md px-5 py-10 bg-wave bg-cover bg-[center_top_2rem] bg-no-repeat
+                        class="col-span-1 border-solid border-gray-400 shadow-md rounded-xl px-5 py-10 bg-wave bg-cover bg-[center_top_2rem] bg-no-repeat
                             
                         ">
                         <!-- Start: Welcome Message -->
-                      <div class="flex justify-between">
+                      <div class="flex justify-between mb-5">
                          <div>
 
                            <h1 class="font-sans font-bold  text-5xl">Hello, Sample User!</h1>
@@ -119,8 +119,12 @@
                         <!-- End: Mini-Dashboard Analytics -->
                     </div>
 
-                    <div class=" col-span-1 bg-gradient-to-r bg-orange-400 ">
-                        <h1>Total Balace</h1>
+                    <div class=" col-span-1 bg-gradient-to-b from-[#F8B721] to-[#FBCF68] rounded-xl drop-shadow-md">
+                        <div class="mx-5 my-5 py-3 px-3 text-white">
+                            <h1 class="text-3xl font-bold">Total Balance</h1>
+                            <p class="mt-5 text-3xl font-medium">0</p>
+                            <p class="mt-5 text-md font-bold">Summary</p>
+                        </div>
                     </div>
 
 
@@ -136,41 +140,92 @@
 
             <!-- Start: Fifth Section -->
             <div class="mt-10  grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Start: Inventory Request -->
+                <!-- Start: Request -->
                 <div class="px-5 border-2 border-solid border-gray-300 shadow-lg">
                     <!-- Start: Header -->
                     <div class="flex justify-between mt-5 ">
                         <div>
                             <h1 class="font-sans text-xl font-bold">
-                                Inventory Request
+                                Request
+                                <span class="text-white bg-[#F8B721] inline-flex items-center rounded-full px-2 py-1">99+</span>
                             </h1>
+                            
                         </div>
                         <div>
-                            <a href="#" class="text-sm font-sans font-semibold">View All</a>
+                            <a href="#" class="text-sm font-sans font-semibold">
+                                <i class="ri-more-line text-3xl text-[#F8B721]"></i>
+                            </a>
                         </div>
                     </div>
                     <!-- End: Header -->
-                    <!-- Start: Search Bar -->
-                    <form action="#" method="get">
-                        <div
-                            class="mt-5 px-5 flex justify-between border-2 border-gray-200 bg-gray-200 rounded-xl transition-colors text-black">
-                            <input type="text" name="search"
-                                class="w-full pl-3 pr-10 py-2 text-black focus:outline-none bg-transparent transition-colors"
-                                placeholder="Search by ID...">
-                            <button class="block text-center text-xl">
-                                <!-- Search -->
-                                <i class="ri-search-line"></i>
-                            </button>
+                    <!-- Start: Tab -->
+                    <div class="flex justify-stretch">
+                        <button class="flex-grow px-10 py-2 font-xl font-semibold text-[#F8B721] border-b-2 border-[#F8B721] focus:outline-none">All</button>
+                        <button class="flex-grow px-10 py-2 font-xl font-semibold text-black border-b-2 border-slate-300  hover:text-[#F8B721] hover:border-[#F8B721] focus:outline-none">HR</button>
+                        <button class="flex-grow px-10 py-2 font-xl font-semibold text-black border-b-2 border-slate-300  hover:text-[#F8B721] hover:border-[#F8B721] focus:outline-none">Sales</button>
+                        <button class="flex-grow px-10 py-2 font-xl font-semibold text-black border-b-2 border-slate-300  hover:text-[#F8B721] hover:border-[#F8B721] focus:outline-none">PO</button>
+                        <button class="flex-grow px-10 py-2 font-xl font-semibold text-black border-b-2 border-slate-300  hover:text-[#F8B721] hover:border-[#F8B721] focus:outline-none">Delivery</button>
+                        <button class="flex-grow px-10 py-2 font-xl font-semibold text-black border-b-2 border-slate-300  hover:text-[#F8B721] hover:border-[#F8B721] focus:outline-none">Inventory</button>
+                    </div>
+                    <!-- End: Tab -->
 
-                            <!-- <i class="ri-search-line">sdasd</i> -->
-                        </div>
-                    </form>
-                    <!-- End: Search Bar -->
-                    <br><br><br><br>
-                    <br><br><br><br>
-                    <br><br><br><br>
+                    <!-- Start: Table -->
+                    <div>
+                        <table class="table-fixed my-5 w-full" id="table_request">
+                            <tr class="flex justify-between py-5 font-medium text-xl">
+                                <td class="mr-4 text-xl">
+                                    <p class="font-semibold">Sample User</p>
+                                    <p>HR Dept</p>
+                                </td>
+
+                                <td class="mr-4 line-clamp-2">
+                                    <p>Salary Request</p>
+                                </td>
+
+                                <td class="mr-4 line-clamp-2">
+                                    <p>March 4, 2024</p>
+                                </td>
+                                <td class="mr-4">
+                                    <button class="bg-[#F8B721] rounded-lg px-8 py-3 shadow-md shadow-black-300">
+                                        <p class="text-white text-lg font-bold ">View</p>
+                                    </button>
+                                </td>
+                            </tr>
+                           
+                        </table>
+
+                        <script>
+                            let table_request = document.getElementById('table_request');
+                            
+                            for (let index = 0; index < 2; index++) {
+                                table_request.innerHTML += `
+                                <tr class="flex justify-between py-5 font-medium text-xl">
+                                <td class="mr-4 text-xl">
+                                    <p class="font-semibold">Sample User</p>
+                                    <p>HR Dept</p>
+                                </td>
+
+                                <td class="mr-4 line-clamp-2">
+                                    <p>Salary Request</p>
+                                </td>
+
+                                <td class="mr-4 line-clamp-2">
+                                    <p>March 4, 2024</p>
+                                </td>
+                                <td class="mr-4">
+                                    <button class="bg-[#F8B721] rounded-lg px-8 py-3 shadow-md shadow-black-300">
+                                        <p class="text-white text-lg font-bold ">View</p>
+                                    </button>
+                                </td>
+                            </tr>
+                                `;
+                                
+                            }
+                        </script>
+                    </div>
+                    <!-- End: Table -->
                 </div>
-                <!-- End: Inventory Request -->
+                <!-- End: Request -->
 
                 <!-- Start: Salary Request -->
                 <div class="px-5 border-2 border-solid border-gray-300 shadow-lg">
@@ -213,7 +268,16 @@
 
             <!-- Start: Second Section -->
             <div class="mt-10  h-2/4">
-                <h1 class="font-sans font-bold text-3xl">Overview</h1>
+                <!-- Start: Header Report -->
+                <div class="my-10 flex justify-between">
+                    <h1 class="font-sans font-bold text-3xl">Report</h1>
+                    <div class="font-bold  border-none ">
+                        <select name="" id="" class="bg-white border-collapse text-xl">
+                            <option value="year" selected>Year</option>
+                            <option value="month">Month</option>
+                        </select>
+                    </div>
+                </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="px-3 pt-5 border-solid border-2 border-gray-200 shadow-md">
