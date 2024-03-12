@@ -1,3 +1,20 @@
+<?php
+try {
+  require_once 'dbconn-test.php';
+
+  $query = "SELECT * FROM employees WHERE department = 'Point of Sale';";
+  $stmt = $conn->prepare($query);
+  $stmt->execute();
+  $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  $pdo = null;
+  $stmt = null;
+}
+catch (PDOException $e) {
+    echo 'Database connection failed: ' . $e->getMessage();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +47,7 @@
   <a href="#" class="text-[#151313] mr-2 font-medium hover:text-gray-600">Departments</a>
   <!-- test -->
   <li class="text-[#151313] mr-2 font-medium">/</li>
-  <a href="#" class="text-[#151313] mr-2 font-medium hover:text-gray-600">Points of Sale</a>
+  <a href="#" class="text-[#151313] mr-2 font-medium hover:text-gray-600">Point of Sale</a>
   <!-- end test -->
    </ul>
    <ul class="ml-auto flex items-center">
@@ -59,7 +76,7 @@
                 <a route="/hr/employees/departments/sales"
                     class="cursor-pointer shrink-0 border-b-2 border-sidebar px-1 pb-4 text-sm font-medium text-sidebar"
                     aria-current="page">
-                    Points of Sale
+                    Point of Sale
                 </a>
                 <a route="/hr/employees/departments/finance"
                     class="cursor-pointer shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
@@ -79,6 +96,7 @@
 </div>
 <!-- end department tabs -->
 
+<!-- EMPLOYEES -->
 <div class="flex flex-wrap">
     <h3 class="ml-6 mt-8 text-xl font-bold">Employees</h3>
     <form action="/search" method="get" class="mt-6 ml-auto mr-4 flex">
@@ -86,7 +104,59 @@
       <button type="submit" class="ml-2 bg-blue-500 text-white px-4 py-1 rounded-md hover:bg-blue-600"><i class="ri-search-line"></i></button>
     </form>
   </div> 
-  <!-- Employees -->
+  <div class="ml-6 flex flex-col mt-8 mr-6">
+  <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-300 shadow-md sm:rounded-lg">
+    <table class="min-w-full">
+      <!-- START HEADER -->
+      <thead>
+        <tr>
+          <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+            Name</th>
+          <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+            ID</th>
+          <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+            Department</th>
+          <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+            Action</th>
+        </tr>
+      </thead>
+      <!-- END HEADER -->
+      <?php foreach ($employees as $employee): ?>
+        <tbody class="bg-white">
+          <tr>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10">
+                  <img class="w-10 h-10 rounded-full object-cover object-center"
+                    src="<?php echo $employee['image_url']; ?>"
+                    alt="">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium leading-5 text-gray-900"><?php echo $employee['first_name'] . ' ' . $employee['last_name']; ?>
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500"><?php echo $employee['email']; ?></div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900"><?php echo $employee['id']; ?></span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <div class="text-sm leading-5 text-gray-900"><?php echo $employee['position']; ?></div>
+              <div class="text-sm leading-5 text-gray-500"><?php echo $employee['department']; ?></div>
+            </td>
+            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+              <a href="../profile" class="text-indigo-600 hover:text-indigo-900">View</a>
+            </td>
+          </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- END EMPLOYEES -->
+
+  <!-- TEST Employees -->
   <!-- <div class="ml-6 flex flex-col mt-8 mr-6">
   <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-300 shadow-md sm:rounded-lg">
     <table class="min-w-full">
@@ -159,7 +229,7 @@
       </table>
     </div>
   </div> -->
-  <!-- End Employees -->
+  <!-- End TEST Employees -->
 
 </main>
 <!-- End Main Bar -->

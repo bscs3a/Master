@@ -26,5 +26,6 @@ $hr = [
     '/hr/applicants' => $basePath . "applicants.php",
     '/hr/payroll' => $basePath . "payroll.php",
     '/hr/leave-requests' => $basePath . "leave-requests.php",
+    '/hr/dtr' => $basePath . "daily-time-record.php",
 ];
 

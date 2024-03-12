@@ -77,7 +77,7 @@ catch (PDOException $e) {
                 </a>
                 <a route="/hr/employees/departments/sales"
                     class="cursor-pointer shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
-                    Points of Sale
+                    Point of Sale
                 </a>
                 <a route="/hr/employees/departments/finance"
                     class="cursor-pointer shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">

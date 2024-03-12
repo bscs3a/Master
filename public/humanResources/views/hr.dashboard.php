@@ -93,7 +93,7 @@
               <span class="text-sm leading-5 text-gray-900">10122</span>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              <div class="text-sm leading-5 text-gray-900">Points of Sale</div>
+              <div class="text-sm leading-5 text-gray-900">Point of Sale</div>
               <div class="text-sm leading-5 text-gray-500">Sales Associate</div>
             </td>
             <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">

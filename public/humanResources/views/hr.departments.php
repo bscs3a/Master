@@ -44,31 +44,6 @@
   </div>
   <!-- End Top Bar -->
 
-  <!-- test tab -->
-  
-<div class="mb-4">
-
-
-    <div class="hidden sm:block">
-        <div class="border-b border-gray-200">
-            <nav class="-mb-px flex gap-6" aria-label="Tabs">
-                <a onclick="location.href='/Master/hr/departments/product-order'"
-                    class="cursor-pointer shrink-0 border-b-2 border-sidebar px-1 pb-4 text-sm font-medium text-sidebar"
-                    aria-current="page">
-                    Product Order
-                </a>
-                <a onclick="location.href='/Master/hr/departments/inventory'"
-                    class="cursor-pointer shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
-                    Inventory
-                </a>
-
-
-            </nav>
-        </div>
-    </div>
-</div>
-
-<!-- end test tab -->
 
 </main>
 <!-- End Main Bar -->
