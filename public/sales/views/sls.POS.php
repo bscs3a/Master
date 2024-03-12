@@ -255,7 +255,7 @@
                         <i class="ri-pause-line text-lg mr-2"></i>
                         Hold
                     </button>
-                    <button class="flex items-center justify-center font-bold py-1 px-4 rounded w-1/2 border border-black shadow custom-button">
+                    <button route='/sls/Checkout' class="flex items-center justify-center font-bold py-1 px-4 rounded w-1/2 border border-black shadow custom-button">
                         <i class="ri-shopping-basket-2-fill mr-2"></i>
                         Proceed
                     </button>
@@ -264,7 +264,7 @@
         </div>
 
 
-        <div class="flex flex-col items-center min-h-screen w-full" :class="{ 'w-full': !cartOpen, 'w-9/12': cartOpen }">
+        <div class="flex flex-col items-center min-h-screen w-full sidebar-toggle3" :class="{ 'w-full': !cartOpen, 'w-9/12': cartOpen }">
             <?php
             // Assuming $products is an array of arrays where each inner array contains the product details including category
             $categories = array_unique(array_column($products, 'Category')); // Extracting unique categories from products
@@ -274,7 +274,7 @@
                 <div class="text-xl font-bold divide-y ml-3 mt-5"><?= $category ?></div>
                 <!-- Horizontal line -->
                 <hr class="w-full border-gray-300 my-2">
-                <div id="grid" class="mb-10 sidebar-toggle3 " x-bind:class="cartOpen ? ' grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? ' grid-cols-5 gap-4' : (!cartOpen && !sidebarOpen) ? ' grid-cols-6 gap-4' : ' grid-cols-5 gap-4'" style="display: grid;">
+                <div id="grid" class="mb-10" x-bind:class="cartOpen ? ' grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? ' grid-cols-5 gap-4' : (!cartOpen && !sidebarOpen) ? ' grid-cols-6 gap-4' : ' grid-cols-5 gap-4'" style="display: grid;">
                     <?php foreach ($products as $product) : ?>
                         <?php if ($product['Category'] === $category) : ?> <!-- Show products only for the current category -->
                             <div class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg" @click="addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?> }); 
