@@ -1423,6 +1423,10 @@ video {
   width: 100vw;
 }
 
+.w-2\/4{
+  width: 50%;
+}
+
 .min-w-full{
   min-width: 100%;
 }
@@ -2847,26 +2851,39 @@ video {
   background-color: rgb(228 228 231 / var(--tw-bg-opacity));
 }
 
-.bg-fuchsia-200{
+.bg-orange-300{
   --tw-bg-opacity: 1;
-  background-color: rgb(245 208 254 / var(--tw-bg-opacity));
+  background-color: rgb(253 186 116 / var(--tw-bg-opacity));
 }
 
-.bg-green-700{
+.bg-orange-800{
   --tw-bg-opacity: 1;
-  background-color: rgb(21 128 61 / var(--tw-bg-opacity));
+  background-color: rgb(154 52 18 / var(--tw-bg-opacity));
+}
+
+.bg-orange-400{
+  --tw-bg-opacity: 1;
+  background-color: rgb(251 146 60 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-50{
   --tw-bg-opacity: 0.5;
 }
 
-.bg-opacity-30{
-  --tw-bg-opacity: 0.3;
-}
-
 .bg-wave{
   background-image: url('../public/finance/img/wave.png');
+}
+
+.bg-gradient-to-b{
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+}
+
+.bg-gradient-to-r{
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.to-50\%{
+  --tw-gradient-to-position: 50%;
 }
 
 .decoration-slice{
@@ -2924,6 +2941,70 @@ video {
 
 .bg-right-top{
   background-position: right top;
+}
+
+.bg-top{
+  background-position: top;
+}
+
+.bg-bottom{
+  background-position: bottom;
+}
+
+.bg-left{
+  background-position: left;
+}
+
+.bg-right{
+  background-position: right;
+}
+
+.bg-right-bottom{
+  background-position: right bottom;
+}
+
+.bg-center{
+  background-position: center;
+}
+
+.bg-left-top{
+  background-position: left top;
+}
+
+.bg-\[center_1rem\]{
+  background-position: center 1rem;
+}
+
+.bg-\[center_3rem\]{
+  background-position: center 3rem;
+}
+
+.bg-\[center_right_3rem\]{
+  background-position: center right 3rem;
+}
+
+.bg-\[center_right_1rem\]{
+  background-position: center right 1rem;
+}
+
+.bg-\[center_top_1rem\]{
+  background-position: center top 1rem;
+}
+
+.bg-\[center_top_3rem\]{
+  background-position: center top 3rem;
+}
+
+.bg-\[top_3rem\]{
+  background-position: top 3rem;
+}
+
+.bg-\[right_top_3rem\]{
+  background-position: right top 3rem;
+}
+
+.bg-\[center_top_2rem\]{
+  background-position: center top 2rem;
 }
 
 .bg-repeat{
@@ -3108,6 +3189,11 @@ video {
 .py-5{
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
+}
+
+.py-20{
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .pb-3{

@@ -58,26 +58,28 @@
             <!-- Start: Top Section -->
             <div class=" mb-6">
                 <!-- Start: Top Left-Side Section -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  ">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 ">
                     <div
-                        class="col-span-2 border-solid border-gray-400 shadow-md rounded-md px-5 py-10 bg-wave bg-cover bg-right-top bg-no-repeat">
+                        class="col-span-1 border-solid border-gray-400 shadow-md rounded-md px-5 py-10 bg-wave bg-cover bg-[center_top_2rem] bg-no-repeat
+                            
+                        ">
                         <!-- Start: Welcome Message -->
-                        <a route='/'>ye</a>
-                        <h1 class="font-sans font-bold  text-5xl">Hello, Sample User!</h1>
-                        <p class="line-clamp-2 w-3/4 mt-3 font-sans text-xl text-gray-400 ">Welcome back! Ready to gear
-                            up for another productive day?</p>
-                        <!-- End: Welcome Message -->
+                      <div class="flex justify-between">
+                         <div>
 
-                                <h1 class="font-sans font-bold  text-5xl">Hello, Sample User!</h1>
-                                <p class="line-clamp-2 w-3/4 mt-3 font-sans text-xl text-gray-400 ">Welcome back! Ready
-                                    to gear
-                                    up for another productive day?</p>
-                            </div>
-                            <div>
+                           <h1 class="font-sans font-bold  text-5xl">Hello, Sample User!</h1>
+                           <p class=" w-3/4 text wrap mt-3 font-sans text-md text-gray-400 ">Welcome back! Ready to gear
+                               up for another productive day?</p>
+                           <!-- End: Welcome Message -->
+                       </div>
 
-                                <p class="font-sans font-bold text-xl text-gray-400">Today, March 04, 2024</p>
-                            </div>
+                                
+                        <div class="text-right">
+                            <p class="font-sans font-bold text-xl text-gray-400">Today,</p>
+                            <p class="font-sans font-bold text-xl text-gray-400">March 04, 2024</p>
                         </div>
+                      </div>
+                        
                         <!-- End: Welcome Message -->
                         <!-- Start: Mini-Dashboard Analytics -->
                         <div id="mini-dashboard" class="mt-10 grid grid-cols-1  md:grid-cols-2  gap-4">
@@ -115,42 +117,10 @@
                             <!-- End: Dashboard Analytics: Total Expense -->
                         </div>
                         <!-- End: Mini-Dashboard Analytics -->
-
-                        <!-- Start Script: mini-dashboard item repeater -->
-                        <script>
-                            // var miniDashboard = document.getElementById('mini-dashboard');
-                            // // Array of mini-dashboard items
-                            // var mini_dash_items = [
-                            //     "?",
-                            //     "Total Expense",
-                            //     "Balance"
-                            // ];
-                            // // Loop through the mini_dash_items array and display the mini-dashboard items
-                            // for (let index = 0; index < mini_dash_items.length; index++) {
-                            //     // const element = array[index];
-                            //     miniDashboard.innerHTML +=
-                            //         `
-                            //         <div class="bg-white rounded-md border border-gray-300 p-4 shadow-lg">
-                            //             <div class="flex justify-between mb-4">
-                            //                 <div>
-                            //                     <div class="flex items-center mb-1">
-                            //                         <div class="text-2xl font-semibold">0</div>
-                            //                     </div>
-                            //                     <div class="text-sm font-medium text-gray-400">${mini_dash_items[index]}</div>
-                            //                 </div>
-                            //                 <div>
-                            //                 <i class="ri-file-text-line mr-3 text-4xl"></i>
-                            //                 </div>
-                            //             </div>
-                            //         </div>
-                            //     `;
-                            // }
-                        </script>
-                        <!-- End Script: mini-dashboard item repeater -->
                     </div>
 
-                    <div class="text-right col-span-1">
-                        <h1>asdas</h1>
+                    <div class=" col-span-1 bg-gradient-to-r bg-orange-400 ">
+                        <h1>Total Balace</h1>
                     </div>
 
 
@@ -164,6 +134,82 @@
             </div>
             <!-- End: Top Section -->
 
+            <!-- Start: Fifth Section -->
+            <div class="mt-10  grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Start: Inventory Request -->
+                <div class="px-5 border-2 border-solid border-gray-300 shadow-lg">
+                    <!-- Start: Header -->
+                    <div class="flex justify-between mt-5 ">
+                        <div>
+                            <h1 class="font-sans text-xl font-bold">
+                                Inventory Request
+                            </h1>
+                        </div>
+                        <div>
+                            <a href="#" class="text-sm font-sans font-semibold">View All</a>
+                        </div>
+                    </div>
+                    <!-- End: Header -->
+                    <!-- Start: Search Bar -->
+                    <form action="#" method="get">
+                        <div
+                            class="mt-5 px-5 flex justify-between border-2 border-gray-200 bg-gray-200 rounded-xl transition-colors text-black">
+                            <input type="text" name="search"
+                                class="w-full pl-3 pr-10 py-2 text-black focus:outline-none bg-transparent transition-colors"
+                                placeholder="Search by ID...">
+                            <button class="block text-center text-xl">
+                                <!-- Search -->
+                                <i class="ri-search-line"></i>
+                            </button>
+
+                            <!-- <i class="ri-search-line">sdasd</i> -->
+                        </div>
+                    </form>
+                    <!-- End: Search Bar -->
+                    <br><br><br><br>
+                    <br><br><br><br>
+                    <br><br><br><br>
+                </div>
+                <!-- End: Inventory Request -->
+
+                <!-- Start: Salary Request -->
+                <div class="px-5 border-2 border-solid border-gray-300 shadow-lg">
+                    <!-- Start: Header -->
+                    <div class="flex justify-between mt-5 ">
+                        <div>
+                            <h1 class="font-sans text-xl font-bold">
+                                Salary Request
+                            </h1>
+                        </div>
+                        <div>
+                            <a href="#" class="text-sm font-sans font-semibold">View All</a>
+                        </div>
+                    </div>
+                    <!-- End: Header -->
+                    <!-- Start: Search Bar -->
+                    <form action="#" method="get">
+                        <div
+                            class="mt-5 px-5 flex justify-between border-2 border-gray-200 bg-gray-200 rounded-xl transition-colors text-black">
+                            <input type="text" name="search"
+                                class="w-full pl-3 pr-10 py-2 text-black focus:outline-none bg-transparent transition-colors"
+                                placeholder="Search by ID...">
+                            <button class="block text-center text-xl">
+                                <!-- Search -->
+                                <i class="ri-search-line"></i>
+                            </button>
+
+                            <!-- <i class="ri-search-line">sdasd</i> -->
+                        </div>
+                    </form>
+                    <!-- End: Search Bar -->
+                    <br><br><br><br>
+                    <br><br><br><br>
+                    <br><br><br><br>
+                </div>
+                <!-- End: Salary Request -->
+
+            </div>
+            <!-- End: Fifth Section -->
 
             <!-- Start: Second Section -->
             <div class="mt-10  h-2/4">
@@ -423,82 +469,7 @@
             </div>
             <!-- End: Fourth Section -->
 
-            <!-- Start: Fifth Section -->
-            <div class="mt-10  grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Start: Inventory Request -->
-                <div class="px-5 border-2 border-solid border-gray-300 shadow-lg">
-                    <!-- Start: Header -->
-                    <div class="flex justify-between mt-5 ">
-                        <div>
-                            <h1 class="font-sans text-xl font-bold">
-                                Inventory Request
-                            </h1>
-                        </div>
-                        <div>
-                            <a href="#" class="text-sm font-sans font-semibold">View All</a>
-                        </div>
-                    </div>
-                    <!-- End: Header -->
-                    <!-- Start: Search Bar -->
-                    <form action="#" method="get">
-                        <div
-                            class="mt-5 px-5 flex justify-between border-2 border-gray-200 bg-gray-200 rounded-xl transition-colors text-black">
-                            <input type="text" name="search"
-                                class="w-full pl-3 pr-10 py-2 text-black focus:outline-none bg-transparent transition-colors"
-                                placeholder="Search by ID...">
-                            <button class="block text-center text-xl">
-                                <!-- Search -->
-                                <i class="ri-search-line"></i>
-                            </button>
-
-                            <!-- <i class="ri-search-line">sdasd</i> -->
-                        </div>
-                    </form>
-                    <!-- End: Search Bar -->
-                    <br><br><br><br>
-                    <br><br><br><br>
-                    <br><br><br><br>
-                </div>
-                <!-- End: Inventory Request -->
-
-                <!-- Start: Salary Request -->
-                <div class="px-5 border-2 border-solid border-gray-300 shadow-lg">
-                    <!-- Start: Header -->
-                    <div class="flex justify-between mt-5 ">
-                        <div>
-                            <h1 class="font-sans text-xl font-bold">
-                                Salary Request
-                            </h1>
-                        </div>
-                        <div>
-                            <a href="#" class="text-sm font-sans font-semibold">View All</a>
-                        </div>
-                    </div>
-                    <!-- End: Header -->
-                    <!-- Start: Search Bar -->
-                    <form action="#" method="get">
-                        <div
-                            class="mt-5 px-5 flex justify-between border-2 border-gray-200 bg-gray-200 rounded-xl transition-colors text-black">
-                            <input type="text" name="search"
-                                class="w-full pl-3 pr-10 py-2 text-black focus:outline-none bg-transparent transition-colors"
-                                placeholder="Search by ID...">
-                            <button class="block text-center text-xl">
-                                <!-- Search -->
-                                <i class="ri-search-line"></i>
-                            </button>
-
-                            <!-- <i class="ri-search-line">sdasd</i> -->
-                        </div>
-                    </form>
-                    <!-- End: Search Bar -->
-                    <br><br><br><br>
-                    <br><br><br><br>
-                    <br><br><br><br>
-                </div>
-                <!-- End: Salary Request -->
-
-            </div>
-            <!-- End: Fifth Section -->
+            
         </div>
         <!-- End: Inner Dashboard Analytics-->
 
