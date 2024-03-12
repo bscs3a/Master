@@ -42,11 +42,16 @@
 
 
   <!-- Daily Time Record -->
-  <h3 class="ml-6 mt-4 text-xl font-bold">Daily Time Record</h3>
+<div class="flex flex-wrap">
+    <h3 class="ml-6 mt-8 text-xl font-bold">Daily Time Record</h3>
+    <form action="/search" method="get" class="mt-6 ml-auto mr-4 flex">
+      <input type="search" id="search" name="q" placeholder="Search" class="w-40 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+      <button type="submit" class="ml-2 bg-blue-500 text-white px-4 py-1 rounded-md hover:bg-blue-600"><i class="ri-search-line"></i></button>
+    </form>
+  </div> 
   <div class="ml-6 flex flex-col mt-8 mr-6">
   <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-300 shadow-md sm:rounded-lg">
     <table class="min-w-full">
-      <!-- START HEADER -->
       <thead>
         <tr>
           <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
@@ -56,35 +61,39 @@
           <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
             Department</th>
           <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-            Action</th>
+            In</th>
+          <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+            Out</th>
         </tr>
       </thead>
-      <!-- END HEADER -->
         <tbody class="bg-white">
           <tr>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
               <div class="flex items-center">
                 <div class="flex-shrink-0 w-10 h-10">
                   <img class="w-10 h-10 rounded-full object-cover object-center"
-                    src="#"
+                    src="https://pbs.twimg.com/profile_images/1679743561200463872/2XNOMV6V_400x400.jpg"
                     alt="">
                 </div>
                 <div class="ml-4">
-                  <div class="text-sm font-medium leading-5 text-gray-900">Employee Name
+                  <div class="text-sm font-medium leading-5 text-gray-900">Mysta Rias
                   </div>
-                  <div class="text-sm leading-5 text-gray-500">Employee Email</div>
+                  <div class="text-sm leading-5 text-gray-500">mystarias@example.com</div>
                 </div>
               </div>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              <span class="text-sm leading-5 text-gray-900">Employee ID</span>
+              <span class="text-sm leading-5 text-gray-900">10284</span>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              <div class="text-sm leading-5 text-gray-900">Employee Position</div>
-              <div class="text-sm leading-5 text-gray-500">Employee Department</div>
+              <div class="text-sm leading-5 text-gray-900">Inventory</div>
+              <div class="text-sm leading-5 text-gray-500">Inventory Manager</div>
             </td>
-            <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
-              <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">YYYY-MM-DD HH-MM-SS</span>
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+              <span class="text-sm leading-5 text-gray-900">YYYY-MM-DD HH-MM-SS</span>
             </td>
           </tr>
         </tbody>

@@ -96,7 +96,6 @@ catch (PDOException $e) {
 <!-- end department tabs -->
 
 <!-- employees -->
-
 <div class="flex flex-wrap">
     <h3 class="ml-6 mt-8 text-xl font-bold">Employees</h3>
     <form action="/search" method="get" class="mt-6 ml-auto mr-4 flex">
