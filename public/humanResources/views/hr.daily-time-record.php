@@ -72,18 +72,18 @@
               <div class="flex items-center">
                 <div class="flex-shrink-0 w-10 h-10">
                   <img class="w-10 h-10 rounded-full object-cover object-center"
-                    src="https://pbs.twimg.com/profile_images/1679743561200463872/2XNOMV6V_400x400.jpg"
+                    src="https://pbs.twimg.com/profile_images/1669355498234318849/Kg3mWUFZ_400x400.jpg"
                     alt="">
                 </div>
                 <div class="ml-4">
-                  <div class="text-sm font-medium leading-5 text-gray-900">Mysta Rias
+                  <div class="text-sm font-medium leading-5 text-gray-900">Ike Eveland
                   </div>
-                  <div class="text-sm leading-5 text-gray-500">mystarias@example.com</div>
+                  <div class="text-sm leading-5 text-gray-500">ikey@example.com</div>
                 </div>
               </div>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              <span class="text-sm leading-5 text-gray-900">10284</span>
+              <span class="text-sm leading-5 text-gray-900">10612</span>
             </td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
               <div class="text-sm leading-5 text-gray-900">Inventory</div>
