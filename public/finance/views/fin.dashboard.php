@@ -460,78 +460,7 @@
             </div>
             <!-- End: Third Section -->
 
-            <!-- Start: Fourth Section -->
-            <div class="mt-10 mb-10">
-
-                <h1 class="font-sans font-bold text-xl">Recent Transaction</h1>
-
-                <!-- Start: Table -->
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
-                    <table class="table-auto border-collapse border-slate-50 w-full">
-                        <thead>
-                            <tr>
-                                <th
-                                    class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    ID
-                                </th>
-                                <th
-                                    class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Name
-                                </th>
-                                <th
-                                    class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Date
-                                </th>
-                                <th
-                                    class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Amount
-                                </th>
-                                <th class="px-6 py-3 bg-gray-50"></th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white" id="recent-table">
-                            <tr>
-                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900">
-                                    1
-                                </td>
-                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                                    John Doe
-                                </td>
-                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                                    01/01/2024
-                                </td>
-                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                                    $1000
-                                </td>
-                            </tr>
-                    </table>
-                    <script>
-                        var recent_table = document.getElementById('recent-table');
-
-                        for (let index = 0; index < 5; index++) {
-
-                            recent_table.innerHTML += `
-                        <tr>
-                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900">
-                                    1
-                                </td>
-                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                                    John Doe
-                                </td>
-                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                                    01/01/2024
-                                </td>
-                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                                    $1000
-                                </td> 
-                            </tr>
-                        `;
-                        }
-                    </script>
-                </div>
-                <!-- End: Table -->
-            </div>
-            <!-- End: Fourth Section -->
+          
 
             
         </div>
