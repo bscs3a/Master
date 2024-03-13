@@ -22,8 +22,6 @@ $fin = [
     '/fin/request' => $basePath . "requestInventory.php",
     '/fin/salary' => $basePath . "requestSalary.php",
     
-    //charts
-    '/fin/charts' => $basePath . "charts.php", 
 
     '/' => "C:/xampp/htdocs/Master/index.php",
     
