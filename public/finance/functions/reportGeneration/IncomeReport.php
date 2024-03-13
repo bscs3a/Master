@@ -128,7 +128,8 @@ function generate_html() {
             }
         }
         $total = getTotalOfGroup($group['grouptype']);
-        $html .= "<span>Resulting Calculation</span>&emsp;<span>{$total}</span>\n</ul>\n</li>\n";
+        $resultText = $group['grouptype'] == "IC" ? "Gross Profit" : "Total Expense";
+        $html .= "</ul>\n<span>{$resultText}</span>&emsp;<span>{$total}</span>\n</li>\n";
     }
     $netSalesOrLoss = calculateNetSalesOrLoss();
     $textSalesOrLoss = $netSalesOrLoss > 0 ? "Net Sales" : "Net Loss";
