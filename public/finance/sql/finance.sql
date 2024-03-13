@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2024 at 03:04 PM
+-- Generation Time: Mar 13, 2024 at 10:12 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -49,7 +49,7 @@ INSERT INTO `accounttype` (`AccountType`, `Description`, `grouptype`, `XactTypeC
 (6, 'Contra-Revenue', 'IC', 'DR'),
 (7, 'Direct Expense', 'EP', 'DR'),
 (8, 'Indirect Expense', 'EP', 'DR'),
-(9, 'Purchases', 'EP', 'DR');
+(9, 'Purchases', 'IC', 'DR');
 
 -- --------------------------------------------------------
 
@@ -276,8 +276,8 @@ ALTER TABLE `requestexpense`
 -- Constraints for table `accounttype`
 --
 ALTER TABLE `accounttype`
-  ADD CONSTRAINT `grp` FOREIGN KEY (`grouptype`) REFERENCES `grouptype` (`grouptype`),
-  ADD CONSTRAINT `xactcode` FOREIGN KEY (`XactTypeCode`) REFERENCES `transactiontype_de` (`XactTypeCode`);
+  ADD CONSTRAINT `grptype` FOREIGN KEY (`grouptype`) REFERENCES `grouptype` (`grouptype`),
+  ADD CONSTRAINT `xacttype` FOREIGN KEY (`XactTypeCode`) REFERENCES `transactiontype_de` (`XactTypeCode`);
 
 --
 -- Constraints for table `ledger`
