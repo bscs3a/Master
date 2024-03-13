@@ -49,7 +49,7 @@
     $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
     ?>
 
-    <script src="app.js" defer></script>
+    <script src="js/app.js" defer></script>
 </head>
 
 <body x-data="main">
@@ -193,23 +193,33 @@
 
             <!-- Add Order and Delete buttons -->
             <div class="flex justify-between px-3 py-2">
-                <button class="py-1 px-4 rounded bg-gray-100 border-2 border-gray-300">
+                <!-- <button class="py-1 px-4 rounded bg-gray-100 border-2 border-gray-300">
                     <i class="ri-add-circle-fill text-xl"></i> Add Order
-                </button>
-                <button class="py-1 px-3 rounded bg-gray-100 border-2 border-gray-300">
+                </button> -->
+                <button></button>
+                <button class="py-1 px-3 rounded bg-gray-100 border-2 border-gray-300" @click="clearCart">
                     <i class="ri-delete-bin-7-fill text-xl"></i>
                 </button>
             </div>
 
             <!-- Cart items -->
-            <div class="flex justify-between px-3 py-2 overflow-y-auto max-h-80">
+            <style>
+                tr:nth-child(even) {
+                    background: #EEEEEE
+                }
+
+                tr:nth-child(odd) {
+                    background: #FFF
+                }
+            </style>
+            <div class="flex justify-between px-3 py-2 overflow-y-auto " style="max-height: 26rem;">
                 <table class="w-full text-right p-3">
                     <tbody>
                         <!-- Cart item rows -->
                         <template x-for="(item, index) in cart" :key="index">
                             <tr class="bg-gray-100">
-                                <td class="text-left px-3 py-2 rounded-l-lg" x-text="item.quantity + ' x ' + item.name"></td>
-                                <td class="text-left border-l border-gray-400 pl-2 px-3 py-2" x-text="item.price"></td>
+                                <td class="text-left px-3 py-2 rounded-l-lg max-w-36" x-text="item.quantity + ' x ' + item.name"></td>
+                                <td class="text-left border-l border-gray-400 pl-2 px-3 py-2" x-text="'₱' + item.price"></td>
                                 <td class="px-3 py-2 rounded-r-lg">
                                     <i class="ri-close-circle-fill cursor-pointer" @click="removeFromCart(index)"></i>
                                 </td>
@@ -224,17 +234,9 @@
             <div class="absolute bottom-0 w-full">
                 <div class="py-2 px-1 ml-2 border-t">
                     <!-- Order detail rows -->
-                    <div class=" grid-cols-2 gap-4 items-center mb-2 bg-gray-100 p-4 rounded-lg shadow-md" style="display: grid;">
-                        <span class="font-bold text-base">Subtotal:</span>
-                        <span class="text-base ml-0" x-text="'&#8369;' + cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)"></span>
-                    </div>
-                    <div class="grid-cols-2 gap-4 items-center mb-2 bg-gray-100 p-4 rounded-lg shadow-md" style="display: grid;">
-                        <span class="font-bold text-base">Tax (10%):</span>
-                        <span class="text-base" x-text="'&#8369;' + (cart.reduce((total, item) => total + (item.price * item.quantity), 0) * 0.1).toFixed(2)"></span>
-                    </div>
                     <div class="grid-cols-2 gap-4 items-center mb-2 bg-gray-100 p-4 rounded-lg shadow-md" style="display: grid;">
                         <span class="font-bold text-base">Order Total:</span>
-                        <span class="text-base" x-text="'&#8369;' + (cart.reduce((total, item) => total + (item.price * item.quantity), 0) * 1.1).toFixed(2)"></span>
+                        <span class="text-base" x-text="'&#8369;' + cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)"></span>
                     </div>
                     <!-- Add more order detail rows as needed -->
                 </div>
@@ -255,7 +257,7 @@
                         <i class="ri-pause-line text-lg mr-2"></i>
                         Hold
                     </button>
-                    <button route='/sls/Checkout' class="flex items-center justify-center font-bold py-1 px-4 rounded w-1/2 border border-black shadow custom-button">
+                    <button onclick="checkout()" class="flex items-center justify-center font-bold py-1 px-4 rounded w-1/2 border border-black shadow custom-button">
                         <i class="ri-shopping-basket-2-fill mr-2"></i>
                         Proceed
                     </button>
@@ -301,6 +303,11 @@
 </body>
 
 <script>
+    function checkout() {
+        // Assuming 'cart' is an array that holds your cart items
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
     // Initialize Alpine.js data
     document.addEventListener('alpine:init', () => {
         Alpine.data('main', () => ({
@@ -323,6 +330,10 @@
             // Function to remove product from cart
             removeFromCart(index) {
                 this.cart.splice(index, 1);
+            },
+            // Function to clear the cart
+            clearCart() {
+                this.cart = [];
             }
         }));
     });

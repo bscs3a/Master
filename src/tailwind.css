@@ -1063,10 +1063,6 @@ video {
   margin-top: 2rem;
 }
 
-.-mt-12{
-  margin-top: -3rem;
-}
-
 .box-border{
   box-sizing: border-box;
 }
@@ -1405,6 +1401,10 @@ video {
 
 .max-w-2xl{
   max-width: 42rem;
+}
+
+.max-w-36{
+  max-width: 9rem;
 }
 
 .max-w-4xl{
@@ -3142,10 +3142,6 @@ video {
 
 .pt-6{
   padding-top: 1.5rem;
-}
-
-.pt-12{
-  padding-top: 3rem;
 }
 
 .text-left{
