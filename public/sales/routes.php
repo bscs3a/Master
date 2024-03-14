@@ -10,7 +10,7 @@ $sls = [
     '/sls/Transaction-Details' => "$path/sls.TransactionDetails.php",
     '/sls/Dashboard' => "$path/sls.Dashboard.php",
     '/sls/POS' => "$path/sls.POS.php",
-    '/sls/Checkout' => "$path/sls.checkout.php",
+    '/sls/POS/Checkout' => "$path/sls.checkout.php",
     '/sls/Receipt' => "$path/sls.Receipt.php",
     '/sls/Audit-Trail' => "$path/sls.AuditTrail.php",
     // ... other routes ...

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
-    <link href="./../src/tailwind.css" rel="stylesheet">
+    <link href="./../../src/tailwind.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
     <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
 </head>
@@ -56,81 +56,88 @@
                     <h1 class="mb-3 text-xl font-bold text-black">Checkout</h1>
                 </div>
                 <!-- Checkout form -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <!-- Form for delivery address and date -->
-                    <div>
-                        <label for="customerName" class="block mb-2">Customer Name:</label>
-                        <input type="text" id="customerName" name="customerName" class="w-full p-2 border border-gray-300 rounded mb-4">
+                <form route='/sls/Dashboard' method="post">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <!-- Form for delivery address and date -->
+                        <div>
+                            <label for="customerName" class="block mb-2">Customer First Name:</label>
+                            <input type="text" id="customerName" name="customerName" class="w-full p-2 border border-gray-300 rounded mb-4">
+                        </div>
+                        <div>
+                            <label for="customerName" class="block mb-2">Customer Last Name:</label>
+                            <input type="text" id="customerName" name="customerName" class="w-full p-2 border border-gray-300 rounded mb-4">
+                        </div>
+                        <div>
+                            <label for="customerEmail" class="block mb-2">Customer Email or Phone:</label>
+                            <input type="text" id="customerEmail" name="customerEmail" class="w-full p-2 border border-gray-300 rounded mb-4">
+                        </div>
+
+                        <!-- Option for delivery or pick-up -->
+                        <div class="mb-4">
+                            <label class="block mb-2 font-semibold">Delivery or Pick-up:</label>
+                            <select name="delivery-option" id="delivery-option" class="w-full p-2 border border-gray-300 rounded">
+                                <option value="delivery">Delivery</option>
+                                <option value="pick-up">Pick-up</option>
+                            </select>
+                        </div>
+
+                        <div id="delivery-details">
+                            <label for="address" class="block mb-2">Delivery Address:</label>
+                            <input type="text" id="address" name="address" class="w-full p-2 border border-gray-300 rounded mb-4">
+
+                            <label for="date" class="block mb-2">Delivery Date:</label>
+                            <input type="date" id="date" name="date" class="w-full p-2 border border-gray-300 rounded mb-4">
+                        </div>
+
+
+                        <!-- Mode of payment -->
+                        <div class="mb-4">
+                            <label class="block mb-2 font-semibold">Mode of Payment:</label>
+                            <select name="payment-mode" id="payment-mode" class="w-full p-2 border border-gray-300 rounded">
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </div>
+
+                        <div id="payment-details" style="display: none;">
+                            <label for="cardNumber" class="block mb-2">Card Number:</label>
+                            <input type="text" id="cardNumber" name="cardNumber" class="w-full p-2 border border-gray-300 rounded mb-4">
+
+                            <label for="expiryDate" class="block mb-2">Expiry Date:</label>
+                            <input type="date" id="expiryDate" name="expiryDate" class="w-full p-2 border border-gray-300 rounded mb-4">
+
+                            <label for="cvv" class="block mb-2">CVV:</label>
+                            <input type="text" id="cvv" name="cvv" class="w-full p-2 border border-gray-300 rounded mb-4">
+                        </div>
                     </div>
-                    <div>
-                        <label for="customerEmail" class="block mb-2">Customer Email or Phone:</label>
-                        <input type="text" id="customerEmail" name="customerEmail" class="w-full p-2 border border-gray-300 rounded mb-4">
+
+                    <div class="bg-white rounded-lg shadow-md p-6 mt-2">
+                        <!-- Order summary -->
+                        <div class="mb-4">
+                            <h2 class="text-xl font-semibold mb-4 text-blue-600">Order Summary</h2>
+                            <!-- Replace with dynamic content -->
+                            <ul id="order-summary" x-data="{ cart: JSON.parse(localStorage.getItem('cart')) || [], taxRate: 0.10 }" class="text-gray-700">
+                                <!-- Cart item rows -->
+                                <template x-for="(item, index) in cart" :key="index">
+                                    <li class="border-b py-4" x-text="item.quantity + ' x ' + item.name + ': ₱' + item.price * item.quantity"></li>
+                                </template>
+                                <li class="mt-4 py-2 font-semibold" x-text="'Subtotal: ₱' + cart.reduce((total, item) => total + item.price * item.quantity, 0)"></li>
+                                <li class="py-2 font-semibold" x-text="'Tax: ₱' + (cart.reduce((total, item) => total + item.price * item.quantity, 0) * taxRate).toFixed(2)"></li>
+                                <li class="py-2 font-semibold text-blue-600" x-text="'Total: ₱' + (cart.reduce((total, item) => total + item.price * item.quantity, 0) * (1 + taxRate)).toFixed(2)"></li>
+                            </ul>
+                        </div>
+                        <button type="submit" class="bg-blue-600 text-white rounded px-4 py-2 mt-4 hover:bg-blue-700">Complete Sale</button>
                     </div>
-
-                    <!-- Option for delivery or pick-up -->
-                    <div class="mb-4">
-                        <label class="block mb-2 font-semibold">Delivery or Pick-up:</label>
-                        <select name="delivery-option" id="delivery-option" class="w-full p-2 border border-gray-300 rounded">
-                            <option value="delivery">Delivery</option>
-                            <option value="pick-up">Pick-up</option>
-                        </select>
-                    </div>
-
-                    <div id="delivery-details">
-
-
-                        <label for="address" class="block mb-2">Delivery Address:</label>
-                        <input type="text" id="address" name="address" class="w-full p-2 border border-gray-300 rounded mb-4">
-
-                        <label for="date" class="block mb-2">Delivery Date:</label>
-                        <input type="date" id="date" name="date" class="w-full p-2 border border-gray-300 rounded mb-4">
-                    </div>
-
-
-                    <!-- Mode of payment -->
-                    <div class="mb-4">
-                        <label class="block mb-2 font-semibold">Mode of Payment:</label>
-                        <select name="payment-mode" id="payment-mode" class="w-full p-2 border border-gray-300 rounded">
-                            <option value="cash">Cash</option>
-                            <option value="card">Card</option>
-                        </select>
-                    </div>
-
-                    <div id="payment-details" style="display: none;">
-                        <label for="cardNumber" class="block mb-2">Card Number:</label>
-                        <input type="text" id="cardNumber" name="cardNumber" class="w-full p-2 border border-gray-300 rounded mb-4">
-
-                        <label for="expiryDate" class="block mb-2">Expiry Date:</label>
-                        <input type="date" id="expiryDate" name="expiryDate" class="w-full p-2 border border-gray-300 rounded mb-4">
-
-                        <label for="cvv" class="block mb-2">CVV:</label>
-                        <input type="text" id="cvv" name="cvv" class="w-full p-2 border border-gray-300 rounded mb-4">
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-md p-6 mt-2">
-                    <!-- Order summary -->
-                    <div class="mb-4">
-                        <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
-                        <!-- Replace with dynamic content -->
-                        <ul id="order-summary" x-data="{ cart: window.cart }">
-                            <!-- Cart item rows -->
-                            <template x-for="(item, index) in cart" :key="index">
-                                <li x-text="item.quantity + ' x ' + item.name + ': ₱' + item.price * item.quantity"></li>
-                            </template>
-                        </ul>
-                        <h2 class="text-xl font-semibold mb-4 mt-6" x-text="'Total: ₱' + cart.reduce((total, item) => total + item.price * item.quantity, 0)"></h2>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-        window.cart = JSON.parse(localStorage.getItem('cart') || '[]');
-        // Ensure cart items are properly displayed in the HTML
-    });
+            window.cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            // Ensure cart items are properly displayed in the HTML
+        });
 
         window.onload = function() {
             var deliveryOption = document.getElementById('delivery-option');
@@ -166,7 +173,7 @@
             document.getElementById('mainContent').classList.toggle('md:ml-64');
         });
     </script>
-    <script src="./../src/route.js"></script>
+    <script src="./../../src/route.js"></script>
 </body>
 
 </html>

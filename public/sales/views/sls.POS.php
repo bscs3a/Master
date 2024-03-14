@@ -257,7 +257,7 @@
                         <i class="ri-pause-line text-lg mr-2"></i>
                         Hold
                     </button>
-                    <button onclick="checkout()" class="flex items-center justify-center font-bold py-1 px-4 rounded w-1/2 border border-black shadow custom-button">
+                    <button route='/sls/POS/Checkout' class="flex items-center justify-center font-bold py-1 px-4 rounded w-1/2 border border-black shadow custom-button">
                         <i class="ri-shopping-basket-2-fill mr-2"></i>
                         Proceed
                     </button>
@@ -303,10 +303,6 @@
 </body>
 
 <script>
-    function checkout() {
-        // Assuming 'cart' is an array that holds your cart items
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
 
     // Initialize Alpine.js data
     document.addEventListener('alpine:init', () => {
@@ -314,6 +310,15 @@
             sidebarOpen: true,
             cartOpen: false,
             isFullScreen: false,
+
+            // Load the cart items from localStorage when the page loads
+            init() {
+                let savedCart = localStorage.getItem('cart');
+                if (savedCart) {
+                    this.cart = JSON.parse(savedCart);
+                }
+            },
+
             cart: [],
             // Function to add product to cart
             addToCart(product) {
@@ -326,14 +331,19 @@
                         quantity: 1
                     });
                 }
+
+                // Save the cart items to localStorage
+                localStorage.setItem('cart', JSON.stringify(this.cart));
             },
             // Function to remove product from cart
             removeFromCart(index) {
                 this.cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(this.cart));
             },
             // Function to clear the cart
             clearCart() {
                 this.cart = [];
+                localStorage.setItem('cart', JSON.stringify(this.cart));
             }
         }));
     });

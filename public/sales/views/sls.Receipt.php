@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link href="./../src/tailwind.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
 </head>
+
 <body>
     <?php include "components/sidebar.php" ?>
 
@@ -29,17 +31,38 @@
                 <!-- Add receipt details here -->
                 <div id="receipt" class="bg-white rounded-lg shadow-md p-6">
                     <h2 class="text-xl font-semibold mb-4">Purchased Items</h2>
-                    <ul>
-                        <!-- Replace with dynamic content -->
-                        <li>Item 1: $10</li>
-                        <li>Item 2: $20</li>
-                        <li>Item 3: $30</li>
+                    <ul id="cart-items">
+                        <!-- Cart items will be added here by JavaScript -->
                     </ul>
-                    <h2 class="text-xl font-semibold mb-4 mt-6">Total: $60</h2>
+                    <h2 id="total" class="text-xl font-semibold mb-4 mt-6"></h2>
                 </div>
                 <button class="print-button mt-4 bg-blue-500 text-white py-2 px-4 rounded">Print Receipt</button>
             </div>
         </div>
+
+        <script>
+            // Get the cart items from localStorage
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Get the cart items element
+            var cartItemsElement = document.getElementById('cart-items');
+
+            // Add each cart item to the cart items element
+            for (var i = 0; i < cart.length; i++) {
+                var item = cart[i];
+                var li = document.createElement('li');
+                li.textContent = item.quantity + ' x ' + item.name + ': ₱' + item.price * item.quantity;
+                cartItemsElement.appendChild(li);
+            }
+
+            // Calculate the total price
+            var total = cart.reduce(function(total, item) {
+                return total + item.price * item.quantity;
+            }, 0);
+
+            // Display the total price
+            document.getElementById('total').textContent = 'Total: ₱' + total;
+        </script>
     </main>
 
     <script>
@@ -52,21 +75,22 @@
         });
     </script>
 
-<script>
-function printReceipt() {
-    var receipt = document.getElementById('receipt').innerHTML;
-    var originalContent = document.body.innerHTML;
+    <script>
+        function printReceipt() {
+            var receipt = document.getElementById('receipt').innerHTML;
+            var originalContent = document.body.innerHTML;
 
-    document.body.innerHTML = receipt;
+            document.body.innerHTML = receipt;
 
-    window.print();
+            window.print();
 
-    document.body.innerHTML = originalContent;
-}
+            document.body.innerHTML = originalContent;
+        }
 
-document.querySelector('.print-button').addEventListener('click', printReceipt);
-</script>
+        document.querySelector('.print-button').addEventListener('click', printReceipt);
+    </script>
 
     <script src="./../src/route.js"></script>
 </body>
+
 </html>
