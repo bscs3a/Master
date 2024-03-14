@@ -4,7 +4,7 @@
 // php -r "require 'public\finance\functions\functionTesting.php';"  
 // php -r "require 'public\finance\views\test.php';'
 
-require_once "assets/foo.php";
+require_once '../../../src/dbconn.php';
 
 $db = Database::getInstance();
 $conn = $db->connect();
