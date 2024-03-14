@@ -1,6 +1,6 @@
 -- Products Table
 CREATE TABLE IF NOT EXISTS Products (
-    ProductID INT PRIMARY KEY,
+    ProductID INT AUTO_INCREMENT PRIMARY KEY,
     ProductName VARCHAR(255),
     Description TEXT,
     Category VARCHAR(100),
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS Products (
 
 -- Customers Table
 CREATE TABLE IF NOT EXISTS Customers (
-    CustomerID INT PRIMARY KEY,
+    CustomerID INT AUTO_INCREMENT PRIMARY KEY,
     FirstName VARCHAR(100),
     LastName VARCHAR(100),
     Address TEXT,
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS Customers (
 
 -- Employees Table
 CREATE TABLE IF NOT EXISTS Employees (
-    EmployeeID INT PRIMARY KEY,
+    EmployeeID INT AUTO_INCREMENT PRIMARY KEY,
     FirstName VARCHAR(100),
     LastName VARCHAR(100),
     Position VARCHAR(100),
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS Employees (
 
 -- Orders Table with DeliveryDate column
 CREATE TABLE IF NOT EXISTS Orders (
-    OrderID INT PRIMARY KEY,
+    OrderID INT AUTO_INCREMENT PRIMARY KEY,
     OrderDate DATE,
     DeliveryDate DATE, 
     TotalAmount DECIMAL(10, 2),
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS Orders (
 
 -- OrderDetails Table
 CREATE TABLE IF NOT EXISTS OrderDetails (
-    OrderDetailID INT PRIMARY KEY,
+    OrderDetailID INT AUTO_INCREMENT PRIMARY KEY,
     OrderID INT,
     ProductID INT,
     Quantity INT,
