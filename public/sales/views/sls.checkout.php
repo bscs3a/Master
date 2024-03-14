@@ -8,6 +8,49 @@
     <link href="./../../src/tailwind.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
     <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
+
+    <?php
+    // Database connection
+    $host = 'localhost';
+    $db   = 'sales';
+    $user = 'root';
+    $pass = '';
+    $charset = 'utf8mb4';
+
+    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+    $pdo = new PDO($dsn, $user, $pass);
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Get the form data from the POST request
+        $customerFirstName = $_POST["customerFirstName"];
+        $customerLastName = $_POST["customerLastName"];
+        $customerEmail = $_POST["customerEmail"];
+        $deliveryOption = $_POST["delivery-option"];
+        $address = $_POST["address"];
+        $date = $_POST["date"];
+        $paymentMode = $_POST["payment-mode"];
+        $cardNumber = $_POST["cardNumber"];
+        $expiryDate = $_POST["expiryDate"];
+        $cvv = $_POST["cvv"];
+
+        // Insert the customer data into the Customers table
+        $sql = "INSERT INTO Customers (FirstName, LastName, Email, Address, Phone) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$customerFirstName, $customerLastName, $customerEmail, $address, $customerEmail]);
+
+        // Get the ID of the last inserted customer
+        $customerID = $pdo->lastInsertId();
+
+        // Insert the order data into the Orders table
+        $sql = "INSERT INTO Orders (OrderDate, DeliveryDate, TotalAmount, CustomerID) VALUES (NOW(), ?, ?, ?)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$date, $_POST["totalAmount"], $customerID]);
+
+        // Redirect to the receipt page
+        header('Location: sls.Receipt.php');
+        exit;
+    }
+    ?>
 </head>
 
 <body>
@@ -56,7 +99,7 @@
                     <h1 class="mb-3 text-xl font-bold text-black">Checkout</h1>
                 </div>
                 <!-- Checkout form -->
-                <form route='/sls/Dashboard' method="post">
+                <form method="POST">
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <!-- Form for delivery address and date -->
                         <div>
@@ -129,6 +172,7 @@
                         <button type="submit" class="bg-blue-600 text-white rounded px-4 py-2 mt-4 hover:bg-blue-700">Complete Sale</button>
                     </div>
                 </form>
+
             </div>
         </div>
     </main>

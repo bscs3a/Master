@@ -21,6 +21,6 @@ $stmt->bindParam(':customerEmail', $_POST['customerEmail']);
 $stmt->execute();
 
 // Redirect the user to the receipt page
-header("Location: receipt.php");
+header("Location: sls.receipt.php");
 exit();
 ?>
