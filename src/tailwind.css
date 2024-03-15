@@ -903,11 +903,6 @@ video {
   margin-bottom: 1.25rem;
 }
 
-.my-auto{
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
 .-mb-px{
   margin-bottom: -1px;
 }
@@ -1278,14 +1273,6 @@ video {
 
 .h-screen{
   height: 100vh;
-}
-
-.h-3\/5{
-  height: 60%;
-}
-
-.h-4\/5{
-  height: 80%;
 }
 
 .min-h-\[80vh\]{
@@ -2881,7 +2868,26 @@ video {
   background-color: rgb(228 228 231 / var(--tw-bg-opacity));
 }
 
+.bg-opacity-50{
+  --tw-bg-opacity: 0.5;
+}
 
+.bg-gradient-to-b{
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+}
+
+.bg-request-money{
+  background-image: url('../public/finance/img/RequestMoney.png');
+}
+
+.bg-wave{
+  background-image: url('../public/finance/img/wave.png');
+}
+
+.from-\[\#F8B721\]{
+  --tw-gradient-from: #F8B721 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(248 183 33 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
 .to-\[\#FBCF68\]{
@@ -4127,11 +4133,6 @@ video {
 .hover\:bg-violet-300:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(196 181 253 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-white:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-yellow-500:hover{

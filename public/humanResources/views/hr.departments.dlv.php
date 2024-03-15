@@ -1,7 +1,9 @@
 <?php
 try {
-  require_once 'dbconn-test.php';
-
+  require_once './src/dbconn.php';
+  $db = Database::getInstance();
+  $conn = $db->connect();
+  
   $query = "SELECT * FROM employees WHERE department = 'Delivery';";
   $stmt = $conn->prepare($query);
   $stmt->execute();

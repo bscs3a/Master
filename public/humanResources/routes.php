@@ -14,6 +14,8 @@ $hr = [
     '/hr/employees/update' => $basePath . "employees.add.php",
     '/hr/employees/profile' => $basePath . "employees.profile.php",
 
+    '/hr/test' => $basePath . "test-add.php",
+
     // departments
     '/hr/employees/departments' => $basePath . "departments.php", // 'departments.php
     '/hr/employees/departments/product-order' => $basePath . "departments.PO.php", // 'departments.PO.php

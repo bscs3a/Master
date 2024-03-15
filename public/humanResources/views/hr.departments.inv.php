@@ -1,26 +1,8 @@
 <?php
-// try {
-//   require_once 'dbconn-test.php';
-
-//   $query = "SELECT * FROM employees WHERE department = 'Inventory';";
-//   $stmt = $conn->prepare($query);
-//   $stmt->execute();
-//   $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-//   if (empty($employees)) {
-//     echo 'No results found.';
-// }
-
-//   $pdo = null;
-//   $stmt = null;
-// }
-// catch (PDOException $e) {
-//     echo 'Database connection failed: ' . $e->getMessage();
-// }
 try {
-  require_once 'dbconn-test.php';
-  // require_once 'dbconnection.php';
-
+  require_once './src/dbconn.php';
+  $db = Database::getInstance();
+  $conn = $db->connect();
   $search = $_POST['search'] ?? '';
 
   if ($search) {
