@@ -114,7 +114,7 @@
             <?php foreach ($categories as $category) : ?>
                 <div class="text-xl font-bold divide-y ml-3 mt-5"><?= $category ?></div> <!-- Display category name -->
                 <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                <div id="grid" x-bind:class="cartOpen ? 'grid grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? 'grid grid-cols-6 gap-4' : (!cartOpen && !sidebarOpen) ? 'grid grid-cols-5 gap-4' : 'grid grid-cols-5 gap-4'">
+                <div id="grid" x-bind:class="cartOpen ? 'grid grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? 'grid grid-cols-5 gap-4' : (!cartOpen && !sidebarOpen) ? 'grid grid-cols-5 gap-4' : 'grid grid-cols-5 gap-4'">
                     <?php foreach ($products as $product) : ?>
                         <?php if ($product['Category'] === $category) : ?> <!-- Show products only for the current category -->
                             <div class="w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg">
