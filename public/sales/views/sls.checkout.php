@@ -10,35 +10,29 @@
     <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
 
     <?php
-    // Database connection
-    $host = 'localhost';
-    $db   = 'sales';
-    $user = 'root';
-    $pass = '';
-    $charset = 'utf8mb4';
-
-    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-    $pdo = new PDO($dsn, $user, $pass);
+    require_once 'function/insertCheckoutInfo.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Get the form data from the POST request
-        $customerFirstName = $_POST["customerFirstName"];
-        $customerLastName = $_POST["customerLastName"];
-        $customerEmail = $_POST["customerEmail"];
-        $customerPhone = $_POST["customerPhone"];
-        $address = $_POST["address"];
+        $customerInfo = [
+            'firstName' => $_POST['customerFirstName'],
+            'lastName' => $_POST['customerLastName'],
+            'address' => $_POST['address'],
+            'phone' => $_POST['customerPhone'],
+            'email' => $_POST['customerEmail']
+        ];
 
-        // Insert data into the Customers table
-        $sql = "INSERT INTO Customers (FirstName, LastName, Email, Phone, Address) VALUES (?, ?, ?, ?, ?)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$customerFirstName, $customerLastName, $customerEmail, $customerPhone, $address]);
+        $orderInfo = [
+            'orderDate' => date('Y-m-d'),
+            'deliveryDate' => $_POST['date'],
+            'totalAmount' => $_POST['totalAmount'],
+            'employeeId' => $_SESSION['employeeId']
+        ];
 
-        // Redirect to the receipt page
-        header('Location: sls.Receipt.php');
-        exit;
+        $orderDetails = $_SESSION['cart'];
+
+        insertCheckoutInfo($customerInfo, $orderInfo, $orderDetails);
     }
     ?>
-
 </head>
 
 <body>
@@ -87,15 +81,16 @@
                     <h1 class="mb-3 text-xl font-bold text-black">Checkout</h1>
                 </div>
                 <!-- Checkout form -->
+                <form method="POST" action="">
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <!-- Form for delivery address and date -->
                         <div>
-                            <label for="customerName" class="block mb-2">Customer First Name:</label>
-                            <input type="text" id="customerName" name="customerName" class="w-full p-2 border border-gray-300 rounded mb-4">
+                            <label for="customerFirstName" class="block mb-2">Customer First Name:</label>
+                            <input type="text" id="customerFirstName" name="customerFirstName" class="w-full p-2 border border-gray-300 rounded mb-4">
                         </div>
                         <div>
-                            <label for="customerName" class="block mb-2">Customer Last Name:</label>
-                            <input type="text" id="customerName" name="customerName" class="w-full p-2 border border-gray-300 rounded mb-4">
+                            <label for="customerLastName" class="block mb-2">Customer Last Name:</label>
+                            <input type="text" id="customerLastName" name="customerLastName" class="w-full p-2 border border-gray-300 rounded mb-4">
                         </div>
                         <div>
                             <label for="customerEmail" class="block mb-2">Customer Email:</label>
@@ -160,9 +155,9 @@
                                 <li class="py-2 font-semibold text-blue-600" x-text="'Total: ₱' + (cart.reduce((total, item) => total + item.price * item.quantity, 0) * (1 + taxRate)).toFixed(2)"></li>
                             </ul>
                         </div>
-                        <button route='/sls/Receipt' class="bg-blue-600 text-white rounded px-4 py-2 mt-4 hover:bg-blue-700">Complete Sale</button>
+                        <button type="submit" class="bg-blue-600 text-white rounded px-4 py-2 mt-4 hover:bg-blue-700">Complete Sale</button>
                     </div>
-                
+                </form>
             </div>
         </div>
     </main>

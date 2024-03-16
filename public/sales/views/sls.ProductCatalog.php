@@ -24,21 +24,11 @@
     </style>
 
     <?php
-    require_once './src/dbconn.php';
+    require_once 'function/getProducts.php';
 
-    // Get PDO instance
-    $database = Database::getInstance();
-    $pdo = $database->connect();
-
-    // Query for products
-    $sqlProducts = "SELECT * FROM products";
-    $stmtProducts = $pdo->query($sqlProducts);
-    $products = $stmtProducts->fetchAll(PDO::FETCH_ASSOC);
-
-    // Query for categories
-    $sqlCategories = "SELECT DISTINCT Category FROM products";
-    $stmtCategories = $pdo->query($sqlCategories);
-    $categories = $stmtCategories->fetchAll(PDO::FETCH_COLUMN);
+    $data = getProductsAndCategories();
+    $products = $data['products'];
+    $categories = $data['categories'];
     ?>
 
 </head>
