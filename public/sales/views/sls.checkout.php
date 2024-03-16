@@ -39,6 +39,12 @@
     }
     ?>
 
+<style>
+        ::-webkit-scrollbar{
+            display: none;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -82,12 +88,54 @@
 
         <!-- End: Header -->
         <div class="flex flex-col items-center min-h-screen">
-            <div class="w-full max-w-6xl mt-10">
-                <div class="flex justify-between items-center">
+            <div class="w-full max-w-6xl">
+                <!-- <div class="flex justify-between items-center">
                     <h1 class="mb-3 text-xl font-bold text-black">Checkout</h1>
-                </div>
+                </div> -->
                 <!-- Checkout form -->
-                    <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex flex-row gap-6 mt-10">
+                  
+                <div class="bg-white rounded-lg p-6 w-1/2">
+    <!-- Order summary -->
+                <div class="mb-4">
+                    <h2 class="text-xl font-medium mb-6 text-gray-500">Order Summary</h2>
+                    <div class="text-6xl font-medium mb-10">₱123</div>
+                    <!-- Replace with dynamic content -->
+                    <ul id="order-summary" x-data="{ cart: JSON.parse(localStorage.getItem('cart')) || [], taxRate: 0.10 }" class="text-gray-700">
+                        <!-- Cart item rows -->
+                        <template x-for="(item, index) in cart" :key="index">
+                            <li class="py-4 flex justify-between items-center">
+                                <div class="flex">
+                                <img class="h-10 w-10 mr-6" :src="" :alt="item.name">
+                                <span x-text="item.quantity + ' x ' + item.name"></span>
+                                </div>
+                                <span x-text="'₱' + (item.price * item.quantity).toFixed(2)"></span>
+                            </li>
+                        </template>
+                        <div class="ml-16">
+                        <li class="mt-4 pb-4 pt-6 font-semibold border-t border-b mb-4 flex justify-between">
+                            <span x-text="'Subtotal:'"></span>
+                            <span x-text="'₱' + cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2) "></span>
+
+                        </li>
+                        <li class="py-2 pb-4 text-gray-500 font-medium border-b mb-4 flex justify-between">
+                            <span x-text="'Tax:'"></span>
+                            <span x-text="'₱' + (cart.reduce((total, item) => total + item.price * item.quantity, 0) * taxRate).toFixed(2)"></span>
+
+                        </li>
+                        <li class="py-4 font-semibold  text-green-800 flex justify-between">
+                            <span x-text="'Total:'"></span>
+                            <span x-text="'₱' + (cart.reduce((total, item) => total + item.price * item.quantity, 0) * (1 + taxRate)).toFixed(2)"></span>
+
+                        </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+
+
+                    <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 w-1/2">
+                        <div class="font-medium text-xl mb-4 text-gray-500 border-b pb-2">Shipping Information</div>
                         <!-- Form for delivery address and date -->
                         <div>
                             <label for="customerName" class="block mb-2">Customer First Name:</label>
@@ -109,7 +157,7 @@
                         <!-- Option for delivery or pick-up -->
                         <div class="mb-4">
                             <label class="block mb-2 font-semibold">Delivery or Pick-up:</label>
-                            <select name="delivery-option" id="delivery-option" class="w-full p-2 border border-gray-300 rounded">
+                            <select name="delivery-option" id="delivery-option" class="cursor-pointer w-full p-2 border border-gray-300 rounded">
                                 <option value="delivery">Delivery</option>
                                 <option value="pick-up">Pick-up</option>
                             </select>
@@ -128,41 +176,29 @@
                         <div class="mb-4">
                             <label class="block mb-2 font-semibold">Mode of Payment:</label>
                             <select name="payment-mode" id="payment-mode" class="w-full p-2 border border-gray-300 rounded">
-                                <option value="cash">Cash</option>
-                                <option value="card">Card</option>
+                            <option value="card">Card</option>
+                            <option value="cash">Cash</option>
                             </select>
                         </div>
 
-                        <div id="payment-details" style="display: none;">
-                            <label for="cardNumber" class="block mb-2">Card Number:</label>
-                            <input type="text" id="cardNumber" name="cardNumber" class="w-full p-2 border border-gray-300 rounded mb-4">
-
-                            <label for="expiryDate" class="block mb-2">Expiry Date:</label>
-                            <input type="date" id="expiryDate" name="expiryDate" class="w-full p-2 border border-gray-300 rounded mb-4">
-
-                            <label for="cvv" class="block mb-2">CVV:</label>
-                            <input type="text" id="cvv" name="cvv" class="w-full p-2 border border-gray-300 rounded mb-4">
+                        <div id="payment-details" class="grid grid-rows-2 p-4 rounded-md shadow-inner bg-gray-200">
+                            <div class="w-full">
+                            <input type="text" id="cardNumber" name="cardNumber" placeholder="Card Number" class="w-full p-4 border border-gray-300 rounded">
+                            </div>
+                            <div class="grid grid-cols-2">
+                            <div>
+                            <input type="" id="expiryDate" name="expiryDate" placeholder="MM/DD/YYYY" class="text-gray-200 w-full p-4 border border-gray-300 rounded ">
+                            </div>
+                            <div>
+                            <input type="text" id="cvv" name="cvv" placeholder="CVC" class="w-full p-4 border border-gray-300 rounded">
+                            </div>
+                            </div>
                         </div>
+                        <button route='/sls/Receipt' class="bg-green-800 text-white rounded px-4 py-2 mt-4 w-full hover:bg-gray-200 hover:text-green-800 hover:font-bold transition-colors ease-in-out">Complete Sale</button>
                     </div>
 
-                    <div class="bg-white rounded-lg shadow-md p-6 mt-2">
-                        <!-- Order summary -->
-                        <div class="mb-4">
-                            <h2 class="text-xl font-semibold mb-4 text-blue-600">Order Summary</h2>
-                            <!-- Replace with dynamic content -->
-                            <ul id="order-summary" x-data="{ cart: JSON.parse(localStorage.getItem('cart')) || [], taxRate: 0.10 }" class="text-gray-700">
-                                <!-- Cart item rows -->
-                                <template x-for="(item, index) in cart" :key="index">
-                                    <li class="border-b py-4" x-text="item.quantity + ' x ' + item.name + ': ₱' + item.price * item.quantity"></li>
-                                </template>
-                                <li class="mt-4 py-2 font-semibold" x-text="'Subtotal: ₱' + cart.reduce((total, item) => total + item.price * item.quantity, 0)"></li>
-                                <li class="py-2 font-semibold" x-text="'Tax: ₱' + (cart.reduce((total, item) => total + item.price * item.quantity, 0) * taxRate).toFixed(2)"></li>
-                                <li class="py-2 font-semibold text-blue-600" x-text="'Total: ₱' + (cart.reduce((total, item) => total + item.price * item.quantity, 0) * (1 + taxRate)).toFixed(2)"></li>
-                            </ul>
-                        </div>
-                        <button route='/sls/Receipt' class="bg-blue-600 text-white rounded px-4 py-2 mt-4 hover:bg-blue-700">Complete Sale</button>
-                    </div>
-                
+
+                </div>
             </div>
         </div>
     </main>
