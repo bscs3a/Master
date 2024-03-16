@@ -87,13 +87,16 @@
                                 <div class="flex justify-between mb-4">
                                     <div>
                                         <div class="flex items-center mb-1">
-                                            <div class="text-2xl font-semibold">0</div>
+                                            <div class="text-2xl font-semibold text-[#F8B721]">0</div>
                                         </div>
                                         <div class="text-sm font-medium text-gray-400">Total Sales</div>
                                     </div>
                                     <div>
+                                    <!-- /home/r0khai/website/htdocs/Master/public/finance/img/Profit.png -->
                                         <!-- <i class="ri-file-text-line mr-3 text-4xl"></i> -->
-                                        <i class="ri-funds-box-line text-4xl"></i>
+                                        <!-- <span class="bg-profit"></span> -->
+                                        <!-- <i class="bg-profit bg-contain bg-no-repeat text-black"></i> -->
+                                        <img src="../public/finance/img/Profit.png" alt="Profit.png" class="bg-radial-gradient from-[#FFEB95] to-[#FECE01] py-2 px-2 rounded-full">
                                         <!-- <img src="Profit.jpg" alt="Profit.png"> -->
                                     </div>
                                 </div>
@@ -104,12 +107,13 @@
                                 <div class="flex justify-between mb-4">
                                     <div>
                                         <div class="flex items-center mb-1">
-                                            <div class="text-2xl font-semibold">0</div>
+                                            <div class="text-2xl font-semibold text-[#F8B721]">0</div>
                                         </div>
                                         <div class="text-sm font-medium text-gray-400">Total Expense</div>
                                     </div>
                                     <div>
-                                        <i class="ri-exchange-funds-line text-4xl"></i>
+                                        <!-- <i class="ri-exchange-funds-line text-4xl"></i> -->
+                                        <img src="../public/finance/img/RequestMoney.png" alt="request-money.png"  class="bg-radial-gradient from-[#FFEB95] to-[#FECE01] py-2 px-1 rounded-full ">
                                     </div>
                                 </div>
                             </div>

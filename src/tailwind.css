@@ -2876,6 +2876,14 @@ video {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
 
+.bg-profit{
+  background-image: url('../public/finance/img/Profit.png');
+}
+
+.bg-radial-gradient{
+  background-image: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
 .bg-request-money{
   background-image: url('../public/finance/img/RequestMoney.png');
 }
@@ -2890,8 +2898,18 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
+.from-\[\#FFEB95\]{
+  --tw-gradient-from: #FFEB95 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(255 235 149 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .to-\[\#FBCF68\]{
   --tw-gradient-to: #FBCF68 var(--tw-gradient-to-position);
+}
+
+.to-\[\#FECE01\]{
+  --tw-gradient-to: #FECE01 var(--tw-gradient-to-position);
 }
 
 .decoration-slice{
@@ -2912,6 +2930,10 @@ video {
 .box-decoration-clone{
   -webkit-box-decoration-break: clone;
           box-decoration-break: clone;
+}
+
+.bg-contain{
+  background-size: contain;
 }
 
 .bg-cover{
@@ -3972,6 +3994,15 @@ video {
 
 .forced-color-adjust-none{
   forced-color-adjust: none;
+}
+
+.hide-scrollbar{
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar{
+  display: none;
 }
 
 .\!\[a-zA-Z\:_\]{

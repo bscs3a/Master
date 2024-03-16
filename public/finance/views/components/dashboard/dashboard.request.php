@@ -19,7 +19,7 @@
         </div>
         <!-- End: Header -->
         <!-- Start: Tab -->
-        <div class="flex justify-stretch">
+        <div class="flex justify-stretch overflow-x-auto hide-scrollbar">
             <button
                 class="flex-grow px-10 py-2 font-xl font-semibold text-[#F8B721] border-b-2 border-[#F8B721] focus:outline-none">All</button>
             <button
