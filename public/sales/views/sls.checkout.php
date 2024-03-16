@@ -33,13 +33,11 @@
         insertCheckoutInfo($customerInfo, $orderInfo, $orderDetails);
     }
     ?>
-    <<<<<<< HEAD=======<style>
-        ::-webkit-scrollbar{
-        display: none;
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
         }
-        </style>
-
-        >>>>>>> ReyBackup
+    </style>
 </head>
 
 <body>
@@ -129,7 +127,7 @@
                     </div>
 
 
-                    <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 w-1/2">
+                    <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 w-1/2 h-full">
                         <div class="font-medium text-xl mb-4 text-gray-500 border-b pb-2">Shipping Information</div>
                         <!-- Form for delivery address and date -->
                         <div>
