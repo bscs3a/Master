@@ -7,6 +7,37 @@
     <title>Receipt</title>
     <link href="./../src/tailwind.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
+
+    <?php
+    // Database connection
+    $host = 'localhost';
+    $db   = 'sales';
+    $user = 'root';
+    $pass = '';
+    $charset = 'utf8mb4';
+
+    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+    $pdo = new PDO($dsn, $user, $pass);
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Get the form data from the POST request
+        $customerFirstName = $_POST["customerFirstName"];
+        $customerLastName = $_POST["customerLastName"];
+        $customerEmail = $_POST["customerEmail"];
+        $customerPhone = $_POST["customerPhone"];
+        $address = $_POST["address"];
+
+        // Insert data into the Customers table
+        $sql = "INSERT INTO Customers (FirstName, LastName, Email, Phone, Address) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$customerFirstName, $customerLastName, $customerEmail, $customerPhone, $address]);
+
+        // Redirect to the receipt page
+        header('Location: sls.Receipt.php');
+        exit;
+    }
+    ?>
+
 </head>
 
 <body>

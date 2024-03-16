@@ -25,32 +25,20 @@
         $customerFirstName = $_POST["customerFirstName"];
         $customerLastName = $_POST["customerLastName"];
         $customerEmail = $_POST["customerEmail"];
-        $deliveryOption = $_POST["delivery-option"];
+        $customerPhone = $_POST["customerPhone"];
         $address = $_POST["address"];
-        $date = $_POST["date"];
-        $paymentMode = $_POST["payment-mode"];
-        $cardNumber = $_POST["cardNumber"];
-        $expiryDate = $_POST["expiryDate"];
-        $cvv = $_POST["cvv"];
 
-        // Insert the customer data into the Customers table
-        $sql = "INSERT INTO Customers (FirstName, LastName, Email, Address, Phone) VALUES (?, ?, ?, ?, ?)";
+        // Insert data into the Customers table
+        $sql = "INSERT INTO Customers (FirstName, LastName, Email, Phone, Address) VALUES (?, ?, ?, ?, ?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$customerFirstName, $customerLastName, $customerEmail, $address, $customerEmail]);
-
-        // Get the ID of the last inserted customer
-        $customerID = $pdo->lastInsertId();
-
-        // Insert the order data into the Orders table
-        $sql = "INSERT INTO Orders (OrderDate, DeliveryDate, TotalAmount, CustomerID) VALUES (NOW(), ?, ?, ?)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$date, $_POST["totalAmount"], $customerID]);
+        $stmt->execute([$customerFirstName, $customerLastName, $customerEmail, $customerPhone, $address]);
 
         // Redirect to the receipt page
         header('Location: sls.Receipt.php');
         exit;
     }
     ?>
+
 </head>
 
 <body>
@@ -99,7 +87,6 @@
                     <h1 class="mb-3 text-xl font-bold text-black">Checkout</h1>
                 </div>
                 <!-- Checkout form -->
-                <form method="POST">
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <!-- Form for delivery address and date -->
                         <div>
@@ -111,8 +98,12 @@
                             <input type="text" id="customerName" name="customerName" class="w-full p-2 border border-gray-300 rounded mb-4">
                         </div>
                         <div>
-                            <label for="customerEmail" class="block mb-2">Customer Email or Phone:</label>
-                            <input type="text" id="customerEmail" name="customerEmail" class="w-full p-2 border border-gray-300 rounded mb-4">
+                            <label for="customerEmail" class="block mb-2">Customer Email:</label>
+                            <input type="email" id="customerEmail" name="customerEmail" class="w-full p-2 border border-gray-300 rounded mb-4">
+                        </div>
+                        <div>
+                            <label for="customerPhone" class="block mb-2">Customer Phone:</label>
+                            <input type="tel" id="customerPhone" name="customerPhone" class="w-full p-2 border border-gray-300 rounded mb-4">
                         </div>
 
                         <!-- Option for delivery or pick-up -->
@@ -169,10 +160,9 @@
                                 <li class="py-2 font-semibold text-blue-600" x-text="'Total: ₱' + (cart.reduce((total, item) => total + item.price * item.quantity, 0) * (1 + taxRate)).toFixed(2)"></li>
                             </ul>
                         </div>
-                        <button type="submit" class="bg-blue-600 text-white rounded px-4 py-2 mt-4 hover:bg-blue-700">Complete Sale</button>
+                        <button route='/sls/Receipt' class="bg-blue-600 text-white rounded px-4 py-2 mt-4 hover:bg-blue-700">Complete Sale</button>
                     </div>
-                </form>
-
+                
             </div>
         </div>
     </main>
