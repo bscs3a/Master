@@ -9,30 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
     <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
 
-    <?php
-    require_once 'function/insertCheckoutInfo.php';
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $customerInfo = [
-            'firstName' => $_POST['customerFirstName'],
-            'lastName' => $_POST['customerLastName'],
-            'address' => $_POST['address'],
-            'phone' => $_POST['customerPhone'],
-            'email' => $_POST['customerEmail']
-        ];
 
-        $orderInfo = [
-            'orderDate' => date('Y-m-d'),
-            'deliveryDate' => $_POST['date'],
-            'totalAmount' => $_POST['totalAmount'],
-            'employeeId' => $_SESSION['employeeId']
-        ];
-
-        $orderDetails = $_SESSION['cart'];
-
-        insertCheckoutInfo($customerInfo, $orderInfo, $orderDetails);
-    }
-    ?>
     <style>
         ::-webkit-scrollbar {
             display: none;
@@ -102,7 +80,7 @@
                                             <img class="h-10 w-10 mr-6" :src="" :alt="item.name">
                                             <span x-text="item.quantity + ' x ' + item.name"></span>
                                         </div>
-                                        <span x-text="'₱' + (item.price * item.quantity).toFixed(2)"></span>
+                                        <span x-text="'₱' + (item.priceWithTax * item.quantity).toFixed(2)"></span>
                                     </li>
                                 </template>
                                 <div class="ml-16">
@@ -118,8 +96,7 @@
                                     </li>
                                     <li class="py-4 font-semibold  text-green-800 flex justify-between">
                                         <span x-text="'Total:'"></span>
-                                        <span x-text="'₱' + (cart.reduce((total, item) => total + item.price * item.quantity, 0) * (1 + taxRate)).toFixed(2)"></span>
-
+                                        <span x-text="'₱' + cart.reduce((total, item) => total + item.priceWithTax * item.quantity, 0).toFixed(2)"></span>
                                     </li>
                                 </div>
                             </ul>

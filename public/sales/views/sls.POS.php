@@ -240,6 +240,15 @@
                     background: #FFF
                 }
             </style>
+
+            <script>
+                // Parse the JSON string to a JavaScript object
+                var taxRates = JSON.parse('<?php echo $taxRatesJson; ?>');
+
+                // Use the taxRates in your Alpine.js code
+                // ...
+            </script>
+
             <div class="flex justify-between px-3 py-2 overflow-y-auto " style="max-height: 26rem;">
                 <table class="w-full text-right p-3">
                     <tbody>
@@ -247,7 +256,7 @@
                         <template x-for="(item, index) in cart" :key="index">
                             <tr class="bg-gray-100">
                                 <td class="text-left px-3 py-2 rounded-l-lg max-w-36" x-text="item.quantity + ' x ' + item.name"></td>
-                                <td class="text-left border-l border-gray-400 pl-2 px-3 py-2" x-text="'₱' + item.price"></td>
+                                <td class="text-left border-l border-gray-400 pl-2 px-3 py-2" x-text="'₱' + Number(item.priceWithTax).toFixed(2)"></td>
                                 <td class="px-3 py-2 rounded-r-lg">
                                     <i class="ri-close-circle-fill cursor-pointer" @click="removeFromCart(index)"></i>
                                 </td>
@@ -285,10 +294,31 @@
                         <i class="ri-pause-line text-lg mr-2"></i>
                         Hold
                     </button>
-                    <button id="checkout-button" route='/sls/POS/Checkout' class="flex items-center justify-center font-bold py-1 px-4 rounded w-1/2 border border-black shadow custom-button" :disabled="cart.length === 0">
+                    <button id="checkout-button" class="flex items-center justify-center font-bold py-1 px-4 rounded w-1/2 border border-black shadow custom-button">
                         <i class="ri-shopping-basket-2-fill mr-2"></i>
                         Proceed
                     </button>
+
+                    <script>
+                        const checkoutButton = document.getElementById('checkout-button');
+                        const checkoutRoute = '/master/sls/POS/Checkout'; // Define the route path here
+
+                        checkoutButton.addEventListener('click', (event) => {
+                            // Get the cart from localStorage
+                            var cart = JSON.parse(localStorage.getItem('cart'));
+
+                            if (!cart || cart.length === 0) {
+                                // Prevent the default button click behavior
+                                event.preventDefault();
+
+                                // Show a notification if the cart is empty
+                                alert('Your cart is empty!');
+                            } else {
+                                // Proceed to checkout
+                                window.location.pathname = checkoutRoute;
+                            }
+                        });
+                    </script>
                 </div>
             </div>
         </div>
@@ -324,8 +354,7 @@
                 <div id="grid" class="mb-10" x-bind:class="cartOpen ? ' grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? ' grid-cols-5 gap-4' : (!cartOpen && !sidebarOpen) ? ' grid-cols-6 gap-4' : ' grid-cols-6 gap-4'" style="display: grid;">
                     <?php foreach ($products as $product) : ?>
                         <?php if ($product['Category'] === $category) : ?> <!-- Show products only for the current category -->
-                            <button type="button" class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out" @click="addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?> }); 
-                        cartOpen = true;">
+                            <button type="button" class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out" @click="addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?>,  priceWithTax: <?= $product['Price'] ?> * (1 + <?= $product['TaxRate'] ?>) }); cartOpen = true;">
                                 <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
                                     <!-- SVG icon -->
                                 </div>
@@ -333,9 +362,14 @@
                                 <hr class="w-full border-gray-300 my-2">
                                 <div class="font-bold text-lg text-gray-700 text-center"><?= $product['ProductName'] ?></div>
                                 <div class="font-normal text-sm text-gray-500"><?= $product['Category'] ?></div>
-                                <div class="mt-6 text-lg font-semibold text-gray-700">&#8369;<?= $product['Price'] ?></div>
+                                <?php
+                                // Compute the price with tax
+                                $price_with_tax = $product['Price'] * (1 + $product['TaxRate']);
+                                ?>
+                                <div class="mt-6 text-lg font-semibold text-gray-700">&#8369;<?= number_format($price_with_tax, 2) ?></div>
                                 <div class="text-gray-500 text-sm">Stocks: <?= $product['Quantity'] ?></div>
                             </button>
+
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
@@ -359,8 +393,8 @@
                 if (savedCart) {
                     this.cart = JSON.parse(savedCart);
                 }
-                 // Update the cart quantity display when the page loads
-                 updateCartQuantity();
+                // Update the cart quantity display when the page loads
+                updateCartQuantity();
             },
 
             cart: [],

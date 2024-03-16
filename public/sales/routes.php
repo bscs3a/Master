@@ -16,4 +16,9 @@ $sls = [
     // ... other routes ...
 ];
 
+Router::setRoutes([
+    '/sls/POS/Checkout' => "$path/sls.checkout.php", // Replace 'path/to/checkout.php' with the actual path to your checkout page
+    // Add other routes here
+]);
+
 

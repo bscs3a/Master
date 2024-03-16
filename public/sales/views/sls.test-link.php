@@ -1,20 +1,36 @@
+<?php
+// Database connection
+$host = 'localhost';
+$db   = 'sales';
+$user = 'root';
+$pass = '';
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$pdo = new PDO($dsn, $user, $pass);
+
+if (isset($_POST['name'], $_POST['email'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+
+    $sql = "INSERT INTO test (name, email) VALUES (?, ?)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$name, $email]);
+}
+
+?>
+
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Link</title>
-    <link href="./../src/tailwind.css" rel="stylesheet">
-
-</head>
+<html>
 
 <body>
-    <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-        <h1 class="mb-6 text-3xl font-bold text-center text-blue-500">This is a Test-link Routing for Sales</h1>
-        <button onclick="location.href='/Master/sls/sample'"
-            class="px-6 py-3 text-white bg-blue-500 rounded hover:bg-blue-700">Go to Sales</button>
-    </div>
+
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        Name: <input type="text" name="name">
+        Email: <input type="text" name="email">
+        <input type="submit">
+    </form>
+
 </body>
 
 </html>

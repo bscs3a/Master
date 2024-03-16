@@ -81,6 +81,7 @@
                     </tbody>
                 </table>
             </div>
+            <button route='/sls/link'>test link</button>
         </div>
     </main>
     <script>

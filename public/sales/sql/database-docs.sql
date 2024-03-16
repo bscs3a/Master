@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS Products (
     Category VARCHAR(100),
     Size VARCHAR(50),
     Price DECIMAL(10, 2),
-    Quantity INT
+    Quantity INT,
+    TaxRate DECIMAL(5, 2) DEFAULT 0 
 );
 
 -- Customers Table
@@ -29,10 +30,10 @@ CREATE TABLE IF NOT EXISTS Employees (
     Phone VARCHAR(20)
 );
 
--- Orders Table with DeliveryDate column
-CREATE TABLE IF NOT EXISTS Orders (
-    OrderID INT AUTO_INCREMENT PRIMARY KEY,
-    OrderDate DATE,
+-- Sales Table with DeliveryDate column
+CREATE TABLE IF NOT EXISTS Sales (
+    SaleID INT AUTO_INCREMENT PRIMARY KEY,
+    SaleDate DATE,
     DeliveryDate DATE, 
     TotalAmount DECIMAL(10, 2),
     EmployeeID INT,
@@ -41,16 +42,17 @@ CREATE TABLE IF NOT EXISTS Orders (
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
 
--- OrderDetails Table
-CREATE TABLE IF NOT EXISTS OrderDetails (
-    OrderDetailID INT AUTO_INCREMENT PRIMARY KEY,
-    OrderID INT,
+-- SaleDetails Table
+CREATE TABLE IF NOT EXISTS SaleDetails (
+    SaleDetailID INT AUTO_INCREMENT PRIMARY KEY,
+    SaleID INT,
     ProductID INT,
     Quantity INT,
     UnitPrice DECIMAL(10, 2),
-    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    FOREIGN KEY (SaleID) REFERENCES Sales(SaleID),
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
+
 
 INSERT INTO `products` (`ProductID`, `ProductName`, `Description`, `Category`, `Size`, `Price`, `Quantity`) VALUES
 (1, 'Hammer', 'Heavy-duty hammer for construction work', 'Tools', '', 999.00, 50),
