@@ -24,22 +24,23 @@
     </style>
 
     <?php
-    include "dbconn/conn.php";
+    require_once './src/dbconn.php';
 
-    // Query
-    $sql = "SELECT * FROM products";
-    $stmt = $pdo->query($sql);
+    // Get PDO instance
+    $database = Database::getInstance();
+    $pdo = $database->connect();
 
-    // Fetch all products
-    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Query for products
+    $sqlProducts = "SELECT * FROM products";
+    $stmtProducts = $pdo->query($sqlProducts);
+    $products = $stmtProducts->fetchAll(PDO::FETCH_ASSOC);
 
     // Query for categories
-    $sql = "SELECT DISTINCT Category FROM products";
-    $stmt = $pdo->query($sql);
-
-    // Fetch all categories
-    $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    $sqlCategories = "SELECT DISTINCT Category FROM products";
+    $stmtCategories = $pdo->query($sqlCategories);
+    $categories = $stmtCategories->fetchAll(PDO::FETCH_COLUMN);
     ?>
+
 </head>
 
 <body x-data="{ sidebarOpen: true, cartOpen: false, isFullScreen: false }">
