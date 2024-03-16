@@ -24,15 +24,7 @@
     </style>
 
     <?php
-    // Database connection
-    $host = 'localhost';
-    $db   = 'sales';
-    $user = 'root';
-    $pass = '';
-    $charset = 'utf8mb4';
-
-    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-    $pdo = new PDO($dsn, $user, $pass);
+    include "dbconn/conn.php";
 
     // Query
     $sql = "SELECT * FROM products";
@@ -296,14 +288,11 @@
                 </div>
             <?php endforeach; ?>
         </div>
-
     </main>
-
     <script src="./../src/route.js"></script>
 </body>
 
 <script>
-
     // Initialize Alpine.js data
     document.addEventListener('alpine:init', () => {
         Alpine.data('main', () => ({
