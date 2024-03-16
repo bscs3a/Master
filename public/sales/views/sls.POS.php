@@ -22,10 +22,9 @@
             grid-template-columns: 1fr;
         }
 
-        ::-webkit-scrollbar{
+        ::-webkit-scrollbar {
             display: none;
         }
-
     </style>
 
     <?php
@@ -184,31 +183,29 @@
                 <!-- <button class="py-1 px-4 rounded bg-gray-100 border-2 border-gray-300">
                     <i class="ri-add-circle-fill text-xl"></i> Add Order
                 </button> -->
-                <button></button>
-                <button data-open-modal class="py-1 px-3 rounded bg-gray-100 border-2 border-gray-300 hover:bg-red-400 hover:border-red-600 active:scale-75 transition-all transform ease-in-out" >
+                <h2 class="text-sm font-semibold text-gray-800 py-2">Total Items in Cart: <span id="cart-quantity" class="text-sm font-bold ">0</span></h2>
+                <button data-open-modal class="py-1 px-3 rounded bg-gray-100 border-2 border-gray-300 hover:bg-red-400 hover:border-red-600 active:scale-75 transition-all transform ease-in-out">
                     <i class="ri-delete-bin-7-fill text-xl"></i>
                 </button>
 
 
-            <!-- MODAL SECTION -->
+                <!-- MODAL SECTION -->
                 <dialog data-modal class="rounded-lg shadow-xl">
-                <div class="relative p-4 w-full max-w-md max-h-full">
-                 <div class="relative bg-white">
-                <div class="p-4 md:p-5 text-center">
-                    <svg class="mx-auto mb-4 text-red-500 w-12 h-12 dark:text-white-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                    </svg>
-                    <h3 class="mb-5 text-lg font-semibold text-gray-800 dark:text-gray-800">Are you sure you want to delete this cart order?</h3>
-                    <button data-close-modal type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
-                    @click="clearCart()"
-                    >
-                        Yes, I'm sure
-                    </button>
-                    <button data-close-modal2 type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
-                </div>
-                </div>
-                </div>
-                    </dialog>
+                    <div class="relative p-4 w-full max-w-md max-h-full">
+                        <div class="relative bg-white">
+                            <div class="p-4 md:p-5 text-center">
+                                <svg class="mx-auto mb-4 text-red-500 w-12 h-12 dark:text-white-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                                <h3 class="mb-5 text-lg font-semibold text-gray-800 dark:text-gray-800">Are you sure you want to delete this cart order?</h3>
+                                <button data-close-modal type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center" @click="clearCart()">
+                                    Yes, I'm sure
+                                </button>
+                                <button data-close-modal2 type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </dialog>
 
 
                 <!-- MODAL SCRIPT -->
@@ -288,7 +285,7 @@
                         <i class="ri-pause-line text-lg mr-2"></i>
                         Hold
                     </button>
-                    <button route='/sls/POS/Checkout' class="flex items-center justify-center font-bold py-1 px-4 rounded w-1/2 border border-black shadow custom-button">
+                    <button id="checkout-button" route='/sls/POS/Checkout' class="flex items-center justify-center font-bold py-1 px-4 rounded w-1/2 border border-black shadow custom-button" :disabled="cart.length === 0">
                         <i class="ri-shopping-basket-2-fill mr-2"></i>
                         Proceed
                     </button>
@@ -296,6 +293,23 @@
             </div>
         </div>
 
+        <script>
+            function updateCartQuantity() {
+                // Get the cart from localStorage
+                var cart = JSON.parse(localStorage.getItem('cart'));
+
+                // Calculate the total quantity of items in the cart
+                var totalQuantity = 0;
+                if (cart) {
+                    for (var i = 0; i < cart.length; i++) {
+                        totalQuantity += cart[i].quantity; // Replace 'quantity' with the actual property name for the quantity
+                    }
+                }
+
+                // Update the cart quantity display
+                document.getElementById('cart-quantity').textContent = totalQuantity;
+            }
+        </script>
 
         <div class="flex flex-col items-center min-h-screen w-full sidebar-toggle3" :class="{ 'w-full': !cartOpen, 'w-9/12': cartOpen }">
             <?php
@@ -310,8 +324,7 @@
                 <div id="grid" class="mb-10" x-bind:class="cartOpen ? ' grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? ' grid-cols-5 gap-4' : (!cartOpen && !sidebarOpen) ? ' grid-cols-6 gap-4' : ' grid-cols-6 gap-4'" style="display: grid;">
                     <?php foreach ($products as $product) : ?>
                         <?php if ($product['Category'] === $category) : ?> <!-- Show products only for the current category -->
-                            <button type="button" class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out"
-                             @click="addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?> }); 
+                            <button type="button" class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out" @click="addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?> }); 
                         cartOpen = true;">
                                 <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
                                     <!-- SVG icon -->
@@ -322,7 +335,7 @@
                                 <div class="font-normal text-sm text-gray-500"><?= $product['Category'] ?></div>
                                 <div class="mt-6 text-lg font-semibold text-gray-700">&#8369;<?= $product['Price'] ?></div>
                                 <div class="text-gray-500 text-sm">Stocks: <?= $product['Quantity'] ?></div>
-                        </button>
+                            </button>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
@@ -346,6 +359,8 @@
                 if (savedCart) {
                     this.cart = JSON.parse(savedCart);
                 }
+                 // Update the cart quantity display when the page loads
+                 updateCartQuantity();
             },
 
             cart: [],
@@ -363,16 +378,27 @@
 
                 // Save the cart items to localStorage
                 localStorage.setItem('cart', JSON.stringify(this.cart));
+
+                // Update the cart quantity display
+                updateCartQuantity();
             },
+
             // Function to remove product from cart
             removeFromCart(index) {
                 this.cart.splice(index, 1);
                 localStorage.setItem('cart', JSON.stringify(this.cart));
+
+                // Update the cart quantity display
+                updateCartQuantity();
             },
+
             // Function to clear the cart
             clearCart() {
                 this.cart = [];
                 localStorage.setItem('cart', JSON.stringify(this.cart));
+
+                // Update the cart quantity display
+                updateCartQuantity();
             }
         }));
     });
