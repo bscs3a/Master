@@ -58,7 +58,7 @@
             <div class=" mb-6">
                 <!-- Start: Top Left-Side Section -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 ">
-                    <div class="col-span-1 border-solid border-gray-400 shadow-md rounded-xl px-5 py-10 bg-wave bg-cover bg-[center_top_2rem] bg-no-repeat
+                    <div class="col-span-1 border-solid border-gray-400 shadow-md rounded-xl px-5 py-10 bg-wave bg-cover bg-[center_top_6rem] bg-[length:100%_70%] bg-no-repeat
                             
                         ">
                         <!-- Start: Welcome Message -->
@@ -74,8 +74,8 @@
 
 
                             <div class="text-right">
-                                <p class="font-sans font-bold text-xl text-gray-400">Today,</p>
-                                <p class="font-sans font-bold text-xl text-gray-400">March 04, 2024</p>
+                                <p class="font-sans font-bold text-xl text-gray-500">Today,</p>
+                                <p class="font-sans font-bold text-xl text-gray-500">March 04, 2024</p>
                             </div>
                         </div>
 
@@ -87,17 +87,12 @@
                                 <div class="flex justify-between mb-4">
                                     <div>
                                         <div class="flex items-center mb-1">
-                                            <div class="text-2xl font-semibold text-[#F8B721]">0</div>
+                                            <div class="text-4xl font-semibold text-[#F8B721]">0</div>
                                         </div>
                                         <div class="text-sm font-medium text-gray-400">Total Sales</div>
                                     </div>
                                     <div>
-                                    <!-- /home/r0khai/website/htdocs/Master/public/finance/img/Profit.png -->
-                                        <!-- <i class="ri-file-text-line mr-3 text-4xl"></i> -->
-                                        <!-- <span class="bg-profit"></span> -->
-                                        <!-- <i class="bg-profit bg-contain bg-no-repeat text-black"></i> -->
                                         <img src="../public/finance/img/Profit.png" alt="Profit.png" class="bg-radial-gradient from-[#FFEB95] to-[#FECE01] py-2 px-2 rounded-full">
-                                        <!-- <img src="Profit.jpg" alt="Profit.png"> -->
                                     </div>
                                 </div>
                             </div>
@@ -107,12 +102,11 @@
                                 <div class="flex justify-between mb-4">
                                     <div>
                                         <div class="flex items-center mb-1">
-                                            <div class="text-2xl font-semibold text-[#F8B721]">0</div>
+                                            <div class="text-4xl font-semibold text-[#F8B721]">0</div>
                                         </div>
                                         <div class="text-sm font-medium text-gray-400">Total Expense</div>
                                     </div>
                                     <div>
-                                        <!-- <i class="ri-exchange-funds-line text-4xl"></i> -->
                                         <img src="../public/finance/img/RequestMoney.png" alt="request-money.png"  class="bg-radial-gradient from-[#FFEB95] to-[#FECE01] py-2 px-1 rounded-full ">
                                     </div>
                                 </div>
