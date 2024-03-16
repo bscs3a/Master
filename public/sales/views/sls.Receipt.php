@@ -38,6 +38,12 @@
     }
     ?>
 
+<style>
+        ::-webkit-scrollbar{
+            display: none;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -57,17 +63,61 @@
 
         <!-- receipt -->
         <div class="flex flex-col items-center min-h-screen">
-            <div class="w-96 max-w-6xl mt-10">
-                <h1 class="mb-3 text-xl font-bold text-black">Receipt</h1>
+            <div class="w-1/2 mt-10">
+             
                 <!-- Add receipt details here -->
-                <div id="receipt" class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-xl font-semibold mb-4">Purchased Items</h2>
+                <div id="receipt" class="bg-white rounded-xl shadow-md">
+                    <div class=" bg-green-800 text-white p-10">
+                    <div class="flex justify-between">
+                    <h2 class="text-6xl font-medium">Receipt</h2>
+                    <h2 class="text-6xl font-medium">₱123</h2>
+                    </div>
+                    
+                    <div class="flex justify-between mt-8 text-gray-300">
+                        <span>March 3 , 2016</span>
+                        <span>Order ID: 1234567</span>
+                        <span>Payment Method: Card</span>
+                    </div>
+
+                    </div>
+
+                    <div class="p-10">
                     <ul id="cart-items">
                         <!-- Cart items will be added here by JavaScript -->
                     </ul>
-                    <h2 id="total" class="text-xl font-semibold mb-4 mt-6"></h2>
-                </div>
-                <button class="print-button mt-4 bg-blue-500 text-white py-2 px-4 rounded">Print Receipt</button>
+
+
+                    <div class="grid grid-cols-2 gap-6 mt-6">
+                        <div class="grid grid-rows-4">
+                        <div class="border-b text-gray-400 text-xl font-bold pb-2 mb-2">Billing Address</div>
+                            <div>Billing Address</div>
+                            <div>Block Number</div>
+                            <div>Locale / Municipality</div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between border-b text-lg pb-4 mb-2 text-gray-400">
+                                <span>Subtotal</span>
+                                <span>₱123456</span>
+                            </div>   
+                              <div class="flex justify-between border-b text-lg pb-2 mt-4 text-gray-400">
+                                <span>Taxes</span>
+                                <span>₱123456</span>
+                            </div>  
+                            <div class="flex justify-between font-semibold border-b text-xl pb-2 text-gray-400 mt-4">
+                                <span>Total</span>
+                                <span class="text-green-800 font-semibold">₱123456</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    </div>
+                    <button class="print-button mt-4 w-full text-black text-xl py-4 px-4 hover:bg-gray-200 hover:font-bold transition-all ease-in-out">
+                    <i class="ri-import-line font-medium text-2xl"></i>
+                     Print Receipt</button>
+                    </div>
+                
             </div>
         </div>
 

@@ -60,7 +60,7 @@
 
         <div class="flex justify-between items-center w-full pt-10 pl-10">
 
-            <form class="max-w-lg mb-3 w-2/5 pl-10">
+            <form class="max-w-lg ml-20 mb-3 w-2/5 pl-10">
                 <div class="flex">
                     <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only">Your Email</label>
                     <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100" type="button">All categories <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -114,7 +114,7 @@
             <?php foreach ($categories as $category) : ?>
                 <div class="text-xl font-bold divide-y ml-3 mt-5"><?= $category ?></div> <!-- Display category name -->
                 <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                <div id="grid" class="mb-10" x-bind:class="cartOpen ? 'grid grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? 'grid grid-cols-5 gap-4' : (!cartOpen && !sidebarOpen) ? 'grid grid-cols-6 gap-4' : 'grid grid-cols-5 gap-4'">
+                <div id="grid" x-bind:class="cartOpen ? 'grid grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? 'grid grid-cols-6 gap-4' : (!cartOpen && !sidebarOpen) ? 'grid grid-cols-5 gap-4' : 'grid grid-cols-5 gap-4'">
                     <?php foreach ($products as $product) : ?>
                         <?php if ($product['Category'] === $category) : ?> <!-- Show products only for the current category -->
                             <div class="w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg">

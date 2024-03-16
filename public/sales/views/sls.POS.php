@@ -21,6 +21,11 @@
         .sidebar-closed {
             grid-template-columns: 1fr;
         }
+
+        ::-webkit-scrollbar{
+            display: none;
+        }
+
     </style>
 
     <?php
@@ -75,7 +80,7 @@
 
         <div class="flex justify-between items-center w-full pt-10 pl-10">
 
-            <form class="max-w-lg mb-3 w-2/5 pl-10">
+            <form class="max-w-lg ml-20 mb-3 w-2/5 pl-10">
 
                 <!-- Dropdown for selecting categories -->
                 <div class="flex">
@@ -144,7 +149,7 @@
             <div class="right-0 fixed flex items-center border-2 border-gray-300 rounded-l-md bg-gray-200">
                 <div class="flex items-center">
                     <!-- Button to toggle the cart view -->
-                    <button type="button" @click="if (sidebarOpen) { sidebarOpen = false; cartOpen = !cartOpen; } else { cartOpen = !cartOpen; }" x-show="!cartOpen" class="items-center flex bg-gray-200 py-2 w-full justify-between sidebar-toggle2">
+                    <button type="button" @click="if (sidebarOpen) { sidebarOpen = false; cartOpen = !cartOpen; } else { cartOpen = !cartOpen; }" x-show="!cartOpen" class="items-center flex bg-gray-200 py-2 w-full justify-between sidebar-toggle2 hover:bg-gray-300 ease-in-out transition">
                         <!-- Icon indicating going back to the previous view -->
                         <i class="ri-arrow-left-s-line ml-5 mr-5 text-xl"></i>
                         <!-- Vertical separator line -->
@@ -165,7 +170,7 @@
         <!-- Cart -->
         <div id="cart" x-show="cartOpen" class="fixed right-0 top-10 w-96 overflow-auto rounded-l-lg border-2 border-gray-300 bg-white shadow" x-bind:style="isFullScreen ? 'height: 94vh;' : 'height: 88vh;'" :class="{ '': isFullScreen, 'mt-12': !isFullScreen }">
             <!-- Close Sidebar Button -->
-            <div @click="sidebarOpen = false; cartOpen = !cartOpen" class="flex items-center py-2 text-black no-underline bg-gray-200 border-b border-gray-300 cursor-pointer">
+            <div @click="sidebarOpen = false; cartOpen = !cartOpen" class="flex items-center py-2 text-black no-underline bg-gray-200 border-b hover:bg-gray-300 border-gray-300 cursor-pointer">
                 <i class="ri-arrow-right-s-line text-xl ml-5 mr-5"></i>
                 <div class="border-r border-gray-400 h-6"></div>
                 <div class="mx-3">
@@ -180,9 +185,52 @@
                     <i class="ri-add-circle-fill text-xl"></i> Add Order
                 </button> -->
                 <button></button>
-                <button class="py-1 px-3 rounded bg-gray-100 border-2 border-gray-300" @click="clearCart">
+                <button data-open-modal class="py-1 px-3 rounded bg-gray-100 border-2 border-gray-300 hover:bg-red-400 hover:border-red-600 active:scale-75 transition-all transform ease-in-out" >
                     <i class="ri-delete-bin-7-fill text-xl"></i>
                 </button>
+
+
+            <!-- MODAL SECTION -->
+                <dialog data-modal class="rounded-lg shadow-xl">
+                <div class="relative p-4 w-full max-w-md max-h-full">
+                 <div class="relative bg-white">
+                <div class="p-4 md:p-5 text-center">
+                    <svg class="mx-auto mb-4 text-red-500 w-12 h-12 dark:text-white-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                    </svg>
+                    <h3 class="mb-5 text-lg font-semibold text-gray-800 dark:text-gray-800">Are you sure you want to delete this cart order?</h3>
+                    <button data-close-modal type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
+                    @click="clearCart()"
+                    >
+                        Yes, I'm sure
+                    </button>
+                    <button data-close-modal2 type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+                </div>
+                </div>
+                </div>
+                    </dialog>
+
+
+                <!-- MODAL SCRIPT -->
+                <script>
+                    const openButtons = document.querySelector('[data-open-modal]');
+                    const closeButtons = document.querySelector('[data-close-modal]');
+                    const closeButton2 = document.querySelector('[data-close-modal2]');
+                    const modal = document.querySelector('[data-modal]');
+
+                    openButtons.addEventListener('click', () => {
+                        modal.showModal();
+                    });
+
+                    closeButtons.addEventListener('click', () => {
+                        modal.close();
+                    });
+
+                    closeButton2.addEventListener('click', () => {
+                        modal.close();
+                    });
+                </script>
+
             </div>
 
             <!-- Cart items -->
@@ -259,10 +307,11 @@
                 <div class="text-xl font-bold divide-y ml-3 mt-5"><?= $category ?></div>
                 <!-- Horizontal line -->
                 <hr class="w-full border-gray-300 my-2">
-                <div id="grid" class="mb-10" x-bind:class="cartOpen ? ' grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? ' grid-cols-5 gap-4' : (!cartOpen && !sidebarOpen) ? ' grid-cols-6 gap-4' : ' grid-cols-5 gap-4'" style="display: grid;">
+                <div id="grid" class="mb-10" x-bind:class="cartOpen ? ' grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? ' grid-cols-6 gap-4' : (!cartOpen && !sidebarOpen) ? ' grid-cols-6 gap-4' : ' grid-cols-5 gap-4'" style="display: grid;">
                     <?php foreach ($products as $product) : ?>
                         <?php if ($product['Category'] === $category) : ?> <!-- Show products only for the current category -->
-                            <div class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg" @click="addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?> }); 
+                            <button type="button" class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out"
+                             @click="addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?> }); 
                         cartOpen = true;">
                                 <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
                                     <!-- SVG icon -->
@@ -273,7 +322,7 @@
                                 <div class="font-normal text-sm text-gray-500"><?= $product['Category'] ?></div>
                                 <div class="mt-6 text-lg font-semibold text-gray-700">&#8369;<?= $product['Price'] ?></div>
                                 <div class="text-gray-500 text-sm">Stocks: <?= $product['Quantity'] ?></div>
-                            </div>
+                        </button>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
