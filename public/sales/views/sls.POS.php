@@ -273,7 +273,7 @@
                     <!-- Order detail rows -->
                     <div class="grid-cols-2 gap-4 items-center mb-2 bg-gray-100 p-4 rounded-lg shadow-md" style="display: grid;">
                         <span class="font-bold text-base">Order Total:</span>
-                        <span class="text-base" x-text="'&#8369;' + cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)"></span>
+                        <span class="text-base" x-text="'&#8369;' + cart.reduce((total, item) => total + item.priceWithTax * item.quantity, 0).toFixed(2)"></span>
                     </div>
                     <!-- Add more order detail rows as needed -->
                 </div>
