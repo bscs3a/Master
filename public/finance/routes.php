@@ -1,7 +1,4 @@
 <?php
-
-
-
 $path = './public/finance/views';
 
 $basePath = "$path/fin.";
@@ -32,20 +29,35 @@ $fin = [
 
 ];
 
-Router::post('/fin/test', function () {
+Router::post('/insert', function () {
     $db = Database::getInstance();
     $conn = $db->connect();
 
     $name = $_POST['name'];
 
-    // Validate the input
-    if (empty ($name)) {
-        echo "Name and email are required.";
+    $stmt = $conn->prepare("INSERT INTO name (name) VALUES (:name)");
+    $stmt->bindParam(':name', $name);
+
+    $rootFolder = dirname($_SERVER['PHP_SELF']);
+
+    if (empty($name)) {
+        header("Location: $rootFolder/fin/test");
         return;
     }
-    $_SESSION['name'] = $name;
 
-    $stmt = $conn->prepare("INSERT INTO name (name) VALUES (:name)");
+    // Execute the statement
+    $stmt->execute();
+
+    header("Location: $rootFolder/fin/test");
+});
+
+Router::post('/delete', function () {
+    $db = Database::getInstance();
+    $conn = $db->connect();
+
+    $name = $_POST['name'];
+
+    $stmt = $conn->prepare("DELETE FROM name WHERE name = :name");
     $stmt->bindParam(':name', $name);
 
     // Execute the statement
@@ -54,7 +66,6 @@ Router::post('/fin/test', function () {
     $rootFolder = dirname($_SERVER['PHP_SELF']);
     header("Location: $rootFolder/fin/test");
 });
-
 
 
 
