@@ -64,8 +64,8 @@
                     <h1 class="mb-3 text-xl font-bold text-black">Checkout</h1>
                 </div> -->
                 <!-- Checkout form -->
-                <div class="flex flex-row gap-6 mt-10">
 
+                <div class="flex flex-row gap-6 mt-10">
                     <div class="bg-white rounded-lg p-6 w-1/2">
                         <!-- Order summary -->
                         <div class="mb-4">
@@ -105,71 +105,72 @@
 
 
                     <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 w-1/2 h-full">
-                        <div class="font-medium text-xl mb-4 text-gray-500 border-b pb-2">Shipping Information</div>
-                        <!-- Form for delivery address and date -->
-                        <div>
-                            <label for="customerFirstName" class="block mb-2">Customer First Name:</label>
-                            <input type="text" id="customerFirstName" name="customerFirstName" class="w-full p-2 border border-gray-300 rounded mb-4">
-                        </div>
-                        <div>
-                            <label for="customerLastName" class="block mb-2">Customer Last Name:</label>
-                            <input type="text" id="customerLastName" name="customerLastName" class="w-full p-2 border border-gray-300 rounded mb-4">
-                        </div>
-                        <div>
-                            <label for="customerEmail" class="block mb-2">Customer Email:</label>
-                            <input type="email" id="customerEmail" name="customerEmail" class="w-full p-2 border border-gray-300 rounded mb-4">
-                        </div>
-                        <div>
-                            <label for="customerPhone" class="block mb-2">Customer Phone:</label>
-                            <input type="tel" id="customerPhone" name="customerPhone" class="w-full p-2 border border-gray-300 rounded mb-4">
-                        </div>
-
-                        <!-- Option for delivery or pick-up -->
-                        <div class="mb-4">
-                            <label class="block mb-2 font-semibold">Delivery or Pick-up:</label>
-                            <select name="delivery-option" id="delivery-option" class="cursor-pointer w-full p-2 border border-gray-300 rounded">
-                                <option value="delivery">Delivery</option>
-                                <option value="pick-up">Pick-up</option>
-                            </select>
-                        </div>
-
-                        <div id="delivery-details">
-                            <label for="address" class="block mb-2">Delivery Address:</label>
-                            <input type="text" id="address" name="address" class="w-full p-2 border border-gray-300 rounded mb-4">
-
-                            <label for="date" class="block mb-2">Delivery Date:</label>
-                            <input type="date" id="date" name="date" class="w-full p-2 border border-gray-300 rounded mb-4">
-                        </div>
-
-
-                        <!-- Mode of payment -->
-                        <div class="mb-4">
-                            <label class="block mb-2 font-semibold">Mode of Payment:</label>
-                            <select name="payment-mode" id="payment-mode" class="w-full p-2 border border-gray-300 rounded">
-                                <option value="card">Card</option>
-                                <option value="cash">Cash</option>
-                            </select>
-                        </div>
-
-                        <div id="payment-details" class="grid grid-rows-2 p-4 rounded-md shadow-inner bg-gray-200">
-                            <div class="w-full">
-                                <input type="text" id="cardNumber" name="cardNumber" placeholder="Card Number" class="w-full p-4 border border-gray-300 rounded">
+                        <form action="/addSales" method="POST">
+                            <div class="font-medium text-xl mb-4 text-gray-500 border-b pb-2">Shipping Information</div>
+                            <!-- Form for delivery address and date -->
+                            <div>
+                                <label for="customerFirstName" class="block mb-2">Customer First Name:</label>
+                                <input type="text" id="customerFirstName" name="customerFirstName" class="w-full p-2 border border-gray-300 rounded mb-4">
                             </div>
-                            <div class="grid grid-cols-2">
-                                <div>
-                                    <input type="" id="expiryDate" name="expiryDate" placeholder="MM/DD/YYYY" class="text-gray-200 w-full p-4 border border-gray-300 rounded ">
+                            <div>
+                                <label for="customerLastName" class="block mb-2">Customer Last Name:</label>
+                                <input type="text" id="customerLastName" name="customerLastName" class="w-full p-2 border border-gray-300 rounded mb-4">
+                            </div>
+                            <div>
+                                <label for="customerEmail" class="block mb-2">Customer Email:</label>
+                                <input type="email" id="customerEmail" name="customerEmail" class="w-full p-2 border border-gray-300 rounded mb-4">
+                            </div>
+                            <div>
+                                <label for="customerPhone" class="block mb-2">Customer Phone:</label>
+                                <input type="tel" id="customerPhone" name="customerPhone" class="w-full p-2 border border-gray-300 rounded mb-4">
+                            </div>
+
+                            <!-- Option for delivery or pick-up -->
+                            <div class="mb-4">
+                                <label class="block mb-2 font-semibold">Delivery or Pick-up:</label>
+                                <select name="SalePreference" id="SalePreference" class="cursor-pointer w-full p-2 border border-gray-300 rounded">
+                                    <option value="delivery">Delivery</option>
+                                    <option value="pick-up">Pick-up</option>
+                                </select>
+                            </div>
+
+                            <div id="sale-details">
+                                <label for="address" class="block mb-2">Delivery Address:</label>
+                                <input type="text" id="address" name="address" class="w-full p-2 border border-gray-300 rounded mb-4">
+
+                                <label for="deliveryDate" class="block mb-2">Delivery Date:</label>
+                                <input type="date" id="deliveryDate" name="deliveryDate" class="w-full p-2 border border-gray-300 rounded mb-4" min="<?php echo date('Y-m-d'); ?>">
+                            </div>
+
+
+                            <!-- Mode of payment -->
+                            <div class="mb-4">
+                                <label class="block mb-2 font-semibold">Mode of Payment:</label>
+                                <select name="payment-mode" id="payment-mode" class="w-full p-2 border border-gray-300 rounded">
+                                    <option value="card">Card</option>
+                                    <option value="cash">Cash</option>
+                                </select>
+                            </div>
+
+                            <div id="payment-details" class="grid grid-rows-2 p-4 rounded-md shadow-inner bg-gray-200">
+                                <div class="w-full">
+                                    <input type="text" id="cardNumber" name="cardNumber" placeholder="Card Number" class="w-full p-4 border border-gray-300 rounded">
                                 </div>
-                                <div>
-                                    <input type="text" id="cvv" name="cvv" placeholder="CVC" class="w-full p-4 border border-gray-300 rounded">
+                                <div class="grid grid-cols-2">
+                                    <div>
+                                        <input type="" id="expiryDate" name="expiryDate" placeholder="MM/DD/YYYY" class="text-gray-200 w-full p-4 border border-gray-300 rounded ">
+                                    </div>
+                                    <div>
+                                        <input type="text" id="cvv" name="cvv" placeholder="CVC" class="w-full p-4 border border-gray-300 rounded">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <button route='/sls/Receipt' class="bg-green-800 text-white rounded px-4 py-2 mt-4 w-full hover:bg-gray-200 hover:text-green-800 hover:font-bold transition-colors ease-in-out">Complete Sale</button>
+                            <button type="submit" value="Submit" class="bg-green-800 text-white rounded px-4 py-2 mt-4 w-full hover:bg-gray-200 hover:text-green-800 hover:font-bold transition-colors ease-in-out">Complete Sale</button>
+                        </form>
                     </div>
-
-
                 </div>
             </div>
+        </div>
         </div>
     </main>
 
@@ -180,8 +181,8 @@
         });
 
         window.onload = function() {
-            var deliveryOption = document.getElementById('delivery-option');
-            var deliveryDetails = document.getElementById('delivery-details');
+            var deliveryOption = document.getElementById('SalePreference');
+            var deliveryDetails = document.getElementById('sale-details');
 
             deliveryOption.addEventListener('change', function() {
                 if (this.value === 'delivery') {
@@ -213,6 +214,8 @@
             document.getElementById('mainContent').classList.toggle('md:ml-64');
         });
     </script>
+
+    <script src="./../../src/form.js"></script>
     <script src="./../../src/route.js"></script>
 </body>
 
