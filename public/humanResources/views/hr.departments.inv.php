@@ -228,6 +228,7 @@ catch (PDOException $e) {
 </main>
 <!-- End Main Bar -->
     <script  src="./../../../src/route.js"></script>
+    <script  src="./../../../src/form.js"></script>
 
 <!-- Sidebar active/inactive -->
 <script>

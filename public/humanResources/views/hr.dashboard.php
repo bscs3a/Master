@@ -105,7 +105,7 @@
               <div class="flex items-center">
                 <div class="flex-shrink-0 w-10 h-10">
                   <img class="w-10 h-10 rounded-full object-cover object-center"
-                    src="https://pbs.twimg.com/profile_images/1727459524808970240/aDMHxOQC_400x400.jpg"
+                    src="https://pbs.twimg.com/profile_images/1767366909417144320/4jM8rbT7_400x400.jpg"
                     alt="">
                 </div>
                 <div class="ml-4">
@@ -195,6 +195,7 @@
 </main>
 <!-- End Main Bar-->
 <script  src="./../src/route.js"></script>
+<script  src="./../src/form.js"></script>
 <script type="module" src="../public/humanResources/js/sidenav-active-inactive.js"></script>
 </body>
 

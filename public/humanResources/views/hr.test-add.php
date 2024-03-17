@@ -1,23 +1,24 @@
 <?php 
-require_once './src/dbconn.php';
-try {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $firstName = $data['firstName'];
-        $lastName = $data['lastName'];
+// require_once './src/dbconn.php';
+
+// try {
+//     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//         $firstName = $data['firstName'];
+//         $lastName = $data['lastName'];
         
-        $db = Database::getInstance();
-        $conn = $db->connect();
+//         $db = Database::getInstance();
+//         $conn = $db->connect();
     
-        $query = "INSERT INTO test_table (first_name, last_name) VALUES (:firstName, :lastName)";
-        $stmt = $conn->prepare($query);
-        $stmt->bindParam(':firstName', $firstName, PDO::PARAM_STR);
-        $stmt->bindParam(':lastName', $lastName, PDO::PARAM_STR);
+//         $query = "INSERT INTO test_table (first_name, last_name) VALUES (:firstName, :lastName)";
+//         $stmt = $conn->prepare($query);
+//         $stmt->bindParam(':firstName', $firstName, PDO::PARAM_STR);
+//         $stmt->bindParam(':lastName', $lastName, PDO::PARAM_STR);
     
-        $stmt->execute();
-    }
-} catch (PDOException $e) {
-  echo "Error: " . $e->getMessage();
-}
+//         $stmt->execute();
+//     }
+// } catch (PDOException $e) {
+//   echo "Error: " . $e->getMessage();
+// }
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +27,7 @@ try {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
   <link href="./../src/tailwind.css" rel="stylesheet">
-  <title>Profile</title>
+  <title>TEST</title>
 </head>
 <body class="text-gray-800 font-sans">
 
@@ -61,20 +62,49 @@ try {
   </div>
   <!-- End Top Bar -->
 
-  
+  <?php 
+    // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //     require_once './public/humanResources/func/test-add.php';
+    //     insertEmployee($_POST);
+    // }
+  ?>
   <h3 class="ml-6 mt-8 text-xl font-bold">TEST ADD</h3>
-  <form action="" method="post">
+  <form action="/add" method="POST">
   <label for="firstName">First Name:</label><br>
-  <input type="text" id="firstName" name="firstName"><br>
+  <input type="text" id="firstName" name="firstName"><br><br>
   <label for="lastName">Last Name:</label><br>
-  <input type="text" id="lastName" name="lastName"><br>
+  <input type="text" id="lastName" name="lastName"><br><br>
 
   <input type="submit" value="Submit">
 </form>
 
+<table>
+  <tr><th>Name</th></tr>
+  <?php
+    $db = Database::getInstance();
+    $conn = $db->connect();
+
+    $stmt = $conn->prepare("SELECT * FROM test_table");
+    
+    // Execute the statement
+    $stmt->execute();
+
+    // Fetch all rows as an associative array
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Iterate over the names
+    foreach ($users as $user) {
+        // Access the name and id of the row and add it to the table
+        // Also add a hyperlink to the /hr/test/{id} route with the id as a parameter
+        echo "<tr><td><a route='/hr/test/id=" . $user['id'] . "'>" . $user['first_name'] . "</a></td></tr>";
+    }
+  ?>
+</table>
+
 </main>
 <!-- End Main Bar -->
 <script  src="./../src/route.js"></script>
+<script  src="./../src/form.js"></script>
 
 <!-- Sidebar active/inactive -->
 <script>
