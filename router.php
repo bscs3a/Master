@@ -1,7 +1,6 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 require "./web.php";
-// $dotenv = Dotenv\Dotenv::createImmutable(__DIR__)->load();
 
 class Router
 {
@@ -42,6 +41,28 @@ class Router
         }
 
         exit();
+    }
+
+    public static function post($path, $callback)
+    {
+        $currentMethod = $_SERVER['REQUEST_METHOD'];
+        $currentUri = $_SERVER['REQUEST_URI'];
+
+        // Get the base path of the application
+        $basePath = dirname($_SERVER['SCRIPT_NAME']);
+
+        // Replace the base path in the current URI
+        $currentUri = str_replace($basePath, '', $currentUri);
+
+        // If the current URI is an empty string, set it to "/"
+        if ($currentUri === '') {
+            $currentUri = '/';
+        }
+
+        if ($currentMethod === 'POST' && $currentUri === $path) {
+            call_user_func($callback);
+            exit();
+        }
     }
 }
 
