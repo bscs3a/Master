@@ -33,12 +33,12 @@ CREATE TABLE IF NOT EXISTS Employees (
 -- Sales Table with DeliveryDate column
 CREATE TABLE IF NOT EXISTS Sales (
     SaleID INT AUTO_INCREMENT PRIMARY KEY,
-    SaleDate DATE,
+    SaleDate DATETIME,
     SalePreference ENUM('Delivery', 'Pick-up'),
     DeliveryDate DATE, 
     PaymentMode ENUM('Cash', 'Card'),
     CardNumber VARCHAR(16),
-    ExpiryDate DATE,
+    ExpiryDate TEXT,
     CVV VARCHAR(3),
     TotalAmount DECIMAL(10, 2),
     EmployeeID INT,

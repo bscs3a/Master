@@ -8,41 +8,12 @@
     <link href="./../../src/tailwind.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
 
-    <?php
-    // Database connection
-    $host = 'localhost';
-    $db   = 'sales';
-    $user = 'root';
-    $pass = '';
-    $charset = 'utf8mb4';
-
-    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-    $pdo = new PDO($dsn, $user, $pass);
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Get the form data from the POST request
-        $customerFirstName = $_POST["customerFirstName"];
-        $customerLastName = $_POST["customerLastName"];
-        $customerEmail = $_POST["customerEmail"];
-        $customerPhone = $_POST["customerPhone"];
-        $address = $_POST["address"];
-
-        // Insert data into the Customers table
-        $sql = "INSERT INTO Customers (FirstName, LastName, Email, Phone, Address) VALUES (?, ?, ?, ?, ?)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$customerFirstName, $customerLastName, $customerEmail, $customerPhone, $address]);
-
-        // Redirect to the receipt page
-        header('Location: sls.Receipt.php');
-        exit;
-    }
-    ?>
-
-<style>
-        ::-webkit-scrollbar{
+    <style>
+        ::-webkit-scrollbar {
             display: none;
         }
     </style>
+
 
 </head>
 
@@ -64,60 +35,77 @@
         <!-- receipt -->
         <div class="flex flex-col items-center min-h-screen">
             <div class="w-1/2 mt-10">
-             
+
                 <!-- Add receipt details here -->
                 <div id="receipt" class="bg-white rounded-xl shadow-md">
                     <div class=" bg-green-800 text-white p-10">
-                    <div class="flex justify-between">
-                    <h2 class="text-6xl font-medium">Receipt</h2>
-                    <h2 class="text-6xl font-medium">₱123</h2>
-                    </div>
-                    
-                    <div class="flex justify-between mt-8 text-gray-300">
-                        <span>March 3 , 2016</span>
-                        <span>Order ID: 1234567</span>
-                        <span>Payment Method: Card</span>
-                    </div>
+                        <div class="flex justify-between">
+                            <h2 class="text-6xl font-medium">Receipt</h2>
+                            <h2 class="text-6xl font-medium">₱123</h2>
+                        </div>
+
+                        <div class="flex justify-between mt-8 text-gray-300">
+                            <span>March 3 , 2016</span>
+                            <span>Order ID: 1234567</span>
+                            <span>Payment Method: Card</span>
+                        </div>
 
                     </div>
 
                     <div class="p-10">
-                    <ul id="cart-items">
-                        <!-- Cart items will be added here by JavaScript -->
-                    </ul>
+                        <ul id="cart-items">
+                            <!-- Cart items will be added here by JavaScript -->
+                        </ul>
 
 
-                    <div class="grid grid-cols-2 gap-6 mt-6">
-                        <div class="grid grid-rows-4">
-                        <div class="border-b text-gray-400 text-xl font-bold pb-2 mb-2">Billing Address</div>
-                            <div>Billing Address</div>
-                            <div>Block Number</div>
-                            <div>Locale / Municipality</div>
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between border-b text-lg pb-4 mb-2 text-gray-400">
-                                <span>Subtotal</span>
-                                <span>₱123456</span>
-                            </div>   
-                              <div class="flex justify-between border-b text-lg pb-2 mt-4 text-gray-400">
-                                <span>Taxes</span>
-                                <span>₱123456</span>
-                            </div>  
-                            <div class="flex justify-between font-semibold border-b text-xl pb-2 text-gray-400 mt-4">
-                                <span>Total</span>
-                                <span class="text-green-800 font-semibold">₱123456</span>
+                        <div class="grid grid-cols-2 gap-6 mt-6">
+                            <div class="grid grid-rows-4">
+                                <div class="border-b text-gray-400 text-xl font-bold pb-2 mb-2">Billing Address</div>
+                                <div>Billing Address</div>
+                                <div>Block Number</div>
+                                <div>Locale / Municipality</div>
                             </div>
+
+                            <div>
+                                <div id="subtotal" class="flex justify-between border-b text-lg pb-4 mb-2 text-gray-400">
+                                    <span>Subtotal</span>
+                                    <span>₱0</span>
+                                </div>
+                                <div id="taxes" class="flex justify-between border-b text-lg pb-2 mt-4 text-gray-400">
+                                    <span>Taxes</span>
+                                    <span>₱0</span>
+                                </div>
+                                <div id="total" class="flex justify-between font-semibold border-b text-xl pb-2 text-gray-400 mt-4">
+                                    <span>Total</span>
+                                    <span class="text-green-800 font-semibold">₱0</span>
+                                </div>
+                            </div>
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', () => {
+                                    // Get the cart from localStorage
+                                    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                                    // Calculate the subtotal, tax, and total
+                                    const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+                                    const tax = subtotal * 0.12; // Assuming a tax rate of 12%
+                                    const total = subtotal + tax;
+
+                                    // Set the text content of the subtotal, tax, and total elements
+                                    document.querySelector('#subtotal span:last-child').textContent = '₱' + subtotal.toFixed(2);
+                                    document.querySelector('#taxes span:last-child').textContent = '₱' + tax.toFixed(2);
+                                    document.querySelector('#total span:last-child').textContent = '₱' + total.toFixed(2);
+                                });
+                            </script>
                         </div>
-                    </div>
 
 
                     </div>
                     <button class="print-button mt-4 w-full text-black text-xl py-4 px-4 hover:bg-gray-200 hover:font-bold transition-all ease-in-out">
-                    <i class="ri-import-line font-medium text-2xl"></i>
-                     Print Receipt</button>
-                    </div>
-                
+                        <i class="ri-import-line font-medium text-2xl"></i>
+                        Print Receipt</button>
+                </div>
+
             </div>
         </div>
 
@@ -169,6 +157,13 @@
         }
 
         document.querySelector('.print-button').addEventListener('click', printReceipt);
+    </script>
+
+    <script>
+        window.onbeforeunload = function() {
+            // Clear the cart in localStorage
+            localStorage.removeItem('cart');
+        };
     </script>
 
     <script src="./../../src/route.js"></script>

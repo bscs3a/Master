@@ -105,30 +105,30 @@
 
 
                     <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 w-1/2 h-full">
-                        <form action="/addSales" method="POST">
+                        <form action="/addSales" method="POST" onsubmit="clearCart()">
                             <div class="font-medium text-xl mb-4 text-gray-500 border-b pb-2">Shipping Information</div>
                             <!-- Form for delivery address and date -->
                             <div>
                                 <label for="customerFirstName" class="block mb-2">Customer First Name:</label>
-                                <input type="text" id="customerFirstName" name="customerFirstName" class="w-full p-2 border border-gray-300 rounded mb-4">
+                                <input type="text" id="customerFirstName" name="customerFirstName" class="w-full p-2 border border-gray-300 rounded mb-4" required>
                             </div>
                             <div>
                                 <label for="customerLastName" class="block mb-2">Customer Last Name:</label>
-                                <input type="text" id="customerLastName" name="customerLastName" class="w-full p-2 border border-gray-300 rounded mb-4">
+                                <input type="text" id="customerLastName" name="customerLastName" class="w-full p-2 border border-gray-300 rounded mb-4" required>
                             </div>
                             <div>
                                 <label for="customerEmail" class="block mb-2">Customer Email:</label>
-                                <input type="email" id="customerEmail" name="customerEmail" class="w-full p-2 border border-gray-300 rounded mb-4">
+                                <input type="email" id="customerEmail" name="customerEmail" class="w-full p-2 border border-gray-300 rounded mb-4" required>
                             </div>
                             <div>
                                 <label for="customerPhone" class="block mb-2">Customer Phone:</label>
-                                <input type="tel" id="customerPhone" name="customerPhone" class="w-full p-2 border border-gray-300 rounded mb-4">
+                                <input type="tel" id="customerPhone" name="customerPhone" class="w-full p-2 border border-gray-300 rounded mb-4" required>
                             </div>
 
                             <!-- Option for delivery or pick-up -->
                             <div class="mb-4">
                                 <label class="block mb-2 font-semibold">Delivery or Pick-up:</label>
-                                <select name="SalePreference" id="SalePreference" class="cursor-pointer w-full p-2 border border-gray-300 rounded">
+                                <select name="SalePreference" id="SalePreference" class="cursor-pointer w-full p-2 border border-gray-300 rounded" onchange="toggleSaleDetails(this.value)">
                                     <option value="delivery">Delivery</option>
                                     <option value="pick-up">Pick-up</option>
                                 </select>
@@ -142,11 +142,31 @@
                                 <input type="date" id="deliveryDate" name="deliveryDate" class="w-full p-2 border border-gray-300 rounded mb-4" min="<?php echo date('Y-m-d'); ?>">
                             </div>
 
+                            <script>
+                                function toggleSaleDetails(salePreference) {
+                                    const addressInput = document.getElementById('address');
+                                    const deliveryDateInput = document.getElementById('deliveryDate');
+
+                                    if (salePreference == 'delivery') {
+                                        addressInput.required = true;
+                                        deliveryDateInput.required = true;
+                                    } else {
+                                        addressInput.required = false;
+                                        deliveryDateInput.required = false;
+                                        deliveryDateInput.value = '';
+                                    }
+                                }
+
+                                // Call the function on page load to set the initial state
+                                document.addEventListener('DOMContentLoaded', () => {
+                                    toggleSaleDetails(document.getElementById('SalePreference').value);
+                                });
+                            </script>
 
                             <!-- Mode of payment -->
                             <div class="mb-4">
                                 <label class="block mb-2 font-semibold">Mode of Payment:</label>
-                                <select name="payment-mode" id="payment-mode" class="w-full p-2 border border-gray-300 rounded">
+                                <select name="payment-mode" id="payment-mode" class="w-full p-2 border border-gray-300 rounded" onchange="togglePaymentDetails(this.value)">
                                     <option value="card">Card</option>
                                     <option value="cash">Cash</option>
                                 </select>
@@ -158,21 +178,82 @@
                                 </div>
                                 <div class="grid grid-cols-2">
                                     <div>
-                                        <input type="" id="expiryDate" name="expiryDate" placeholder="MM/DD/YYYY" class="text-gray-200 w-full p-4 border border-gray-300 rounded ">
+                                        <input type="text" id="expiryDate" name="expiryDate" placeholder="Expiry Date" class=" w-full p-4 border border-gray-300 rounded">
                                     </div>
                                     <div>
-                                        <input type="text" id="cvv" name="cvv" placeholder="CVC" class="w-full p-4 border border-gray-300 rounded">
+                                        <input type="number" id="cvv" name="cvv" placeholder="CVC" class="w-full p-4 border border-gray-300 rounded">
                                     </div>
                                 </div>
                             </div>
+
+                            <script>
+                                function togglePaymentDetails(paymentMode) {
+                                    const cardNumberInput = document.getElementById('cardNumber');
+                                    const expiryDateInput = document.getElementById('expiryDate');
+                                    const cvvInput = document.getElementById('cvv');
+
+                                    if (paymentMode == 'card') {
+                                        cardNumberInput.required = true;
+                                        expiryDateInput.required = true;
+                                        cvvInput.required = true;
+                                    } else {
+                                        cardNumberInput.required = false;
+                                        expiryDateInput.required = false;
+                                        cvvInput.required = false;
+                                        cardNumberInput.value = '';
+                                        expiryDateInput.value = '';
+                                        cvvInput.value = '';
+                                    }
+                                }
+
+                                // Call the function on page load to set the initial state
+                                document.addEventListener('DOMContentLoaded', () => {
+                                    togglePaymentDetails(document.getElementById('payment-mode').value);
+                                });
+                            </script>
+
+                            <input type="hidden" id="totalAmount" name="totalAmount">
+                            <input type="hidden" id="cartData" name="cartData">
+
                             <button type="submit" value="Submit" class="bg-green-800 text-white rounded px-4 py-2 mt-4 w-full hover:bg-gray-200 hover:text-green-800 hover:font-bold transition-colors ease-in-out">Complete Sale</button>
                         </form>
+
+                        <!-- <script>
+                            function clearCart() {
+                                // Clear the cart in localStorage
+                                localStorage.removeItem('cart');
+                            }
+                        </script> -->
+
                     </div>
                 </div>
             </div>
         </div>
         </div>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get the cart from localStorage
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Calculate the total amount
+            const totalAmount = cart.reduce((total, item) => total + item.priceWithTax * item.quantity, 0);
+
+            // Set the value of the hidden input field
+            document.getElementById('totalAmount').value = totalAmount.toFixed(2);
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get the cart from localStorage
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Set the value of the hidden input field
+            document.getElementById('cartData').value = JSON.stringify(cart);
+        });
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {

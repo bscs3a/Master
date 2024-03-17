@@ -15,11 +15,12 @@ $sls = [
     '/sls/Audit-Trail' => "$path/sls.AuditTrail.php",
     // ... other routes ...
 ];
-
 Router::post('/addSales', function () {
+    // Get database instance and connection
     $db = Database::getInstance();
     $conn = $db->connect();
 
+    // Get form data
     $customerFirstName = $_POST['customerFirstName'];
     $customerLastName = $_POST['customerLastName'];
     $customerEmail = $_POST['customerEmail'];
@@ -33,25 +34,38 @@ Router::post('/addSales', function () {
     $cardNumber = $_POST['cardNumber'];
     $expiryDate = $_POST['expiryDate'];
     $cvv = $_POST['cvv'];
+    $totalAmount = $_POST['totalAmount'];
 
-    // Insert into Customers table
+    // Prepare SQL statement to insert customer data
     $stmt = $conn->prepare("INSERT INTO Customers (FirstName, LastName, Address, Phone, Email) VALUES (:firstName, :lastName, :address, :phone, :email)");
+
+    // Bind parameters
     $stmt->bindParam(':firstName', $customerFirstName);
     $stmt->bindParam(':lastName', $customerLastName);
-    $stmt->bindParam(':address', $address);
     $stmt->bindParam(':phone', $customerPhone);
     $stmt->bindParam(':email', $customerEmail);
+
+    // Conditionally bind Address
+    if ($salePreference == 'delivery') {
+        $stmt->bindParam(':address', $address);
+    } else {
+        $emptyAddress = '';
+        $stmt->bindParam(':address', $emptyAddress);
+    }
+
+    // Execute the SQL statement
     $stmt->execute();
 
+    // Get the last inserted customer ID
     $customerId = $conn->lastInsertId();
 
-    // Insert into Sales table
+    // Prepare SQL statement to insert sale data
     $stmt = $conn->prepare("INSERT INTO Sales (SaleDate, DeliveryDate, SalePreference, PaymentMode, TotalAmount, EmployeeID, CustomerID, CardNumber, ExpiryDate, CVV) VALUES (:saleDate, :deliveryDate, :salePreference, :paymentMode, :totalAmount, :employeeId, :customerId, :cardNumber, :expiryDate, :cvv)");
     $stmt->bindParam(':saleDate', $saleDate);
     $stmt->bindParam(':deliveryDate', $deliveryDate);
     $stmt->bindParam(':salePreference', $salePreference);
     $stmt->bindParam(':paymentMode', $paymentMode);
-    $stmt->bindParam(':totalAmount', $totalAmount); // You need to calculate this
+    $stmt->bindParam(':totalAmount', $totalAmount); // Bind the total amount from the form data
     $stmt->bindParam(':employeeId', $employeeId); // You need to get this
     $stmt->bindParam(':customerId', $customerId);
     $stmt->bindParam(':cardNumber', $cardNumber);
@@ -59,16 +73,31 @@ Router::post('/addSales', function () {
     $stmt->bindParam(':cvv', $cvv);
     $stmt->execute();
 
+    // Get the last inserted sale ID
     $saleId = $conn->lastInsertId();
 
-    // Insert into SaleDetails table
-    // You need to do this for each product in the cart
+    // Get the cart data from the form data
+    $cartData = $_POST['cartData'];
+
+    // Decode the cart data
+    $cart = json_decode($cartData, true);
+
+    // Prepare the SQL statement to insert sale details
     $stmt = $conn->prepare("INSERT INTO SaleDetails (SaleID, ProductID, Quantity, UnitPrice) VALUES (:saleId, :productId, :quantity, :unitPrice)");
+
+    // Bind the SaleID parameter
     $stmt->bindParam(':saleId', $saleId);
-    $stmt->bindParam(':productId', $productId); // You need to get this
-    $stmt->bindParam(':quantity', $quantity); // You need to get this
-    $stmt->bindParam(':unitPrice', $unitPrice); // You need to get this
-    $stmt->execute();
+
+    // Loop through the cart and insert each item
+    foreach ($cart as $item) {
+        // Bind the product ID, quantity, and unit price
+        $stmt->bindParam(':productId', $item['id']);
+        $stmt->bindParam(':quantity', $item['quantity']);
+        $stmt->bindParam(':unitPrice', $item['price']);
+
+        // Execute the SQL statement
+        $stmt->execute();
+    }
 
     $rootFolder = dirname($_SERVER['PHP_SELF']);
 
