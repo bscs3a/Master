@@ -9,11 +9,8 @@ $conn = $db->connect();
 //check if the database connection is working
 try {
     $conn->query('SELECT 1');
-    echo 'Database connection is working.';
 } catch (PDOException $e) {
     echo 'Database connection failed: ' . $e->getMessage();
 }
-
-
 
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 $path = './public/finance/views';
 
 $basePath = "$path/fin.";
@@ -17,18 +17,55 @@ $fin = [
     '/fin/ledger' => $basePath . "ledger.gen.php",
     '/fin/ledger/accounts/investors' => $basePath . "ledger.investors.php",
     '/fin/ledger/accounts/payable' => $basePath . "ledger.payable.php",
-    
+
     //request
     '/fin/request' => $basePath . "requestInventory.php",
     '/fin/salary' => $basePath . "requestSalary.php",
-    
-    //charts
-    '/fin/charts' => $basePath . "charts.php", 
+
+    '/fin/test' => $basePath . "test.php",
+
 
     '/' => "C:/xampp/htdocs/Master/index.php",
-    
+
 ];
 
+Router::post('/insert', function () {
+    $db = Database::getInstance();
+    $conn = $db->connect();
+
+    $name = $_POST['name'];
+
+    $stmt = $conn->prepare("INSERT INTO name (name) VALUES (:name)");
+    $stmt->bindParam(':name', $name);
+
+    $rootFolder = dirname($_SERVER['PHP_SELF']);
+
+    if (empty($name)) {
+        header("Location: $rootFolder/fin/test");
+        return;
+    }
+
+    // Execute the statement
+    $stmt->execute();
+
+    header("Location: $rootFolder/fin/test");
+});
+
+Router::post('/delete', function () {
+    $db = Database::getInstance();
+    $conn = $db->connect();
+
+    $name = $_POST['name'];
+
+    $stmt = $conn->prepare("DELETE FROM name WHERE name = :name");
+    $stmt->bindParam(':name', $name);
+
+    // Execute the statement
+    $stmt->execute();
+
+    $rootFolder = dirname($_SERVER['PHP_SELF']);
+    header("Location: $rootFolder/fin/test");
+});
 
 
 
