@@ -36,6 +36,17 @@ class Router
         if (array_key_exists($currentUri, $validRoutes)) {
             require_once $validRoutes[$currentUri];
         } else {
+            // Check for dynamic routes
+            foreach ($validRoutes as $route => $action) {
+                // Replace {param} with regex pattern
+                $pattern = preg_replace('/{[\w-]+}/', '(\w+)', $route);
+                if (preg_match("#^$pattern$#", $currentUri, $matches)) {
+                    array_shift($matches); // remove the first match
+                    call_user_func_array($action, $matches);
+                    exit();
+                }
+            }
+
             // The route is not valid
             require_once __DIR__ . "/src/error.php";
         }
