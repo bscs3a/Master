@@ -24,8 +24,11 @@ $fin = [
 
     '/fin/test' => $basePath . "test.php",
 
-
-    '/' => "C:/xampp/htdocs/Master/index.php",
+    '/fin/test/id={id}' => function($id) use ($basePath) {
+        $_SESSION['id'] = $id;
+        $_GET['id'] = $id;
+        include $basePath . "test2.php";
+    },
 
 ];
 
@@ -40,7 +43,7 @@ Router::post('/insert', function () {
 
     $rootFolder = dirname($_SERVER['PHP_SELF']);
 
-    if (empty($name)) {
+    if (empty ($name)) {
         header("Location: $rootFolder/fin/test");
         return;
     }
