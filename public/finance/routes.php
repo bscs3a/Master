@@ -21,11 +21,26 @@ $fin = [
     //request
     '/fin/request' => $basePath . "requestInventory.php",
     '/fin/salary' => $basePath . "requestSalary.php",
+
+    '/fin/test' => $basePath . "test.php",
     
 
     '/' => "C:/xampp/htdocs/Master/index.php",
     
 ];
+
+Router::post('/fin/test', function () {
+    $name = $_POST['name'];
+ 
+    // Validate the input
+    if (empty($name)) {
+        echo "Name and email are required.";
+        return;
+    }
+    $_SESSION['name'] = $name;
+    
+    echo "Form submitted successfully. Hello, " . $name . "!";
+});
 
 
 
