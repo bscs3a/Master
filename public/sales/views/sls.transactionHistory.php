@@ -49,10 +49,23 @@
         </div>
 
         <!-- End: Header -->
-        <div class="flex flex-col items-center min-h-screen">
+        <?php
+        require_once './src/dbconn.php';
+
+        // Get PDO instance
+        $database = Database::getInstance();
+        $pdo = $database->connect();
+
+        // Query for sales
+        $sqlSales = "SELECT Sales.*, Customers.FirstName, Customers.LastName, Customers.Address FROM Sales JOIN Customers ON Sales.CustomerID = Customers.CustomerID";
+        $stmtSales = $pdo->query($sqlSales);
+        $sales = $stmtSales->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+
+        <div class="flex flex-col items-center min-h-screen mb-10">
             <div class="w-full max-w-6xl mt-10">
                 <div class="flex justify-between items-center">
-                    <h1 class="mb-3 text-xl font-bold text-black">Transaction History</h1>
+                    <h1 class="mb-3 text-xl font-bold text-black">Transactions</h1>
                     <div class="relative mb-3">
                         <input type="text" placeholder="Search by ID..." class="px-3 py-2 pl-5 pr-10 border rounded-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-6 h-6">
@@ -63,21 +76,23 @@
                 <table class="table-auto w-full mx-auto text-left rounded-lg overflow-hidden shadow-lg">
                     <thead class="bg-gray-200">
                         <tr>
-                            <th class="px-4 py-2 font-semibold">Name</th>
-                            <th class="px-4 py-2 font-semibold">Order ID</th>
+                            <th class="px-4 py-2 font-semibold">Customer Name</th>
+                            <th class="px-4 py-2 font-semibold">Sale ID</th>
                             <th class="px-4 py-2 font-semibold">Address</th>
                             <th class="px-4 py-2 font-semibold">Total Amount</th>
-                            <th class="px-4 py-2 font-semibold">Delivery Status</th>
+                            <th class="px-4 py-2 font-semibold">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="border border-gray-200 bg-white" onclick="location.href='/master/sls/Transaction-Details'" route='/sls/Transaction-Details' style="cursor: pointer;">
-                            <td class="px-4 py-2">John Doe</td>
-                            <td class="px-4 py-2">123456</td>
-                            <td class="px-4 py-2">123 Main St, Anytown, USA</td>
-                            <td class="px-4 py-2">&#8369;1500.00</td>
-                            <td class="px-4 py-2">Delivered</td>
-                        </tr>
+                        <?php foreach ($sales as $sale) : ?>
+                            <tr class="border border-gray-200 bg-white">
+                                <td class="px-4 py-2"><?= $sale['FirstName'] . ' ' . $sale['LastName'] ?></td>
+                                <td class="px-4 py-2"><?= $sale['SaleID'] ?></td>
+                                <td class="px-4 py-2"><?= $sale['Address'] ?></td>
+                                <td class="px-4 py-2">&#8369;<?= number_format($sale['TotalAmount'], 2) ?></td>
+                                <td class="px-4 py-2"><a href="/master/sls/Transaction-Details" class="text-blue-500 hover:underline">View</a></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
@@ -92,7 +107,7 @@
             document.getElementById('mainContent').classList.toggle('md:ml-64');
         });
     </script>
-    <script  src="./../src/route.js"></script>
+    <script src="./../src/route.js"></script>
 </body>
 
 </html>
