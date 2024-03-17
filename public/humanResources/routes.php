@@ -140,6 +140,181 @@ Router::post('/hr/employees', function () {
     include './public/humanResources/views/hr.employees.php';
 });
 
+// search employees in DEPARTMENTS : Product Order
+Router::post('/hr/employees/departments/product-order', function () {
+    $db = Database::getInstance();
+    $conn = $db->connect();
+
+    $search = $_POST['search'];
+
+    $rootFolder = dirname($_SERVER['PHP_SELF']);
+
+    if (empty($search)) {
+        header("Location: $rootFolder/hr/employees/departments/product-order");
+        return;
+    }
+
+    $query = "SELECT * FROM employees WHERE first_name = :search OR last_name = :search OR position = :search OR id = :search AND department = 'Product Order';";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":search", $search);
+
+    // Execute the statement
+    $stmt->execute();
+    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    include './public/humanResources/views/hr.departments.PO.php';
+});
+
+// search employees in DEPARTMENTS : Inventory
+Router::post('/hr/employees/departments/inventory', function () {
+    $db = Database::getInstance();
+    $conn = $db->connect();
+
+    $search = $_POST['search'];
+
+    $rootFolder = dirname($_SERVER['PHP_SELF']);
+
+    if (empty($search)) {
+        header("Location: $rootFolder/hr/employees/departments/inventory");
+        return;
+    }
+
+    $query = "SELECT * FROM employees WHERE first_name = :search OR last_name = :search OR position = :search OR id = :search AND department = 'Inventory';";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":search", $search);
+
+    // Execute the statement
+    $stmt->execute();
+    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    include './public/humanResources/views/hr.departments.inv.php';
+});
+
+// search employees in DEPARTMENTS : Point of Sales
+Router::post('/hr/employees/departments/sales', function () {
+    $db = Database::getInstance();
+    $conn = $db->connect();
+
+    $search = $_POST['search'];
+
+    $rootFolder = dirname($_SERVER['PHP_SELF']);
+
+    if (empty($search)) {
+        header("Location: $rootFolder/hr/employees/departments/sales");
+        return;
+    }
+
+    $query = "SELECT * FROM employees WHERE first_name = :search OR last_name = :search OR position = :search OR id = :search AND department = 'Point of Sales';";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":search", $search);
+
+    // Execute the statement
+    $stmt->execute();
+    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    include './public/humanResources/views/hr.departments.POS.php';
+});
+
+// search employees in DEPARTMENTS : Finance
+Router::post('/hr/employees/departments/finance', function () {
+    $db = Database::getInstance();
+    $conn = $db->connect();
+
+    $search = $_POST['search'];
+
+    $rootFolder = dirname($_SERVER['PHP_SELF']);
+
+    if (empty($search)) {
+        header("Location: $rootFolder/hr/employees/departments/finance");
+        return;
+    }
+
+    $query = "SELECT * FROM employees WHERE first_name = :search OR last_name = :search OR position = :search OR id = :search AND department = 'Finance';";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":search", $search);
+
+    // Execute the statement
+    $stmt->execute();
+    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    include './public/humanResources/views/hr.departments.fin.php';
+});
+
+// search employees in DEPARTMENTS : Delivery
+Router::post('/hr/employees/departments/delivery', function () {
+    $db = Database::getInstance();
+    $conn = $db->connect();
+
+    $search = $_POST['search'];
+
+    $rootFolder = dirname($_SERVER['PHP_SELF']);
+
+    if (empty($search)) {
+        header("Location: $rootFolder/hr/employees/departments/delivery");
+        return;
+    }
+
+    $query = "SELECT * FROM employees WHERE first_name = :search OR last_name = :search OR position = :search OR id = :search AND department = 'Delivery';";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":search", $search);
+
+    // Execute the statement
+    $stmt->execute();
+    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    include './public/humanResources/views/hr.departments.dlv.php';
+});
+
+// search employees in DEPARTMENTS : Human Resources
+Router::post('/hr/employees/departments/human-resources', function () {
+    $db = Database::getInstance();
+    $conn = $db->connect();
+
+    $search = $_POST['search'];
+
+    $rootFolder = dirname($_SERVER['PHP_SELF']);
+
+    if (empty($search)) {
+        header("Location: $rootFolder/hr/employees/departments/human-resources");
+        return;
+    }
+
+    $query = "SELECT * FROM employees WHERE first_name = :search OR last_name = :search OR position = :search OR id = :search AND department = 'Human Resources';";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":search", $search);
+
+    // Execute the statement
+    $stmt->execute();
+    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    include './public/humanResources/views/hr.departments.HR.php';
+});
+
+// search applicants
+Router::post('/hr/applicants', function () {
+    $db = Database::getInstance();
+    $conn = $db->connect();
+
+    $search = $_POST['search'];
+
+    $rootFolder = dirname($_SERVER['PHP_SELF']);
+
+    if (empty($search)) {
+        header("Location: $rootFolder/hr/applicants");
+        return;
+    }
+
+    $query = "SELECT * FROM applicants WHERE first_name = :search OR last_name = :search OR applyingForPosition = :search OR id = :search;";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":search", $search);
+
+    // Execute the statement
+    $stmt->execute();
+    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    include './public/humanResources/views/hr.applicants.php';
+});
+
 // example [test]
 Router::post('/add', function () {
     $db = Database::getInstance();
