@@ -39,7 +39,7 @@ $hr = [
     },
 ];
 
-// add employees
+// add employees [NOT YET FINALIZED]
 Router::post('/add-employees', function () {
     $db = Database::getInstance();
     $conn = $db->connect();
