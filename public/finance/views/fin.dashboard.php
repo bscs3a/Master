@@ -40,10 +40,41 @@
             <!-- Start: Profile -->
 
             <ul class="ml-auto flex items-center">
-                <div class="text-black font-medium">Sample User</div>
-                <li class="dropdown ml-3">
-                    <i class="ri-arrow-down-s-line"></i>
-                </li>
+
+                <div class="relative inline-block text-left">
+                    <div>
+                        <a class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-black bg-white rounded-md shadow-sm hover:bg-gray-50 focus:outline-none hover:cursor-pointer"
+                            id="options-menu" aria-haspopup="true" aria-expanded="true">
+                            <div class="text-black font-medium mr-4 ">
+                                <?= $_SESSION['fullname']; ?>
+                            </div>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </a>
+                    </div>
+
+                    <div class="origin-top-right absolute right-0 mt-4 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
+                        id="dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                        <div class="py-1" role="none">
+                            <a href="logout.php"
+                                class="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                role="menuitem">
+                                <i class="ri-logout-box-line"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    document.getElementById('options-menu').addEventListener('click', function () {
+                        var dropdownMenu = document.getElementById('dropdown-menu');
+                        if (dropdownMenu.classList.contains('hidden')) {
+                            dropdownMenu.classList.remove('hidden');
+                        } else {
+                            dropdownMenu.classList.add('hidden');
+                        }
+                    });
+                </script>
             </ul>
 
             <!-- End: Profile -->
@@ -75,7 +106,7 @@
 
                             <div class="text-right">
                                 <p class="font-sans font-bold text-xl text-gray-500">Today,</p>
-                                <p class="font-sans font-bold text-xl text-gray-500">March 04, 2024</p>
+                                <p class="font-sans font-bold text-xl text-gray-500"><?php ?></p>
                             </div>
                         </div>
 
@@ -92,7 +123,8 @@
                                         <div class="text-sm font-medium text-gray-400">Total Sales</div>
                                     </div>
                                     <div>
-                                        <img src="../public/finance/img/Profit.png" alt="Profit.png" class="bg-radial-gradient from-[#FFEB95] to-[#FECE01] py-2 px-2 rounded-full">
+                                        <img src="../public/finance/img/Profit.png" alt="Profit.png"
+                                            class="bg-radial-gradient from-[#FFEB95] to-[#FECE01] py-2 px-2 rounded-full">
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +139,8 @@
                                         <div class="text-sm font-medium text-gray-400">Total Expense</div>
                                     </div>
                                     <div>
-                                        <img src="../public/finance/img/RequestMoney.png" alt="request-money.png"  class="bg-radial-gradient from-[#FFEB95] to-[#FECE01] py-2 px-1 rounded-full ">
+                                        <img src="../public/finance/img/RequestMoney.png" alt="request-money.png"
+                                            class="bg-radial-gradient from-[#FFEB95] to-[#FECE01] py-2 px-1 rounded-full ">
                                     </div>
                                 </div>
                             </div>

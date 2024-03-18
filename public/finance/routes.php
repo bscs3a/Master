@@ -1,4 +1,10 @@
 <?php
+
+session_start();
+$_SESSION['user'] = 'admin';
+$_SESSION['role'] = 'admin';
+$_SESSION['fullname'] = "Xailer, Rokhai";
+
 $path = './public/finance/views';
 
 $basePath = "$path/fin.";
@@ -26,6 +32,10 @@ $fin = [
 
 
     '/' => "C:/xampp/htdocs/Master/index.php",
+
+    // functions
+    // can't recognize by the router logout can proceed
+    '/fin/logout' => "./public/finance/functions/logout.php",
 
 ];
 
