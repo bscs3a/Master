@@ -67,7 +67,7 @@
                                 </button>
 
                                 <button
-                                    class="border-e px-4 py-2 text-sm/none bg-gray-200 hover:bg-gray-300 text-gray-900">                   
+                                    class="border-e px-4 py-2 text-sm/none bg-gray-200 hover:bg-gray-300 text-gray-900">
                                     Recent
                                 </button>
                             </div>
@@ -135,56 +135,130 @@
                     <div class="bg-white rounded shadow-lg w-1/3">
                         <div class="border-b pl-3 pr-3 pt-3 flex">
                             <h5 class="font-bold uppercase text-gray-600">New Transactions</h5>
-                            <button id="closeModal" class="ml-auto text-gray-600 hover:text-gray-800 cursor-pointer">
+                            <!-- <button id="closeModal" class="ml-auto text-gray-600 hover:text-gray-800 cursor-pointer">
                                 <i class="ri-close-line"></i>
-                            </button>
+                            </button> -->
                         </div>
+                        <!-- form -->
+                        <?php $rootFolder = dirname($_SERVER['PHP_SELF']); ?>
                         <div class="p-5">
-                            <div class="mb-4 relative">
-                                <label for="date" class="block text-xs font-medium text-gray-900"> Date </label>
-                                <input type="text" id="date" readonly
-                                    class="mt-1 py-1 px-7 w-full rounded-md border border-gray-400 shadow-md  sm:text-sm" />
-                                <i
-                                    class="ri-calendar-fill absolute left-2 top-6 transform -translate-y-0.5 h-6 w-6 text-gray-400"></i>
-                            </div>
+                            <form action="<?= $rootFolder . '/fin/ledger' ?>" method="POST">
+                                <div class="mb-4 relative">
+                                    <label for="date" class="block text-xs font-medium text-gray-900"> Date </label>
+                                    <input type="text" id="date" name="date" required readonly
+                                        class="mt-1 py-1 px-7 w-full rounded-md border border-gray-400 shadow-md  sm:text-sm" />
+                                    <i
+                                        class="ri-calendar-fill absolute left-2 top-6 transform -translate-y-0.5 h-6 w-6 text-gray-400"></i>
+                                </div>
 
-                            <script>
-                                var today = new Date();
-                                var dd = String(today.getDate()).padStart(2, '0');
-                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                                var yyyy = today.getFullYear();
+                                <script>
+                                    var today = new Date();
+                                    var dd = String(today.getDate()).padStart(2, '0');
+                                    var monthNames = ["January", "February", "March", "April", "May", "June",
+                                        "July", "August", "September", "October", "November", "December"];
+                                    var mm = monthNames[today.getMonth()]; //January is 0!
+                                    var yyyy = today.getFullYear();
 
-                                today = mm + '/' + dd + '/' + yyyy;
-                                document.getElementById('date').value = today;
-                            </script>
-                            <div class="mb-4 relative">
-                                <label for="cash" class="block text-xs font-medium text-gray-900"> Cash </label>
-                                <input type="text" id="cash" placeholder="0.00"
-                                    class="mt-1 py-1 px-7 w-full rounded-md border border-gray-400 shadow-md sm:text-sm" />
-                                <span
-                                    class="absolute left-2 top-6 transform -translate-y-0.5 text-gray-400">&#8369;</span>
-                            </div>
-                            <div class="mb-4 relative">
-                                <label for="debit" class="block text-xs font-medium text-gray-900"> Debit </label>
-                                <input type="text" id="debit" placeholder="0.00"
-                                    class="mt-1 py-1 px-7 w-full rounded-md border border-gray-400 shadow-md sm:text-sm" />
-                                <span
-                                    class="absolute left-2 top-6 transform -translate-y-0.5 text-gray-400">&#8369;</span>
-                            </div>
-                            <div class="mb-4 relative">
-                                <label for="credit" class="block text-xs font-medium text-gray-900"> Credit </label>
-                                <input type="text" id="credit" placeholder="0.00"
-                                    class="mt-1 py-1 px-7 w-full rounded-md border border-gray-400 shadow-md sm:text-sm" />
-                                <span
-                                    class="absolute left-2 top-6 transform -translate-y-0.5 text-gray-400">&#8369;</span>
-                            </div>
-                            <div class="flex justify-end items-start mb-2">
-                                <button id="cancelModal"
-                                    class="border border-gray-700 bg-gray-200 hover:bg-gray-100 text-gray-800 text-sm font-bold py-1 px-5 rounded-md ml-4 ">Cancel</button>
-                                <button
-                                    class="border border-gray-700 bg-amber-400 hover:bg-amber-300 text-gray-800 text-sm font-bold py-1 px-7 rounded-md ml-4 ">Save</button>
+                                    today = mm + ' ' + dd + ', ' + yyyy;
+                                    document.getElementById('date').value = today;
+                                </script>
+                                <div class="mb-4 relative">
+                                    <label for="description" class="block text-xs font-medium text-gray-900">
+                                        Description
+                                    </label>
+                                    <input type="text" id="description" name="description" required
+                                        class="mt-1 py-1 px-3 w-full rounded-md border border-gray-400 shadow-md sm:text-sm" />
 
-                            </div>
+                                </div>
+                                <div class="mb-4 relative">
+                                    <label for="amount" class="block text-xs font-medium text-gray-900"> Amount
+                                    </label>
+                                    <input type="text" id="amount" name="amount" placeholder="0.00" required
+                                        class="mt-1 py-1 px-7 w-full rounded-md border border-gray-400 shadow-md sm:text-sm"
+                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+                                    <span
+                                        class="absolute left-2 top-6 transform -translate-y-0.5 text-gray-400">&#8369;</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <div class="mb-4 relative p-1">
+                                        <script>
+                                            function updateOptions(event, targetId) {
+                                                var selectedOption = event.target.value;
+                                                var targetSelect = document.getElementById(targetId);
+                                                var options = targetSelect.options;
+                                                for (var i = 0; i < options.length; i++) {
+                                                    options[i].style.display = options[i].value === selectedOption ? 'none' : '';
+                                                }
+                                            }
+                                        </script>
+                                        <label for="debit" class="block text-xs font-medium text-gray-900"> Debit
+                                        </label>
+                                        <select id="debit" name="debit" required
+                                            class="mt-1 py-1 px-3 w-full rounded-md border border-gray-400 shadow-md sm:text-sm"
+                                            onchange="updateOptions(event, 'credit')">
+                                            <?php
+                                            $db = Database::getInstance();
+                                            $conn = $db->connect();
+
+                                            $sql = "SELECT name FROM ledger";
+                                            $stmt = $conn->prepare($sql);
+
+                                            $stmt->execute();
+
+                                            // Add a blank option as the default
+                                            echo "<option value=\"\" selected=\"selected\">...</option>";
+
+                                            if ($stmt->rowCount() > 0) {
+                                                // output data of each row
+                                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                                    echo "<option value=\"{$row['name']}\">{$row['name']}</option>";
+                                                }
+                                            } else {
+                                                echo "0 results";
+                                            }
+                                            ?>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="mb-4 relative p-1">
+                                        <label for="credit" class="block text-xs font-medium text-gray-900"> Credit
+                                        </label>
+                                        <select id="credit" name="credit" required
+                                            class="mt-1 py-1 px-3 w-full rounded-md border border-gray-400 shadow-md sm:text-sm"
+                                            onchange="updateOptions(event, 'debit')">
+                                            <?php
+                                            $db = Database::getInstance();
+                                            $conn = $db->connect();
+
+                                            $sql = "SELECT * FROM ledger";
+                                            $stmt = $conn->prepare($sql);
+
+                                            $stmt->execute();
+
+                                            echo "<option value=\"\" selected=\"selected\">...</option>";
+
+                                            if ($stmt->rowCount() > 0) {
+                                                // output data of each row
+                                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                                    echo "<option value=\"{$row['name']}\">{$row['name']}</option>";
+                                                }
+                                            } else {
+                                                echo "0 results";
+                                            }
+                                            ?>
+                                        </select>
+
+                                    </div>
+                                </div>
+                             
+                                <div class="flex justify-end items-start mb-2">
+                                    <button id="cancelModal" type="button"
+                                        class="border border-gray-700 bg-gray-200 hover:bg-gray-100 text-gray-800 text-sm font-bold py-1 px-5 rounded-md ml-4 ">Cancel</button>
+                                    <button type="submit"
+                                        class="border border-gray-700 bg-amber-400 hover:bg-amber-300 text-gray-800 text-sm font-bold py-1 px-7 rounded-md ml-4 ">Save</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -200,8 +274,8 @@
                     document.getElementById('openModal').addEventListener('click', function () {
                         document.getElementById('myModal').classList.remove('hidden');
                     });
-
-                    ['closeModal', 'cancelModal'].forEach(id => {
+                    //'closeModal',
+                    ['cancelModal'].forEach(id => {
                         document.getElementById(id).addEventListener('click', function (event) {
                             event.stopPropagation();
                             closeModalAndClearInputs();
@@ -215,33 +289,71 @@
                         <thead class="ltr:text-left rtl:text-right bg-gray-200">
                             <tr>
                                 <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Date</th>
-                                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Cash</th>
+                                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Account</th>
                                 <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Debit</th>
                                 <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Credit</th>
                             </tr>
                         </thead>
 
-                        <tbody class="divide-y divide-gray-200 text-center">
-                            <tr>
-                                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">24/05/1995</td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700"></td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700">&#8369;100,000</td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700">&#8369;120,000</td>
-                            </tr>
+                        <tbody class="divide-y divide-gray-200  text-center">
+                            <?php
+                            $db = Database::getInstance();
+                            $conn = $db->connect();
 
-                            <tr>
-                                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Jane Doe</td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700">04/11/1980</td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700">>&#8369;20,000</td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700">&#8369;100,000</td>
-                            </tr>
+                            // Function to get ledger name
+                            function getLedgerName($conn, $ledgerNo)
+                            {
+                                $stmt = $conn->prepare("SELECT name FROM ledger WHERE ledgerno = :ledgerno");
+                                $stmt->bindParam(':ledgerno', $ledgerNo);
+                                $stmt->execute();
+                                return $stmt->fetchColumn();
+                            }
 
-                            <tr>
-                                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Gary Barlow</td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700">24/05/1995</td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700">&#8369;100,000</td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700">>&#8369;20,000</td>
-                            </tr>
+                            // Execute SQL query to fetch all data from ledgertransaction table
+                            $stmt = $conn->prepare("SELECT * FROM ledgertransaction ORDER BY DateTime DESC");
+                            $stmt->execute();
+                            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            ?>
+
+                            <div>
+                                <?php foreach ($rows as $row): ?>
+                                    <tr class="">
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-900">
+                                            <?= (new DateTime($row['DateTime']))->format('F d, Y') ?>
+                                        </td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                                            <?= getLedgerName($conn, $row['LedgerNo_Dr']) ?>
+                                        </td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">&#8369;
+                                            <?= $row['amount'] ?>
+                                        </td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-4 py-2  text-gray-700"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                                            <?= getLedgerName($conn, $row['LedgerNo']) ?>
+                                        </td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700"></td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">&#8369;
+                                            <?= $row['amount'] ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" class="whitespace-nowrap px-4 py-2 text-gray-700">
+                                            <?= $row['details'] ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </div>
+
+
+
+
+
+
+
+
                         </tbody>
                     </table>
                 </div>
@@ -300,7 +412,27 @@
             </li>
         </ol>
     </main>
-    <script  src="./../../../src/route.js"></script>
+    <script src="./../src/form.js"></script>
+    <script src="./../src/route.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const form = document.querySelector('form');
+            console.log(form); // Check if form is found
+
+            const pathSegments = window.location.pathname.split('/');
+            console.log(pathSegments); // Check path segments
+
+            const rootFolder = pathSegments.length > 1 ? pathSegments[1] : '';
+            console.log(rootFolder); // Check root folder
+
+            const existingAction = form.getAttribute('action');
+            console.log(existingAction); // Check existing action
+
+            form.action = `/${rootFolder}${existingAction}`;
+            console.log(form.action); // Check final form action
+        });
+    </script>
+
     <!-- Start: Sidebar -->
     <!-- End: Dashboard -->
 </body>
