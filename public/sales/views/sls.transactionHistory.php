@@ -62,7 +62,7 @@
         $sales = $stmtSales->fetchAll(PDO::FETCH_ASSOC);
         ?>
 
-        <div class="flex flex-col items-center min-h-screen mb-10">
+        <div class="flex flex-col items-center min-h-screen mb-10 ">
             <div class="w-full max-w-6xl mt-10">
                 <div class="flex justify-between items-center">
                     <h1 class="mb-3 text-xl font-bold text-black">Transactions</h1>
