@@ -52,12 +52,12 @@
 
         <!-- End: Header -->
 
-        <div class="w-full p-6 bg-white">
+        <div class="w-full px-6 py-3 bg-white">
 
-            <div class="justify-between items-start mb-4">
+            <div class="justify-between items-start">
                 <!-- Button -->
                 <div class="flex justify-between">
-                    <div class="items-start mb-2">
+                    <div class="items-start mb-1">
                         <div class="relative">
                             <div class="inline-flex items-center overflow-hidden rounded-lg  border border-gray-500">
                                 <!-- bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium text-sm  -->
@@ -285,17 +285,17 @@
 
                 <!-- Table -->
                 <div class="overflow-x-auto rounded-lg border border-gray-400">
-                    <table class="min-w-full divide-y-2 divide-gray-400 bg-white text-sm">
+                    <table class="divide-y-2 divide-gray-400 min-w-full bg-white text-sm">
                         <thead class="ltr:text-left rtl:text-right bg-gray-200">
                             <tr>
-                                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Date</th>
-                                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Account</th>
-                                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Debit</th>
-                                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Credit</th>
+                                <th class="whitespace-nowrap px-4 py-1 font-medium text-gray-900">Date</th>
+                                <th class="whitespace-nowrap px-4 py-1 font-medium text-gray-900">Account</th>
+                                <th class="whitespace-nowrap px-4 py-1 font-medium text-gray-900">Debit</th>
+                                <th class="whitespace-nowrap px-4 py-1 font-medium text-gray-900">Credit</th>
                             </tr>
                         </thead>
 
-                        <tbody class="divide-y divide-gray-200  text-center">
+                        <tbody class=" text-center">
                             <?php
                             $db = Database::getInstance();
                             $conn = $db->connect();
@@ -318,29 +318,29 @@
                             <div>
                                 <?php foreach ($rows as $row): ?>
                                     <tr class="">
-                                        <td class="whitespace-nowrap px-4 py-2 text-gray-900">
+                                        <td class="whitespace-nowrap px-4  text-gray-900">
                                             <?= (new DateTime($row['DateTime']))->format('F d, Y') ?>
                                         </td>
-                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                                        <td class="whitespace-nowrap px-4 py-1 text-gray-700">
                                             <?= getLedgerName($conn, $row['LedgerNo_Dr']) ?>
                                         </td>
-                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">&#8369;
+                                        <td class="whitespace-nowrap px-4 py-1 text-gray-700">&#8369;
                                             <?= $row['amount'] ?>
                                         </td>
-                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700"></td>
+                                        <td class="whitespace-nowrap px-4 py-1 text-gray-700"></td>
                                     </tr>
                                     <tr>
-                                        <td class="whitespace-nowrap px-4 py-2  text-gray-700"></td>
-                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                                        <td class="whitespace-nowrap px-4 py-1  text-gray-700"></td>
+                                        <td class="whitespace-nowrap px-4 py-1 text-gray-700">
                                             <?= getLedgerName($conn, $row['LedgerNo']) ?>
                                         </td>
-                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700"></td>
-                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">&#8369;
+                                        <td class="whitespace-nowrap px-4 py-1 text-gray-700"></td>
+                                        <td class="whitespace-nowrap px-4 py-1 text-gray-700">&#8369;
                                             <?= $row['amount'] ?>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="4" class="whitespace-nowrap px-4 py-2 text-gray-700">
+                                    <tr class="bg-gray-200">
+                                        <td colspan="4" class="italic whitespace-nowrap px-4 py-1 text-gray-700">
                                             <?= $row['details'] ?>
                                         </td>
                                     </tr>
