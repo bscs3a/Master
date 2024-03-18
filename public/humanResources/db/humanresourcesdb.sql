@@ -3,9 +3,9 @@ USE humanresourcesdb;
 
 CREATE TABLE employees (
     id INT(10) NOT NULL AUTO_INCREMENT,
-	image_url VARCHAR(255) NULL DEFAULT NULL,
+	  image_url VARCHAR(255) NULL DEFAULT NULL,
     first_name VARCHAR(30) NOT NULL,
-middle_name VARCHAR(30),
+    middle_name VARCHAR(30),
     last_name VARCHAR(30) NOT NULL,
     dateofbirth DATE NOT NULL,
     gender ENUM('male','female') NOT NULL,
@@ -15,7 +15,7 @@ middle_name VARCHAR(30),
     email VARCHAR(30) NOT NULL UNIQUE,
     civil_status ENUM('single','married','divorced','widowed') NOT NULL,
     department ENUM('Product Order','Human Resources','Point of Sale', 'Inventory','Finance','Delivery') NOT NULL,
-	position VARCHAR(50) NOT NULL,
+	  position VARCHAR(50) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -85,7 +85,7 @@ CREATE TABLE leave_requests (
 CREATE TABLE applicants (
     id INT(10) NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(30) NOT NULL,
-middle_name VARCHAR(30),
+    middle_name VARCHAR(30),
     last_name VARCHAR(30) NOT NULL,
     dateofbirth DATETIME NOT NULL,
     gender ENUM('male','female') NOT NULL,
