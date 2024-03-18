@@ -17,7 +17,7 @@ $sls = [
 ];
 
 
-
+// START: Add Sales
 class Customer {
     public function create($firstName, $lastName, $phone, $email) {
         $db = Database::getInstance();
@@ -83,26 +83,48 @@ class DeliveryOrder {
     }
 }
 
+class Product {
+    public function decreaseQuantity($productId, $quantity) {
+        $db = Database::getInstance();
+        $conn = $db->connect();
+
+        $stmt = $conn->prepare("UPDATE Products SET Quantity = Quantity - :quantity WHERE ProductID = :productId");
+        $stmt->bindParam(':quantity', $quantity);
+        $stmt->bindParam(':productId', $productId);
+        $stmt->execute();
+    }
+}
+
 Router::post('/addSales', function () {
     $customer = new Customer();
     $customerId = $customer->create($_POST['customerFirstName'], $_POST['customerLastName'], $_POST['customerPhone'], $_POST['customerEmail']);
 
     $sale = new Sale();
     $saleId = $sale->create(date('Y-m-d H:i:s'), $_POST['SalePreference'], $_POST['payment-mode'], $_POST['totalAmount'], '1', $customerId, $_POST['cardNumber'], $_POST['expiryDate'], $_POST['cvv']);
-    
+
     $saleDetail = new SaleDetail();
     $deliveryOrder = new DeliveryOrder();
     $cart = json_decode($_POST['cartData'], true);
     foreach ($cart as $item) {
         $saleDetail->create($saleId, $item['id'], $item['quantity'], $item['price']);
-        if ($_POST['SalePreference'] === 'delivery') { // Changed from 'Delivery' to 'delivery'
-            $deliveryOrder->create($saleId, $item['id'], $item['quantity'], $_POST['deliveryAddress'], $_POST['deliveryDate']); // Changed from 'deliveryaddress' to 'deliveryAddress'
+        if ($_POST['SalePreference'] === 'delivery') { 
+            $deliveryOrder->create($saleId, $item['id'], $item['quantity'], $_POST['deliveryAddress'], $_POST['deliveryDate']); 
+        }
+    }
+
+    $product = new Product();
+    foreach ($cart as $item) {
+        $saleDetail->create($saleId, $item['id'], $item['quantity'], $item['price']);
+        $product->decreaseQuantity($item['id'], $item['quantity']); // Decrease product quantity
+        if ($_POST['SalePreference'] === 'delivery') {
+            $deliveryOrder->create($saleId, $item['id'], $item['quantity'], $_POST['deliveryAddress'], $_POST['deliveryDate']);
         }
     }
 
     $rootFolder = dirname($_SERVER['PHP_SELF']);
     header("Location: $rootFolder/sls/POS/Receipt");
 });
+// END: Add Sales
 
 Router::post('/remove', function () {
     $db = Database::getInstance();
