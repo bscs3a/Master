@@ -1,5 +1,5 @@
 <?php
-  require_once './public/humanResources/func/add-employee.php';
+  // require_once './public/humanResources/func/add-employee.php';
 ?>
 
 <!DOCTYPE html>
@@ -167,10 +167,10 @@
               class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
               id="civilstatus"
               name="civilstatus">
-              <option value="">Single</option>
-              <option value="Female">Married</option>
-              <option value="Male">Widowed</option>
-              <option value="">Divorced</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Widowed">Widowed</option>
+              <option value="Divorced">Divorced</option>
           </select>
           </div>
           <div class="mr-2">
@@ -258,7 +258,7 @@
                         </label>
                         <input
                           class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                          name="basesalary"
+                          name="monthlysalary"
                           id="monthlysalary"
                           type="number"
                           placeholder="Ex. 20000"

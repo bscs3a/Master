@@ -11,10 +11,10 @@ CREATE TABLE employees (
     gender ENUM('male','female') NOT NULL,
     nationality VARCHAR(30) NOT NULL,
     address VARCHAR(255) NOT NULL,
-    contact_no VARCHAR(20) NOT NULL,
-    email VARCHAR(30) NOT NULL UNIQUE,
-    civil_status ENUM('single','married','divorced','widowed') NOT NULL,
-    department ENUM('Product Order','Human Resources','Point of Sale', 'Inventory','Finance','Delivery') NOT NULL,
+    contact_no VARCHAR(20) DEFAULT 'N/A',
+    email VARCHAR(30) DEFAULT 'N/A',
+    civil_status ENUM('Single','Married','Divorced','Widowed') NOT NULL,
+    department ENUM('Product Order','Human Resources','Point of Sales', 'Inventory','Finance','Delivery') NOT NULL,
 	  position VARCHAR(50) NOT NULL,
     PRIMARY KEY (id)
 );
@@ -31,8 +31,7 @@ CREATE TABLE employment_info (
 
 CREATE TABLE salary_info (
     id INT(10) NOT NULL AUTO_INCREMENT,
-    base_salary DECIMAL(10,2) NOT NULL,
-    bonus DECIMAL(10,2) NOT NULL,
+    monthly_salary DECIMAL(10,2) NOT NULL,
     total_salary DECIMAL(10,2) NOT NULL,
     employees_id INT(10) NOT NULL,
     PRIMARY KEY (id),
@@ -76,7 +75,7 @@ CREATE TABLE leave_requests (
     date_submitted TIMESTAMP NOT NULL DEFAULT current_timestamp(),
     start_date DATETIME NOT NULL,
     end_date DATETIME NOT NULL,
-    status ENUM('pending','approved','denied'),
+    status ENUM('Pending','Approved','Denied'),
     employees_id INT(10) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (employees_id) REFERENCES employees (id)
@@ -88,9 +87,9 @@ CREATE TABLE applicants (
     middle_name VARCHAR(30),
     last_name VARCHAR(30) NOT NULL,
     dateofbirth DATETIME NOT NULL,
-    gender ENUM('male','female') NOT NULL,
+    gender ENUM('Male','Female') NOT NULL,
     nationality VARCHAR(30) NOT NULL,
-    civil_status ENUM('single','married','divorced','widowed') NOT NULL,
+    civil_status ENUM('Single','Married','Divorced','Widowed') NOT NULL,
     applyingForPosition VARCHAR(30) NOT NULL,
     apply_date TIMESTAMP NOT NULL DEFAULT current_timestamp(),
     PRIMARY KEY (id)
@@ -100,7 +99,7 @@ CREATE TABLE account_info (
     id INT(10) NOT NULL AUTO_INCREMENT,
     username VARCHAR(30) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role ENUM('Product Order','Human Resources','Point of Sale', 'Inventory','Finance','Delivery') NOT NULL,
+    role ENUM('Product Order','Human Resources','Point of Sales', 'Inventory','Finance','Delivery') NOT NULL,
     employees_id INT(10) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (employees_id) REFERENCES employees (id)
@@ -111,6 +110,6 @@ CREATE TABLE session (
     username VARCHAR(30) NOT NULL UNIQUE,
     login_time TIMESTAMP DEFAULT current_timestamp(),
     logout_time TIMESTAMP DEFAULT current_timestamp(),
-    role ENUM('Product Order','Human Resources','Point of Sale', 'Inventory','Finance','Delivery') NOT NULL,
+    role ENUM('Product Order','Human Resources','Point of Sales', 'Inventory','Finance','Delivery') NOT NULL,
     PRIMARY KEY (id)
 );

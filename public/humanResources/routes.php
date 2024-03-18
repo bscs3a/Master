@@ -79,14 +79,14 @@ Router::post('/hr/employees/add', function () {
 
     // SALARY AND TAX INFORMATION
     // salary
-    $basesalary = $_POST['basesalary'];
+    $monthlysalary = $_POST['monthlysalary'];
     $totalsalary = $_POST['totalsalary'];
     
-    $query = "INSERT INTO salary_info (employees_id, base_salary, total_salary) VALUES (:employeeId, :basesalary, :totalsalary);";
+    $query = "INSERT INTO salary_info (employees_id, monthly_salary, total_salary) VALUES (:employeeId, :monthlysalary, :totalsalary);";
     $stmt = $conn->prepare($query);
     $stmt->execute([
         ':employeeId' => $employeeId,
-        ':basesalary' => $basesalary,
+        ':monthlysalary' => $monthlysalary,
         ':totalsalary' => $totalsalary,
     ]);
 
@@ -120,7 +120,7 @@ Router::post('/hr/employees/add', function () {
 
     $rootFolder = dirname($_SERVER['PHP_SELF']);
 
-    if (empty($firstName) || empty($lastName) || empty($birthday) || empty($gender) || empty($nationality) || empty($civilstatus) || empty($address) || empty($contactnumber) || empty($email) || empty($department) || empty($position) || empty($basesalary) || empty($totalsalary) || empty($incometax) || empty($withholdingtax) || empty($sss) || empty($pagibig) || empty($philhealth) || empty($thirteenthmonth)) {
+    if (empty($firstName) || empty($lastName) || empty($birthday) || empty($gender) || empty($nationality) || empty($civilstatus) || empty($address) || empty($contactnumber) || empty($email) || empty($department) || empty($position) || empty($monthlysalary) || empty($totalsalary) || empty($incometax) || empty($withholdingtax) || empty($sss) || empty($pagibig) || empty($philhealth) || empty($thirteenthmonth)) {
         header("Location: $rootFolder/hr/employees/add");
         return;
     }
