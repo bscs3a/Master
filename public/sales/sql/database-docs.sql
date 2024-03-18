@@ -59,11 +59,12 @@ CREATE TABLE IF NOT EXISTS SaleDetails (
 -- DeliveryOrders Table
 CREATE TABLE IF NOT EXISTS DeliveryOrders (
     DeliveryOrderID INT AUTO_INCREMENT PRIMARY KEY,
-    SaleID INT,  -- Reference to the corresponding sales order
+    SaleID INT,  
     ProductID INT,
     Quantity INT,
     DeliveryAddress TEXT,
     DeliveryDate DATE,
+    ReceivedDate DATE,  
     DeliveryStatus ENUM('Pending', 'In Transit', 'Delivered') DEFAULT 'Pending',
     FOREIGN KEY (SaleID) REFERENCES Sales(SaleID),
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID)

@@ -13,8 +13,10 @@ $sls = [
     '/sls/POS/Checkout' => "$path/sls.checkout.php",
     '/sls/POS/Receipt' => "$path/sls.Receipt.php",
     '/sls/Audit-Trail' => "$path/sls.AuditTrail.php",
+    
     // ... other routes ...
 ];
+
 
 
 // START: Add Sales
