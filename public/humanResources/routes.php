@@ -77,16 +77,30 @@ Router::post('/hr/employees/add', function () {
 
     $employeeId = $conn->lastInsertId();
 
-    // SALARY AND TAX INFORMATION
-    // salary
-    $basesalary = $_POST['basesalary'];
-    $totalsalary = $_POST['totalsalary'];
-    
-    $query = "INSERT INTO salary_info (employees_id, base_salary, total_salary) VALUES (:employeeId, :basesalary, :totalsalary);";
+    // EMPLOYMENT INFORMATION
+    $dateofhire = $_POST['dateofhire'];
+    $startdate = $_POST['startdate'];
+    $enddate = $_POST['enddate'];
+
+    $query = "INSERT INTO employment_info (employees_id, dateofhire, startdate, enddate) VALUES (:employeeId, :dateofhire, :startdate, :enddate);";
     $stmt = $conn->prepare($query);
     $stmt->execute([
         ':employeeId' => $employeeId,
-        ':basesalary' => $basesalary,
+        ':dateofhire' => $dateofhire,
+        ':startdate' => $startdate,
+        ':enddate' => $enddate,
+    ]);
+
+    // SALARY AND TAX INFORMATION
+    // salary
+    $monthlysalary = $_POST['monthlysalary'];
+    $totalsalary = $_POST['totalsalary'];
+    
+    $query = "INSERT INTO salary_info (employees_id, monthly_salary, total_salary) VALUES (:employeeId, :monthlysalary, :totalsalary);";
+    $stmt = $conn->prepare($query);
+    $stmt->execute([
+        ':employeeId' => $employeeId,
+        ':monthlysalary' => $monthlysalary,
         ':totalsalary' => $totalsalary,
     ]);
 
@@ -118,9 +132,23 @@ Router::post('/hr/employees/add', function () {
         ':thirteenthmonth' => $thirteenthmonth,
     ]);
 
+    // ACCOUNT INFORMATION
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $role = $_POST['department'];
+
+    $query = "INSERT INTO account_info (employees_id, username, password, role) VALUES (:employeeId, :username, :password, :role);";
+    $stmt = $conn->prepare($query);
+    $stmt->execute([
+        ':employeeId' => $employeeId,
+        ':username' => $username,
+        ':password' => $password,
+        ':role' => $role,
+    ]);
+
     $rootFolder = dirname($_SERVER['PHP_SELF']);
 
-    if (empty($firstName) || empty($lastName) || empty($birthday) || empty($gender) || empty($nationality) || empty($civilstatus) || empty($address) || empty($contactnumber) || empty($email) || empty($department) || empty($position) || empty($basesalary) || empty($totalsalary) || empty($incometax) || empty($withholdingtax) || empty($sss) || empty($pagibig) || empty($philhealth) || empty($thirteenthmonth)) {
+    if (empty($firstName) || empty($lastName) || empty($dateofbirth) || empty($gender) || empty($nationality) || empty($civilstatus) || empty($address) || empty($contactnumber) || empty($email) || empty($department) || empty($position) || empty($monthlysalary) || empty($totalsalary) || empty($incometax) || empty($withholdingtax) || empty($sss) || empty($pagibig) || empty($philhealth) || empty($thirteenthmonth) || empty($username) || empty($password) || empty($role) || empty($dateofhire) || empty($startdate) || empty($enddate)) {
         header("Location: $rootFolder/hr/employees/add");
         return;
     }

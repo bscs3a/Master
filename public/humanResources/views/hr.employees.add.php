@@ -1,5 +1,5 @@
 <?php
-  require_once './public/humanResources/func/add-employee.php';
+  // require_once './public/humanResources/func/add-employee.php';
 ?>
 
 <!DOCTYPE html>
@@ -167,10 +167,10 @@
               class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
               id="civilstatus"
               name="civilstatus">
-              <option value="">Single</option>
-              <option value="Female">Married</option>
-              <option value="Male">Widowed</option>
-              <option value="">Divorced</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Widowed">Widowed</option>
+              <option value="Divorced">Divorced</option>
           </select>
           </div>
           <div class="mr-2">
@@ -212,7 +212,7 @@
               class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
               name="email"
               id="email"
-              placeholder="example@gmail.com">
+              placeholder="example@example.com">
           </div>
           <div class="mr-2">
             <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="department">
@@ -246,6 +246,50 @@
           </div>
         </div>
       </div>
+
+    <!-- Employee Information 5 : EMPLOYMENT INFO-->
+    <div class="flex flex-col">
+      <div class="mb-4">
+        <div class="flex">
+          <div class="mr-2">
+            <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="dateofhire">
+              Date of Hire
+            </label>
+            <input  
+            class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            name="dateofhire"
+            id="dateofhire"
+            type="date"
+            placeholder="Date of Hire"
+          />
+          </div>
+          <div class="mr-2">
+            <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="startdate">
+              Start of Employment
+            </label>
+            <input  
+            class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            name="startdate"
+            id="startdate"
+            type="date"
+            placeholder="Start Date"
+          />
+          </div>
+          <div>
+            <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="enddate">
+              End of Employment
+            </label>
+            <input  
+              class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+              name="enddate"
+              id="enddate"
+              type="date"
+              placeholder="enddate"
+            />
+          </div>
+        </div>
+      </div>
+
                   <!-- Salary Information and Tax Information -->
             <div>
               <h2 class="block mb-2 mt-8 text-base font-bold text-gray-700">Salary and Tax Information</h2>
@@ -258,12 +302,13 @@
                         </label>
                         <input
                           class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                          name="basesalary"
+                          name="monthlysalary"
                           id="monthlysalary"
                           type="number"
                           placeholder="Ex. 20000"
                         />
                     </div>
+                    <!-- TAX INFO -->
                     <div class="mr-2">
                         <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="incometax">
                           Income Tax
@@ -291,6 +336,7 @@
                   </div>
                 </div>
                 <div>
+                  <!-- BENEFIT INFO -->
                   <div class="flex flex-col">
                     <div class="mb-4">
                       <div class="flex">
@@ -360,8 +406,42 @@
                               />
                           </div>
                       </div>
-                      
-  
+
+                            <!-- Account Information -->
+            <div>
+              <h2 class="block mb-2 mt-8 text-base font-bold text-gray-700">Account Information</h2>
+              <div class="flex flex-col">
+                <div class="mb-4 mt-4">
+                  <div class="flex">
+                    <div class="mr-2">
+                        <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="username">
+                          Username
+                        </label>
+                        <input
+                          class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                          name="username"
+                          id="username"
+                          type="text"
+                          placeholder="Username"
+                        />
+                    </div>
+                    <!-- TAX INFO -->
+                    <div class="mr-2">
+                        <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="incometax">
+                          Password
+                        </label>
+                        <input
+                          class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                          name="password"
+                          id="password"
+                          type="password"
+                          placeholder="Password"
+                        />
+                        <input type="checkbox" id="togglePassword"> Show Password
+                    </div>
+                  </div>
+                </div>
+              </div>
                       <div>
                       </div>
                       <div class="flex flex-row mt-8 justify-center">
@@ -385,6 +465,15 @@
     document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
     document.getElementById('mainContent').classList.toggle('md:w-full');
     document.getElementById('mainContent').classList.toggle('md:ml-64');
+  });
+
+  document.getElementById('togglePassword').addEventListener('change', function () {
+    const passwordInput = document.getElementById('password');
+    if (this.checked) {
+        passwordInput.type = 'text';
+    } else {
+        passwordInput.type = 'password';
+    }
   });
 </script>
 </body>
