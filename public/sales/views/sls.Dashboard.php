@@ -218,7 +218,7 @@
 
 
             <!-- Go to Sales Button -->
-            <button onclick="location.href='/Master/sls/sample'" class="mt-6 px-6 py-3 text-white bg-black rounded">Go to Sales</button>
+            <button route='sls/sample' class="mt-6 px-6 py-3 text-white bg-black rounded">Go to Sales</button>
         </div>
     </main>
 
@@ -300,6 +300,7 @@
             document.getElementById('mainContent').classList.toggle('md:ml-64');
         });
     </script>
+    <script  src="./../src/route.js"></script>
 </body>
 
 </html>

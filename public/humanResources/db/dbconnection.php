@@ -3,7 +3,7 @@
 function conn()
 {
     $dsn = getenv('DB_HOST');
-    $database = getenv('DB_DATABSE');
+    $database = getenv('DB_NAME');
     $username = getenv('DB_USER');
     $password = getenv('DB_PASS');
 
@@ -14,3 +14,4 @@ function conn()
         echo "Connection failed: " . $e->getMessage();
     }
 }
+
