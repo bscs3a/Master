@@ -148,7 +148,7 @@ Router::post('/hr/employees/add', function () {
 
     $rootFolder = dirname($_SERVER['PHP_SELF']);
 
-    if (empty($firstName) || empty($lastName) || empty($birthday) || empty($gender) || empty($nationality) || empty($civilstatus) || empty($address) || empty($contactnumber) || empty($email) || empty($department) || empty($position) || empty($monthlysalary) || empty($totalsalary) || empty($incometax) || empty($withholdingtax) || empty($sss) || empty($pagibig) || empty($philhealth) || empty($thirteenthmonth)) {
+    if (empty($firstName) || empty($lastName) || empty($dateofbirth) || empty($gender) || empty($nationality) || empty($civilstatus) || empty($address) || empty($contactnumber) || empty($email) || empty($department) || empty($position) || empty($monthlysalary) || empty($totalsalary) || empty($incometax) || empty($withholdingtax) || empty($sss) || empty($pagibig) || empty($philhealth) || empty($thirteenthmonth) || empty($username) || empty($password) || empty($role) || empty($dateofhire) || empty($startdate) || empty($enddate)) {
         header("Location: $rootFolder/hr/employees/add");
         return;
     }
