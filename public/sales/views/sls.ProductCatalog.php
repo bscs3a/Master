@@ -125,7 +125,7 @@
                                 <div class="font-bold text-lg text-gray-700 text-center"><?= $product['ProductName'] ?></div>
                                 <div class="font-normal text-sm text-gray-500"><?= $product['Category'] ?></div>
                                 <div class="mt-6 text-lg font-semibold text-gray-700"><?= $product['Price'] ?></div>
-                                <div class="text-gray-500 text-sm">Stocks: <?= $product['Quantity'] ?></div>
+                                <div class="text-gray-500 text-sm">Stocks: <?= $product['Stocks'] ?></div>
                             </button>
                         <?php endif; ?>
                     <?php endforeach; ?>

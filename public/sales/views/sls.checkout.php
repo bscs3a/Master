@@ -104,7 +104,7 @@
                     </div>
 
 
-                    <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 w-1/2 h-full">
+                    <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 w-1/2 h-full mb-10">
                         <form action="/addSales" method="POST" onsubmit="clearCart()">
                             <div class="font-medium text-xl mb-4 text-gray-500 border-b pb-2">Shipping Information</div>
                             <!-- Form for delivery address and date -->

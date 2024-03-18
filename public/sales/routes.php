@@ -10,6 +10,7 @@ $sls = [
     '/sls/Transaction-Details' => "$path/sls.TransactionDetails.php",
     '/sls/Dashboard' => "$path/sls.Dashboard.php",
     '/sls/POS' => "$path/sls.POS.php",
+    '/sls/POS2' => "$path/sls.POS2.php",
     '/sls/POS/Checkout' => "$path/sls.checkout.php",
     '/sls/POS/Receipt' => "$path/sls.Receipt.php",
     '/sls/Audit-Trail' => "$path/sls.AuditTrail.php",
@@ -90,7 +91,7 @@ class Product {
         $db = Database::getInstance();
         $conn = $db->connect();
 
-        $stmt = $conn->prepare("UPDATE Products SET Quantity = Quantity - :quantity WHERE ProductID = :productId");
+        $stmt = $conn->prepare("UPDATE Products SET Stocks = Stocks - :quantity WHERE ProductID = :productId");
         $stmt->bindParam(':quantity', $quantity);
         $stmt->bindParam(':productId', $productId);
         $stmt->execute();
@@ -106,15 +107,8 @@ Router::post('/addSales', function () {
 
     $saleDetail = new SaleDetail();
     $deliveryOrder = new DeliveryOrder();
-    $cart = json_decode($_POST['cartData'], true);
-    foreach ($cart as $item) {
-        $saleDetail->create($saleId, $item['id'], $item['quantity'], $item['price']);
-        if ($_POST['SalePreference'] === 'delivery') { 
-            $deliveryOrder->create($saleId, $item['id'], $item['quantity'], $_POST['deliveryAddress'], $_POST['deliveryDate']); 
-        }
-    }
-
     $product = new Product();
+    $cart = json_decode($_POST['cartData'], true);
     foreach ($cart as $item) {
         $saleDetail->create($saleId, $item['id'], $item['quantity'], $item['price']);
         $product->decreaseQuantity($item['id'], $item['quantity']); // Decrease product quantity

@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS Products (
     Category VARCHAR(100),
     DeliveryRequired ENUM('Yes', 'No') DEFAULT 'No',
     Price DECIMAL(10, 2),
-    Quantity INT,
+    Stocks INT,
     TaxRate DECIMAL(5, 2) DEFAULT 0 
 );
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS DeliveryOrders (
 );
 
 -- Inserting sample data into Products table
-INSERT INTO Products (ProductName, Description, Category, DeliveryRequired, Price, Quantity, TaxRate) 
+INSERT INTO Products (ProductName, Description, Category, DeliveryRequired, Price, Stocks, TaxRate) 
 VALUES 
     ('Hammer', 'Heavy-duty hammer for construction work', 'Tools', 'No', 299.00, 50, 0.12),
     ('Screwdriver Set', 'Set of 6 screwdrivers with various sizes', 'Tools', 'No', 199.00, 30, 0.12),
