@@ -109,7 +109,7 @@
                             echo "<td class='px-4 py-2'>" . $row['SalePreference'] . "</td>";
                             echo "<td class='px-4 py-2'>" . $row['PaymentMode'] . "</td>";
                             echo "<td class='px-4 py-2'>" . $row['TotalAmount'] . "</td>";
-                            echo "<td class='px-4 py-2'><a href='/master/sls/Transaction-Details' class='text-blue-500 hover:underline'>View</a></td>";
+                            echo "<td class='px-4 py-2'><a route='/sls/Transaction-Details' class='text-blue-500 hover:underline'>View</a></td>";
                             echo "</tr>";
                         }
                         ?>

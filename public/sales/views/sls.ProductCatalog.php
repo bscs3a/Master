@@ -15,6 +15,21 @@
     <!-- External JavaScript (Alpine.js) -->
     <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
 
+    
+    <style>
+        .sidebar-open {
+            grid-template-columns: 1fr 300px;
+        }
+
+        .sidebar-closed {
+            grid-template-columns: 1fr;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+
     <!-- Inline PHP -->
     <?php
     require_once 'function/getProducts.php';
