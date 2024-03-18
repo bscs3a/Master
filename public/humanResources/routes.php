@@ -77,6 +77,20 @@ Router::post('/hr/employees/add', function () {
 
     $employeeId = $conn->lastInsertId();
 
+    // EMPLOYMENT INFORMATION
+    $dateofhire = $_POST['dateofhire'];
+    $startdate = $_POST['startdate'];
+    $enddate = $_POST['enddate'];
+
+    $query = "INSERT INTO employment_info (employees_id, dateofhire, startdate, enddate) VALUES (:employeeId, :dateofhire, :startdate, :enddate);";
+    $stmt = $conn->prepare($query);
+    $stmt->execute([
+        ':employeeId' => $employeeId,
+        ':dateofhire' => $dateofhire,
+        ':startdate' => $startdate,
+        ':enddate' => $enddate,
+    ]);
+
     // SALARY AND TAX INFORMATION
     // salary
     $monthlysalary = $_POST['monthlysalary'];
@@ -116,6 +130,20 @@ Router::post('/hr/employees/add', function () {
         ':pagibig' => $pagibig,
         ':philhealth' => $philhealth,
         ':thirteenthmonth' => $thirteenthmonth,
+    ]);
+
+    // ACCOUNT INFORMATION
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $role = $_POST['department'];
+
+    $query = "INSERT INTO account_info (employees_id, username, password, role) VALUES (:employeeId, :username, :password, :role);";
+    $stmt = $conn->prepare($query);
+    $stmt->execute([
+        ':employeeId' => $employeeId,
+        ':username' => $username,
+        ':password' => $password,
+        ':role' => $role,
     ]);
 
     $rootFolder = dirname($_SERVER['PHP_SELF']);
