@@ -1,91 +1,5 @@
 <?php
   require_once './public/humanResources/func/add-employee.php';
-  // try {
-  //   require_once './src/dbconn.php';
-  //   $db = Database::getInstance();
-  //   $conn = $db->connect();
-  //   if(isset($_POST['save'])) {
-  
-  //     // BASIC EMPLOYEE INFORMATION
-  //     $firstName = $_POST['firstName'];
-  //     $middleName = $_POST['middleName'];
-  //     $lastName = $_POST['lastName'];
-  //     $birthday = $_POST['birthday'];
-  //     $gender = $_POST['gender'];
-  //     $nationality = $_POST['nationality'];
-  //     $civilStatus = $_POST['civilStatus'];
-  //     $address = $_POST['address'];
-  //     $contactNumber = $_POST['contactNumber'];
-  //     $email = $_POST['email'];
-  //     $department = $_POST['department'];
-  //     $position = $_POST['position'];
-  
-  //     // SALARY AND TAX INFORMATION
-  //     // salary
-  //     $baseSalary = $_POST['baseSalary'];
-  //     $totalSalary = $_POST['totalSalary'];
-  //     // tax
-  //     $incomeTax = $_POST['incomeTax'];
-  //     $withholdingTax = $_POST['withholdingTax'];
-  //     // benefits
-  //     $sss = $_POST['sss'];
-  //     $pagibig = $_POST['pagibig'];
-  //     $philhealth = $_POST['philhealth'];
-  //     $thirteenthMonth = $_POST['thirteenthMonth'];
-  
-  //     // to employees table
-  //     $query_employees = "INSERT INTO employees (first_name, last_name, dateofbirth, gender, nationality, civil_status, address, contact_number, email, department, position) VALUES (:firstname, :lastname, :dateofbirth, :gender, :nationality, :civilstatus, :address, contactnumber, :email, :department, :position)";
-  //     $stmt_employees = $conn->prepare($query_employees);
-  //     $stmt_employees->bindParam(':firstName', $firstName, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':middleName', $middleName, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':lastName', $lastName, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':birthday', $birthday, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':gender', $gender, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':nationality', $nationality, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':civilStatus', $civilStatus, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':address', $address, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':contactNumber', $contactNumber, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':email', $email, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':department', $department, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':position', $position, PDO::PARAM_STR);
-  //     $stmt_employees->execute();
-  //     $lastInsertedEmployeeId = $conn->lastInsertId();
-  
-  //     // to salary info table
-  //     $query_salary = "INSERT INTO salary_info (base_salary, total_salary, employees_id) VALUES (:basesalary, :totalsalary, :employees_id)";
-  //     $stmt_salary = $conn->prepare($query_salary);
-  //     $stmt_salary->bindParam(':basesalary', $basesalary, PDO::PARAM_STR);
-  //     $stmt_salary->bindParam(':totalsalary', $totalsalary, PDO::PARAM_STR);
-  //     $stmt_salary->bindParam(':employees_id', $lastInsertedEmployeeId, PDO::PARAM_INT);
-  //     $stmt_salary->execute();;
-  
-  //     // to tax info table
-  //     $query_tax = "INSERT INTO tax_info (income_tax, withholding_tax, employees_id) VALUES (:incometax, :withholdingtax, :employees_id)";
-  //     $stmt_tax = $conn->prepare($query_tax);
-  //     $stmt_tax->bindParam(':incometax', $incometax, PDO::PARAM_STR);
-  //     $stmt_tax->bindParam(':withholdingtax', $withholdingtax, PDO::PARAM_STR);
-  //     $stmt_tax->bindParam(':employees_id', $lastInsertedEmployeeId, PDO::PARAM_INT);
-  //     $stmt_tax->execute();
-  
-  //     // to benefits info table
-  //     $query_benefits = "INSERT INTO benefits_info (sss, pagibig, philhealth, thirteenth_month, employees_id) VALUES (:sss, :pagibig, :philhealth, :thirteenthmonth, :employees_id)";
-  //     $stmt_benefits = $conn->prepare($query_benefits);
-  //     $stmt_benefits->bindParam(':sss', $sss, PDO::PARAM_STR);
-  //     $stmt_benefits->bindParam(':pagibig', $pagibig, PDO::PARAM_STR);
-  //     $stmt_benefits->bindParam(':philhealth', $philhealth, PDO::PARAM_STR);
-  //     $stmt_benefits->bindParam(':thirteenthmonth', $thirteenthmonth, PDO::PARAM_STR);
-  //     $stmt_benefits->bindParam(':employees_id', $lastInsertedEmployeeId, PDO::PARAM_INT);
-  //     $stmt_benefits->execute();
-  
-  //     if($stmt_employees->rowCount() > 0 && $stmt_salary->rowCount() > 0 && $stmt_tax->rowCount() > 0 && $stmt_benefits->rowCount() > 0){
-  //       echo "<script>alert('Data Inserted Successfully');</script>";
-  //     } else {
-  //         echo "<script>alert('Data Not Inserted');</script>";
-  //     }
-  // }
-  // } catch (PDOException $e) {
-  //   echo "Error: $e";
-  // }
 ?>
 
 <!DOCTYPE html>
@@ -157,7 +71,7 @@
       ?>
   <!-- Employee Information -->
   
-                            <form action= "/add-employees" method="POST">
+                            <form action= "/hr/employes/add" method="post">
   <div class="flex flex-col ml-20">
     <div class="mb-4">
       <div class="flex">
@@ -460,7 +374,6 @@
 </main>
 
 <script  src="./../../src/route.js"></script>
-<script  src="./../../src/form.js"></script>
 
 <!-- Sidebar active/inactive -->
 <script>

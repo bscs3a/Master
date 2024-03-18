@@ -1,19 +1,22 @@
 <?php
-try {
-  require_once './src/dbconn.php';
-  $db = Database::getInstance();
-  $conn = $db->connect();
-  $query = "SELECT * FROM employees;";
-  $stmt = $conn->prepare($query);
-  $stmt->execute();
-  $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$db = Database::getInstance();
+$conn = $db->connect();
 
-  $pdo = null;
-  $stmt = null;
+$search = $_POST['search'] ?? '';
+$query = "SELECT * FROM employees";
+$params = [];
+
+if (!empty($search)) {
+    $query .= " WHERE first_name = :search OR last_name = :search OR position = :search OR department = :search OR id = :search;";
+    $params[':search'] = $search;
 }
-catch (PDOException $e) {
-    echo 'Database connection failed: ' . $e->getMessage();
-}
+
+$stmt = $conn->prepare($query);
+$stmt->execute($params);
+$employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$pdo = null;
+$stmt = null;
 ?>
 
 <!DOCTYPE html>
@@ -62,22 +65,13 @@ catch (PDOException $e) {
   <div class="flex items-center flex-wrap">
     <h3 class="ml-6 mt-8 text-xl font-bold">All Employees</h3>
     <button route="/hr/employees/add" class="mt-9 mr-4 flex ml-2 bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600"><i class="ri-add-line"></i></button>
-    <form action="./public/humanResources/func/search-handler.php" method="POST" class="mt-6 ml-auto mr-4 flex">
+    
+    <form action="/hr/employees" method="POST" class="mt-6 ml-auto mr-4 flex">
       <input type="text" id="search" name="search" placeholder="Search..." class="w-40 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
       <button type="submit" class="ml-2 bg-blue-500 text-white px-4 py-1 rounded-md hover:bg-blue-600"><i class="ri-search-line"></i></button>
     </form>
   </div> 
   <?php 
-    require_once './public/humanResources/func/search-handler.php';
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      if (isset($_POST['search'])) {
-          $search = $_POST['search'] ?? '';
-          $employees = searchEmployees($search);
-  
-          require_once 'inc/employees.table.php';
-      }
-    }
-
     if (empty($employees)) {
         require_once 'inc/employees.noResult.php';
     } 
@@ -503,6 +497,7 @@ catch (PDOException $e) {
 </main>
 <!-- End Main Bar -->
 <script  src="./../src/route.js"></script>
+<script  src="./../src/form.js"></script>
 <script type="module" src="../public/humanResources/js/sidenav-active-inactive.js"></script>
 </body>
 </html> 
