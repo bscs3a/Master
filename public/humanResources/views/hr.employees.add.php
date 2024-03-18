@@ -1,91 +1,5 @@
 <?php
   require_once './public/humanResources/func/add-employee.php';
-  // try {
-  //   require_once './src/dbconn.php';
-  //   $db = Database::getInstance();
-  //   $conn = $db->connect();
-  //   if(isset($_POST['save'])) {
-  
-  //     // BASIC EMPLOYEE INFORMATION
-  //     $firstName = $_POST['firstName'];
-  //     $middleName = $_POST['middleName'];
-  //     $lastName = $_POST['lastName'];
-  //     $birthday = $_POST['birthday'];
-  //     $gender = $_POST['gender'];
-  //     $nationality = $_POST['nationality'];
-  //     $civilStatus = $_POST['civilStatus'];
-  //     $address = $_POST['address'];
-  //     $contactNumber = $_POST['contactNumber'];
-  //     $email = $_POST['email'];
-  //     $department = $_POST['department'];
-  //     $position = $_POST['position'];
-  
-  //     // SALARY AND TAX INFORMATION
-  //     // salary
-  //     $baseSalary = $_POST['baseSalary'];
-  //     $totalSalary = $_POST['totalSalary'];
-  //     // tax
-  //     $incomeTax = $_POST['incomeTax'];
-  //     $withholdingTax = $_POST['withholdingTax'];
-  //     // benefits
-  //     $sss = $_POST['sss'];
-  //     $pagibig = $_POST['pagibig'];
-  //     $philhealth = $_POST['philhealth'];
-  //     $thirteenthMonth = $_POST['thirteenthMonth'];
-  
-  //     // to employees table
-  //     $query_employees = "INSERT INTO employees (first_name, last_name, dateofbirth, gender, nationality, civil_status, address, contact_number, email, department, position) VALUES (:firstname, :lastname, :dateofbirth, :gender, :nationality, :civilstatus, :address, contactnumber, :email, :department, :position)";
-  //     $stmt_employees = $conn->prepare($query_employees);
-  //     $stmt_employees->bindParam(':firstName', $firstName, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':middleName', $middleName, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':lastName', $lastName, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':birthday', $birthday, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':gender', $gender, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':nationality', $nationality, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':civilStatus', $civilStatus, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':address', $address, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':contactNumber', $contactNumber, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':email', $email, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':department', $department, PDO::PARAM_STR);
-  //     $stmt_employees->bindParam(':position', $position, PDO::PARAM_STR);
-  //     $stmt_employees->execute();
-  //     $lastInsertedEmployeeId = $conn->lastInsertId();
-  
-  //     // to salary info table
-  //     $query_salary = "INSERT INTO salary_info (base_salary, total_salary, employees_id) VALUES (:basesalary, :totalsalary, :employees_id)";
-  //     $stmt_salary = $conn->prepare($query_salary);
-  //     $stmt_salary->bindParam(':basesalary', $basesalary, PDO::PARAM_STR);
-  //     $stmt_salary->bindParam(':totalsalary', $totalsalary, PDO::PARAM_STR);
-  //     $stmt_salary->bindParam(':employees_id', $lastInsertedEmployeeId, PDO::PARAM_INT);
-  //     $stmt_salary->execute();;
-  
-  //     // to tax info table
-  //     $query_tax = "INSERT INTO tax_info (income_tax, withholding_tax, employees_id) VALUES (:incometax, :withholdingtax, :employees_id)";
-  //     $stmt_tax = $conn->prepare($query_tax);
-  //     $stmt_tax->bindParam(':incometax', $incometax, PDO::PARAM_STR);
-  //     $stmt_tax->bindParam(':withholdingtax', $withholdingtax, PDO::PARAM_STR);
-  //     $stmt_tax->bindParam(':employees_id', $lastInsertedEmployeeId, PDO::PARAM_INT);
-  //     $stmt_tax->execute();
-  
-  //     // to benefits info table
-  //     $query_benefits = "INSERT INTO benefits_info (sss, pagibig, philhealth, thirteenth_month, employees_id) VALUES (:sss, :pagibig, :philhealth, :thirteenthmonth, :employees_id)";
-  //     $stmt_benefits = $conn->prepare($query_benefits);
-  //     $stmt_benefits->bindParam(':sss', $sss, PDO::PARAM_STR);
-  //     $stmt_benefits->bindParam(':pagibig', $pagibig, PDO::PARAM_STR);
-  //     $stmt_benefits->bindParam(':philhealth', $philhealth, PDO::PARAM_STR);
-  //     $stmt_benefits->bindParam(':thirteenthmonth', $thirteenthmonth, PDO::PARAM_STR);
-  //     $stmt_benefits->bindParam(':employees_id', $lastInsertedEmployeeId, PDO::PARAM_INT);
-  //     $stmt_benefits->execute();
-  
-  //     if($stmt_employees->rowCount() > 0 && $stmt_salary->rowCount() > 0 && $stmt_tax->rowCount() > 0 && $stmt_benefits->rowCount() > 0){
-  //       echo "<script>alert('Data Inserted Successfully');</script>";
-  //     } else {
-  //         echo "<script>alert('Data Not Inserted');</script>";
-  //     }
-  // }
-  // } catch (PDOException $e) {
-  //   echo "Error: $e";
-  // }
 ?>
 
 <!DOCTYPE html>
@@ -157,7 +71,7 @@
       ?>
   <!-- Employee Information -->
   
-                            <form action= "/add-employees" method="POST">
+                            <form action= "/hr/employees/add" method="POST">
   <div class="flex flex-col ml-20">
     <div class="mb-4">
       <div class="flex">
@@ -204,13 +118,13 @@
     <div class="mb-4">
       <div class="flex">
         <div class="mr-2">
-            <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="birthday">
+            <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="dateofbirth">
               Date of Birth
             </label>
             <input
               class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-              name="birthday"
-              id="birthday"
+              name="dateofbirth"
+              id="dateofbirth"
               type="date"
             />
         </div>
@@ -339,15 +253,15 @@
                 <div class="mb-4 mt-4">
                   <div class="flex">
                     <div class="mr-2">
-                        <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="basesalary">
-                          Base Salary
+                        <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="monthlysalary">
+                          Monthly Salary
                         </label>
                         <input
                           class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                           name="basesalary"
-                          id="basesalary"
+                          id="monthlysalary"
                           type="number"
-                          placeholder="Base Salary"
+                          placeholder="Ex. 20000"
                         />
                     </div>
                     <div class="mr-2">
@@ -422,20 +336,20 @@
                       <div class="mb-4">
                         <div class="flex">
                           <div class="mr-2">
-                              <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="thirteenththmonth">
+                              <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="thirteenthmonth">
                                 13th Month Pay
                               </label>
                               <input
                                 class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                name="thirteenththmonth"
-                                id="thirteenththmonth"
+                                name="thirteenthmonth"
+                                id="thirteenthmonth"
                                 type="number"
                                 placeholder="13th Month Pay"
                               />
                           </div>
                           <div class="mr-2">
                               <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="totalsalary">
-                                Total Salary
+                                Total Salary (with Tax reductions)
                               </label>
                               <input
                                 class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
@@ -447,13 +361,14 @@
                           </div>
                       </div>
                       
-  </form>
+  
                       <div>
                       </div>
                       <div class="flex flex-row mt-8 justify-center">
-                        <button type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Save</button>
+                        <button type="submit" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Save</button>
                         <button route="/hr/employees" type="button" class="focus:outline-none text-gray-700 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Cancel</button>
                       </div>
+                      </form>
     </div>
   </div>
 </div> 
