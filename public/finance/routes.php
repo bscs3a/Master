@@ -26,7 +26,6 @@ $fin = [
 
     '/fin/test/id={id}' => function($id) use ($basePath) {
         $_SESSION['id'] = $id;
-        $_GET['id'] = $id;
         include $basePath . "test2.php";
     },
 
