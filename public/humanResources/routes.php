@@ -39,8 +39,8 @@ $hr = [
     },
 ];
 
-// add employees [NOT YET FINALIZED]
-Router::post('/add-employees', function () {
+// add employees [NOT YET FINALIZED, NEEDS FIX IN DB AND UI LOL BUT IT WORKS]
+Router::post('/hr/employees/add', function () {
     $db = Database::getInstance();
     $conn = $db->connect();
 
@@ -48,7 +48,7 @@ Router::post('/add-employees', function () {
     $firstName = $_POST['firstName'];
     $middleName = $_POST['middleName'];
     $lastName = $_POST['lastName'];
-    $birthday = $_POST['birthday'];
+    $dateofbirth = $_POST['dateofbirth'];
     $gender = $_POST['gender'];
     $nationality = $_POST['nationality'];
     $civilstatus = $_POST['civilstatus'];
@@ -58,49 +58,65 @@ Router::post('/add-employees', function () {
     $department = $_POST['department'];
     $position = $_POST['position'];
 
+    $query = "INSERT INTO employees (first_name, middle_name, last_name, dateofbirth, gender, nationality, civil_status, address, contact_no, email, department, position) VALUES (:firstName, :middleName, :lastName, :dateofbirth, :gender, :nationality, :civilstatus, :address, :contactnumber, :email, :department, :position);";
+    $stmt = $conn->prepare($query);
+    $stmt->execute([
+        ':firstName' => $firstName,
+        ':middleName' => $middleName,
+        ':lastName' => $lastName,
+        ':dateofbirth' => $dateofbirth,
+        ':gender' => $gender,
+        ':nationality' => $nationality,
+        ':civilstatus' => $civilstatus,
+        ':address' => $address,
+        ':contactnumber' => $contactnumber,
+        ':email' => $email,
+        ':department' => $department,
+        ':position' => $position,
+    ]);
+
+    $employeeId = $conn->lastInsertId();
+
     // SALARY AND TAX INFORMATION
     // salary
     $basesalary = $_POST['basesalary'];
     $totalsalary = $_POST['totalsalary'];
+    
+    $query = "INSERT INTO salary_info (employees_id, base_salary, total_salary) VALUES (:employeeId, :basesalary, :totalsalary);";
+    $stmt = $conn->prepare($query);
+    $stmt->execute([
+        ':employeeId' => $employeeId,
+        ':basesalary' => $basesalary,
+        ':totalsalary' => $totalsalary,
+    ]);
+
     // tax
     $incometax = $_POST['incometax'];
     $withholdingtax = $_POST['withholdingtax'];
+
+    $query = "INSERT INTO tax_info (employees_id, income_tax, withholding_tax) VALUES (:employeeId, :incometax, :withholdingtax);";
+    $stmt = $conn->prepare($query);
+    $stmt->execute([
+        ':employeeId' => $employeeId,
+        ':incometax' => $incometax,
+        ':withholdingtax' => $withholdingtax,
+    ]);
+    
     // benefits
     $sss = $_POST['sss'];
     $pagibig = $_POST['pagibig'];
     $philhealth = $_POST['philhealth'];
     $thirteenthmonth = $_POST['thirteenthmonth'];
 
-    $query = "INSERT INTO employees (first_name, middle_name, last_name, dateofbirth, gender, nationality, civil_status, address, contact_no, email, department, position) VALUES (:firstName, :middleName, :lastName, :dateofbirth, :gender, :nationality, :civilstatus, :address, contactnumber, :email, :department, :position); INSERT INTO salary_info (base_salary, total_salary) VALUES (:basesalary, :totalsalary); INSERT INTO tax_info (income_tax, withholding_tax) VALUES (:incometax, :withholdingtax); INSERT INTO benefit_info (sss, pagibig, philhealth, thirteenth_month) VALUES (:sss, :pagibig, :philhealth, :thirteenthmonth);";
+    $query = "INSERT INTO benefit_info (employees_id, sss_fund, pagibig_fund, philhealth, thirteenth_month) VALUES (:employeeId, :sss, :pagibig, :philhealth, :thirteenthmonth);";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':firstName', $firstName, PDO::PARAM_STR);
-    $stmt->bindParam(':middleName', $middleName, PDO::PARAM_STR);
-    $stmt->bindParam(':lastName', $lastName, PDO::PARAM_STR);
-    $stmt->bindParam(':birthday', $birthday, PDO::PARAM_STR);
-    $stmt->bindParam(':gender', $gender, PDO::PARAM_STR);
-    $stmt->bindParam(':nationality', $nationality, PDO::PARAM_STR);
-    $stmt->bindParam(':civilstatus', $civilstatus, PDO::PARAM_STR);
-    $stmt->bindParam(':address', $address, PDO::PARAM_STR);
-    $stmt->bindParam(':contactnumber', $contactnumber, PDO::PARAM_STR);
-    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-    $stmt->bindParam(':department', $department, PDO::PARAM_STR);
-    $stmt->bindParam(':position', $position, PDO::PARAM_STR);
-    
-    $lastInsertedEmployeeId = $conn->lastInsertId();
-    
-    $stmt->bindParam(':basesalary', $basesalary, PDO::PARAM_STR);
-    $stmt->bindParam(':totalsalary', $totalsalary, PDO::PARAM_STR);
-    $stmt->bindParam(':employees_id', $lastInsertedEmployeeId, PDO::PARAM_INT);
-    
-    $stmt->bindParam(':incometax', $incometax, PDO::PARAM_STR);
-    $stmt->bindParam(':withholdingtax', $withholdingtax, PDO::PARAM_STR);
-    $stmt->bindParam(':employees_id', $lastInsertedEmployeeId, PDO::PARAM_INT);
-    
-    $stmt->bindParam(':sss', $sss, PDO::PARAM_STR);
-    $stmt->bindParam(':pagibig', $pagibig, PDO::PARAM_STR);
-    $stmt->bindParam(':philhealth', $philhealth, PDO::PARAM_STR);
-    $stmt->bindParam(':thirteenthmonth', $thirteenthmonth, PDO::PARAM_STR);
-    $stmt->bindParam(':employees_id', $lastInsertedEmployeeId, PDO::PARAM_INT);
+    $stmt->execute([
+        ':employeeId' => $employeeId,
+        ':sss' => $sss,
+        ':pagibig' => $pagibig,
+        ':philhealth' => $philhealth,
+        ':thirteenthmonth' => $thirteenthmonth,
+    ]);
 
     $rootFolder = dirname($_SERVER['PHP_SELF']);
 
@@ -109,16 +125,11 @@ Router::post('/add-employees', function () {
         return;
     }
 
-    // Execute the statement
-    $stmt->execute();
-
     header("Location: $rootFolder/hr/employees");
 });
 
 // search employees
 Router::post('/hr/employees', function () {
-    $db = Database::getInstance();
-    $conn = $db->connect();
 
     $search = $_POST['search'];
 
@@ -128,14 +139,6 @@ Router::post('/hr/employees', function () {
         header("Location: $rootFolder/hr/employees");
         return;
     }
-
-    $query = "SELECT * FROM employees WHERE first_name = :search OR last_name = :search OR position = :search OR department = :search OR id = :search;";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(":search", $search);
-
-    // Execute the statement
-    $stmt->execute();
-    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     include './public/humanResources/views/hr.employees.php';
 });
@@ -154,14 +157,6 @@ Router::post('/hr/employees/departments/product-order', function () {
         return;
     }
 
-    $query = "SELECT * FROM employees WHERE first_name = :search OR last_name = :search OR position = :search OR id = :search AND department = 'Product Order';";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(":search", $search);
-
-    // Execute the statement
-    $stmt->execute();
-    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
     include './public/humanResources/views/hr.departments.PO.php';
 });
 
@@ -178,14 +173,6 @@ Router::post('/hr/employees/departments/inventory', function () {
         header("Location: $rootFolder/hr/employees/departments/inventory");
         return;
     }
-
-    $query = "SELECT * FROM employees WHERE first_name = :search OR last_name = :search OR position = :search OR id = :search AND department = 'Inventory';";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(":search", $search);
-
-    // Execute the statement
-    $stmt->execute();
-    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     include './public/humanResources/views/hr.departments.inv.php';
 });
@@ -204,14 +191,6 @@ Router::post('/hr/employees/departments/sales', function () {
         return;
     }
 
-    $query = "SELECT * FROM employees WHERE first_name = :search OR last_name = :search OR position = :search OR id = :search AND department = 'Point of Sales';";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(":search", $search);
-
-    // Execute the statement
-    $stmt->execute();
-    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
     include './public/humanResources/views/hr.departments.POS.php';
 });
 
@@ -228,14 +207,6 @@ Router::post('/hr/employees/departments/finance', function () {
         header("Location: $rootFolder/hr/employees/departments/finance");
         return;
     }
-
-    $query = "SELECT * FROM employees WHERE first_name = :search OR last_name = :search OR position = :search OR id = :search AND department = 'Finance';";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(":search", $search);
-
-    // Execute the statement
-    $stmt->execute();
-    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     include './public/humanResources/views/hr.departments.fin.php';
 });
@@ -254,14 +225,6 @@ Router::post('/hr/employees/departments/delivery', function () {
         return;
     }
 
-    $query = "SELECT * FROM employees WHERE first_name = :search OR last_name = :search OR position = :search OR id = :search AND department = 'Delivery';";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(":search", $search);
-
-    // Execute the statement
-    $stmt->execute();
-    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
     include './public/humanResources/views/hr.departments.dlv.php';
 });
 
@@ -278,14 +241,6 @@ Router::post('/hr/employees/departments/human-resources', function () {
         header("Location: $rootFolder/hr/employees/departments/human-resources");
         return;
     }
-
-    $query = "SELECT * FROM employees WHERE first_name = :search OR last_name = :search OR position = :search OR id = :search AND department = 'Human Resources';";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(":search", $search);
-
-    // Execute the statement
-    $stmt->execute();
-    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     include './public/humanResources/views/hr.departments.HR.php';
 });
