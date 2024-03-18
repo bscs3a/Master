@@ -14,7 +14,11 @@ $fin = [
     '/fin/reportBalance' => $basePath . "reportBalance.php",
 
     //ledger
-    '/fin/ledger' => $basePath . "ledger.gen.php",
+    // '/fin/ledger' => $basePath . "ledger.gen.php",
+    '/fin/ledger/page={pageNumber}' => function($pageNumber) use ($basePath) {
+        $_GET['page'] = $pageNumber;
+        include $basePath . "ledger.gen.php";
+    },
     '/fin/ledger/accounts/investors' => $basePath . "ledger.investors.php",
     '/fin/ledger/accounts/payable' => $basePath . "ledger.payable.php",
 

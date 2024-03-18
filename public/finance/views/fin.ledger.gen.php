@@ -5,14 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ledger</title>
-    <link href="./../src/tailwind.css" rel="stylesheet">
+    <link href="./../../src/tailwind.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
 </head>
 
 <body>
 
     <?php include "components/sidebar.php" ?>
-
     <!-- Start: Dashboard -->
 
     <main class="w-full md:w-[calc(100%-256px)] md:ml-64 min-h-screen transition-all main">
@@ -101,19 +100,19 @@
                                 </div>
 
                                 <div class="p-2">
-                                   
-                                        <button type="submit"
-                                            class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
-                                            role="menuitem">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
 
-                                            Delete Product
-                                        </button>
-                                    
+                                    <button type="submit"
+                                        class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
+                                        role="menuitem">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+
+                                        Delete Product
+                                    </button>
+
                                 </div>
                             </div>
                         </div>
@@ -181,78 +180,37 @@
                                         class="absolute left-2 top-6 transform -translate-y-0.5 text-gray-400">&#8369;</span>
                                 </div>
                                 <div class="flex justify-between">
-                                    <div class="mb-4 relative p-1">
-                                        <script>
-                                            function updateOptions(event, targetId) {
-                                                var selectedOption = event.target.value;
-                                                var targetSelect = document.getElementById(targetId);
-                                                var options = targetSelect.options;
-                                                for (var i = 0; i < options.length; i++) {
-                                                    options[i].style.display = options[i].value === selectedOption ? 'none' : '';
-                                                }
+                                    <?php
+                                    function generateSelect($id, $name, $onchange, $sql)
+                                    {
+                                        $db = Database::getInstance();
+                                        $conn = $db->connect();
+
+                                        $stmt = $conn->prepare($sql);
+                                        $stmt->execute();
+
+                                        echo "<div class=\"mb-4 relative p-1\">";
+                                        echo "<label for=\"$id\" class=\"block text-xs font-medium text-gray-900\"> $name </label>";
+                                        echo "<select id=\"$id\" name=\"$id\" required class=\"mt-1 py-1 px-3 w-full rounded-md border border-gray-400 shadow-md sm:text-sm\" onchange=\"$onchange\">";
+                                        echo "<option value=\"\" selected=\"selected\">...</option>";
+
+                                        if ($stmt->rowCount() > 0) {
+                                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                                echo "<option value=\"{$row['name']}\">{$row['name']}</option>";
                                             }
-                                        </script>
-                                        <label for="debit" class="block text-xs font-medium text-gray-900"> Debit
-                                        </label>
-                                        <select id="debit" name="debit" required
-                                            class="mt-1 py-1 px-3 w-full rounded-md border border-gray-400 shadow-md sm:text-sm"
-                                            onchange="updateOptions(event, 'credit')">
-                                            <?php
-                                            $db = Database::getInstance();
-                                            $conn = $db->connect();
+                                        } else {
+                                            echo "0 results";
+                                        }
 
-                                            $sql = "SELECT name FROM ledger";
-                                            $stmt = $conn->prepare($sql);
+                                        echo "</select>";
+                                        echo "</div>";
+                                    }
 
-                                            $stmt->execute();
-
-                                            // Add a blank option as the default
-                                            echo "<option value=\"\" selected=\"selected\">...</option>";
-
-                                            if ($stmt->rowCount() > 0) {
-                                                // output data of each row
-                                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                                    echo "<option value=\"{$row['name']}\">{$row['name']}</option>";
-                                                }
-                                            } else {
-                                                echo "0 results";
-                                            }
-                                            ?>
-                                        </select>
-
-                                    </div>
-
-                                    <div class="mb-4 relative p-1">
-                                        <label for="credit" class="block text-xs font-medium text-gray-900"> Credit
-                                        </label>
-                                        <select id="credit" name="credit" required
-                                            class="mt-1 py-1 px-3 w-full rounded-md border border-gray-400 shadow-md sm:text-sm"
-                                            onchange="updateOptions(event, 'debit')">
-                                            <?php
-                                            $db = Database::getInstance();
-                                            $conn = $db->connect();
-
-                                            $sql = "SELECT * FROM ledger";
-                                            $stmt = $conn->prepare($sql);
-
-                                            $stmt->execute();
-
-                                            echo "<option value=\"\" selected=\"selected\">...</option>";
-
-                                            if ($stmt->rowCount() > 0) {
-                                                // output data of each row
-                                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                                    echo "<option value=\"{$row['name']}\">{$row['name']}</option>";
-                                                }
-                                            } else {
-                                                echo "0 results";
-                                            }
-                                            ?>
-                                        </select>
-
-                                    </div>
+                                    generateSelect('debit', 'Debit', "updateOptions(event, 'credit')", "SELECT name FROM ledger");
+                                    generateSelect('credit', 'Credit', "updateOptions(event, 'debit')", "SELECT name FROM ledger");
+                                    ?>
                                 </div>
-                             
+
                                 <div class="flex justify-end items-start mb-2">
                                     <button id="cancelModal" type="button"
                                         class="border border-gray-700 bg-gray-200 hover:bg-gray-100 text-gray-800 text-sm font-bold py-1 px-5 rounded-md ml-4 ">Cancel</button>
@@ -310,8 +268,23 @@
                                 return $stmt->fetchColumn();
                             }
 
+                            // Get the current page number from the route
+                            $page = isset ($_GET['page']) ? (int) $_GET['page'] : 1;
+                            $perPage = 5; // Number of items per page
+                            $offset = ($page - 1) * $perPage;
+
+                            // Execute SQL query to get total records
+                            $stmt = $conn->prepare("SELECT COUNT(*) FROM ledgertransaction");
+                            $stmt->execute();
+                            $totalRecords = $stmt->fetchColumn();
+
+                            // Calculate total pages
+                            $totalPages = ceil($totalRecords / $perPage);
+
                             // Execute SQL query to fetch all data from ledgertransaction table
-                            $stmt = $conn->prepare("SELECT * FROM ledgertransaction ORDER BY DateTime DESC");
+                            $stmt = $conn->prepare("SELECT * FROM ledgertransaction ORDER BY DateTime DESC LIMIT :perPage OFFSET :offset");
+                            $stmt->bindParam(':perPage', $perPage, PDO::PARAM_INT);
+                            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
                             $stmt->execute();
                             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             ?>
@@ -347,74 +320,55 @@
                                     </tr>
                                 <?php endforeach; ?>
                             </div>
-
-
-
-
-
-
-
-
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
-
+    
+        <!-- Pagination links -->
         <ol class="flex justify-end mr-8 gap-1 text-xs font-medium">
-            <li>
-                <a href="#"
-                    class="inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180">
-                    <span class="sr-only">Prev Page</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </li>
+            <!-- Next & Previous -->
+            <?php if ($page > 1): ?>
+                <li>
+                    <a route="/fin/ledger/page=<?= $page - 1 ?>"
+                        class="inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180">
+                        <span class="sr-only">Prev Page</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </li>
+            <?php endif; ?>
 
-            <li>
-                <a href="#"
-                    class="block size-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900">
-                    1
-                </a>
-            </li>
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <li>
+                    <a route="/fin/ledger/page=<?= $i ?>"
+                        class="block size-8 rounded border <?= $i == $page ? 'border-blue-600 bg-blue-600 text-white' : 'border-gray-100 bg-white text-gray-900' ?> text-center leading-8">
+                        <?= $i ?>
+                    </a>
+                </li>
+            <?php endfor; ?>
 
-            <li class="block size-8 rounded border-blue-600 bg-blue-600 text-center leading-8 text-white">
-                2
-            </li>
-
-            <li>
-                <a href="#"
-                    class="block size-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900">
-                    3
-                </a>
-            </li>
-
-            <li>
-                <a href="#"
-                    class="block size-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900">
-                    4
-                </a>
-            </li>
-
-            <li>
-                <a href="#"
-                    class="inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180">
-                    <span class="sr-only">Next Page</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </li>
+            <?php if ($page < $totalPages): ?>
+                <li>
+                    <a route="/fin/ledger/page=<?= $page + 1 ?>"
+                        class="inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180">
+                        <span class="sr-only">Next Page</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </li>
+            <?php endif; ?>
         </ol>
     </main>
-    <script src="./../src/form.js"></script>
-    <script src="./../src/route.js"></script>
+    <script src="./../../src/form.js"></script>
+    <script src="./../../src/route.js"></script>
     <script>
         window.addEventListener('DOMContentLoaded', (event) => {
             const form = document.querySelector('form');
