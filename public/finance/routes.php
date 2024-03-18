@@ -31,29 +31,7 @@ $fin = [
 
 ];
 
-// Router::post('/NewLedgerTransaction', function () {
-//     $db = Database::getInstance();
-//     $conn = $db->connect();
-
-//     $name = $_POST['name'];
-
-//     $stmt = $conn->prepare("INSERT INTO name (name) VALUES (:name)");
-//     $stmt->bindParam(':name', $name);
-
-//     $rootFolder = dirname($_SERVER['PHP_SELF']);
-
-//     if (empty ($name)) {
-//         header("Location: $rootFolder/fin/test");
-//         return;
-//     }
-
-//     // Execute the statement
-//     $stmt->execute();
-
-//     header("Location: $rootFolder/fin/test");
-// });
-
-Router::post('/fin/ledger', function () {
+Router::post('/test', function () {
     $db = Database::getInstance();
     $conn = $db->connect();
     $rootFolder = dirname($_SERVER['PHP_SELF']);
@@ -69,10 +47,6 @@ Router::post('/fin/ledger', function () {
     $amount = intval($_POST['amount']);
     $ledgerNo_Dr = ($_POST['debit']);
     $ledgerNo = ($_POST['credit']);
-
-    // More input validation...
-    // ...
-
     $datetime = $datetime->format('Y-m-d H:i:s');
 
     // Function to get ledger number

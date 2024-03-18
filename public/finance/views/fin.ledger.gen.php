@@ -101,7 +101,7 @@
                                 </div>
 
                                 <div class="p-2">
-                                    <form method="POST" action="#">
+                                   
                                         <button type="submit"
                                             class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
                                             role="menuitem">
@@ -113,7 +113,7 @@
 
                                             Delete Product
                                         </button>
-                                    </form>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -142,7 +142,8 @@
                         <!-- form -->
                         <?php $rootFolder = dirname($_SERVER['PHP_SELF']); ?>
                         <div class="p-5">
-                            <form action="<?= $rootFolder . '/fin/ledger' ?>" method="POST">
+                            <!-- <form action="<?= $rootFolder . '/fin/ledger' ?>" method="POST"> -->
+                            <form action="/test" method="POST">
                                 <div class="mb-4 relative">
                                     <label for="date" class="block text-xs font-medium text-gray-900"> Date </label>
                                     <input type="text" id="date" name="date" required readonly
@@ -268,7 +269,7 @@
                 <script>
                     function closeModalAndClearInputs() {
                         document.getElementById('myModal').classList.add('hidden');
-                        ['cash', 'credit', 'debit'].forEach(id => document.getElementById(id).value = '');
+                        ['description', 'credit', 'debit', 'amount'].forEach(id => document.getElementById(id).value = '');
                     }
 
                     document.getElementById('openModal').addEventListener('click', function () {
