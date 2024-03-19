@@ -62,7 +62,7 @@ Router::post('/hr/employees/add', function () {
     $query = "INSERT INTO employees (first_name, middle_name, last_name, dateofbirth, gender, nationality, civil_status, address, contact_no, email, department, position) VALUES (:firstName, :middleName, :lastName, :dateofbirth, :gender, :nationality, :civilstatus, :address, :contactnumber, :email, :department, :position);";
     $stmt = $conn->prepare($query);
 
-    if (empty($firstName) || empty($lastName) || empty($dateofbirth) || empty($gender) || empty($nationality) || empty($civilstatus) || empty($address) || empty($contactnumber) || empty($email) || empty($department) || empty($position)) {
+    if (empty($firstName) || empty($lastName) || empty($dateofbirth) || empty($gender) || empty($nationality) || empty($civilstatus) || empty($address) || empty($department) || empty($position)) {
         header("Location: $rootFolder/hr/employees/add");
         return;
     }
@@ -92,7 +92,7 @@ Router::post('/hr/employees/add', function () {
     $query = "INSERT INTO employment_info (employees_id, dateofhire, startdate, enddate) VALUES (:employeeId, :dateofhire, :startdate, :enddate);";
     $stmt = $conn->prepare($query);
 
-    if (empty($dateofhire) || empty($startdate) || empty($enddate)) {
+    if (empty($dateofhire) || empty($startdate)) {
         header("Location: $rootFolder/hr/employees/add");
         return;
     }
