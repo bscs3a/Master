@@ -365,12 +365,12 @@
                 <div id="grid" class="mb-10" x-bind:class="cartOpen ? ' grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? ' grid-cols-5 gap-4' : (!cartOpen && !sidebarOpen) ? ' grid-cols-6 gap-4' : ' grid-cols-6 gap-4'" style="display: grid;">
                     <?php foreach ($products as $product) : ?>
                         <?php if ($product['Category'] === $category) : ?> <!-- Show products only for the current category -->
-                            <button type="button" class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out" @click="
-                            if (<?= $product['Stocks'] ?> > 0 ) { 
-                                addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?>, priceWithTax: <?= $product['Price'] ?> * (1 + <?= $product['TaxRate'] ?>), deliveryRequired: '<?= $product['DeliveryRequired'] ?>' }); cartOpen = true; 
-                            } else { 
-                                alert('This product is out of stock.'); 
-                            }">
+                            <button type="button" class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out" x-for="(item, index) in cart" :key="index" @click="
+                                    if (<?= $product['Stocks'] ?> > 0) { 
+                                        addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?>, stocks: <?= $product['Stocks'] ?>, priceWithTax: <?= $product['Price'] ?> * (1 + <?= $product['TaxRate'] ?>), deliveryRequired: '<?= $product['DeliveryRequired'] ?>' }); cartOpen = true; 
+                                    } else { 
+                                        alert('This product is out of stock.'); 
+                                    }">
 
                                 <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
                                     <!-- SVG icon -->
@@ -418,12 +418,20 @@
             addToCart(product) {
                 let item = this.cart.find(i => i.id === product.id);
                 if (item) {
-                    item.quantity++;
+                    if (item.quantity + 1 > product.stocks) {
+                        alert('The quantity you want to add is greater than the available stocks.');
+                    } else {
+                        item.quantity++;
+                    }
                 } else {
-                    this.cart.push({
-                        ...product,
-                        quantity: 1
-                    });
+                    if (product.stocks < 1) {
+                        alert('The quantity you want to add is greater than the available stocks.');
+                    } else {
+                        this.cart.push({
+                            ...product,
+                            quantity: 1
+                        });
+                    }
                 }
 
                 // Save the cart items to localStorage
