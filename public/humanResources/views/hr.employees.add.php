@@ -54,7 +54,7 @@
 <!-- Profile -->
 <div class="py-2 px-6 mt-4">
   <div class="flex">
-    <form method="POST" enctype="multipart/form-data">
+    <form action="/hr/employees/add" method="POST" enctype="multipart/form-data">
     <div class="mr-4">
       <img src="https://placehold.co/192x192" alt="Profile Picture" class="w-48 h-48 object-cover ml-3">
       <span>
@@ -71,10 +71,9 @@
         </div>    
       </span>
     </div>
-    </form>
   <!-- Employee Information -->
   
-<form action= "/hr/employees/add" method="POST">
+<!-- <form action= "/hr/employees/add" method="POST"> -->
   <div class="flex flex-col ml-20">
     <div class="mb-4">
       <div class="flex">
