@@ -18,7 +18,7 @@ $sls = [
     '/sls/Revenue' => $basePath . "Revenue.php",
     // ... other routes ...
 
-    '/sls/Transaction-Details/sale=' => function($saleId) use ($basePath) {
+    '/sls/Transaction-Details/sale={saleId}' => function($saleId) use ($basePath) {
         $_GET['sale'] = $saleId;
         include $basePath . "transactionDetails.php";
     },
