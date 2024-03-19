@@ -29,10 +29,10 @@ or
 gulp serve
 ```
 
-## Routing 3.0
+## Routing 3.1
 > Bug Fix: Rootfolder and Routing issue
 > 
-> New Feature: post-method <br>
+> New Feature: post-method and dynamic routing <br>
 
 ### Try to understand how the Routing works at `routes.php` of your system folder<br><br>
 ### Root Folder Filename issues fix
@@ -66,6 +66,15 @@ no need to include the root folder name just the route
 <button route='/sls/sampleRoute'>
 
 <div route='/dlv/sampleRoute'>
+```
+
+### Dynamic Routing
+```
+'/fin/test/id={id}' => function($id) use ($basePath) {
+        $_SESSION['id'] = $id;
+        $_GET['id'] = $id;
+        include $basePath . "test2.php";
+},
 ```
 
 ### Post-Method
