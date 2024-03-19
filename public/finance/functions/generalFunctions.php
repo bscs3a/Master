@@ -1,6 +1,6 @@
 <?php
-//get the value of 1 t-account
-function getAccountBalance($ledger) {
+//get the value of 1 t-account - can return negative or positive
+function getAccountBalance($ledger, $considerDate = false, $year = null, $month = null) {
     $db = Database::getInstance();
     $conn = $db->connect();
 
@@ -10,11 +10,21 @@ function getAccountBalance($ledger) {
     if ($ledgerNo === false) {
         throw new Exception("Account not found in Ledger table.");
     }
+    // If the year and month are not specified while you want to consider date, throw an exception
+    if ($considerDate && ($year === null || $month === null)) {
+        throw new Exception("Year and month must be specified when considering date.");
+    }
 
-    // Fetch entries from the LedgerStatement table
-    $sql = "SELECT * FROM LedgerTransaction WHERE ledgerno = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$ledgerNo]);
+    // Fetch entries from the LedgerTransaction table
+    if ($considerDate && $year !== null && $month !== null) {
+        $sql = "SELECT * FROM LedgerTransaction WHERE ledgerno = ? AND YEAR(date) = ? AND MONTH(date) = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$ledgerNo, $year, $month]);
+    } else {
+        $sql = "SELECT * FROM LedgerTransaction WHERE ledgerno = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$ledgerNo]);
+    }
 
     $balance = 0;
 
@@ -44,7 +54,7 @@ function getLedgerCode($ledger){
 
 }
 
-//get the value of 1 group type
+//get the value of 1 group type - always returns positve
 function getTotalOfGroup($groupType) {
     $db = Database::getInstance();
     $conn = $db->connect();
