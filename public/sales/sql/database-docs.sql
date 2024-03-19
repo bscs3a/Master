@@ -1,14 +1,16 @@
 -- Products Table
-CREATE TABLE IF NOT EXISTS Products (
-    ProductID INT AUTO_INCREMENT PRIMARY KEY,
-    ProductName VARCHAR(255),
-    Description TEXT,
-    Category VARCHAR(100),
-    DeliveryRequired ENUM('Yes', 'No') DEFAULT 'No',
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY AUTO_INCREMENT,
+    ProductName VARCHAR(100),
+    Description VARCHAR(255),
+    Category VARCHAR(50),
+    DeliveryRequired VARCHAR(3),
     Price DECIMAL(10, 2),
     Stocks INT,
-    TaxRate DECIMAL(5, 2) DEFAULT 0 
+    UnitOfMeasurement VARCHAR(20),
+    TaxRate DECIMAL(5, 2)
 );
+
 
 -- Customers Table
 CREATE TABLE IF NOT EXISTS Customers (
@@ -70,46 +72,44 @@ CREATE TABLE IF NOT EXISTS DeliveryOrders (
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
 
--- Inserting sample data into Products table
 INSERT INTO Products (ProductName, Description, Category, DeliveryRequired, Price, Stocks, TaxRate) 
 VALUES 
-    ('Hammer', 'Heavy-duty hammer for construction work', 'Tools', 'No', 299.00, 50, 0.12),
-    ('Screwdriver Set', 'Set of 6 screwdrivers with various sizes', 'Tools', 'No', 199.00, 30, 0.12),
-    ('Cement', 'Portland cement for construction purposes', 'Building Materials', 'Yes', 220.00, 100, 0.12),
-    ('Gravel', 'Crushed stone for construction projects', 'Building Materials', 'Yes', 500.00, 50, 0.12),
+    ('Hammer (Large)', 'Heavy-duty hammer for construction work', 'Tools', 'No', 299.00, 50, 0.12),
+    ('Screwdriver Set (Standard)', 'Set of 6 screwdrivers with various sizes', 'Tools', 'No', 199.00, 30, 0.12),
+    ('Cement (50kg)', 'Portland cement for construction purposes', 'Building Materials', 'Yes', 220.00, 100, 0.12),
+    ('Gravel (1 ton)', 'Crushed stone for construction projects', 'Building Materials', 'Yes', 500.00, 50, 0.12),
     ('Paint Brush Set', 'Set of 10 paint brushes for art projects', 'Art Supplies', 'No', 99.00, 20, 0.12),
     ('Safety Helmet', 'Hard hat helmet for construction safety', 'Safety Gear', 'No', 150.00, 40, 0.12),
     ('Drill Machine', 'Cordless drill machine with rechargeable batteries', 'Tools', 'No', 599.00, 15, 0.12),
-    ('Plywood', 'Plywood sheets for carpentry and construction', 'Building Materials', 'Yes', 600.00, 30, 0.12),
-    ('Steel Bar', 'Deformed steel bars for reinforcement in concrete construction', 'Building Materials', 'Yes', 50.00, 200, 0.12),
-    ('Paint Thinner', 'Solvent used for thinning oil-based paints and cleaning paint brushes', 'Paints and Chemicals', 'No', 150.00, 50, 0.12);
+    ('Plywood (4x8 feet)', 'Plywood sheets for carpentry and construction', 'Building Materials', 'Yes', 600.00, 30, 0.12),
+    ('Steel Bar (1 meter)', 'Deformed steel bars for reinforcement in concrete construction', 'Building Materials', 'Yes', 50.00, 200, 0.12),
+    ('Paint Thinner', 'Solvent used for thinning oil-based paints and cleaning paint brushes', 'Paints and Chemicals', 'No', 150.00, 50, 0.12),
+    ('Concrete Blocks (Standard)', 'Standard concrete blocks for building walls', 'Building Materials', 'Yes', 5.00, 200, 0.12),
+    ('Roofing Shingles (Bundle)', 'Bundle of roofing shingles for covering roofs', 'Building Materials', 'Yes', 25.00, 100, 0.12),
+    ('Sand (1 cubic yard)', 'Fine aggregate sand for various construction applications', 'Building Materials', 'Yes', 40.00, 150, 0.12),
+    ('Brick (Standard)', 'Standard clay bricks for construction', 'Building Materials', 'Yes', 0.50, 500, 0.12),
+    ('Wood Studs (8 feet)', 'Standard wood studs for framing walls', 'Building Materials', 'Yes', 3.00, 300, 0.12),
+    ('Galvanized Nails (5 lbs)', 'Galvanized nails for various construction applications', 'Building Materials', 'Yes', 10.00, 100, 0.12),
+    ('Drywall (4x8 feet)', 'Drywall sheets for interior wall finishing', 'Building Materials', 'Yes', 12.00, 200, 0.12),
+    ('Concrete Mix (50 lb)', 'Pre-mixed concrete for small-scale construction projects', 'Building Materials', 'Yes', 8.00, 150, 0.12);
 
-
-INSERT INTO `products` (`ProductID`, `ProductName`, `Description`, `Category`, `Size`, `Price`, `Quantity`) VALUES
-(1, 'Hammer', 'Heavy-duty hammer for construction work', 'Tools', '', 999.00, 50),
-(2, 'Screwdriver Set', 'Set of 6 screwdrivers with various sizes', 'Tools', '', 749.00, 30),
-(3, 'Paint Brush Set', 'Set of 10 paint brushes for art projects', 'Art Supplies', '', 499.00, 20),
-(4, 'Drill Machine', 'Cordless drill machine with rechargeable batteries', 'Tools', '', 2999.00, 15),
-(5, 'Safety Helmet', 'Hard hat helmet for construction safety', 'Safety Gear', '', 1499.00, 40),
-(6, 'Cement', 'Portland cement for construction purposes', 'Building Materials', '40 kg', 220.00, 100),
-(7, 'Galvanized Iron (GI) Sheet', 'Galvanized iron sheet for roofing and siding', 'Building Materials', '8 ft x 4 ft', 450.00, 50),
-(8, 'Plywood', 'Plywood sheets for carpentry and construction', 'Building Materials', '8 ft x 4 ft', 600.00, 30),
-(9, 'Steel Bar', 'Deformed steel bars for reinforcement in concrete construction', 'Building Materials', '6 meters', 50.00, 200),
-(10, 'Paint Thinner', 'Solvent used for thinning oil-based paints and cleaning paint brushes', 'Paints and Chemicals', '', 150.00, 50),
-(11, 'Wrench Set', 'Set of 6 wrenches for various mechanical tasks', 'Tools', '', 899.00, 25),
-(12, 'Utility Knife', 'Multipurpose utility knife for cutting tasks', 'Tools', '', 299.00, 40),
-(13, 'Adjustable Pliers', 'Set of 6 adjustable pliers for gripping and turning nuts and bolts', 'Tools', '', 699.00, 20),
-(14, 'Paint Roller', 'High-quality paint roller for smooth application of paint', 'Art Supplies', '', 199.00, 35),
-(15, 'Sketch Pad', 'Sketch pad for drawing and sketching', 'Art Supplies', '', 99.00, 50),
-(16, 'Canvas Set', 'Set of 6 canvases for painting', 'Art Supplies', '', 599.00, 15),
-(17, 'Safety Vest', 'High-visibility safety vest for construction sites', 'Safety Gear', '', 299.00, 30),
-(18, 'Safety Goggles', 'Protective safety goggles for eye protection', 'Safety Gear', '', 149.00, 45),
-(19, 'Safety Gloves', 'Durable safety gloves for hand protection', 'Safety Gear', '', 199.00, 20),
-(20, 'Roofing Nails', 'Box of 1000 roofing nails for securing roofing materials', 'Building Materials', '', 99.00, 100),
-(21, 'Concrete Blocks', 'Set of 6 concrete blocks for construction', 'Building Materials', '', 799.00, 10),
-(22, 'Sandpaper Set', 'Set of 6 sandpapers for sanding wood and metal surfaces', 'Building Materials', '', 149.00, 25),
-(23, 'Acrylic Paint Set', 'Set of 6 acrylic paint tubes for painting projects', 'Paints and Chemicals', '', 399.00, 30),
-(24, 'Brush Cleaner', 'Solvent for cleaning paint brushes and other painting tools', 'Paints and Chemicals', '', 249.00, 20),
-(25, 'Paint Tray', 'Paint tray for holding paint during painting tasks', 'Paints and Chemicals', '', 99.00, 40);
-
-
+INSERT INTO Products (ProductName, Description, Category, DeliveryRequired, Price, Stocks, TaxRate, UnitOfMeasurement) 
+VALUES 
+    ('Hammer (Large)', 'Heavy-duty hammer for construction work', 'Tools', 'No', 299.00, 50, 0.12, 'pcs'),
+    ('Screwdriver Set (Standard)', 'Set of 6 screwdrivers with various sizes', 'Tools', 'No', 199.00, 30, 0.12, 'set'),
+    ('Cement (50kg)', 'Portland cement for construction purposes', 'Building Materials', 'Yes', 220.00, 100, 0.12, 'kg'),
+    ('Gravel (1 ton)', 'Crushed stone for construction projects', 'Building Materials', 'Yes', 500.00, 50, 0.12, 'ton'),
+    ('Paint Brush Set', 'Set of 10 paint brushes for art projects', 'Art Supplies', 'No', 99.00, 20, 0.12, 'set'),
+    ('Safety Helmet', 'Hard hat helmet for construction safety', 'Safety Gear', 'No', 150.00, 40, 0.12, 'pcs'),
+    ('Drill Machine', 'Cordless drill machine with rechargeable batteries', 'Tools', 'No', 599.00, 15, 0.12, 'pcs'),
+    ('Plywood (4x8 feet)', 'Plywood sheets for carpentry and construction', 'Building Materials', 'Yes', 600.00, 30, 0.12, 'sheet'),
+    ('Steel Bar (1 meter)', 'Deformed steel bars for reinforcement in concrete construction', 'Building Materials', 'Yes', 50.00, 200, 0.12, 'meter'),
+    ('Paint Thinner', 'Solvent used for thinning oil-based paints and cleaning paint brushes', 'Paints and Chemicals', 'No', 150.00, 50, 0.12, NULL),
+    ('Concrete Blocks (Standard)', 'Standard concrete blocks for building walls', 'Building Materials', 'Yes', 5.00, 200, 0.12, 'pcs'),
+    ('Roofing Shingles (Bundle)', 'Bundle of roofing shingles for covering roofs', 'Building Materials', 'Yes', 25.00, 100, 0.12, 'bundle'),
+    ('Sand (1 cubic yard)', 'Fine aggregate sand for various construction applications', 'Building Materials', 'Yes', 40.00, 150, 0.12, 'cubic yard'),
+    ('Brick (Standard)', 'Standard clay bricks for construction', 'Building Materials', 'Yes', 0.50, 500, 0.12, 'pcs'),
+    ('Wood Studs (8 feet)', 'Standard wood studs for framing walls', 'Building Materials', 'Yes', 3.00, 300, 0.12, '8 feet'),
+    ('Galvanized Nails (5 lbs)', 'Galvanized nails for various construction applications', 'Building Materials', 'Yes', 10.00, 100, 0.12, 'lbs'),
+    ('Drywall (4x8 feet)', 'Drywall sheets for interior wall finishing', 'Building Materials', 'Yes', 12.00, 200, 0.12, 'sheet'),
+    ('Concrete Mix (50 lb)', 'Pre-mixed concrete for small-scale construction projects', 'Building Materials', 'Yes', 8.00, 150, 0.12, 'lb');
