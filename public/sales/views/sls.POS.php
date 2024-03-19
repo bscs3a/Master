@@ -338,7 +338,7 @@
                                         imageHeight: 200,
                                         imageAlt: "Custom image",
                                         width: 400,
-                                    
+                                        confirmButtonColor: "#FF0000",
                                         });
 
                                
@@ -402,7 +402,7 @@
                                     Toast.fire({
                                         icon: 'success',
                                         title: 'Item Added To Cart!'
-                                        
+
                                     });
                                     
                                     } else { 
