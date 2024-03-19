@@ -225,7 +225,6 @@
                         <option value="Human Resources">Human Resources</option>
                         <option value="Point of Sales">Point of Sales</option>
                         <option value="Finance">Finance/Accounting</option>
-                      
                       </select>
           </div>
           <div>
