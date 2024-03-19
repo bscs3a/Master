@@ -6,16 +6,20 @@ require_once '../generalFunctions.php';
 // must consider date
 // must consider closing balance table(ledgerstatement)
 
-function calculateNetSalesOrLoss() {
+//calculate net sales
+function calculateNetSalesOrLoss($year, $month) {
+    if ($year === null || $month === null) {
+        throw new Exception("Year and month must not be null.");
+    }
     define("INCOME", "IC");
     define("EXPENSE", "EP");
 
     // income - expense = netsales or loss
-    return getTotalOfGroup(INCOME) - getTotalOfGroup(EXPENSE);
+    return getTotalOfGroup(INCOME, $year, $month) - getTotalOfGroup(EXPENSE, $year, $month);
 }
 
 
-function generate_html() {
+function generateIncomeReport($year, $month) {
     $db = Database::getInstance();
     $conn = $db->connect();
 
@@ -40,18 +44,18 @@ function generate_html() {
                 $html .= "<li>\n{$account['Description']}\n<ul>\n";
                 foreach ($ledger_data as $ledger) {
                     if ($ledger['AccountType'] == $account['AccountType']) {
-                        $balance = getAccountBalance($ledger['ledgerno']);
+                        $balance = getAccountBalance($ledger['ledgerno'], true, $year, $month);
                         $html .= "<li>\n<span>{$ledger['name']}</span>&emsp;<span>{$balance}</span>\n</li>\n";
                     }
                 }
                 $html .= "</ul>\n</li>\n";
             }
         }
-        $total = getTotalOfGroup($group['grouptype']);
+        $total = getTotalOfGroup($group['grouptype'], $year, $month);
         $resultText = $group['grouptype'] == "IC" ? "Gross Profit" : "Total Expense";
         $html .= "</ul>\n<span>{$resultText}</span>&emsp;<span>{$total}</span>\n</li>\n";
     }
-    $netSalesOrLoss = calculateNetSalesOrLoss();
+    $netSalesOrLoss = calculateNetSalesOrLoss($year, $month);
     $textSalesOrLoss = $netSalesOrLoss > 0 ? "Net Sales" : "Net Loss";
     $html .= "
     <li>
