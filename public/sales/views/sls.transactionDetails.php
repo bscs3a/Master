@@ -101,7 +101,8 @@
             </div>
         </div>
     </main>
-    <script src="./../src/route.js"></script>
+    <script src="./../../src/form.js"></script>
+    <script src="./../../src/route.js"></script>
 </body>
 
 </html>

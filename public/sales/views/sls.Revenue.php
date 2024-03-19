@@ -28,7 +28,7 @@
             <ul class="flex items-center text-md ml-4">
 
                 <li class="mr-2">
-                    <p class="text-black font-medium">Sales / Transaction History</p>
+                    <p class="text-black font-medium">Sales / Revenue</p>
                 </li>
 
             </ul>
@@ -53,7 +53,7 @@
         <div class="flex flex-col items-center min-h-screen mb-10 ">
             <div class="w-full max-w-6xl mt-10">
                 <div class="flex justify-between items-center">
-                    <h1 class="mb-3 text-xl font-bold text-black">Transaction History</h1>
+                    <h1 class="mb-3 text-xl font-bold text-black">Revenue</h1>
                     <div class="relative mb-3">
                         <input type="text" placeholder="Search by ID..." class="px-3 py-2 pl-5 pr-10 border rounded-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-6 h-6">
@@ -75,45 +75,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        // Include your database connection file
-                        require_once './src/dbconn.php';
-
-                        // Get PDO instance
-                        $database = Database::getInstance();
-                        $pdo = $database->connect();
-
-                        // SQL query to fetch sales data along with customer name
-                        $sql = "SELECT 
-                                    Sales.SaleID,
-                                    Sales.SaleDate,
-                                    Sales.SalePreference,
-                                    Sales.PaymentMode,
-                                    Sales.TotalAmount,
-                                    Customers.FirstName AS CustomerFirstName,
-                                    Customers.LastName AS CustomerLastName
-                                FROM 
-                                    Sales
-                                JOIN 
-                                    Customers ON Sales.CustomerID = Customers.CustomerID";
-
-                        // Execute the query
-                        $stmt = $pdo->query($sql);
-                        ?>
-
-                        <!-- Fetch data from the result set -->
-                        <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-                            <?php $saleId = $row['SaleID']; ?>
-                            <tr class='border border-gray-200 bg-white' data-sale-id='<?php echo $saleId; ?>'>
-                                <td class='px-4 py-2'><?php echo $row['CustomerFirstName'] . " " . $row['CustomerLastName']; ?></td>
-                                <td class='px-4 py-2'><?php echo $saleId; ?></td>
-                                <td class='px-4 py-2'><?php echo $row['SaleDate']; ?></td>
-                                <td class='px-4 py-2'><?php echo $row['SalePreference']; ?></td>
-                                <td class='px-4 py-2'><?php echo $row['PaymentMode']; ?></td>
-                                <td class='px-4 py-2'><?php echo $row['TotalAmount']; ?></td>
-                                <td class='px-4 py-2'><a route='/sls/Transaction-Details/sale=<?php echo $saleId; ?>' class='text-blue-500 hover:underline view-link'>View</a></td>
-                            </tr>
-                        <?php endwhile; ?>
+                        <!-- Table data will be inserted here -->
                     </tbody>
                 </table>
             </div>

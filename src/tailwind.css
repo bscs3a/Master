@@ -3186,6 +3186,10 @@ video {
   padding-inline-end: 2.5rem;
 }
 
+.pl-0{
+  padding-left: 0px;
+}
+
 .pl-10{
   padding-left: 2.5rem;
 }
@@ -3260,14 +3264,6 @@ video {
 
 .pt-6{
   padding-top: 1.5rem;
-}
-
-.pl-0{
-  padding-left: 0px;
-}
-
-.pl-1{
-  padding-left: 0.25rem;
 }
 
 .text-left{
@@ -4154,11 +4150,6 @@ video {
 .hover\:bg-gray-600:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(75 85 99 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-gray-800:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-gray-950:hover{

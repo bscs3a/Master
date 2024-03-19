@@ -1,27 +1,53 @@
 <?php
 
 $path = './public/sales/views';
+$basePath = "$path/sls.";
 
 $sls = [
-    '/sls/sample' => "$path/sls.sample.php",
-    '/sls/link' => "$path/sls.test-link.php",
-    '/sls/Product-Catalog' => "$path/sls.ProductCatalog.php",
-    '/sls/Transaction-History' => "$path/sls.TransactionHistory.php",
-    '/sls/Transaction-Details' => "$path/sls.TransactionDetails.php",
-    '/sls/Dashboard' => "$path/sls.Dashboard.php",
-    '/sls/POS' => "$path/sls.POS.php",
-    '/sls/POS2' => "$path/sls.POS2.php",
-    '/sls/POS/Checkout' => "$path/sls.checkout.php",
-    '/sls/POS/Receipt' => "$path/sls.Receipt.php",
-    '/sls/Audit-Trail' => "$path/sls.AuditTrail.php",
+    '/sls/sample' => $basePath . "sample.php",
+    '/sls/link' => $basePath . "test-link.php",
+    '/sls/Product-Catalog' => $basePath . "ProductCatalog.php",
+    '/sls/Transaction-History' => $basePath . "transactionHistory.php",
+    '/sls/Transaction-Details' => $basePath . "transactionDetails.php",
+    '/sls/Dashboard' => $basePath . "Dashboard.php",
+    '/sls/POS' => $basePath . "POS.php",
+    '/sls/POS2' => $basePath . "POS2.php",
+    '/sls/POS/Checkout' => $basePath . "checkout.php",
+    '/sls/POS/Receipt' => $basePath . "Receipt.php",
+    '/sls/Audit-Trail' => $basePath . "AuditTrail.php",
+    '/sls/Revenue' => $basePath . "Revenue.php",
     // ... other routes ...
+
+    '/sls/Transaction-Details/sale=' => function($saleId) use ($basePath) {
+        $_GET['sale'] = $saleId;
+        include $basePath . "transactionDetails.php";
+    },
 ];
 
+// Get the current URL path
+$urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+// Loop through all routes
+foreach ($sls as $route => $action) {
+    // Check if the start of the URL path matches the route
+    if (strpos($urlPath, $route) === 0) {
+        // Get the sale ID from the URL path
+        $saleId = substr($urlPath, strlen($route));
+
+        // Execute the action for the route
+        $action($saleId);
+
+        // Stop the loop
+        break;
+    }
+}
 
 
 // START: Add Sales
-class Customer {
-    public function create($firstName, $lastName, $phone, $email) {
+class Customer
+{
+    public function create($firstName, $lastName, $phone, $email)
+    {
         $db = Database::getInstance();
         $conn = $db->connect();
 
@@ -36,8 +62,10 @@ class Customer {
     }
 }
 
-class Sale {
-    public function create($saleDate, $salePreference, $paymentMode, $totalAmount, $employeeId, $customerId, $cardNumber, $expiryDate, $cvv) {
+class Sale
+{
+    public function create($saleDate, $salePreference, $paymentMode, $totalAmount, $employeeId, $customerId, $cardNumber, $expiryDate, $cvv)
+    {
         $db = Database::getInstance();
         $conn = $db->connect();
 
@@ -56,8 +84,10 @@ class Sale {
     }
 }
 
-class SaleDetail {
-    public function create($saleId, $productId, $quantity, $unitPrice) {
+class SaleDetail
+{
+    public function create($saleId, $productId, $quantity, $unitPrice)
+    {
         $db = Database::getInstance();
         $conn = $db->connect();
 
@@ -70,8 +100,10 @@ class SaleDetail {
     }
 }
 
-class DeliveryOrder {
-    public function create($saleId, $productId, $quantity, $deliveryAddress, $deliveryDate) {
+class DeliveryOrder
+{
+    public function create($saleId, $productId, $quantity, $deliveryAddress, $deliveryDate)
+    {
         $db = Database::getInstance();
         $conn = $db->connect();
 
@@ -85,8 +117,10 @@ class DeliveryOrder {
     }
 }
 
-class Product {
-    public function decreaseQuantity($productId, $quantity) {
+class Product
+{
+    public function decreaseQuantity($productId, $quantity)
+    {
         $db = Database::getInstance();
         $conn = $db->connect();
 
