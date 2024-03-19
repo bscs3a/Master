@@ -12,6 +12,13 @@
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
 
     <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+        import Swal from 'sweetalert2'
+
+        const Swal = require('sweetalert2')
+    </script>
+
+    
 
     <style>
         .sidebar-open {
@@ -323,7 +330,18 @@
                                 event.preventDefault();
 
                                 // Show a notification if the cart is empty
-                                alert('Your cart is empty!');
+                                Swal.fire({
+                                        title: "Uh oh!",
+                                        text: "Please put items in your cart before proceeding to checkout.",
+                                        imageUrl: "https://cdn-icons-png.flaticon.com/512/4555/4555971.png",
+                                        imageWidth: 200,
+                                        imageHeight: 200,
+                                        imageAlt: "Custom image",
+                                        width: 400,
+                                    
+                                        });
+
+                               
                             } else {
                                 // Proceed to checkout
                                 window.location.pathname = checkoutRoute;
@@ -424,7 +442,26 @@
                         alert('The quantity you want to add is greater than the available stocks.');
                     } else {
                         item.quantity++;
-                    }
+
+                        // ADDED notification
+                        const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 1000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                        });
+                        Toast.fire({
+                        icon: "success",
+                        title: "Item Added To Cart!"
+                        });
+                        }
+
+
                 } else {
                     if (product.stocks < 1) {
                         alert('The quantity you want to add is greater than the available stocks.');
@@ -435,6 +472,10 @@
                         });
                     }
                 }
+
+        
+
+                
 
                 // Save the cart items to localStorage
                 localStorage.setItem('cart', JSON.stringify(this.cart));
