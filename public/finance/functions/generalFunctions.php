@@ -6,18 +6,12 @@ function getAccountBalance($ledger, $considerDate = false, $year = null, $month 
 
     $ledgerNo = getLedgerCode($ledger);
 
-    // If getLedgerCode returns false, throw an exception
     if ($ledgerNo === false) {
         throw new Exception("Account not found in Ledger table.");
     }
-    // If the year and month are not specified while you want to consider date, throw an exception
-    if ($considerDate && ($year === null || $month === null)) {
-        throw new Exception("Year and month must be specified when considering date.");
-    }
 
-    // Fetch entries from the LedgerTransaction table
     if ($considerDate && $year !== null && $month !== null) {
-        $sql = "SELECT * FROM LedgerTransaction WHERE ledgerno = ? AND YEAR(date) = ? AND MONTH(date) = ?";
+        $sql = "SELECT * FROM LedgerTransaction WHERE ledgerno = ? AND YEAR(datetime) = ? AND MONTH(datetime) = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$ledgerNo, $year, $month]);
     } else {
@@ -55,36 +49,46 @@ function getLedgerCode($ledger){
 }
 
 //get the value of 1 group type - always returns positve
-function getTotalOfGroup($groupType) {
+function getTotalOfGroup($groupType, $year = null, $month = null) {
     $db = Database::getInstance();
     $conn = $db->connect();
 
-    // Fetch all transactions for ledgers(considering grouptype) on ledgerNo(credit)
     $sql = "SELECT lt.* FROM LedgerTransaction lt
             JOIN Ledger l ON lt.ledgerNo = l.ledgerNo
             JOIN AccountType at ON l.accountType = at.accountType
             WHERE at.groupType = :groupType";
+    if ($year !== null && $month !== null) {
+        $sql .= " AND YEAR(lt.datetime) = :year AND MONTH(lt.datetime) = :month";
+    }
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':groupType', $groupType);
+    if ($year !== null && $month !== null) {
+        $stmt->bindParam(':year', $year, PDO::PARAM_INT);
+        $stmt->bindParam(':month', $month, PDO::PARAM_INT);
+    }
     $stmt->execute();
 
     $netAmount = 0;
 
-    // Calculate the net amount
     while ($row = $stmt->fetch()) {
         $netAmount += $row['amount'];
     }
 
-    // Fetch all transactions for ledgers(considering grouptype) on ledgerNo_dr(debit)
     $sql = "SELECT lt.* FROM LedgerTransaction lt
             JOIN Ledger l ON lt.ledgerNo_dr = l.ledgerNo
             JOIN AccountType at ON l.accountType = at.accountType
             WHERE at.groupType = :groupType";
+    if ($year !== null && $month !== null) {
+        $sql .= " AND YEAR(lt.datetime) = :year AND MONTH(lt.datetime) = :month";
+    }
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':groupType', $groupType);
+    if ($year !== null && $month !== null) {
+        $stmt->bindParam(':year', $year, PDO::PARAM_INT);
+        $stmt->bindParam(':month', $month, PDO::PARAM_INT);
+    }
     $stmt->execute();
 
-    // Subtract the amounts for expense accounts
     while ($row = $stmt->fetch()) {
         $netAmount -= $row['amount'];
     }
