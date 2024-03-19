@@ -18,7 +18,7 @@ $sls = [
     '/sls/Revenue' => $basePath . "Revenue.php",
     // ... other routes ...
 
-    '/sls/Transaction-Details/sale={saleId}' => function($saleId) use ($basePath) {
+    '/sls/Transaction-Details/sale={saleId}' => function ($saleId) use ($basePath) {
         $_GET['sale'] = $saleId;
         include $basePath . "transactionDetails.php";
     },
@@ -86,16 +86,20 @@ class Sale
 
 class SaleDetail
 {
-    public function create($saleId, $productId, $quantity, $unitPrice)
+    public function create($saleId, $productId, $quantity, $unitPrice, $subtotal, $tax, $shippingFee, $totalAmount)
     {
         $db = Database::getInstance();
         $conn = $db->connect();
 
-        $stmt = $conn->prepare("INSERT INTO SaleDetails (SaleID, ProductID, Quantity, UnitPrice) VALUES (:saleId, :productId, :quantity, :unitPrice)");
+        $stmt = $conn->prepare("INSERT INTO SaleDetails (SaleID, ProductID, Quantity, UnitPrice, Subtotal, Tax, ShippingFee, TotalAmount) VALUES (:saleId, :productId, :quantity, :unitPrice, :subtotal, :tax, :shippingFee, :totalAmount)");
         $stmt->bindParam(':saleId', $saleId);
         $stmt->bindParam(':productId', $productId);
         $stmt->bindParam(':quantity', $quantity);
         $stmt->bindParam(':unitPrice', $unitPrice);
+        $stmt->bindParam(':subtotal', $subtotal);
+        $stmt->bindParam(':tax', $tax);
+        $stmt->bindParam(':shippingFee', $shippingFee);
+        $stmt->bindParam(':totalAmount', $totalAmount);
         $stmt->execute();
     }
 }
@@ -143,7 +147,13 @@ Router::post('/addSales', function () {
     $product = new Product();
     $cart = json_decode($_POST['cartData'], true);
     foreach ($cart as $item) {
-        $saleDetail->create($saleId, $item['id'], $item['quantity'], $item['price']);
+        $subtotal = $item['price'] * $item['quantity'];
+        $tax = $subtotal * $item['TaxRate'];
+        $shippingFee = $_POST['SalePreference'] === 'delivery' ? 50 : 0; // Replace 50 with the actual shipping fee
+        $totalAmount = $subtotal + $tax + $shippingFee;
+
+        $saleDetail->create($saleId, $item['id'], $item['quantity'], $item['price'], $subtotal, $tax, $shippingFee, $totalAmount);
+
         $product->decreaseQuantity($item['id'], $item['quantity']); // Decrease product quantity
         if ($_POST['SalePreference'] === 'delivery') {
             $deliveryOrder->create($saleId, $item['id'], $item['quantity'], $_POST['deliveryAddress'], $_POST['deliveryDate']);

@@ -9,13 +9,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
     <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
 
-
-
     <style>
         ::-webkit-scrollbar {
             display: none;
         }
     </style>
+
 </head>
 
 <body>
@@ -69,10 +68,10 @@
                     <div class="bg-white rounded-lg p-6 w-1/2">
                         <!-- Order summary -->
                         <div class="mb-4">
-                            <h2 class="text-xl font-medium mb-6 text-gray-500">Order Summary</h2>
-                            <div class="text-6xl font-medium mb-10">₱123</div>
-                            <!-- Replace with dynamic content -->
-                            <ul id="order-summary" x-data="{ cart: JSON.parse(localStorage.getItem('cart')) || [], taxRate: 0.10 }" class="text-gray-700">
+                            <ul id="order-summary" x-data="cartData()" class="text-gray-700">
+                                <h2 class="text-xl font-medium mb-6 text-gray-500">Order Summary</h2>
+                                <div class="text-6xl font-medium mb-10" x-text="'₱' + total.toFixed(2)"></div>
+
                                 <!-- Cart item rows -->
                                 <template x-for="(item, index) in cart" :key="index">
                                     <li class="py-4 flex justify-between items-center">
@@ -83,23 +82,44 @@
                                         <span x-text="'₱' + (item.priceWithTax * item.quantity).toFixed(2)"></span>
                                     </li>
                                 </template>
+
                                 <div class="ml-16">
                                     <li class="mt-4 pb-4 pt-6 font-semibold border-t border-b mb-4 flex justify-between">
                                         <span x-text="'Subtotal:'"></span>
-                                        <span x-text="'₱' + cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2) "></span>
-
+                                        <span x-text="'₱' + subtotal.toFixed(2)"></span>
+                                    </li>
+                                    <li id="shipping-fee" class="py-2 pb-4 text-gray-500 font-medium border-b mb-4 flex justify-between" x-show="salePreference === 'delivery'">
+                                        <span x-text="'Shipping Fee:'"></span>
+                                        <span>₱50.00</span> <!-- Replace with the actual shipping fee -->
                                     </li>
                                     <li class="py-2 pb-4 text-gray-500 font-medium border-b mb-4 flex justify-between">
                                         <span x-text="'Tax:'"></span>
-                                        <span x-text="'₱' + (cart.reduce((total, item) => total + item.price * item.quantity, 0) * taxRate).toFixed(2)"></span>
-
+                                        <span x-text="'₱' + tax.toFixed(2)"></span>
                                     </li>
                                     <li class="py-4 font-semibold  text-green-800 flex justify-between">
                                         <span x-text="'Total:'"></span>
-                                        <span x-text="'₱' + cart.reduce((total, item) => total + item.priceWithTax * item.quantity, 0).toFixed(2)"></span>
+                                        <span x-text="'₱' + total.toFixed(2)"></span>
                                     </li>
                                 </div>
                             </ul>
+
+                            <script>
+                                function cartData() {
+                                    return {
+                                        cart: JSON.parse(localStorage.getItem('cart')) || [],
+                                        salePreference: 'delivery', // Replace with the actual sale preference
+                                        get subtotal() {
+                                            return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
+                                        },
+                                        get tax() {
+                                            return this.cart.reduce((total, item) => total + item.price * item.quantity * item.TaxRate, 0);
+                                        },
+                                        get total() {
+                                            return this.cart.reduce((total, item) => total + item.price * item.quantity * (1 + item.TaxRate), 0);
+                                        }
+                                    };
+                                }
+                            </script>
                         </div>
                     </div>
 
@@ -107,7 +127,6 @@
                     <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 w-1/2 h-full mb-10">
                         <form action="/addSales" method="POST" onsubmit="clearCart()">
                             <div class="font-medium text-xl mb-4 text-gray-500 border-b pb-2">Shipping Information</div>
-                            <!-- Form for delivery address and date -->
                             <div>
                                 <label for="customerFirstName" class="block mb-2">Customer First Name:</label>
                                 <input type="text" id="customerFirstName" name="customerFirstName" class="w-full p-2 border border-gray-300 rounded mb-4" required>
@@ -161,11 +180,14 @@
 
                                 function toggleSaleDetails(salePreference) {
                                     const saleDetails = document.getElementById('sale-details');
+                                    const shippingFee = document.getElementById('shipping-fee');
 
                                     if (salePreference == 'delivery') {
                                         saleDetails.style.display = 'block';
+                                        shippingFee.style.display = 'flex';
                                     } else {
                                         saleDetails.style.display = 'none';
+                                        shippingFee.style.display = 'none';
                                     }
                                 }
 
@@ -180,7 +202,7 @@
                                 <label class="block mb-2 font-semibold">Mode of Payment:</label>
                                 <select name="payment-mode" id="payment-mode" class="w-full p-2 border border-gray-300 rounded" onchange="togglePaymentDetails(this.value)">
                                     <option value="card">Card</option>
-                                    <option value="cash">Cash</option>
+                                    <option value="cash" selected>Cash</option>
                                 </select>
                             </div>
 
@@ -203,11 +225,13 @@
                                     const cardNumberInput = document.getElementById('cardNumber');
                                     const expiryDateInput = document.getElementById('expiryDate');
                                     const cvvInput = document.getElementById('cvv');
+                                    const paymentDetailsDiv = document.getElementById('payment-details');
 
                                     if (paymentMode == 'card') {
                                         cardNumberInput.required = true;
                                         expiryDateInput.required = true;
                                         cvvInput.required = true;
+                                        paymentDetailsDiv.style.display = 'block';
                                     } else {
                                         cardNumberInput.required = false;
                                         expiryDateInput.required = false;
@@ -215,6 +239,7 @@
                                         cardNumberInput.value = '';
                                         expiryDateInput.value = '';
                                         cvvInput.value = '';
+                                        paymentDetailsDiv.style.display = 'none';
                                     }
                                 }
 
@@ -226,6 +251,9 @@
 
                             <input type="hidden" id="totalAmount" name="totalAmount">
                             <input type="hidden" id="cartData" name="cartData">
+                            <input type="hidden" id="subtotal" name="subtotal">
+                            <input type="hidden" id="tax" name="tax">
+                            <input type="hidden" id="shippingFee" name="shippingFee">
 
                             <button type="submit" value="Submit" class="bg-green-800 text-white rounded px-4 py-2 mt-4 w-full hover:bg-gray-200 hover:text-green-800 hover:font-bold transition-colors ease-in-out">Complete Sale</button>
                         </form>
@@ -242,13 +270,17 @@
             // Get the cart from localStorage
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-            // Calculate the total amount
-            const totalAmount = cart.reduce((total, item) => total + item.priceWithTax * item.quantity, 0);
+            // Calculate the subtotal, tax, and total amount
+            const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+            const tax = cart.reduce((total, item) => total + item.price * item.quantity * item.TaxRate, 0);
+            const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity * (1 + item.TaxRate), 0);
+            const shippingFee = document.getElementById('SalePreference').value === 'delivery' ? 0 : 0; // Replace 50 with the actual shipping fee
 
-            // Set the value of the hidden input field
+            // Set the value of the hidden input fields
+            document.getElementById('subtotal').value = subtotal.toFixed(2);
+            document.getElementById('tax').value = tax.toFixed(2);
+            document.getElementById('shippingFee').value = shippingFee.toFixed(2);
             document.getElementById('totalAmount').value = totalAmount.toFixed(2);
-
-            // Set the value of the hidden input field
             document.getElementById('cartData').value = JSON.stringify(cart);
 
             // Assign the cart to a global variable

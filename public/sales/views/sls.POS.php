@@ -18,7 +18,7 @@
         const Swal = require('sweetalert2')
     </script>
 
-    
+
 
     <style>
         .sidebar-open {
@@ -331,17 +331,17 @@
 
                                 // Show a notification if the cart is empty
                                 Swal.fire({
-                                        title: "Uh oh!",
-                                        text: "Please put items in your cart before proceeding to checkout.",
-                                        imageUrl: "https://cdn-icons-png.flaticon.com/512/4555/4555971.png",
-                                        imageWidth: 200,
-                                        imageHeight: 200,
-                                        imageAlt: "Custom image",
-                                        width: 400,
-                                        confirmButtonColor: "#FF0000",
-                                        });
+                                    title: "Uh oh!",
+                                    text: "Please put items in your cart before proceeding to checkout.",
+                                    imageUrl: "https://cdn-icons-png.flaticon.com/512/4555/4555971.png",
+                                    imageWidth: 200,
+                                    imageHeight: 200,
+                                    imageAlt: "Custom image",
+                                    width: 400,
+                                    confirmButtonColor: "#FF0000",
+                                });
 
-                               
+
                             } else {
                                 // Proceed to checkout
                                 window.location.pathname = checkoutRoute;
@@ -385,7 +385,7 @@
                         <?php if ($product['Category'] === $category) : ?> <!-- Show products only for the current category -->
                             <button type="button" flareFire class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out" x-for="(item, index) in cart" :key="index" @click="
                                     if (<?= $product['Stocks'] ?> > 0) { 
-                                      addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?>, stocks: <?= $product['Stocks'] ?>, priceWithTax: <?= $product['Price'] ?> * (1 + <?= $product['TaxRate'] ?>), deliveryRequired: '<?= $product['DeliveryRequired'] ?>' }); cartOpen = true; 
+                                      addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?>, stocks: <?= $product['Stocks'] ?>, priceWithTax: <?= $product['Price'] ?> * (1 + <?= $product['TaxRate'] ?>), TaxRate: <?= $product['TaxRate'] ?>, deliveryRequired: '<?= $product['DeliveryRequired'] ?>' }); cartOpen = true; 
                                     
                                         const Toast = Swal.mixin({
                                         toast: true,
@@ -412,8 +412,8 @@
                                 <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
                                     <!-- SVG icon -->
                                 </div>
-                                    
-                    
+
+
                                 <!-- Horizontal line -->
                                 <hr class="w-full border-gray-300 my-2">
                                 <div class="font-bold text-lg text-gray-700 text-center" x-data="{ productName: '<?= $product['ProductName'] ?>' }" :style="productName.length > 20 ? 'font-size: 0.90rem;' : 'font-size: 1rem;'">
@@ -463,7 +463,7 @@
                         alert('The quantity you want to add is greater than the available stocks.');
                     } else {
                         item.quantity++;
-                        }
+                    }
 
 
                 } else {

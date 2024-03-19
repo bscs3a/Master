@@ -37,7 +37,7 @@
     <li class="mb-1 hover:bg-slate-400 rounded-xl">
         <a route='/sls/Transaction-History' class="flex items-center py-2 px-4 text-white hover:text-black cursor-pointer">
             <i class="ri-shake-hands-fill mr-3 text-lg"></i>
-            <span class="text-sm font-medium">Transactions</span>
+            <span class="text-sm font-medium">Transaction History</span>
             <i class="ri-arrow-down-s-line ml-auto"></i>
         </a>
     </li>

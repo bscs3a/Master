@@ -31,6 +31,7 @@
     $sale_date = $sale['SaleDate'];
     $total_price = $sale['TotalAmount'];
     $payment_method = $sale['PaymentMode'];
+    $sale_preferences = $sale['SalePreference'];
 
     // Query the database for the sale items
     $sqlSaleItems = "SELECT SaleDetails.Quantity, SaleDetails.UnitPrice, Products.ProductName 
@@ -57,7 +58,7 @@
     $sale = $stmtSale->fetch(PDO::FETCH_ASSOC);
 
     // Query the database for the sale items
-    $sqlSaleItems = "SELECT SaleDetails.Quantity, SaleDetails.UnitPrice, Products.ProductName, Products.TaxRate 
+    $sqlSaleItems = "SELECT SaleDetails.Quantity, SaleDetails.UnitPrice, SaleDetails.TotalAmount, Products.ProductName, Products.TaxRate 
                      FROM SaleDetails 
                      INNER JOIN Products ON SaleDetails.ProductID = Products.ProductID 
                      WHERE SaleDetails.SaleID = $sale_id";
@@ -107,16 +108,12 @@
 
                         <ul id="cart-items">
                             <?php foreach ($sale_items as $item) : ?>
-                                <?php
-                                $price = $item['UnitPrice'] * $item['Quantity'];
-                                $price_with_tax = $price * (1 + $item['TaxRate'] / 100);
-                                ?>
-                                <li><?= $item['Quantity'] ?> x <?= $item['ProductName'] ?>: ₱<?= number_format($price_with_tax, 2) ?></li>
+                                <li><?= $item['Quantity'] ?> x <?= $item['ProductName'] ?>: ₱<?= number_format($item['TotalAmount'], 2) ?></li>
                             <?php endforeach; ?>
                         </ul>
 
-                        <div class="<?= $sale['SalePreference'] == 'Delivery' ? 'grid grid-cols-2' : 'grid grid-cols-1' ?> gap-6 mt-6">
-                            <?php if ($sale['SalePreference'] == 'Delivery') : ?>
+                        <div class="<?= $sale_preferences == 'Delivery' ? 'grid grid-cols-2' : 'grid grid-cols-1' ?> gap-6 mt-6">
+                            <?php if ($sale_preferences != 'Pick-up') : ?>
                                 <div class="grid grid-rows-4">
                                     <div class="border-b text-gray-400 text-xl font-bold pb-2 mb-2">Delivery Address</div>
                                     <div>Name: <?= $sale['FirstName'] . ' ' . $sale['LastName'] ?></div>
@@ -133,6 +130,7 @@
                                     return $carry + $item['UnitPrice'] * $item['Quantity'];
                                 }, 0);
                                 $tax = $subtotal * 0.12; // Assuming a tax rate of 12%
+                                $shippingFee = $sale_preferences === 'Delivery' ? 50 : 0; // Replace 50 with the actual shipping fee
                                 ?>
 
                                 <div id="subtotal" class="flex justify-between border-b text-lg pb-4 mb-2 text-gray-400">
@@ -143,9 +141,15 @@
                                     <span>Taxes</span>
                                     <span>₱<?= number_format($tax, 2) ?></span>
                                 </div>
+                                <?php if ($sale_preferences === 'Delivery') : ?>
+                                    <div id="shippingFee" class="flex justify-between border-b text-lg pb-2 mt-4 text-gray-400">
+                                        <span>Shipping Fee</span>
+                                        <span>₱<?= number_format($shippingFee, 2) ?></span>
+                                    </div>
+                                <?php endif; ?>
                                 <div id="total" class="flex justify-between font-semibold border-b text-xl pb-2 text-gray-400 mt-4">
                                     <span>Total</span>
-                                    <span class="text-green-800 font-semibold">₱<?= number_format($sale['TotalAmount'], 2) ?></span>
+                                    <span class="text-green-800 font-semibold">₱<?= $total_price ?></span>
                                 </div>
                             </div>
                         </div>
