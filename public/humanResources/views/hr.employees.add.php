@@ -54,26 +54,19 @@
 <!-- Profile -->
 <div class="py-2 px-6 mt-4">
   <div class="flex">
-    <form action="/hr/employees/add" method="POST" enctype="multipart/form-data">
     <div class="mr-4">
-      <img src="https://placehold.co/192x192" alt="Profile Picture" class="w-48 h-48 object-cover ml-3">
+      <img src="#" alt="Profile Picture" class="w-48 h-48 object-cover">
       <span>
-        <div class="ml-2 mb-20 mt-4">
-          <!-- The file input for uploading pictures. It's hidden because the custom upload button is used instead. -->
-          <input type="file" id="fileInput" style="display: none;">
-
-          <!-- The custom upload button. When clicked, it triggers the click event of the file input. -->
-          <button type="button" onclick="document.getElementById('fileInput').click();" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Upload</button>
-
-          <!-- The remove button. When clicked, it removes the selected file from the file input. -->
-          <button type="button" onclick="removeFile();" class="focus:outline-none text-black bg-white hover:bg-gray-100 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Remove</button>
-
+        <div class="ml-2 mb-20 mt-4"> 
+          <button type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Upload</button>
+          <button type="button" class="focus:outline-none text-black bg-white hover:bg-gray-100 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Remove</button>
         </div>    
       </span>
     </div>
+
   <!-- Employee Information -->
   
-<!-- <form action= "/hr/employees/add" method="POST"> -->
+                            <form action= "/hr/employees/add" method="POST">
   <div class="flex flex-col ml-20">
     <div class="mb-4">
       <div class="flex">
@@ -293,165 +286,165 @@
         </div>
       </div>
 
-        <!-- Salary Information and Tax Information -->
-  <div>
-    <h2 class="block mb-2 mt-8 text-base font-bold text-gray-700">Salary and Tax Information</h2>
-    <div class="flex flex-col">
-      <div class="mb-4 mt-4">
-        <div class="flex">
-          <div class="mr-2">
-              <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="monthlysalary">
-                Monthly Salary
-              </label>
-              <input
-                class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                name="monthlysalary"
-                id="monthlysalary"
-                type="number"
-                placeholder="Ex. 20000"
-              />
-          </div>
-          <!-- TAX INFO -->
-          <div class="mr-2">
-              <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="incometax">
-                Income Tax
-              </label>
-              <input
-                class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                name="incometax"
-                id="incometax"
-                type="number"
-                placeholder="Income Tax"
-              />
-          </div>
-          <div>
-              <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="withholdingtax">
-                Withholding tax
-              </label>
-              <input  
-                class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                name="withholdingtax"
-                id="withholdingtax"
-                type="number"
-                placeholder="Withholding Tax"
-              />
-          </div>
-        </div>
-      </div>
-      <div>
-        <!-- BENEFIT INFO -->
-        <div class="flex flex-col">
-          <div class="mb-4">
-            <div class="flex">
-              <div class="mr-2">
-                  <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="sss">
-                    SSS
-                  </label>
-                  <input
-                    class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                    name="sss"
-                    id="sss"
-                    type="text"
-                    placeholder="SSS"
-                  />
-              </div>
-              <div class="mr-2">
-                  <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="pagibig">
-                    Pag-IBIG Fund
-                  </label>
-                  <input
-                    class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                    name="pagibig"
-                    id="pagibig"
-                    type="text"
-                    placeholder="PAG-IBIG Fund"
-                  />
-              </div>
-              <div>
-                  <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="philhealth">
-                    Philhealth
-                  </label>
-                  <input  
-                    class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                    name="philhealth"
-                    id="philhealth"
-                    type="text"
-                    placeholder="Philhealth"
-                  />
-              </div>
-            </div>
-          </div>
-          <div class="flex flex-col">
-            <div class="mb-4">
-              <div class="flex">
-                <div class="mr-2">
-                    <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="thirteenthmonth">
-                      13th Month Pay
-                    </label>
-                    <input
-                      class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                      name="thirteenthmonth"
-                      id="thirteenthmonth"
-                      type="number"
-                      placeholder="13th Month Pay"
-                    />
+                  <!-- Salary Information and Tax Information -->
+            <div>
+              <h2 class="block mb-2 mt-8 text-base font-bold text-gray-700">Salary and Tax Information</h2>
+              <div class="flex flex-col">
+                <div class="mb-4 mt-4">
+                  <div class="flex">
+                    <div class="mr-2">
+                        <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="monthlysalary">
+                          Monthly Salary
+                        </label>
+                        <input
+                          class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                          name="monthlysalary"
+                          id="monthlysalary"
+                          type="number"
+                          placeholder="Ex. 20000"
+                        />
+                    </div>
+                    <!-- TAX INFO -->
+                    <div class="mr-2">
+                        <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="incometax">
+                          Income Tax
+                        </label>
+                        <input
+                          class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                          name="incometax"
+                          id="incometax"
+                          type="number"
+                          placeholder="Income Tax"
+                        />
+                    </div>
+                    <div>
+                        <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="withholdingtax">
+                          Withholding tax
+                        </label>
+                        <input  
+                          class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                          name="withholdingtax"
+                          id="withholdingtax"
+                          type="number"
+                          placeholder="Withholding Tax"
+                        />
+                    </div>
+                  </div>
                 </div>
-                <div class="mr-2">
-                    <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="totalsalary">
-                      Total Salary (with Tax reductions)
-                    </label>
-                    <input
-                      class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                      name="totalsalary"
-                      id="totalsalary"
-                      type="number"
-                      placeholder="Total Salary"
-                    />
-                </div>
-            </div>
+                <div>
+                  <!-- BENEFIT INFO -->
+                  <div class="flex flex-col">
+                    <div class="mb-4">
+                      <div class="flex">
+                        <div class="mr-2">
+                            <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="sss">
+                              SSS
+                            </label>
+                            <input
+                              class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                              name="sss"
+                              id="sss"
+                              type="text"
+                              placeholder="SSS"
+                            />
+                        </div>
+                        <div class="mr-2">
+                            <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="pagibig">
+                              Pag-IBIG Fund
+                            </label>
+                            <input
+                              class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                              name="pagibig"
+                              id="pagibig"
+                              type="text"
+                              placeholder="PAG-IBIG Fund"
+                            />
+                        </div>
+                        <div>
+                            <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="philhealth">
+                              Philhealth
+                            </label>
+                            <input  
+                              class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                              name="philhealth"
+                              id="philhealth"
+                              type="text"
+                              placeholder="Philhealth"
+                            />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex flex-col">
+                      <div class="mb-4">
+                        <div class="flex">
+                          <div class="mr-2">
+                              <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="thirteenthmonth">
+                                13th Month Pay
+                              </label>
+                              <input
+                                class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                name="thirteenthmonth"
+                                id="thirteenthmonth"
+                                type="number"
+                                placeholder="13th Month Pay"
+                              />
+                          </div>
+                          <div class="mr-2">
+                              <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="totalsalary">
+                                Total Salary (with Tax reductions)
+                              </label>
+                              <input
+                                class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                name="totalsalary"
+                                id="totalsalary"
+                                type="number"
+                                placeholder="Total Salary"
+                              />
+                          </div>
+                      </div>
 
-    <!-- Account Information -->
-    <div>
-      <h2 class="block mb-2 mt-8 text-base font-bold text-gray-700">Account Information</h2>
-      <div class="flex flex-col">
-        <div class="mb-4 mt-4">
-          <div class="flex">
-            <div class="mr-2">
-                <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="username">
-                  Username
-                </label>
-                <input
-                  class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  name="username"
-                  id="username"
-                  type="text"
-                  placeholder="Username"
-                />
-            </div>
-            <!-- TAX INFO -->
-            <div class="mr-2">
-                <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="incometax">
-                  Password
-                </label>
-                <input
-                  class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  name="password"
-                  id="password"
-                  type="password"
-                  placeholder="Password"
-                />
-                <input type="checkbox" id="togglePassword"> Show Password
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-      </div>
-      <div class="flex flex-row mt-8 justify-center">
-        <button type="submit" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Save</button>
-        <button route="/hr/employees" type="button" class="focus:outline-none text-gray-700 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Cancel</button>
-      </div>
-      </form>
+                            <!-- Account Information -->
+            <div>
+              <h2 class="block mb-2 mt-8 text-base font-bold text-gray-700">Account Information</h2>
+              <div class="flex flex-col">
+                <div class="mb-4 mt-4">
+                  <div class="flex">
+                    <div class="mr-2">
+                        <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="username">
+                          Username
+                        </label>
+                        <input
+                          class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                          name="username"
+                          id="username"
+                          type="text"
+                          placeholder="Username"
+                        />
+                    </div>
+                    <!-- TAX INFO -->
+                    <div class="mr-2">
+                        <label class="block mb-2 mt-0 text-sm font-bold text-gray-700" for="incometax">
+                          Password
+                        </label>
+                        <input
+                          class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                          name="password"
+                          id="password"
+                          type="password"
+                          placeholder="Password"
+                        />
+                        <input type="checkbox" id="togglePassword"> Show Password
+                    </div>
+                  </div>
+                </div>
+              </div>
+                      <div>
+                      </div>
+                      <div class="flex flex-row mt-8 justify-center">
+                        <button type="submit" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Save</button>
+                        <button route="/hr/employees" type="button" class="focus:outline-none text-gray-700 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Cancel</button>
+                      </div>
+                      </form>
     </div>
   </div>
 </div> 
@@ -460,8 +453,8 @@
 <script  src="./../../src/route.js"></script>
 <script  src="./../../src/form.js"></script>
 
+<!-- Sidebar active/inactive -->
 <script>
-  // Sidebar toggle function
   document.querySelector('.sidebar-toggle').addEventListener('click', function() {
     document.getElementById('sidebar-menu').classList.toggle('hidden');
     document.getElementById('sidebar-menu').classList.toggle('transform');
@@ -470,7 +463,6 @@
     document.getElementById('mainContent').classList.toggle('md:ml-64');
   });
 
-  // Show password
   document.getElementById('togglePassword').addEventListener('change', function () {
     const passwordInput = document.getElementById('password');
     if (this.checked) {
@@ -479,11 +471,6 @@
         passwordInput.type = 'password';
     }
   });
-  
-  // Remove profile picture
-  function removeFile() {
-      document.getElementById('fileInput').value = '';
-  }
 </script>
 </body>
 </html> 
