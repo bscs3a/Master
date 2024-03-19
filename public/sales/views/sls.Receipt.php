@@ -14,6 +14,48 @@
         }
     </style>
 
+    <?php
+    require_once './src/dbconn.php';
+
+    // Get the database instance and PDO object
+    $database = Database::getInstance();
+    $pdo = $database->connect();
+
+    // Query the database for the latest sale
+    $sqlSale = 'SELECT * FROM Sales ORDER BY SaleDate DESC LIMIT 1';
+    $stmtSale = $pdo->query($sqlSale);
+    $sale = $stmtSale->fetch(PDO::FETCH_ASSOC);
+
+    // Get the sale details
+    $sale_id = $sale['SaleID'];
+    $sale_date = $sale['SaleDate'];
+    $total_price = $sale['TotalAmount'];
+    $payment_method = $sale['PaymentMode'];
+
+    // Query the database for the sale items
+    $sqlSaleItems = "SELECT SaleDetails.Quantity, SaleDetails.UnitPrice, Products.ProductName 
+                     FROM SaleDetails 
+                     INNER JOIN Products ON SaleDetails.ProductID = Products.ProductID 
+                     WHERE SaleDetails.SaleID = $sale_id";
+    $stmtSaleItems = $pdo->query($sqlSaleItems);
+    $sale_items = $stmtSaleItems->fetchAll(PDO::FETCH_ASSOC);
+
+    $sqlSale = 'SELECT Sales.*, Customers.FirstName, Customers.LastName, Customers.Phone, Customers.Email 
+            FROM Sales 
+            INNER JOIN Customers ON Sales.CustomerID = Customers.CustomerID 
+            ORDER BY SaleDate DESC LIMIT 1';
+    $stmtSale = $pdo->query($sqlSale);
+    $sale = $stmtSale->fetch(PDO::FETCH_ASSOC);
+
+    // Query the database for the latest sale
+    $sqlSale = 'SELECT Sales.*, Customers.FirstName, Customers.LastName, Customers.Phone, Customers.Email, DeliveryOrders.DeliveryAddress 
+                FROM Sales 
+                INNER JOIN Customers ON Sales.CustomerID = Customers.CustomerID 
+                INNER JOIN DeliveryOrders ON Sales.SaleID = DeliveryOrders.SaleID
+                ORDER BY SaleDate DESC LIMIT 1';
+    $stmtSale = $pdo->query($sqlSale);
+    $sale = $stmtSale->fetch(PDO::FETCH_ASSOC);
+    ?>
 
 </head>
 
@@ -39,66 +81,62 @@
                 <!-- Add receipt details here -->
                 <div id="receipt" class="bg-white rounded-xl shadow-md">
                     <div class=" bg-green-800 text-white p-10">
+                        <!-- Display the sale details -->
                         <div class="flex justify-between">
                             <h2 class="text-6xl font-medium">Receipt</h2>
-                            <h2 class="text-6xl font-medium">₱123</h2>
+                            <h2 class="text-6xl font-medium">₱<?= $total_price ?></h2>
                         </div>
 
                         <div class="flex justify-between mt-8 text-gray-300">
-                            <span>March 3 , 2016</span>
-                            <span>Order ID: 1234567</span>
-                            <span>Payment Method: Card</span>
+                            <span><?= date('F j, Y, g:i a', strtotime($sale_date)) ?></span>
+                            <span>Order ID: <?= $sale_id ?></span>
+                            <span>Payment Method: <?= $payment_method ?></span>
                         </div>
 
                     </div>
 
                     <div class="p-10">
+
                         <ul id="cart-items">
-                            <!-- Cart items will be added here by JavaScript -->
+                            <?php foreach ($sale_items as $item) : ?>
+                                <li><?= $item['Quantity'] ?> x <?= $item['ProductName'] ?>: ₱<?= $item['UnitPrice'] * $item['Quantity'] ?></li>
+                            <?php endforeach; ?>
                         </ul>
 
-
-                        <div class="grid grid-cols-2 gap-6 mt-6">
-                            <div class="grid grid-rows-4">
-                                <div class="border-b text-gray-400 text-xl font-bold pb-2 mb-2">Billing Address</div>
-                                <div>Billing Address</div>
-                                <div>Block Number</div>
-                                <div>Locale / Municipality</div>
-                            </div>
+                        <div class="<?= $sale['SalePreference'] == 'Delivery' ? 'grid grid-cols-2' : 'grid grid-cols-1' ?> gap-6 mt-6">
+                            <?php if ($sale['SalePreference'] == 'Delivery') : ?>
+                                <div class="grid grid-rows-4">
+                                    <div class="border-b text-gray-400 text-xl font-bold pb-2 mb-2">Delivery Address</div>
+                                    <div>Name: <?= $sale['FirstName'] . ' ' . $sale['LastName'] ?></div>
+                                    <div>Address: <?= $sale['DeliveryAddress'] ?></div>
+                                    <div>Phone: <?= $sale['Phone'] ?></div>
+                                    <div>Email: <?= $sale['Email'] ?></div>
+                                </div>
+                            <?php endif; ?>
 
                             <div>
+                                <?php
+                                // Calculate the subtotal and tax
+                                $subtotal = array_reduce($sale_items, function ($carry, $item) {
+                                    return $carry + $item['UnitPrice'] * $item['Quantity'];
+                                }, 0);
+                                $tax = $subtotal * 0.12; // Assuming a tax rate of 12%
+                                ?>
+
                                 <div id="subtotal" class="flex justify-between border-b text-lg pb-4 mb-2 text-gray-400">
                                     <span>Subtotal</span>
-                                    <span>₱0</span>
+                                    <span>₱<?= number_format($subtotal, 2) ?></span>
                                 </div>
                                 <div id="taxes" class="flex justify-between border-b text-lg pb-2 mt-4 text-gray-400">
                                     <span>Taxes</span>
-                                    <span>₱0</span>
+                                    <span>₱<?= number_format($tax, 2) ?></span>
                                 </div>
                                 <div id="total" class="flex justify-between font-semibold border-b text-xl pb-2 text-gray-400 mt-4">
                                     <span>Total</span>
-                                    <span class="text-green-800 font-semibold">₱0</span>
+                                    <span class="text-green-800 font-semibold">₱<?= number_format($sale['TotalAmount'], 2) ?></span>
                                 </div>
                             </div>
-
-                            <script>
-                                document.addEventListener('DOMContentLoaded', () => {
-                                    // Get the cart from localStorage
-                                    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-                                    // Calculate the subtotal, tax, and total
-                                    const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-                                    const tax = subtotal * 0.12; // Assuming a tax rate of 12%
-                                    const total = subtotal + tax;
-
-                                    // Set the text content of the subtotal, tax, and total elements
-                                    document.querySelector('#subtotal span:last-child').textContent = '₱' + subtotal.toFixed(2);
-                                    document.querySelector('#taxes span:last-child').textContent = '₱' + tax.toFixed(2);
-                                    document.querySelector('#total span:last-child').textContent = '₱' + total.toFixed(2);
-                                });
-                            </script>
                         </div>
-
 
                     </div>
                     <button class="print-button mt-4 w-full text-black text-xl py-4 px-4 hover:bg-gray-200 hover:font-bold transition-all ease-in-out">
@@ -110,63 +148,38 @@
         </div>
 
         <script>
-            // Get the cart items from localStorage
-            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+            window.onbeforeunload = function() {
+                // Clear the cart in localStorage
+                localStorage.removeItem('cart');
+            };
+        </script>
 
-            // Get the cart items element
-            var cartItemsElement = document.getElementById('cart-items');
+        <script>
+            document.querySelector('.sidebar-toggle').addEventListener('click', function() {
+                document.getElementById('sidebar-menu').classList.toggle('hidden');
+                document.getElementById('sidebar-menu').classList.toggle('transform');
+                document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
+                document.getElementById('mainContent').classList.toggle('md:w-full');
+                document.getElementById('mainContent').classList.toggle('md:ml-64');
+            });
+        </script>
 
-            // Add each cart item to the cart items element
-            for (var i = 0; i < cart.length; i++) {
-                var item = cart[i];
-                var li = document.createElement('li');
-                li.textContent = item.quantity + ' x ' + item.name + ': ₱' + item.price * item.quantity;
-                cartItemsElement.appendChild(li);
+        <script>
+            function printReceipt() {
+                var receipt = document.getElementById('receipt').innerHTML;
+                var originalContent = document.body.innerHTML;
+
+                document.body.innerHTML = receipt;
+
+                window.print();
+
+                document.body.innerHTML = originalContent;
             }
 
-            // Calculate the total price
-            var total = cart.reduce(function(total, item) {
-                return total + item.price * item.quantity;
-            }, 0);
-
-            // Display the total price
-            document.getElementById('total').textContent = 'Total: ₱' + total;
+            document.querySelector('.print-button').addEventListener('click', printReceipt);
         </script>
-    </main>
 
-    <script>
-        document.querySelector('.sidebar-toggle').addEventListener('click', function() {
-            document.getElementById('sidebar-menu').classList.toggle('hidden');
-            document.getElementById('sidebar-menu').classList.toggle('transform');
-            document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
-            document.getElementById('mainContent').classList.toggle('md:w-full');
-            document.getElementById('mainContent').classList.toggle('md:ml-64');
-        });
-    </script>
-
-    <script>
-        function printReceipt() {
-            var receipt = document.getElementById('receipt').innerHTML;
-            var originalContent = document.body.innerHTML;
-
-            document.body.innerHTML = receipt;
-
-            window.print();
-
-            document.body.innerHTML = originalContent;
-        }
-
-        document.querySelector('.print-button').addEventListener('click', printReceipt);
-    </script>
-
-    <script>
-        window.onbeforeunload = function() {
-            // Clear the cart in localStorage
-            localStorage.removeItem('cart');
-        };
-    </script>
-
-    <script src="./../../src/route.js"></script>
+        <script src="./../../src/route.js"></script>
 </body>
 
 </html>
