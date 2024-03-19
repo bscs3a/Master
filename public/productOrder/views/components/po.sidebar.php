@@ -6,7 +6,7 @@
   <div class="flex flex-col flex-1 overflow-y-auto">
     <nav class="flex-1 px-2 py-4 bg-violet-950">
       <a
-        href="#"
+        route='/po/dashboard'
         class="flex justify-between items-center px-4 py-2 text-gray-100 hover:bg-violet-300">
         <span class="flex items-center">
           <span class="mx-4 font-normal">Dashboard</span>
@@ -30,7 +30,7 @@
       </a>
 
       <a
-        href="#"
+        route="/po/dashboard"
         class="flex justify-between items-center px-4 py-2 text-gray-100 hover:bg-violet-300">
         <span class="flex items-center">
           <span class="mx-4 font-normal">Audit Trail</span>
@@ -54,7 +54,7 @@
       </a>
 
       <a
-        href="/Master/adm/suppliers"
+        route='/po/suppliers'
         class="flex justify-between items-center px-4 py-2 text-gray-100 hover:bg-violet-300">
         <span class="flex items-center">
           <span class="mx-4 font-normal">Suppliers</span>
@@ -78,7 +78,7 @@
       </a>
 
       <a
-        href="#"
+        route='/po/items'
         class="flex justify-between items-center px-4 py-2 text-gray-100 hover:bg-violet-300">
         <span class="flex items-center">
           <span class="mx-4 font-normal">Items</span>
@@ -102,7 +102,7 @@
       </a>
 
       <a
-        href="/Master/adm/product"
+        route='/po/orderRequest'
         class="flex justify-between items-center px-4 py-2 text-gray-100 hover:bg-violet-300">
         <span class="flex items-center">
           <span class="mx-4 font-normal">Order Request</span>
@@ -126,10 +126,10 @@
       </a>
 
       <a
-        href="#"
+        route='/po/transactionHistory'
         class="flex justify-between items-center px-4 py-2 text-gray-100 hover:bg-violet-300">
         <span class="flex items-center">
-          <span class="mx-4 font-normal">Transaction Log</span>
+          <span class="mx-4 font-normal">Transaction History</span>
         </span>
 
         <span>
@@ -150,7 +150,7 @@
       </a>
 
       <a
-        href="#"
+        route="/po/dashboard"
         class="flex justify-between items-center px-4 py-2 text-gray-100 hover:bg-violet-300">
         <span class="flex items-center">
           <span class="mx-4 font-normal">Request History</span>
@@ -175,3 +175,5 @@
     </nav>
   </div>
 </div>
+
+<script  src="./../src/route.js"></script>

@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Dashboard</title>
     <link href="./../src/tailwind.css" rel="stylesheet" />
   </head>
+  
   <body>
     <div class="flex h-screen bg-gray-100">
       
-    <?php include "components/adm.sidebar.php" ?>
+    <?php include "components/po.sidebar.php" ?>
 
       <!-- Navbar -->
       <div class="flex flex-col flex-1 overflow-y-auto">
@@ -56,7 +57,19 @@
         </div>
 
         <!-- Main Content -->
-
+        <div class="h-screen">
+          <div class="flex flex-row justify-center gap-16 drop-shadow-md my-8">
+            <div class="flex border-2 border-gray-400 rounded-md w-80 h-40 justify-center items-center">
+              <a class="text-lg">Suppliers</a>
+            </div>
+            <div class="flex border-2 border-gray-400 rounded-md w-80 h-40 justify-center items-center">
+              <a class="text-lg">Items</a>
+            </div>
+            <div class="flex border-2 border-gray-400 rounded-md w-80 h-40 justify-center items-center">
+              <a class="text-lg">Order Request</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </body>
