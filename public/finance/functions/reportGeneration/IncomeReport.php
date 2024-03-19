@@ -1,5 +1,5 @@
 <?php
-require_once '../../../../src/dbconn.php';
+
 require_once '../generalFunctions.php';
 // used for getting the accountbalance
 // problems:

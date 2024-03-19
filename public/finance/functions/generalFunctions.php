@@ -1,4 +1,5 @@
 <?php
+require_once '../../../src/dbconn.php';
 //get the value of 1 t-account - can return negative or positive
 function getAccountBalance($ledger, $considerDate = false, $year = null, $month = null) {
     $db = Database::getInstance();
@@ -83,6 +84,53 @@ function getTotalOfGroup($groupType, $year = null, $month = null) {
     }
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':groupType', $groupType);
+    if ($year !== null && $month !== null) {
+        $stmt->bindParam(':year', $year, PDO::PARAM_INT);
+        $stmt->bindParam(':month', $month, PDO::PARAM_INT);
+    }
+    $stmt->execute();
+
+    while ($row = $stmt->fetch()) {
+        $netAmount -= $row['amount'];
+    }
+
+    return abs($netAmount);
+}
+
+function getTotalOfAccountType($accountType, $year = null, $month = null) {
+    $db = Database::getInstance();
+    $conn = $db->connect();
+
+    $sql = "SELECT lt.* FROM LedgerTransaction lt
+            JOIN Ledger l ON lt.ledgerNo = l.ledgerNo
+            JOIN AccountType at ON l.accountType = at.accountType
+            WHERE at.accountType = :accountType";
+    if ($year !== null && $month !== null) {
+        $sql .= " AND YEAR(lt.datetime) = :year AND MONTH(lt.datetime) = :month";
+    }
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':accountType', $accountType);
+    if ($year !== null && $month !== null) {
+        $stmt->bindParam(':year', $year, PDO::PARAM_INT);
+        $stmt->bindParam(':month', $month, PDO::PARAM_INT);
+    }
+    $stmt->execute();
+
+    $netAmount = 0;
+
+    while ($row = $stmt->fetch()) {
+        $netAmount += $row['amount'];
+    }
+
+    $sql = "SELECT lt.* FROM LedgerTransaction lt
+            JOIN Ledger l ON lt.ledgerNo_dr = l.ledgerNo
+            JOIN AccountType at ON l.accountType = at.accountType
+            WHERE at.accountType = :accountType";
+    if ($year !== null && $month !== null) {
+        $sql .= " AND YEAR(lt.datetime) = :year AND MONTH(lt.datetime) = :month";
+    }
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':accountType', $accountType);
     if ($year !== null && $month !== null) {
         $stmt->bindParam(':year', $year, PDO::PARAM_INT);
         $stmt->bindParam(':month', $month, PDO::PARAM_INT);
