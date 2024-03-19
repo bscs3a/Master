@@ -416,14 +416,16 @@
                     
                                 <!-- Horizontal line -->
                                 <hr class="w-full border-gray-300 my-2">
-                                <div class="font-bold text-lg text-gray-700 text-center"><?= $product['ProductName'] ?></div>
+                                <div class="font-bold text-lg text-gray-700 text-center" x-data="{ productName: '<?= $product['ProductName'] ?>' }" :style="productName.length > 20 ? 'font-size: 0.90rem;' : 'font-size: 1rem;'">
+                                    <span x-text="productName"></span>
+                                </div>
                                 <div class="font-normal text-sm text-gray-500"><?= $product['Category'] ?></div>
                                 <?php
                                 // Compute the price with tax
                                 $price_with_tax = $product['Price'] * (1 + $product['TaxRate']);
                                 ?>
                                 <div class="mt-6 text-lg font-semibold text-gray-700">&#8369;<?= number_format($price_with_tax, 2) ?></div>
-                                <div class="text-gray-500 text-sm">Stocks: <?= $product['Stocks'] ?></div>
+                                <div class="text-gray-500 text-sm">Stocks: <?= $product['Stocks'] ?> <?= $product['UnitOfMeasurement'] ?></div>
                             </button>
                         <?php endif; ?>
                     <?php endforeach; ?>

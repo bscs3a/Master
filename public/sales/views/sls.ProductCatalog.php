@@ -136,11 +136,17 @@
                                 <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
                                     <!-- SVG icon -->
                                 </div>
-                                <hr class="w-full border-gray-300 my-2"> <!-- Horizontal line -->
-                                <div class="font-bold text-lg text-gray-700 text-center"><?= $product['ProductName'] ?></div>
+                                <hr class="w-full border-gray-300 my-2">
+                                <div class="font-bold text-lg text-gray-700 text-center" x-data="{ productName: '<?= $product['ProductName'] ?>' }" :style="productName.length > 20 ? 'font-size: 0.90rem;' : 'font-size: 1rem;'">
+                                    <span x-text="productName"></span>
+                                </div>
                                 <div class="font-normal text-sm text-gray-500"><?= $product['Category'] ?></div>
-                                <div class="mt-6 text-lg font-semibold text-gray-700"><?= $product['Price'] ?></div>
-                                <div class="text-gray-500 text-sm">Stocks: <?= $product['Stocks'] ?></div>
+                                <?php
+                                // Compute the price with tax
+                                $price_with_tax = $product['Price'] * (1 + $product['TaxRate']);
+                                ?>
+                                <div class="mt-6 text-lg font-semibold text-gray-700">&#8369;<?= number_format($price_with_tax, 2) ?></div>
+                                <div class="text-gray-500 text-sm">Stocks: <?= $product['Stocks'] ?> <?= $product['UnitOfMeasurement'] ?></div>
                             </button>
                         <?php endif; ?>
                     <?php endforeach; ?>
@@ -160,6 +166,9 @@
                 <div class="relative bg-white">
                     <div class="flex justify-center">
                         <div class="size-64 rounded-full shadow-lg bg-yellow-200 mb-4"></div>
+                    </div>
+                    <div class="text-justify">
+                        <div id="modal-product-category" class="text-justify font-semibold text-gray-800"></div>
                     </div>
                     <div class="flex justify-between pt-4">
                         <h3 id="modal-product-name" class="mb-5 text-2xl font-semibold text-gray-800 dark:text-gray-800"></h3>
@@ -186,6 +195,7 @@
             const modalProductName = document.getElementById('modal-product-name');
             const modalProductPrice = document.getElementById('modal-product-price');
             const modalProductDescription = document.getElementById('modal-product-description');
+            const modalProductCategory = document.getElementById('modal-product-category');
             const modalProductStocks = document.getElementById('modal-product-stocks');
 
             openButtons.forEach(button => {
@@ -193,8 +203,9 @@
                     const product = JSON.parse(button.dataset.product);
                     modalProductName.textContent = product.ProductName;
                     modalProductPrice.textContent = 'Php' + product.Price;
+                    modalProductCategory.textContent = product.Category;
                     modalProductDescription.textContent = product.Description;
-                    modalProductStocks.textContent = 'Stocks: ' + product.Quantity;
+                    modalProductStocks.textContent = 'Stocks: ' + product.Stocks + ' ' + product.UnitOfMeasurement; 
                     modal.showModal();
                 });
             });
