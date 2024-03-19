@@ -55,6 +55,14 @@
                 ORDER BY SaleDate DESC LIMIT 1';
     $stmtSale = $pdo->query($sqlSale);
     $sale = $stmtSale->fetch(PDO::FETCH_ASSOC);
+
+    // Query the database for the sale items
+    $sqlSaleItems = "SELECT SaleDetails.Quantity, SaleDetails.UnitPrice, Products.ProductName, Products.TaxRate 
+                     FROM SaleDetails 
+                     INNER JOIN Products ON SaleDetails.ProductID = Products.ProductID 
+                     WHERE SaleDetails.SaleID = $sale_id";
+    $stmtSaleItems = $pdo->query($sqlSaleItems);
+    $sale_items = $stmtSaleItems->fetchAll(PDO::FETCH_ASSOC);
     ?>
 
 </head>
@@ -99,7 +107,11 @@
 
                         <ul id="cart-items">
                             <?php foreach ($sale_items as $item) : ?>
-                                <li><?= $item['Quantity'] ?> x <?= $item['ProductName'] ?>: ₱<?= $item['UnitPrice'] * $item['Quantity'] ?></li>
+                                <?php
+                                $price = $item['UnitPrice'] * $item['Quantity'];
+                                $price_with_tax = $price * (1 + $item['TaxRate'] / 100);
+                                ?>
+                                <li><?= $item['Quantity'] ?> x <?= $item['ProductName'] ?>: ₱<?= number_format($price_with_tax, 2) ?></li>
                             <?php endforeach; ?>
                         </ul>
 
