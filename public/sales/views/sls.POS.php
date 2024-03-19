@@ -12,6 +12,13 @@
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
 
     <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+        import Swal from 'sweetalert2'
+
+        const Swal = require('sweetalert2')
+    </script>
+
+    
 
     <style>
         .sidebar-open {
@@ -323,7 +330,18 @@
                                 event.preventDefault();
 
                                 // Show a notification if the cart is empty
-                                alert('Your cart is empty!');
+                                Swal.fire({
+                                        title: "Uh oh!",
+                                        text: "Please put items in your cart before proceeding to checkout.",
+                                        imageUrl: "https://cdn-icons-png.flaticon.com/512/4555/4555971.png",
+                                        imageWidth: 200,
+                                        imageHeight: 200,
+                                        imageAlt: "Custom image",
+                                        width: 400,
+                                    
+                                        });
+
+                               
                             } else {
                                 // Proceed to checkout
                                 window.location.pathname = checkoutRoute;
@@ -365,13 +383,15 @@
                 <div id="grid" class="mb-10" x-bind:class="cartOpen ? ' grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? ' grid-cols-5 gap-4' : (!cartOpen && !sidebarOpen) ? ' grid-cols-6 gap-4' : ' grid-cols-6 gap-4'" style="display: grid;">
                     <?php foreach ($products as $product) : ?>
                         <?php if ($product['Category'] === $category) : ?> <!-- Show products only for the current category -->
-                            <button type="button" class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out" @click="
-                            if (<?= $product['Stocks'] ?> > 0 ) { 
-                                addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?>, priceWithTax: <?= $product['Price'] ?> * (1 + <?= $product['TaxRate'] ?>), deliveryRequired: '<?= $product['DeliveryRequired'] ?>' }); cartOpen = true; 
+                            <button type="button" 
+                            class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out" 
+                            
+                            @click="if (<?= $product['Stocks'] ?> > 0 ) {       
+                                addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?>, priceWithTax: <?= $product['Price'] ?> * (1 + <?= $product['TaxRate'] ?>), deliveryRequired: '<?= $product['DeliveryRequired'] ?>
+                                    ' }); cartOpen = true; 
                             } else { 
                                 alert('This product is out of stock.'); 
                             }">
-
                                 <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
                                     <!-- SVG icon -->
                                 </div>
@@ -419,12 +439,30 @@
                 let item = this.cart.find(i => i.id === product.id);
                 if (item) {
                     item.quantity++;
+                    const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                    });
+                    Toast.fire({
+                    icon: "success",
+                    title: "Item Added To Cart!"
+                    });
                 } else {
                     this.cart.push({
                         ...product,
                         quantity: 1
+                        
                     });
                 }
+
+                
 
                 // Save the cart items to localStorage
                 localStorage.setItem('cart', JSON.stringify(this.cart));
