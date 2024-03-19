@@ -440,7 +440,26 @@
                         alert('The quantity you want to add is greater than the available stocks.');
                     } else {
                         item.quantity++;
-                    }
+
+                        // ADDED notification
+                        const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 1000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                        });
+                        Toast.fire({
+                        icon: "success",
+                        title: "Item Added To Cart!"
+                        });
+                        }
+
+
                 } else {
                     if (product.stocks < 1) {
                         alert('The quantity you want to add is greater than the available stocks.');
@@ -451,6 +470,8 @@
                         });
                     }
                 }
+
+        
 
                 
 
