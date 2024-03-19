@@ -39,6 +39,47 @@ $hr = [
 ];
 
 // add employees [NOT YET FINALIZED, NEED TO FIX TAX INFO. IT SHOULDNT BE MANUALLY INPUTTED]
+// Function to calculate tax amount based on monthly salary
+function calculateTax($monthlysalary) {
+    if ($monthlysalary <= 20833) {
+        return 0;
+    } elseif ($monthlysalary <= 33332) {
+        return ($monthlysalary - 20833) * 0.20;
+    } elseif ($monthlysalary <= 66666) {
+        return 2500 + ($monthlysalary - 33332) * 0.25;
+    } elseif ($monthlysalary <= 166666) {
+        return 10833.33 + ($monthlysalary - 66666) * 0.30;
+    } elseif ($monthlysalary <= 666666) {
+        return 40833.33 + ($monthlysalary - 166666) * 0.32;
+    } else {
+        return 200833.33 + ($monthlysalary - 666666) * 0.35;
+    }
+}
+
+// Function to calculate SSS contribution
+function calculateSSS($monthlysalary) {
+    // SSS contribution is 14% of the monthly salary
+    return $monthlysalary * 0.14;
+}
+
+// Function to calculate Philhealth contribution
+function calculatePhilhealth($monthlysalary) {
+    if ($monthlysalary <= 10000.00) {
+        return 500.00;
+    } elseif ($monthlysalary <= 99999.99) {
+        return 500.00 + ($monthlysalary - 10000.00) * 0.05;
+    } else {
+        return 5000.00;
+    }
+}
+
+
+// Function to calculate Pag-IBIG fund contribution
+function calculatePagibig($monthlysalary) {
+    // Pag-IBIG fund contribution is fixed at P200
+    return 200;
+}
+
 Router::post('/hr/employees/add', function () {
     $db = Database::getInstance();
     $conn = $db->connect();
@@ -62,10 +103,10 @@ Router::post('/hr/employees/add', function () {
     $query = "INSERT INTO employees (first_name, middle_name, last_name, dateofbirth, gender, nationality, civil_status, address, contact_no, email, department, position) VALUES (:firstName, :middleName, :lastName, :dateofbirth, :gender, :nationality, :civilstatus, :address, :contactnumber, :email, :department, :position);";
     $stmt = $conn->prepare($query);
 
-    if (empty($firstName) || empty($lastName) || empty($dateofbirth) || empty($gender) || empty($nationality) || empty($civilstatus) || empty($address) || empty($department) || empty($position)) {
-        header("Location: $rootFolder/hr/employees/add");
-        return;
-    }
+    // if (empty($firstName) || empty($lastName) || empty($dateofbirth) || empty($gender) || empty($nationality) || empty($civilstatus) || empty($address) || empty($contactnumber) || empty($email) || empty($department) || empty($position)) {
+    //     header("Location: $rootFolder/hr/employees/add");
+    //     return;
+    // }
 
     $stmt->execute([
         ':firstName' => $firstName,
@@ -92,10 +133,10 @@ Router::post('/hr/employees/add', function () {
     $query = "INSERT INTO employment_info (employees_id, dateofhire, startdate, enddate) VALUES (:employeeId, :dateofhire, :startdate, :enddate);";
     $stmt = $conn->prepare($query);
 
-    if (empty($dateofhire) || empty($startdate)) {
-        header("Location: $rootFolder/hr/employees/add");
-        return;
-    }
+    // if (empty($dateofhire) || empty($startdate) || empty($enddate)) {
+    //     header("Location: $rootFolder/hr/employees/add");
+    //     return;
+    // }
 
     $stmt->execute([
         ':employeeId' => $employeeId,
@@ -109,36 +150,45 @@ Router::post('/hr/employees/add', function () {
     $monthlysalary = $_POST['monthlysalary'];
     $totalsalary = $_POST['totalsalary'];
     
+    // Calculate total deductions
+    $totalDeductions = calculatePagibig($monthlysalary) + calculateSSS($monthlysalary) + calculatePhilhealth($monthlysalary) + calculatePagibig($monthlysalary);
+
+    // Calculate total salary
+    $totalSalary = $monthlysalary - $totalDeductions;
+
     $query = "INSERT INTO salary_info (employees_id, monthly_salary, total_salary) VALUES (:employeeId, :monthlysalary, :totalsalary);";
     $stmt = $conn->prepare($query);
 
-    if (empty($monthlysalary) || empty($totalsalary)) {
-        header("Location: $rootFolder/hr/employees/add");
-        return;
-    }
+    // if (empty($monthlysalary) || empty($totalsalary)) {
+    //     header("Location: $rootFolder/hr/employees/add");
+    //     return;
+    // }
 
     $stmt->execute([
         ':employeeId' => $employeeId,
         ':monthlysalary' => $monthlysalary,
-        ':totalsalary' => $totalsalary,
+        ':totalsalary' => $totalSalary,
     ]);
 
     // tax
     $incometax = $_POST['incometax'];
     $withholdingtax = $_POST['withholdingtax'];
 
+    // Calculate tax amount based on monthly salary
+    $taxAmount = calculateTax($monthlysalary);
+
     $query = "INSERT INTO tax_info (employees_id, income_tax, withholding_tax) VALUES (:employeeId, :incometax, :withholdingtax);";
     $stmt = $conn->prepare($query);
 
-    if (empty($incometax) || empty($withholdingtax)) {
-        header("Location: $rootFolder/hr/employees/add");
-        return;
-    }
+    // if (empty($incometax) || empty($withholdingtax)) {
+    //     header("Location: $rootFolder/hr/employees/add");
+    //     return;
+    // }
 
     $stmt->execute([
         ':employeeId' => $employeeId,
         ':incometax' => $incometax,
-        ':withholdingtax' => $withholdingtax,
+        ':withholdingtax' => $taxAmount,
     ]);
     
     // benefits
@@ -147,19 +197,37 @@ Router::post('/hr/employees/add', function () {
     $philhealth = $_POST['philhealth'];
     $thirteenthmonth = $_POST['thirteenthmonth'];
 
+    // Calculate SSS contribution
+    $sssContribution = calculateSSS($monthlysalary);
+
+    // Calculate Philhealth contribution based on monthly salary
+    $philhealthContribution = calculatePhilhealth($monthlysalary);
+
+    // Calculate Pag-IBIG fund contribution based on monthly salary
+    $pagibigContribution = calculatePagibig($monthlysalary);
+
+    // Calculate total basic salary earned by the employee within the calendar year
+    $totalBasicSalary = $monthlysalary * 12;
+
+    // Calculate the minimum value for the 13th-month pay
+    $minimumThirteenthMonthPay = $totalBasicSalary / 12;
+
+    // Ensure that the 13th-month pay is not less than the minimum value
+    $thirteenthmonth = max($minimumThirteenthMonthPay, $monthlysalary);
+
     $query = "INSERT INTO benefit_info (employees_id, sss_fund, pagibig_fund, philhealth, thirteenth_month) VALUES (:employeeId, :sss, :pagibig, :philhealth, :thirteenthmonth);";
     $stmt = $conn->prepare($query);
 
-    if (empty($sss) || empty($pagibig) || empty($philhealth) || empty($thirteenthmonth)) {
-        header("Location: $rootFolder/hr/employees/add");
-        return;
-    }
+    // if (empty($sss) || empty($pagibig) || empty($philhealth) || empty($thirteenthmonth)) {
+    //     header("Location: $rootFolder/hr/employees/add");
+    //     return;
+    // }
 
     $stmt->execute([
         ':employeeId' => $employeeId,
-        ':sss' => $sss,
-        ':pagibig' => $pagibig,
-        ':philhealth' => $philhealth,
+        ':sss' => $sssContribution,
+        ':pagibig' => $pagibigContribution,
+        ':philhealth' => $philhealthContribution,
         ':thirteenthmonth' => $thirteenthmonth,
     ]);
 
@@ -171,17 +239,17 @@ Router::post('/hr/employees/add', function () {
     $query = "INSERT INTO account_info (employees_id, username, password, role) VALUES (:employeeId, :username, :password, :role);";
     $stmt = $conn->prepare($query);
 
-    if (empty($username) || empty($password) || empty($role)) {
-        header("Location: $rootFolder/hr/employees/add");
-        return;
-    }
+    // if (empty($username) || empty($password) || empty($role)) {
+    //     header("Location: $rootFolder/hr/employees/add");
+    //     return;
+    // }
 
-    $stmt->execute([
-        ':employeeId' => $employeeId,
-        ':username' => $username,
-        ':password' => $password,
-        ':role' => $role,
-    ]);
+    // $stmt->execute([
+    //     ':employeeId' => $employeeId,
+    //     ':username' => $username,
+    //     ':password' => $password,
+    //     ':role' => $role,
+    // ]);
 
     header("Location: $rootFolder/hr/employees");
 });
