@@ -81,20 +81,83 @@
         <!-- End: Header -->
 
         <div class="flex flex-col items-start justify-center min-h-screen w-full max-w-4xl mx-auto p-4">
-            <h1 class="mb-3 text-xl font-bold text-gray-700">Transaction Details</h1>
             <div class="w-full bg-white rounded-lg overflow-hidden shadow-lg p-4">
-                <div class="p-6 rounded">
-                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Name: <?php echo $customer['FirstName'] . ' ' . $customer['LastName']; ?></h2>
-                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Phone: <?php echo $customer['Phone']; ?></h2>
-                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Email: <?php echo $customer['Email']; ?></h2>
-                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Sale Preferences: <?php echo $sale['SalePreference']; ?></h2>
+                <div class="p-2 pl-6 text-green-800 text-xl">
+                <i class="ri-cash-line text-2xl"></i> <span class="font-regular text-green-800">AMOUNT</span>
                 </div>
-                <hr class="my-4 border-gray-300">
+                <div class="p-2 pl-6 text-6xl font-semibold flex flex-row items-center border-b pb-4">
+                <span>₱12356.00</span>
+                <!-- <span class="text-gray-500 font-medium pl-4">PESO</span> -->
+                <div>
+         
+                    <div class="bg-gray-200 flex justify-center p-2 px-4 rounded-full ml-4 shadow-md border-gray-200 border">
+                    <div class="bg-green-800 size-6 rounded-full mr-2"></div>
+                    <span class="text-xl font-medium">Order Delivered</span>
+                    </div>
+                    
+                </div>
+                
+             
+               </div>
+              
+               
+                <div class="p-6 rounded flex flex-row text-lg font-medium">
+      
+                    <div class="flex flex-col border-r-2 pr-8">
+                        <span class="font-semibold text-gray-500">Transaction Date</span>
+                        <span class="mt-4">00/00/0000</span>
+                    </div>
+                       
+                    <div class="flex flex-col ml-4 pl-4 border-r-2 pr-8">
+                    <span class="font-semibold text-gray-500">Order ID</span>
+                        <span class="mt-4">#12345678</span>
+                    </div>
+
+                    <div class="flex flex-col ml-4 pl-4 pr-8">
+                    <span class="font-semibold text-gray-500">Payment Method</span>
+                        <span class="mt-4">Cash</span>
+                    </div>
+                    
+
+                </div>
+
+                <div class="p-6 pb-2 pt-2 rounded flex flex-row text-lg border-b">
+                    <div class="text-lg text-gray-900 font-semibold">Transaction Details</div>
+                </div>
+
+                <div class="flex flex-row p-6 gap-44">
+                     <div class="flex flex-col gap-4 text-gray-500">
+                        <span class="p-2 font-bold">Cargo Type</span>
+                        <span class="p-2 font-bold">Name</span>
+                        <span class="p-2 font-bold">Phone Number</span>
+                        <span class="p-2 font-bold">Email</span>
+                        <span class="p-2 font-bold">Sale Preferences</span>
+                     </div>
+                 
+                     <div class="flex flex-col gap-4 font-semibold ">
+                     <div class="bg-gray-200 rounded-full p-1 text-center font-bold">HEAVY</div>
+                        <span class="p-2"><?php echo $customer['FirstName'] . ' ' . $customer['LastName']; ?></span>
+                        <span class="p-2"><?php echo $customer['Phone']; ?></span>
+                        <span class="p-2"><?php echo $customer['Email']; ?></span>
+                        <span class="p-2"><?php echo $sale['SalePreference']; ?></span>
+                     </div>
+                </div>
+
+
+
+
+              <!-- <h2 class="mb-2 text-medium font-semibold text-gray-600">Name: </h2>
+                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Phone: </h2>
+                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Email: </h2>
+                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Sale Preferences: </h2> -->
+
+
+                <hr class=" border-gray-300">
                 <h2 class="text-lg font-semibold text-center my-3 text-gray-700">Items</h2>
                 <div class="flex justify-center">
                     <div class="grid grid-cols-3 gap-4 mx-auto">
                         <?php foreach ($items as $item) : ?>
-                            <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
+                            <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg text-center">
                                 <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
                                     <!-- SVG icon -->
                                 </div>
@@ -106,13 +169,31 @@
                         <?php endforeach; ?>
                     </div>
                 </div>
-                <div class="p-6">
-                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Quantity: <?php echo array_sum(array_column($items, 'Quantity')); ?></h2>
-                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Subtotal: &#8369;<?php echo array_sum(array_column($items, 'Subtotal')); ?></h2>
-                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Tax: &#8369;<?php echo array_sum(array_column($items, 'Tax')); ?></h2>
-                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Total: &#8369;<?php echo array_sum(array_column($items, 'TotalAmount')); ?></h2>
+                <div class="p-6 pb-2 pt-2 rounded flex flex-row text-lg border-b mt-8">
+                    <div class="text-lg text-gray-700 font-semibold">Order Summary</div>
                 </div>
+                <div class="flex flex-row p-6 gap-44">
+                <div class="flex flex-col gap-4 text-gray-500">
+                        <span class="p-2 font-bold">Quantity</span>
+                        <span class="p-2 font-bold">Subtotal</span>
+                        <span class="p-2 font-bold">Tax</span>
+                        <span class="p-2 font-bold">Price Discounted</span>
+                        <span class="p-2 font-bold text-xl text-green-800">Total</span>
+                     </div>
+                 
+                     <div class="flex flex-col gap-4 font-semibold ">
+                     <div class="p-2"><?php echo array_sum(array_column($items, 'Quantity')); ?></div>
+                        <span class="p-2">&#8369;<?php echo array_sum(array_column($items, 'Subtotal')); ?></span>
+                        <span class="p-2">&#8369;<?php echo array_sum(array_column($items, 'Tax')); ?></span>
+                        <span class="p-2">N/A</span>
+                        <span class="text-xl text-green-800 bg-gray-200 rounded-full p-1 px-8 text-center font-bold">&#8369;<?php echo array_sum(array_column($items, 'TotalAmount')); ?></span>
+                     </div>
+                </div>
+                <button class="border-t print-button mt-4 w-full rounded-full text-black text-xl py-4 px-4 hover:bg-gray-200 hover:font-bold transition-all ease-in-out">
+                        <i class="ri-import-line font-medium text-2xl"></i>
+                        Print Receipt</button>
             </div>
+            
         </div>
     </main>
     <script src="./../../src/form.js"></script>
