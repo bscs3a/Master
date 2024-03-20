@@ -8,6 +8,35 @@
     <link href="./../../src/tailwind.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
 
+    <?php
+    require_once './src/dbconn.php';
+
+    // Fetch the sale ID from the URL
+    $saleId = $_GET['sale'];
+
+    // Get PDO instance
+    $database = Database::getInstance();
+    $pdo = $database->connect();
+
+    // Query for sale details
+    $sqlSale = "SELECT * FROM Sales WHERE SaleID = ?";
+    $stmtSale = $pdo->prepare($sqlSale);
+    $stmtSale->execute([$saleId]);
+    $sale = $stmtSale->fetch(PDO::FETCH_ASSOC);
+
+    // Query for customer details
+    $sqlCustomer = "SELECT * FROM Customers WHERE CustomerID = ?";
+    $stmtCustomer = $pdo->prepare($sqlCustomer);
+    $stmtCustomer->execute([$sale['CustomerID']]);
+    $customer = $stmtCustomer->fetch(PDO::FETCH_ASSOC);
+
+    // Query for sale items
+    $sqlItems = "SELECT * FROM SaleDetails INNER JOIN Products ON SaleDetails.ProductID = Products.ProductID WHERE SaleID = ?";
+    $stmtItems = $pdo->prepare($sqlItems);
+    $stmtItems->execute([$saleId]);
+    $items = $stmtItems->fetchAll(PDO::FETCH_ASSOC);
+    ?>
+
 </head>
 
 <body class="bg-gray-100">
@@ -55,48 +84,33 @@
             <h1 class="mb-3 text-xl font-bold text-gray-700">Transaction Details</h1>
             <div class="w-full bg-white rounded-lg overflow-hidden shadow-lg p-4">
                 <div class="p-6 rounded">
-                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Name: John Doe</h2>
-                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Address: 123 Main St, Anytown, USA</h2>
-                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Delivery Status: Delivered</h2>
+                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Name: <?php echo $customer['FirstName'] . ' ' . $customer['LastName']; ?></h2>
+                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Phone: <?php echo $customer['Phone']; ?></h2>
+                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Email: <?php echo $customer['Email']; ?></h2>
+                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Sale Preferences: <?php echo $sale['SalePreference']; ?></h2>
                 </div>
                 <hr class="my-4 border-gray-300">
                 <h2 class="text-lg font-semibold text-center my-3 text-gray-700">Items</h2>
                 <div class="flex justify-center">
                     <div class="grid grid-cols-3 gap-4 mx-auto">
-                        <!-- Repeat this block for each item -->
-                        <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                            <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
-                                <!-- SVG icon -->
+                        <?php foreach ($items as $item) : ?>
+                            <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
+                                <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
+                                    <!-- SVG icon -->
+                                </div>
+                                <div class="font-bold text-lg text-gray-700"><?php echo $item['ProductName']; ?></div>
+                                <div class="font-normal text-sm text-gray-500"><?php echo $item['Category']; ?></div>
+                                <div class="mt-6 text-lg font-semibold text-gray-700">Php<?php echo $item['UnitPrice']; ?></div>
+                                <div class="text-gray-500 text-sm">Quantity: <?php echo $item['Quantity']; ?></div>
                             </div>
-                            <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
-                            <div class="font-normal text-sm text-gray-500">Pliers</div>
-                            <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
-                            <div class="text-gray-500 text-sm">Quantity: 1</div>
-                        </div>
-                        <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                            <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
-                                <!-- SVG icon -->
-                            </div>
-                            <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
-                            <div class="font-normal text-sm text-gray-500">Pliers</div>
-                            <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
-                            <div class="text-gray-500 text-sm">Quantity: 1</div>
-                        </div>
-                        <div class="w-52 h-70 p-6 flex flex-col items-center border rounded-lg border-solid border-gray-300 shadow-lg">
-                            <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
-                                <!-- SVG icon -->
-                            </div>
-                            <div class="font-bold text-lg text-gray-700">Nose Pliers</div>
-                            <div class="font-normal text-sm text-gray-500">Pliers</div>
-                            <div class="mt-6 text-lg font-semibold text-gray-700">Php500</div>
-                            <div class="text-gray-500 text-sm">Quantity: 1</div>
-                        </div>
-                        <!-- End of block -->
+                        <?php endforeach; ?>
                     </div>
                 </div>
                 <div class="p-6">
-                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Quantity: 3</h2>
-                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Total Amount: &#8369;1500.00</h2>
+                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Quantity: <?php echo array_sum(array_column($items, 'Quantity')); ?></h2>
+                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Subtotal: &#8369;<?php echo array_sum(array_column($items, 'Subtotal')); ?></h2>
+                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Tax: &#8369;<?php echo array_sum(array_column($items, 'Tax')); ?></h2>
+                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Total: &#8369;<?php echo array_sum(array_column($items, 'TotalAmount')); ?></h2>
                 </div>
             </div>
         </div>
