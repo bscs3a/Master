@@ -299,8 +299,9 @@
                           class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                           name="monthlysalary"
                           id="monthlysalary"
-                          type="number"
-                          placeholder="Monthly Salary"
+                          type="text"
+                          placeholder="0.00"
+                          oninput="calculateTax()"
                           
                         />
                     </div>
@@ -313,8 +314,8 @@
                           class="w-64 px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                           name="incometax"
                           id="incometax"
-                          type="number"
-                          placeholder="Income Tax"
+                          type="text"
+                          placeholder="0.00"
                           readonly
                         />
                     </div>
@@ -327,7 +328,7 @@
                           name="withholdingtax"
                           id="withholdingtax"
                           type="number"
-                          placeholder="Withholding Tax"
+                          placeholder="0.00"
                           readonly
                         />
                     </div>
@@ -347,7 +348,7 @@
                               name="sss"
                               id="sss"
                               type="text"
-                              placeholder="SSS"
+                              placeholder="0.00"
                               readonly
                             />
                         </div>
@@ -360,7 +361,7 @@
                               name="pagibig"
                               id="pagibig"
                               type="text"
-                              placeholder="PAG-IBIG Fund"
+                              placeholder="0.00"
                               readonly
                             />
                         </div>
@@ -373,7 +374,7 @@
                               name="philhealth"
                               id="philhealth"
                               type="text"
-                              placeholder="Philhealth"
+                              placeholder="0.00"
                               readonly
                             />
                         </div>
@@ -391,7 +392,7 @@
                                 name="thirteenthmonth"
                                 id="thirteenthmonth"
                                 type="number"
-                                placeholder="13th Month Pay"
+                                placeholder="0.00"
                                 readonly
                               />
                           </div>
@@ -404,7 +405,7 @@
                                 name="totalsalary"
                                 id="totalsalary"
                                 type="number"
-                                placeholder="Total Salary"
+                                placeholder="0.00"
                                 readonly
                               />
                           </div>
@@ -479,14 +480,74 @@
     }
   });
 
-  
-  // function calculateTax() {
-  //     const monthlySalary = document.getElementById('monthlySalary').value;
-  //     const philhealth = 200;
-  //     document.getElementById('philhealth').value = philhealth;
-      // const incomeTax = monthlySalary * 0.1; // Replace 0.1 with the actual tax rate
-      // document.getElementById('incomeTax').value = incomeTax.toFixed(2);
-  // }
+  // Automatic Tax Calculation for UI
+  function calculateTax() {
+      const monthlySalary = document.getElementById('monthlysalary').value;
+
+      // TAX DEDUCTIONS
+      // FIX INCOME TAX. THIS IS JUST A TEST
+      let incomeTax;
+      if (monthlySalary <= 20833.33) {
+        incomeTax = 0;
+      } else if (monthlySalary <= 33333.33) {
+          incomeTax = (monthlySalary - 20833.33) * 0.20;
+      } else if (monthlySalary <= 66666.67) {
+          incomeTax = 2500 + (monthlySalary - 33333.33) * 0.25;
+      } else if (monthlySalary <= 166666.67) {
+          incomeTax = 10833.33 + (monthlySalary - 66666.67) * 0.30;
+      } else if (monthlySalary <= 666666.67) {
+          incomeTax = 40833.33 + (monthlySalary - 166666.67) * 0.32;
+      } else {
+          incomeTax = 200833.33 + (monthlySalary - 666666.67) * 0.35;
+      }
+      document.getElementById('incometax').value = incomeTax.toFixed(2);
+
+      let withholdingTax;
+      if (monthlySalary <= 20833.33) {
+        // 20,833.33 and below
+        withholdingTax = 0;
+      } else if (monthlySalary <= 33333.33) {
+          // 20,833.34 to 33,333.33
+          withholdingTax = 0 + (monthlySalary - 20833.33) * 0.15;
+      } else if (monthlySalary <= 66666.67) {
+          // 33,333.34 to 66,666.67
+          withholdingTax = 1875 + (monthlySalary - 33333.33) * 0.20;
+      } else if (monthlySalary <= 166666.67) {
+          // 66,666.68 to 166,666.67
+          withholdingTax = 8541.80 + (monthlySalary - 66666.67) * 0.25;
+      } else if (monthlySalary <= 666666.67) {
+          // 166,666.68 to 666,666.67
+          withholdingTax = 33541.80 + (monthlySalary - 166666.67) * 0.30;
+      } else {
+          // 666,666.68 and above
+          withholdingTax = 183541.80 + (monthlySalary - 666666.67) * 0.35;
+      }
+      document.getElementById('withholdingtax').value = withholdingTax.toFixed(2);
+      
+      // BENEFIT DEDUCTIONS
+      const pagibig = 200.00;
+      document.getElementById('pagibig').value = pagibig;
+
+      const sss = (monthlySalary * 0.14) * 0.32;
+      document.getElementById('sss').value = sss.toFixed(2);
+      
+      let philhealth;
+      if (monthlySalary <= 10000.00) {
+          philhealth = 500.00;
+      } else if (monthlySalary <= 99999.99) {
+          philhealth = 500.00 + (monthlySalary - 10000.00) * 0.05;
+      } else {
+          philhealth = 5000.00;
+      }
+      document.getElementById('philhealth').value = philhealth.toFixed(2);
+
+      const thirteenthmonth = monthlySalary;
+      document.getElementById('thirteenthmonth').value = thirteenthmonth;
+
+      // TOTAL SALARY
+      const totalsalary = monthlySalary - (incomeTax + withholdingTax + pagibig + sss + philhealth);
+      document.getElementById('totalsalary').value = totalsalary.toFixed(2);
+  }
 </script>
 </body>
 </html> 
