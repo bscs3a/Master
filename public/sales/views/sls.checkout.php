@@ -274,12 +274,10 @@
             const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
             const tax = cart.reduce((total, item) => total + item.price * item.quantity * item.TaxRate, 0);
             const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity * (1 + item.TaxRate), 0);
-            const shippingFee = document.getElementById('SalePreference').value === 'delivery' ? 0 : 0; // Replace 50 with the actual shipping fee
 
             // Set the value of the hidden input fields
             document.getElementById('subtotal').value = subtotal.toFixed(2);
             document.getElementById('tax').value = tax.toFixed(2);
-            document.getElementById('shippingFee').value = shippingFee.toFixed(2);
             document.getElementById('totalAmount').value = totalAmount.toFixed(2);
             document.getElementById('cartData').value = JSON.stringify(cart);
 
