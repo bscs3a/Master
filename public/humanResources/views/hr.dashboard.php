@@ -7,6 +7,11 @@
   $stmt->execute();
   $result = $stmt->fetch(PDO::FETCH_ASSOC);
   $total_employees = $result['total_employees'];
+
+  $query = "SELECT * FROM employees ORDER BY id DESC LIMIT 3";
+  $stmt = $conn->prepare($query);
+  $stmt->execute();
+  $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!doctype html>
@@ -39,7 +44,7 @@
     <a href="#" class="text-[#151313] hover:text-gray-600 font-medium">Human Resources</a>
   </li>
   <li class="text-[#151313] mr-2 font-medium">/</li>
-  <a href="#" class="text-[#151313] mr-2 font-medium hover:text-gray-600">Analytics</a>
+  <a href="#" class="text-[#151313] mr-2 font-medium hover:text-gray-600">Dashboard</a>
    </ul>
    <ul class="ml-auto flex items-center">
   <li class="mr-1">
@@ -67,9 +72,18 @@
     </div>
     </div>
   </div>
-  <!-- Employees -->
+  <!-- Newly Hired Employees -->
   <h3 class="ml-6 mt-4 text-xl font-bold">Newly Hired Employees</h3>
-  <div class="ml-6 flex flex-col mt-8 mr-6">
+  
+  <?php 
+    if (empty($employees)) {
+        require_once 'inc/employees.noResult.php';
+    } 
+    else {
+        require_once 'inc/employees.table.php';
+    } 
+  ?>
+  <!-- <div class="ml-6 flex flex-col mt-8 mr-6">
   <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-300 shadow-md sm:rounded-lg">
     <table class="min-w-full">
       <thead>
@@ -165,7 +179,7 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
   </div>
 </div>
 </div>

@@ -300,7 +300,8 @@
                           name="monthlysalary"
                           id="monthlysalary"
                           type="number"
-                          placeholder="Ex. 20000"
+                          placeholder="Monthly Salary"
+                          
                         />
                     </div>
                     <!-- TAX INFO -->
@@ -314,6 +315,7 @@
                           id="incometax"
                           type="number"
                           placeholder="Income Tax"
+                          readonly
                         />
                     </div>
                     <div>
@@ -326,6 +328,7 @@
                           id="withholdingtax"
                           type="number"
                           placeholder="Withholding Tax"
+                          readonly
                         />
                     </div>
                   </div>
@@ -345,6 +348,7 @@
                               id="sss"
                               type="text"
                               placeholder="SSS"
+                              readonly
                             />
                         </div>
                         <div class="mr-2">
@@ -357,6 +361,7 @@
                               id="pagibig"
                               type="text"
                               placeholder="PAG-IBIG Fund"
+                              readonly
                             />
                         </div>
                         <div>
@@ -369,6 +374,7 @@
                               id="philhealth"
                               type="text"
                               placeholder="Philhealth"
+                              readonly
                             />
                         </div>
                       </div>
@@ -386,6 +392,7 @@
                                 id="thirteenthmonth"
                                 type="number"
                                 placeholder="13th Month Pay"
+                                readonly
                               />
                           </div>
                           <div class="mr-2">
@@ -398,6 +405,7 @@
                                 id="totalsalary"
                                 type="number"
                                 placeholder="Total Salary"
+                                readonly
                               />
                           </div>
                       </div>
@@ -470,6 +478,15 @@
         passwordInput.type = 'password';
     }
   });
+
+  
+  // function calculateTax() {
+  //     const monthlySalary = document.getElementById('monthlySalary').value;
+  //     const philhealth = 200;
+  //     document.getElementById('philhealth').value = philhealth;
+      // const incomeTax = monthlySalary * 0.1; // Replace 0.1 with the actual tax rate
+      // document.getElementById('incomeTax').value = incomeTax.toFixed(2);
+  // }
 </script>
 </body>
 </html> 
