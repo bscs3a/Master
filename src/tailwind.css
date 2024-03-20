@@ -2940,6 +2940,22 @@ video {
   background-size: cover;
 }
 
+.bg-\[length\:50\%_100\%\]{
+  background-size: 50% 100%;
+}
+
+.bg-\[length\:100\%_100\%\]{
+  background-size: 100% 100%;
+}
+
+.bg-\[length\:100\%_80\%\]{
+  background-size: 100% 80%;
+}
+
+.bg-\[length\:100\%_70\%\]{
+  background-size: 100% 70%;
+}
+
 .bg-fixed{
   background-attachment: fixed;
 }
@@ -2971,6 +2987,18 @@ video {
 
 .bg-\[center_top_2rem\]{
   background-position: center top 2rem;
+}
+
+.bg-\[center_top_4rem\]{
+  background-position: center top 4rem;
+}
+
+.bg-\[center_top_5rem\]{
+  background-position: center top 5rem;
+}
+
+.bg-\[center_top_6rem\]{
+  background-position: center top 6rem;
 }
 
 .bg-repeat{

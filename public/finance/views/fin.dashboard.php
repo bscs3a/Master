@@ -40,10 +40,41 @@
             <!-- Start: Profile -->
 
             <ul class="ml-auto flex items-center">
-                <div class="text-black font-medium">Sample User</div>
-                <li class="dropdown ml-3">
-                    <i class="ri-arrow-down-s-line"></i>
-                </li>
+
+                <div class="relative inline-block text-left">
+                    <div>
+                        <a class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-black bg-white rounded-md shadow-sm hover:bg-gray-50 focus:outline-none hover:cursor-pointer"
+                            id="options-menu" aria-haspopup="true" aria-expanded="true">
+                            <div class="text-black font-medium mr-4 ">
+                                <?= $_SESSION['fullname']; ?>
+                            </div>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </a>
+                    </div>
+
+                    <div class="origin-top-right absolute right-0 mt-4 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
+                        id="dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                        <div class="py-1" role="none">
+                            <a href="logout.php"
+                                class="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                role="menuitem">
+                                <i class="ri-logout-box-line"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    document.getElementById('options-menu').addEventListener('click', function () {
+                        var dropdownMenu = document.getElementById('dropdown-menu');
+                        if (dropdownMenu.classList.contains('hidden')) {
+                            dropdownMenu.classList.remove('hidden');
+                        } else {
+                            dropdownMenu.classList.add('hidden');
+                        }
+                    });
+                </script>
             </ul>
 
             <!-- End: Profile -->
@@ -58,7 +89,7 @@
             <div class=" mb-6">
                 <!-- Start: Top Left-Side Section -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 ">
-                    <div class="col-span-1 border-solid border-gray-400 shadow-md rounded-xl px-5 py-10 bg-wave bg-cover bg-[center_top_2rem] bg-no-repeat
+                    <div class="col-span-1 border-solid border-gray-400 shadow-md rounded-xl px-5 py-10 bg-wave bg-cover bg-[center_top_6rem] bg-[length:100%_70%] bg-no-repeat
                             
                         ">
                         <!-- Start: Welcome Message -->
@@ -74,8 +105,11 @@
 
 
                             <div class="text-right">
-                                <p class="font-sans font-bold text-xl text-gray-400">Today,</p>
-                                <p class="font-sans font-bold text-xl text-gray-400">March 04, 2024</p>
+                                <p class="font-sans font-bold text-xl text-gray-500">Today,</p>
+                                <!-- Expected format: March 04, 2024 -->
+                                <p class="font-sans font-bold text-xl text-gray-500">
+                                    <?= date('F j, Y'); ?>
+                                </p>
                             </div>
                         </div>
 
@@ -87,17 +121,18 @@
                                 <div class="flex justify-between mb-4">
                                     <div>
                                         <div class="flex items-center mb-1">
-                                            <div class="text-2xl font-semibold text-[#F8B721]">0</div>
+                                            <div class="text-4xl font-semibold text-[#F8B721]">
+                                                <?php
+                                                $amount = 2000;
+                                                echo number_format($amount, 2);
+                                                ?>
+                                            </div>
                                         </div>
                                         <div class="text-sm font-medium text-gray-400">Total Sales</div>
                                     </div>
                                     <div>
-                                    <!-- /home/r0khai/website/htdocs/Master/public/finance/img/Profit.png -->
-                                        <!-- <i class="ri-file-text-line mr-3 text-4xl"></i> -->
-                                        <!-- <span class="bg-profit"></span> -->
-                                        <!-- <i class="bg-profit bg-contain bg-no-repeat text-black"></i> -->
-                                        <img src="../public/finance/img/Profit.png" alt="Profit.png" class="bg-radial-gradient from-[#FFEB95] to-[#FECE01] py-2 px-2 rounded-full">
-                                        <!-- <img src="Profit.jpg" alt="Profit.png"> -->
+                                        <img src="../public/finance/img/Profit.png" alt="Profit.png"
+                                            class="bg-radial-gradient from-[#FFEB95] to-[#FECE01] py-2 px-2 rounded-full">
                                     </div>
                                 </div>
                             </div>
@@ -107,13 +142,18 @@
                                 <div class="flex justify-between mb-4">
                                     <div>
                                         <div class="flex items-center mb-1">
-                                            <div class="text-2xl font-semibold text-[#F8B721]">0</div>
+                                            <div class="text-4xl font-semibold text-[#F8B721]">
+                                                <?php
+                                                $amount = 10000;
+                                                echo '₱' . number_format($amount, 2);
+                                                ?>
+                                            </div>
                                         </div>
                                         <div class="text-sm font-medium text-gray-400">Total Expense</div>
                                     </div>
                                     <div>
-                                        <!-- <i class="ri-exchange-funds-line text-4xl"></i> -->
-                                        <img src="../public/finance/img/RequestMoney.png" alt="request-money.png"  class="bg-radial-gradient from-[#FFEB95] to-[#FECE01] py-2 px-1 rounded-full ">
+                                        <img src="../public/finance/img/RequestMoney.png" alt="request-money.png"
+                                            class="bg-radial-gradient from-[#FFEB95] to-[#FECE01] max-w-full h-auto py-2 px-1 rounded-full sm:hidden">
                                     </div>
                                 </div>
                             </div>

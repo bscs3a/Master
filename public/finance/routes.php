@@ -1,4 +1,10 @@
 <?php
+
+session_start();
+$_SESSION['user'] = 'admin';
+$_SESSION['role'] = 'admin';
+$_SESSION['fullname'] = "Xailer, Rokhai";
+
 $path = './public/finance/views';
 
 $basePath = "$path/fin.";
@@ -28,6 +34,10 @@ $fin = [
         $_SESSION['id'] = $id;
         include $basePath . "test2.php";
     },
+
+    // functions
+    // can't recognize by the router logout can proceed
+    '/fin/logout' => "./public/finance/functions/logout.php",
 
 ];
 
