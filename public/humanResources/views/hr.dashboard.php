@@ -1,3 +1,14 @@
+<?php
+  $db = Database::getInstance();
+  $conn = $db->connect();
+
+  $query = "SELECT COUNT(*) as total_employees FROM employees";
+  $stmt = $conn->prepare($query);
+  $stmt->execute();
+  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+  $total_employees = $result['total_employees'];
+?>
+
 <!doctype html>
 <html>
 
@@ -44,7 +55,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/10">
       <div class="text-2xl text-center font-semibold">Total Employees</div>
-      <div class="text-2xl text-center font-semibold">0</div>
+      <div class="text-2xl text-center font-semibold"><?php echo $total_employees; ?></div>
     </div>
     <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/10">
       <div class="text-2xl text-center font-semibold">On Leave</div>

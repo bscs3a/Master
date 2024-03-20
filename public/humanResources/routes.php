@@ -103,10 +103,10 @@ Router::post('/hr/employees/add', function () {
     $query = "INSERT INTO employees (first_name, middle_name, last_name, dateofbirth, gender, nationality, civil_status, address, contact_no, email, department, position) VALUES (:firstName, :middleName, :lastName, :dateofbirth, :gender, :nationality, :civilstatus, :address, :contactnumber, :email, :department, :position);";
     $stmt = $conn->prepare($query);
 
-    // if (empty($firstName) || empty($lastName) || empty($dateofbirth) || empty($gender) || empty($nationality) || empty($civilstatus) || empty($address) || empty($contactnumber) || empty($email) || empty($department) || empty($position)) {
-    //     header("Location: $rootFolder/hr/employees/add");
-    //     return;
-    // }
+    if (empty($firstName) || empty($lastName) || empty($dateofbirth) || empty($gender) || empty($nationality) || empty($civilstatus) || empty($address) || empty($department) || empty($position)) {
+        header("Location: $rootFolder/hr/employees/add");
+        return;
+    }
 
     $stmt->execute([
         ':firstName' => $firstName,
@@ -133,10 +133,10 @@ Router::post('/hr/employees/add', function () {
     $query = "INSERT INTO employment_info (employees_id, dateofhire, startdate, enddate) VALUES (:employeeId, :dateofhire, :startdate, :enddate);";
     $stmt = $conn->prepare($query);
 
-    // if (empty($dateofhire) || empty($startdate) || empty($enddate)) {
-    //     header("Location: $rootFolder/hr/employees/add");
-    //     return;
-    // }
+    if (empty($dateofhire) || empty($startdate)) {
+        header("Location: $rootFolder/hr/employees/add");
+        return;
+    }
 
     $stmt->execute([
         ':employeeId' => $employeeId,
@@ -159,10 +159,10 @@ Router::post('/hr/employees/add', function () {
     $query = "INSERT INTO salary_info (employees_id, monthly_salary, total_salary) VALUES (:employeeId, :monthlysalary, :totalsalary);";
     $stmt = $conn->prepare($query);
 
-    // if (empty($monthlysalary) || empty($totalsalary)) {
-    //     header("Location: $rootFolder/hr/employees/add");
-    //     return;
-    // }
+    if (empty($monthlysalary)) {
+        header("Location: $rootFolder/hr/employees/add");
+        return;
+    }
 
     $stmt->execute([
         ':employeeId' => $employeeId,
@@ -239,17 +239,17 @@ Router::post('/hr/employees/add', function () {
     $query = "INSERT INTO account_info (employees_id, username, password, role) VALUES (:employeeId, :username, :password, :role);";
     $stmt = $conn->prepare($query);
 
-    // if (empty($username) || empty($password) || empty($role)) {
-    //     header("Location: $rootFolder/hr/employees/add");
-    //     return;
-    // }
+    if (empty($username) || empty($password) || empty($role)) {
+        header("Location: $rootFolder/hr/employees/add");
+        return;
+    }
 
-    // $stmt->execute([
-    //     ':employeeId' => $employeeId,
-    //     ':username' => $username,
-    //     ':password' => $password,
-    //     ':role' => $role,
-    // ]);
+    $stmt->execute([
+        ':employeeId' => $employeeId,
+        ':username' => $username,
+        ':password' => $password,
+        ':role' => $role,
+    ]);
 
     header("Location: $rootFolder/hr/employees");
 });
