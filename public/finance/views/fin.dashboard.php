@@ -106,7 +106,10 @@
 
                             <div class="text-right">
                                 <p class="font-sans font-bold text-xl text-gray-500">Today,</p>
-                                <p class="font-sans font-bold text-xl text-gray-500"><?php ?></p>
+                                <!-- Expected format: March 04, 2024 -->
+                                <p class="font-sans font-bold text-xl text-gray-500">
+                                    <?= date('F j, Y'); ?>
+                                </p>
                             </div>
                         </div>
 
@@ -118,7 +121,12 @@
                                 <div class="flex justify-between mb-4">
                                     <div>
                                         <div class="flex items-center mb-1">
-                                            <div class="text-4xl font-semibold text-[#F8B721]">0</div>
+                                            <div class="text-4xl font-semibold text-[#F8B721]">
+                                                <?php
+                                                $amount = 2000;
+                                                echo number_format($amount, 2);
+                                                ?>
+                                            </div>
                                         </div>
                                         <div class="text-sm font-medium text-gray-400">Total Sales</div>
                                     </div>
@@ -134,13 +142,18 @@
                                 <div class="flex justify-between mb-4">
                                     <div>
                                         <div class="flex items-center mb-1">
-                                            <div class="text-4xl font-semibold text-[#F8B721]">0</div>
+                                            <div class="text-4xl font-semibold text-[#F8B721]">
+                                                <?php
+                                                $amount = 10000;
+                                                echo '₱' . number_format($amount, 2);
+                                                ?>
+                                            </div>
                                         </div>
                                         <div class="text-sm font-medium text-gray-400">Total Expense</div>
                                     </div>
                                     <div>
                                         <img src="../public/finance/img/RequestMoney.png" alt="request-money.png"
-                                            class="bg-radial-gradient from-[#FFEB95] to-[#FECE01] py-2 px-1 rounded-full ">
+                                            class="bg-radial-gradient from-[#FFEB95] to-[#FECE01] max-w-full h-auto py-2 px-1 rounded-full sm:hidden">
                                     </div>
                                 </div>
                             </div>
