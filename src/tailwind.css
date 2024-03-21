@@ -854,6 +854,11 @@ video {
   margin-right: 0px;
 }
 
+.mx-2{
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .mx-3{
   margin-left: 0.75rem;
   margin-right: 0.75rem;
@@ -892,11 +897,6 @@ video {
 .my-5{
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
-}
-
-.mx-2{
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
 }
 
 .-mb-px{
@@ -1194,6 +1194,11 @@ video {
   height: 6rem;
 }
 
+.size-44{
+  width: 11rem;
+  height: 11rem;
+}
+
 .size-6{
   width: 1.5rem;
   height: 1.5rem;
@@ -1207,11 +1212,6 @@ video {
 .size-8{
   width: 2rem;
   height: 2rem;
-}
-
-.size-44{
-  width: 11rem;
-  height: 11rem;
 }
 
 .h-1{
@@ -2111,10 +2111,6 @@ video {
 
 .gap-6{
   gap: 1.5rem;
-}
-
-.gap-10{
-  gap: 2.5rem;
 }
 
 .space-x-0 > :not([hidden]) ~ :not([hidden]){
