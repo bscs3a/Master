@@ -181,7 +181,7 @@
 
                     <div class="flex justify-between pt-6">
                         <h3 id="modal-product-stocks" class="pt-3 text-xl text-gray-500 font-medium"></h3>
-                        <button class="p-3 border border-green-900 bg-green-800 text-white rounded-lg font-medium">Add to Cart</button>
+                        <button route="/sls/POS" class="p-3 border border-green-900 bg-green-800 text-white rounded-lg font-medium">Add to Cart</button>
                     </div>
                 </div>
             </div>
