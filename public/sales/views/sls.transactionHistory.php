@@ -61,8 +61,8 @@
                         </svg>
                     </div>
                 </div>
-
-                <table class="table-auto w-full mx-auto text-left rounded-lg overflow-hidden shadow-lg text-center">
+                <div class="flex flex-row gap-10">
+                <table class="table-auto w-full mx-auto rounded-lg overflow-hidden shadow-lg text-center">
                     <thead class="bg-gray-200">
                         <tr>
                             <th class="px-4 py-2 font-semibold">Customer Name</th>
@@ -116,38 +116,54 @@
                         <?php endwhile; ?>
                     </tbody>
                 </table>
+
                 <div class="flex flex-col gap-4 justify-start items-start">
         
-        <div class="bg-white shadow-md text-left size-44 w-64 font-bold p-4 border-gray-200 border rounded-md flex justify-start items-start text-lg">
+                <div class="bg-white shadow-md text-left size-44 w-64 font-bold p-4 border-gray-200 border rounded-md flex justify-start items-start text-lg">
+                  
+                        <div class="flex flex-col gap-5">
+                            <div class="text-lg font-semibold text-gray-800">
+                                <i class="ri-shake-hands-fill text-lg mx-2"></i> Transaction Rate
+                            </div>
+                            <div class="text-5xl font-semibold ml-5">53</div>
+                            <div class="text-sm font-semibold ml-5 text-green-700">+10% more than average</div>
+                        </div>
+                    
+                </div>
+                    
+                <div class="bg-white shadow-md text-left size-44 w-64 font-bold p-4 border-gray-200 border rounded-md flex justify-start items-start text-lg">
+                            
+                    <div class="flex flex-col gap-5">
+                            <div>
+                            <i class="ri-funds-line text-lg mx-2"></i>Raw Sales
+                            </div>
+                            <div class="text-5xl font-semibold ml-5">53</div>
+                            <div class="text-sm font-medium ml-5 text-green-700">+10% more than average</div>
+                    </div>
             
-        
-        <i class="ri-shake-hands-line"></i>Transaction Rates
+                   
+                </div>
 
-       
-        </div> 
-        
-        <div class="bg-white shadow-md text-left size-44 w-64 font-bold p-4 border-gray-200 border rounded-md flex justify-start items-start text-lg">
-            
-        Raw Sales
+                <div class="bg-white shadow-md text-left size-44 w-64 font-bold p-4 border-gray-200 border rounded-md flex justify-start items-start text-lg">
+                            
+                            <div class="flex flex-col gap-5">
+                                    <div>
+                                    <i class="ri-funds-line text-lg mx-2"></i>Raw Sales
+                                    </div>
+                                    <div class="text-5xl font-semibold ml-5">53</div>
+                                    <div class="text-sm font-medium ml-5 text-green-700">+10% more than average</div>
+                            </div>
+                    
+                           
+                </div>
 
-       
-        </div>
-
-        <div class="bg-white shadow-md text-left size-44 w-64 font-bold p-4 border-gray-200 border rounded-md flex justify-start items-start text-lg">
-            
-        
-        <i class="ri-box-2-line text-lg mx-2"></i>Stocks Sold
-
-       
-        </div>
-
-        
-        
-    </div>
+                    
+                    
+                </div>
+                            
 
 
-
-                
+                </div>
             </div>
         </div>
     </main>
