@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS Customers (
     Email VARCHAR(100)
 );
 
--- Employees Table
+-- Employees Table -- Filler onLy
 CREATE TABLE IF NOT EXISTS Employees (
     EmployeeID INT AUTO_INCREMENT PRIMARY KEY,
     FirstName VARCHAR(100),
