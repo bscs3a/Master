@@ -4,6 +4,7 @@ module.exports = {
   safelist: [
     'bg-wave',
     'bg-request-money',
+    'bg-profit',
   ],
   theme: {
     extend: {
@@ -19,8 +20,23 @@ module.exports = {
       backgroundImage: {
         'wave': "url('../public/finance/img/wave.png')",
         'request-money': "url('../public/finance/img/RequestMoney.png')",
+        'profit': "url('../public/finance/img/Profit.png')",
+        'radial-gradient': 'radial-gradient(circle, var(--tw-gradient-stops))',
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.hide-scrollbar': {
+          'scrollbar-width': 'none', /* Firefox */
+          '-ms-overflow-style': 'none', /* Internet Explorer 10+ */
+        },
+        '.hide-scrollbar::-webkit-scrollbar': {
+          display: 'none', /* Safari and Chrome */
+        },
+      }
+      addUtilities(newUtilities)
+    }
+  ],
 }

@@ -3,7 +3,7 @@
 
 <head>
     <title>Form Test</title>
-
+    <link href="./../src/tailwind.css" rel="stylesheet">
 </head>
 
 <body>

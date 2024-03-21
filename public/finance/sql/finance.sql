@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2024 at 10:12 PM
+-- Generation Time: Mar 19, 2024 at 07:04 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -115,7 +115,8 @@ INSERT INTO `ledger` (`ledgerno`, `AccountType`, `name`, `contactIfLE`, `contact
 (21, 8, 'Theft Expense', NULL, NULL),
 (22, 8, 'Interest Expense', NULL, NULL),
 (23, 8, 'Other Operating Expense', NULL, NULL),
-(24, 9, 'Cost of Goods Sold', NULL, NULL);
+(24, 9, 'Cost of Goods Sold', NULL, NULL),
+(25, 3, 'Retained Earnings/Loss', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -248,7 +249,7 @@ ALTER TABLE `accounttype`
 -- AUTO_INCREMENT for table `ledger`
 --
 ALTER TABLE `ledger`
-  MODIFY `ledgerno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `ledgerno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `ledgerstatement`

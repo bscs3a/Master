@@ -1,5 +1,20 @@
 <?php 
     require_once '../../functions/reportGeneration/IncomeReport.php';
+
+    $today = new DateTime();
+    $lastDayOfMonth = new DateTime($today->format('Y-m-t'));
+
+    if ($today < $lastDayOfMonth) {
+        $today->modify('-1 month');
+    }
+
+    $year = $today->format('Y');
+    $month = $today->format('n');
+    $monthName = $today->format('F');
+    if (isset($_POST['year']) && isset($_POST['month'])){
+        $year = $_POST['year'];
+        $month = $_POST['month'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -18,10 +33,9 @@
 <body>
     Company B
     Income Statement
-    For month ended 31st December 2020
-
+    For month ended <?php echo "$monthName $year"?>
     <?php
-        echo generate_html();
+        echo generateIncomeReport($year, $month);
     ?>
 </body>
 </html>
