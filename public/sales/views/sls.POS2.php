@@ -202,49 +202,15 @@
                     <i class="ri-add-circle-fill text-xl"></i> Add Order
                 </button> -->
                 <h2 class="text-sm font-semibold text-gray-800 py-2">Total Items in Cart: <span id="cart-quantity" class="text-sm font-bold ">0</span></h2>
-                <button data-open-modal class="py-1 px-3 rounded bg-gray-100 border-2 border-gray-300 hover:bg-red-400 hover:border-red-600 active:scale-75 transition-all transform ease-in-out">
+                <button class="py-1 px-3 rounded bg-gray-100 border-2 border-gray-300 hover:bg-red-400 hover:border-red-600 active:scale-75 transition-all transform ease-in-out">
                     <i class="ri-delete-bin-7-fill text-xl"></i>
                 </button>
 
 
-                <!-- MODAL SECTION -->
-                <dialog data-modal class="rounded-lg shadow-xl">
-                    <div class="relative p-4 w-full max-w-md max-h-full">
-                        <div class="relative bg-white">
-                            <div class="p-4 md:p-5 text-center">
-                                <svg class="mx-auto mb-4 text-red-500 w-12 h-12 dark:text-white-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                </svg>
-                                <h3 class="mb-5 text-lg font-semibold text-gray-800 dark:text-gray-800">Are you sure you want to delete this cart order?</h3>
-                                <button data-close-modal type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center" @click="clearCart()">
-                                    Yes, I'm sure
-                                </button>
-                                <button data-close-modal2 type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </dialog>
 
 
-                <!-- MODAL SCRIPT -->
-                <script>
-                    const openButtons = document.querySelector('[data-open-modal]');
-                    const closeButtons = document.querySelector('[data-close-modal]');
-                    const closeButton2 = document.querySelector('[data-close-modal2]');
-                    const modal = document.querySelector('[data-modal]');
 
-                    openButtons.addEventListener('click', () => {
-                        modal.showModal();
-                    });
 
-                    closeButtons.addEventListener('click', () => {
-                        modal.close();
-                    });
-
-                    closeButton2.addEventListener('click', () => {
-                        modal.close();
-                    });
-                </script>
 
             </div>
 
@@ -370,7 +336,7 @@
             }
         </script>
 
-        <div class="flex flex-col items-center min-h-screen w-full sidebar-toggle3" :class="{ 'w-full': !cartOpen, 'w-9/12': cartOpen }">
+        <div class="flex flex-col items-center min-h-screen w-full" :class="{ 'w-full': !cartOpen, 'w-9/12': cartOpen }">
             <?php
             // Assuming $products is an array of arrays where each inner array contains the product details including category
             $categories = array_unique(array_column($products, 'Category')); // Extracting unique categories from products
@@ -383,31 +349,7 @@
                 <div id="grid" class="mb-10" x-bind:class="cartOpen ? ' grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? ' grid-cols-5 gap-4' : (!cartOpen && !sidebarOpen) ? ' grid-cols-6 gap-4' : ' grid-cols-6 gap-4'" style="display: grid;">
                     <?php foreach ($products as $product) : ?>
                         <?php if ($product['Category'] === $category) : ?> <!-- Show products only for the current category -->
-                            <button type="button" flareFire class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out" x-for="(item, index) in cart" :key="index" @click="
-                                    if (<?= $product['Stocks'] ?> > 0) { 
-                                      addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?>, stocks: <?= $product['Stocks'] ?>, priceWithTax: <?= $product['Price'] ?> * (1 + <?= $product['TaxRate'] ?>), TaxRate: <?= $product['TaxRate'] ?>, deliveryRequired: '<?= $product['DeliveryRequired'] ?>' }); cartOpen = true; 
-                                    
-                                        const Toast = Swal.mixin({
-                                        toast: true,
-                                        position: 'top-end',
-                                        showConfirmButton: false,
-                                        timer: 1000,
-                                        timerProgressBar: true,
-                                        didOpen: (toast) => {
-                                            toast.onmouseenter = Swal.stopTimer;
-                                            toast.onmouseleave = Swal.resumeTimer;
-                                        }
-                                    });
-
-                                    Toast.fire({
-                                        icon: 'success',
-                                        title: 'Item Added To Cart!'
-
-                                    });
-                                    
-                                    } else { 
-                                        alert('This product is out of stock.'); 
-                                    }">
+                            <button data-open-modal type="button" flareFire class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out" data-product='<?= json_encode($product) ?>'>
 
                                 <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
                                     <!-- SVG icon -->
@@ -427,11 +369,103 @@
                                 <div class="mt-6 text-lg font-semibold text-gray-700">&#8369;<?= number_format($price_with_tax, 2) ?></div>
                                 <div class="text-gray-500 text-sm">Stocks: <?= $product['Stocks'] ?> <?= $product['UnitOfMeasurement'] ?></div>
                             </button>
+
+                            <!-- Modal Section -->
+                            <dialog data-modal class="rounded-lg shadow-xl  w-1/4 max-h-full">
+
+                                <!-- Modal Header -->
+                                <div class="w-full bg-green-800 h-10 flex justify-end items-center">
+                                    <button data-close-modal> <i class="ri-close-fill text-2xl font-bold text-white p-2"></i></button>
+                                </div>
+
+                                <!-- Modal Content -->
+                                <div class="relative p-4">
+                                    <div class="relative bg-white">
+                                        <div class="flex justify-center">
+                                            <div class="size-64 rounded-full shadow-lg bg-yellow-200 mb-4"></div>
+                                        </div>
+                                        <div class="text-justify">
+                                            <div id="modal-product-category" class="text-justify font-semibold text-gray-800"></div>
+                                        </div>
+                                        <div class="flex justify-between pt-4">
+                                            <div id="modal-product-id" class="pt-3 text-xl text-gray-500 font-medium"></div>
+                                            <h3 id="modal-product-name" class="mb-5 text-2xl font-semibold text-gray-800 dark:text-gray-800"></h3>
+                                            <h3 id="modal-product-price" class="mb-5 text-2xl font-semibold text-gray-800 dark:text-gray-800"></h3>
+                                        </div>
+
+                                        <div class="text-justify ">
+                                            <div id="modal-product-description" class="text-justify"></div>
+                                        </div>
+
+                                        <div class="flex justify-between pt-6">
+                                            <h3 id="modal-product-stocks" class="pt-3 text-xl text-gray-500 font-medium"></h3>
+                                            <button class="p-3 border border-green-900 bg-green-800 text-white rounded-lg font-medium" @click="
+                                                    if (<?= $product['Stocks'] ?> > 0) { 
+                                                    addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?>, stocks: <?= $product['Stocks'] ?>, priceWithTax: <?= $product['Price'] ?> * (1 + <?= $product['TaxRate'] ?>), TaxRate: <?= $product['TaxRate'] ?>, deliveryRequired: '<?= $product['DeliveryRequired'] ?>' }); cartOpen = true; 
+                                                    
+                                                        const Toast = Swal.mixin({
+                                                        toast: true,
+                                                        position: 'top-end',
+                                                        showConfirmButton: false,
+                                                        timer: 1000,
+                                                        timerProgressBar: true,
+                                                        didOpen: (toast) => {
+                                                            toast.onmouseenter = Swal.stopTimer;
+                                                            toast.onmouseleave = Swal.resumeTimer;
+                                                        }
+                                                    });
+
+                                                    Toast.fire({
+                                                        icon: 'success',
+                                                        title: 'Item Added To Cart!'
+
+                                                    });
+                                                    
+                                                    } else { 
+                                                        alert('This product is out of stock.'); 
+                                                    }">
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </dialog>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
             <?php endforeach; ?>
         </div>
+
+
+        <!-- Modal Script -->
+        <script>
+            const openButtons = document.querySelectorAll('[data-open-modal]');
+            const closeButtons = document.querySelector('[data-close-modal]');
+            const modal = document.querySelector('[data-modal]');
+            const modalProductName = document.getElementById('modal-product-name');
+            const modalProductPrice = document.getElementById('modal-product-price');
+            const modalProductDescription = document.getElementById('modal-product-description');
+            const modalProductCategory = document.getElementById('modal-product-category');
+            const modalProductStocks = document.getElementById('modal-product-stocks');
+            const modalProductId = document.getElementById('modal-product-id');
+
+            openButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const product = JSON.parse(button.dataset.product);
+                    modalProductName.textContent = product.ProductName;
+                    modalProductPrice.textContent = 'Php' + product.Price;
+                    modalProductCategory.textContent = product.Category;
+                    modalProductDescription.textContent = product.Description;
+                    modalProductStocks.textContent = 'Stocks: ' + product.Stocks + ' ' + product.UnitOfMeasurement;
+                    modalProductId.textContent = 'Product ID: ' + product.ProductID; // Show product ID
+                    modal.showModal();
+                });
+            });
+
+            closeButtons.addEventListener('click', () => {
+                modal.close();
+            });
+        </script>
     </main>
     <script src="./../src/route.js"></script>
 </body>
