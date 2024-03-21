@@ -68,18 +68,9 @@
                   <option value="name">...</option>
                   <!-- Add more filter options as needed -->
                 </select>
-                <span
-                  class="h-full absolute inset-y-0 left-0 flex items-center pl-2">
-                  <svg
-                    viewBox="0 0 24 24"
-                    class="h-4 w-4 fill-current text-gray-500">
-                    <path
-                      d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z"></path>
-                  </svg>
-                </span>
                 <input
                   placeholder="Search ID"
-                  class="appearance-none rounded-l rounded-lg sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-gray-300 text-sm placeholder-gray-400 text-white focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
+                  class=" rounded-l rounded-lg sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-gray-300 text-sm placeholder-white text-white focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
               </div>
             </div>
             <div class="lg:ml-40 ml-10 space-x-8">
@@ -91,29 +82,95 @@
           </div>
 
           <!-- Cards -->
-          <div class="grid m-8">
-            <div class=" size-72 border border-gray-400 rounded-lg drop-shadow-md">
-              <div class="flex flex-col gap-2 ml-3 my-8">
-                <a class="text-2xl">Rank 1</a>
-                <div class="flex flex-row">
-                  <a>Company Name:</a>
-                  <a class="ml-3 text-gray-500">Marc Toolbox</a>
+          <div class="flex justify-center items-center">
+            <div class="grid grid-cols-3 gap-6">
+              <div class="h-72 w-96 border border-gray-400 rounded-lg drop-shadow-md">
+                <div class="flex flex-col gap-2 ml-3 my-8">
+                  <a class="text-2xl">Rank 1</a>
+                  <div class="flex flex-row">
+                    <a>Company Name:</a>
+                    <a class="ml-3 text-gray-500">Marc Toolbox</a>
+                  </div>
+                  <div class="flex flex-row">
+                    <a>Status:</a>
+                    <a class="ml-3 text-green-600">Active</a>
+                  </div>
                 </div>
-                <div class="flex flex-row">
-                  <a>Status:</a>
-                  <a class="ml-3 text-green-600">Active</a>
+
+                <div class="flex justify-center items-center">
+                  <button
+                    class="bg-violet-950 my-3 px-4 py-1 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+                    <a>View</a>
+                  </button>
                 </div>
               </div>
 
-              <div class="flex justify-center items-center">
-                <button
-                  class="bg-violet-950 mt-16 px-4 py-1 rounded-md text-white font-semibold tracking-wide cursor-pointer">
-                  <a>View</a>
-                </button>
+              <div class="h-72 w-96 border border-gray-400 rounded-lg drop-shadow-md">
+                <div class="flex flex-col gap-2 ml-3 my-8">
+                  <a class="text-2xl">Rank 1</a>
+                  <div class="flex flex-row">
+                    <a>Company Name:</a>
+                    <a class="ml-3 text-gray-500">Marc Toolbox</a>
+                  </div>
+                  <div class="flex flex-row">
+                    <a>Status:</a>
+                    <a class="ml-3 text-green-600">Active</a>
+                  </div>
+                </div>
+
+                <div class="flex justify-center items-center">
+                  <button
+                    class="bg-violet-950 my-3 px-4 py-1 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+                    <a>View</a>
+                  </button>
+                </div>
               </div>
+
+              <div class="h-72 w-96 border border-gray-400 rounded-lg drop-shadow-md">
+                <div class="flex flex-col gap-2 ml-3 my-8">
+                  <a class="text-2xl">Rank 1</a>
+                  <div class="flex flex-row">
+                    <a>Company Name:</a>
+                    <a class="ml-3 text-gray-500">Marc Toolbox</a>
+                  </div>
+                  <div class="flex flex-row">
+                    <a>Status:</a>
+                    <a class="ml-3 text-green-600">Active</a>
+                  </div>
+                </div>
+
+                <div class="flex justify-center items-center">
+                  <button
+                    class="bg-violet-950 my-3 px-4 py-1 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+                    <a>View</a>
+                  </button>
+                </div>
+              </div>
+
+              <div class="h-72 w-96 border border-gray-400 rounded-lg drop-shadow-md">
+                <div class="flex flex-col gap-2 ml-3 my-8">
+                  <a class="text-2xl">Rank 1</a>
+                  <div class="flex flex-row">
+                    <a>Company Name:</a>
+                    <a class="ml-3 text-gray-500">Marc Toolbox</a>
+                  </div>
+                  <div class="flex flex-row">
+                    <a>Status:</a>
+                    <a class="ml-3 text-green-600">Active</a>
+                  </div>
+                </div>
+
+                <div class="flex justify-center items-center">
+                  <button
+                    class="bg-violet-950 my-3 px-4 py-1 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+                    <a>View</a>
+                  </button>
+                </div>
+              </div>
+
             </div>
-
           </div>
+
         </div>
       </div>
     </div>
