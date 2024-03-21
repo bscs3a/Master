@@ -9,7 +9,7 @@
 <body>
 
     <table>
-        <form action="/fin/test" class="flex-col">
+        <form action="/test" class="flex-col">
             <input type="text" id="date" name="date" placeholder="Date"><br>
             <script>
                 var today = new Date();

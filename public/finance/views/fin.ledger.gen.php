@@ -290,6 +290,7 @@
                             ?>
 
                             <div>
+                                <!-- Get All Records from ledgertransaction -->
                                 <?php foreach ($rows as $row): ?>
                                     <tr class="">
                                         <td class="whitespace-nowrap px-4  text-gray-900">
