@@ -10,7 +10,7 @@
 
     $year = $today->format('Y');
     $month = $today->format('n');
-
+    $monthName = $today->format('F');
     if (isset($_POST['year']) && isset($_POST['month'])){
         $year = $_POST['year'];
         $month = $_POST['month'];
@@ -33,7 +33,7 @@
 <body>
     Company B
     Income Statement
-    For month ended <?php echo "$month $year"?>
+    For month ended <?php echo "$monthName $year"?>
     <?php
         echo generateIncomeReport($year, $month);
     ?>
