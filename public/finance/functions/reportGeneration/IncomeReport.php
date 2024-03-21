@@ -1,101 +1,25 @@
 <?php
-require_once '../../../../src/dbconn.php';
 
+require_once '../generalFunctions.php';
 // used for getting the accountbalance
 // problems:
 // must consider date
 // must consider closing balance table(ledgerstatement)
-function getAccountBalance($ledger) {
-    $db = Database::getInstance();
-    $conn = $db->connect();
 
-    $ledgerNo = getLedgerCode($ledger);
-
-    // If getLedgerCode returns false, throw an exception
-    if ($ledgerNo === false) {
-        throw new Exception("Account not found in Ledger table.");
+//calculate net sales
+function calculateNetSalesOrLoss($year, $month) {
+    if ($year === null || $month === null) {
+        throw new Exception("Year and month must not be null.");
     }
-
-    // Fetch entries from the LedgerStatement table
-    $sql = "SELECT * FROM LedgerTransaction WHERE ledgerno = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$ledgerNo]);
-
-    $balance = 0;
-
-    while ($row = $stmt->fetch()) {
-        if ($row['LedgerNo_dr'] == $ledgerNo) {
-            $balance += $row['amount'];
-        } else if ($row['LedgerNo'] == $ledgerNo) {
-            $balance -= $row['amount'];
-        }
-    }
-
-    return $balance;
-}
-
-
-// used for getting the ledger code
-function getLedgerCode($ledger){
-    $db = Database::getInstance();
-    $conn = $db->connect();
-
-    // Check if the account exists in the Ledger table
-    $sql = "SELECT ledgerno FROM Ledger WHERE ledgerno = ? OR name = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$ledger, $ledger]);
-    $ledgerNo = $stmt->fetchColumn();
-
-    return $ledgerNo;
-
-}
-function calculateNetSalesOrLoss() {
     define("INCOME", "IC");
     define("EXPENSE", "EP");
 
     // income - expense = netsales or loss
-    return getTotalOfGroup(INCOME) - getTotalOfGroup(EXPENSE);
-}
-
-function getTotalOfGroup($groupType) {
-    $db = Database::getInstance();
-    $conn = $db->connect();
-
-    // Fetch all transactions for ledgers(considering grouptype) on ledgerNo(credit)
-    $sql = "SELECT lt.* FROM LedgerTransaction lt
-            JOIN Ledger l ON lt.ledgerNo = l.ledgerNo
-            JOIN AccountType at ON l.accountType = at.accountType
-            WHERE at.groupType = :groupType";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':groupType', $groupType);
-    $stmt->execute();
-
-    $netAmount = 0;
-
-    // Calculate the net amount
-    while ($row = $stmt->fetch()) {
-        $netAmount += $row['amount'];
-    }
-
-    // Fetch all transactions for ledgers(considering grouptype) on ledgerNo_dr(debit)
-    $sql = "SELECT lt.* FROM LedgerTransaction lt
-            JOIN Ledger l ON lt.ledgerNo_dr = l.ledgerNo
-            JOIN AccountType at ON l.accountType = at.accountType
-            WHERE at.groupType = :groupType";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':groupType', $groupType);
-    $stmt->execute();
-
-    // Subtract the amounts for expense accounts
-    while ($row = $stmt->fetch()) {
-        $netAmount -= $row['amount'];
-    }
-
-    return abs($netAmount);
+    return getTotalOfGroup(INCOME, $year, $month) - getTotalOfGroup(EXPENSE, $year, $month);
 }
 
 
-function generate_html() {
+function generateIncomeReport($year, $month) {
     $db = Database::getInstance();
     $conn = $db->connect();
 
@@ -120,18 +44,18 @@ function generate_html() {
                 $html .= "<li>\n{$account['Description']}\n<ul>\n";
                 foreach ($ledger_data as $ledger) {
                     if ($ledger['AccountType'] == $account['AccountType']) {
-                        $balance = getAccountBalance($ledger['ledgerno']);
+                        $balance = getAccountBalance($ledger['ledgerno'], true, $year, $month);
                         $html .= "<li>\n<span>{$ledger['name']}</span>&emsp;<span>{$balance}</span>\n</li>\n";
                     }
                 }
                 $html .= "</ul>\n</li>\n";
             }
         }
-        $total = getTotalOfGroup($group['grouptype']);
+        $total = getTotalOfGroup($group['grouptype'], $year, $month);
         $resultText = $group['grouptype'] == "IC" ? "Gross Profit" : "Total Expense";
         $html .= "</ul>\n<span>{$resultText}</span>&emsp;<span>{$total}</span>\n</li>\n";
     }
-    $netSalesOrLoss = calculateNetSalesOrLoss();
+    $netSalesOrLoss = calculateNetSalesOrLoss($year, $month);
     $textSalesOrLoss = $netSalesOrLoss > 0 ? "Net Sales" : "Net Loss";
     $html .= "
     <li>
