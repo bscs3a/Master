@@ -73,7 +73,7 @@ $stmt = null;
   </div> 
   <?php 
     if (empty($employees)) {
-        require_once 'inc/employees.noResult.php';
+        require_once 'inc/noResult.php';
     } 
     else {
         require_once 'inc/employees.table.php';
