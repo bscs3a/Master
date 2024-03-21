@@ -65,19 +65,20 @@ $stmt = null;
   <div class="flex flex-wrap">
     <h3 class="ml-6 mt-8 text-xl font-bold">Leave Requests</h3>
 
-    <form action="/search" method="get" class="mt-6 ml-auto mr-4 flex">
+    <form action="/hr/leave-requests" method="get" class="mt-6 ml-auto mr-4 flex">
       <input type="search" id="search" name="search" placeholder="Search" class="w-40 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
       <button type="submit" class="ml-2 bg-blue-500 text-white px-4 py-1 rounded-md hover:bg-blue-600"><i class="ri-search-line"></i></button>
     </form>
   </div> 
 
+  <!-- UNCOMMENT THIS AFTER FINISHING THE BACKEND FOR LEAVE REQUESTS -->
   <?php 
-    if (empty($leaveRequests)) {
-        require_once 'inc/noResult.php';
-    } 
-    else {
-        require_once 'inc/leave-requests.table.php';
-    } 
+    // if (empty($leaveRequests)) {
+    //     require_once 'inc/noResult.php';
+    // } 
+    // else {
+    //     require_once 'inc/leave-requests.table.php';
+    // } 
   ?>
 
   <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
