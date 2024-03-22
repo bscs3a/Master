@@ -90,7 +90,7 @@
                                     </li>
                                     <li id="shipping-fee" class="py-2 pb-4 text-gray-500 font-medium border-b mb-4 flex justify-between" x-show="salePreference === 'delivery'">
                                         <span x-text="'Shipping Fee:'"></span>
-                                        <span>₱50.00</span> <!-- Replace with the actual shipping fee -->
+                                        <span>₱00</span> <!-- Replace with the actual shipping fee -->
                                     </li>
                                     <li class="py-2 pb-4 text-gray-500 font-medium border-b mb-4 flex justify-between">
                                         <span x-text="'Tax:'"></span>
@@ -253,7 +253,6 @@
                             <input type="hidden" id="cartData" name="cartData">
                             <input type="hidden" id="subtotal" name="subtotal">
                             <input type="hidden" id="tax" name="tax">
-                            <input type="hidden" id="shippingFee" name="shippingFee">
 
                             <button type="submit" value="Submit" class="bg-green-800 text-white rounded px-4 py-2 mt-4 w-full hover:bg-gray-200 hover:text-green-800 hover:font-bold transition-colors ease-in-out">Complete Sale</button>
                         </form>

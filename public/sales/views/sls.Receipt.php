@@ -130,7 +130,6 @@
                                     return $carry + $item['UnitPrice'] * $item['Quantity'];
                                 }, 0);
                                 $tax = $subtotal * 0.12; // Assuming a tax rate of 12%
-                                $shippingFee = $sale_preferences === 'Delivery' ? 50 : 0; // Replace 50 with the actual shipping fee
                                 ?>
 
                                 <div id="subtotal" class="flex justify-between border-b text-lg pb-4 mb-2 text-gray-400">
@@ -144,7 +143,7 @@
                                 <?php if ($sale_preferences === 'Delivery') : ?>
                                     <div id="shippingFee" class="flex justify-between border-b text-lg pb-2 mt-4 text-gray-400">
                                         <span>Shipping Fee</span>
-                                        <span>₱<?= number_format($shippingFee, 2) ?></span>
+                                        <span>₱0</span>
                                     </div>
                                 <?php endif; ?>
                                 <div id="total" class="flex justify-between font-semibold border-b text-xl pb-2 text-gray-400 mt-4">
