@@ -450,8 +450,18 @@
             openButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const product = JSON.parse(button.dataset.product);
+                    selectedProduct = { 
+                        id: product.ProductID, 
+                        name: product.ProductName, 
+                        price: Number(product.Price), 
+                        stocks: product.Stocks, 
+                        priceWithTax: Number(product.Price) * (1 + Number(product.TaxRate)), 
+                        TaxRate: Number(product.TaxRate), 
+                        deliveryRequired: product.DeliveryRequired 
+                    };
+                    console.log('selectedProduct: ', selectedProduct);
                     modalProductName.textContent = product.ProductName;
-                    modalProductPrice.textContent = 'Php' + product.Price;
+                    modalProductPrice.textContent = 'Php ' + (Number(product.Price) * (1 + Number(product.TaxRate))).toFixed(2);
                     modalProductCategory.textContent = product.Category;
                     modalProductDescription.textContent = product.Description;
                     modalProductStocks.textContent = 'Stocks: ' + product.Stocks + ' ' + product.UnitOfMeasurement;
