@@ -4,8 +4,6 @@ $path = './public/sales/views';
 $basePath = "$path/sls.";
 
 $sls = [
-    '/sls/sample' => $basePath . "sample.php",
-    '/sls/link' => $basePath . "test-link.php",
     '/sls/Product-Catalog' => $basePath . "ProductCatalog.php",
     '/sls/Transaction-History' => $basePath . "transactionHistory.php",
     '/sls/Transaction-Details' => $basePath . "transactionDetails.php",
