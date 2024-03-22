@@ -16,7 +16,10 @@
         import Swal from 'sweetalert2'
 
         const Swal = require('sweetalert2')
+        
     </script>
+
+    
 
 
 
@@ -32,7 +35,36 @@
         ::-webkit-scrollbar {
             display: none;
         }
+
+
+     .modalPop{
+        animation: fadeInUp 0.3s ease-in-out;
+                    }
+
+                    @keyframes fadeInUp {
+                        0% {
+                            opacity: 0;
+                            transform: translateY(20px);
+                        }
+                        100% {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+
+                    @keyframes fadeInDown{
+                        100%{
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                        
+
+                    }
     </style>
+
+
+
+               
 
     <?php
     require_once 'function/getProducts.php';
@@ -373,7 +405,7 @@
                             </button>
 
                             <!-- Modal Section -->
-                            <dialog data-modal class="rounded-lg shadow-xl  w-1/4 max-h-full">
+                            <dialog data-modal class="modalPop rounded-lg shadow-xl w-1/4 max-h-full elementToFade">
 
                                 <!-- Modal Header -->
                                 <div class="w-full bg-green-800 h-10 flex justify-end items-center">
@@ -384,14 +416,14 @@
                                 <div class="relative p-4">
                                     <div class="relative bg-white">
                                         <div class="flex justify-center">
-                                            <div class="size-64 rounded-full shadow-lg bg-yellow-200 mb-4"></div>
+                                            <div class="size-64 rounded-full shadow-lg bg-yellow-200 mb-6 mt-6"></div>
                                         </div>
                                         <div class="text-justify">
-                                            <div id="modal-product-category" class="text-justify font-semibold text-gray-800"></div>
+                                            <div id="modal-product-category" class="text-justify text-gray-400"></div>
                                         </div>
-                                        <div class="flex justify-between pt-4">
-                                            <h3 id="modal-product-name" class="mb-5 text-2xl font-semibold text-gray-800 dark:text-gray-800"></h3>
-                                            <h3 id="modal-product-price" class="mb-5 text-2xl font-semibold text-gray-800 dark:text-gray-800"></h3>
+                                        <div class="flex justify-between items-center">
+                                            <h3 id="modal-product-name" class="mb-5 text-2xl font-bold text-gray-800 dark:text-gray-800"></h3>
+                                            <h3 id="modal-product-price" class="mb-5 text-2xl font-bold text-gray-800 dark:text-gray-800 bg-gray-200 rounded-lg p-1 px-3 shadow-md border border-gray-300"></h3>
                                         </div>
 
                                         <div class="text-justify ">
@@ -399,8 +431,8 @@
                                         </div>
 
                                         <div class="flex justify-between pt-6">
-                                            <h3 id="modal-product-stocks" class="pt-3 text-xl text-gray-500 font-medium"></h3>
-                                            <button class="p-3 border border-green-900 bg-green-800 text-white rounded-lg font-medium" @click="
+                                            <h3 id="modal-product-stocks" class="pt-3 text-xl text-gray-400"></h3>
+                                            <button class="p-3 border border-green-900 bg-green-800 text-white rounded-lg font-medium hover:bg-green-950 hover:font-bold transition-all" @click="
                                                 if (selectedProduct['stocks'] > 0) { 
                                                     addToCart(selectedProduct); 
                                                     const Toast = Swal.mixin({
@@ -460,8 +492,14 @@
             });
 
             closeButtons.addEventListener('click', () => {
-                modal.close();
+                modal.animate([{ opacity: 1 }, { opacity: 0 }], 250).onfinish = () => {
+                    modal.close();
+                };
             });
+
+            
+   
+
         </script>
     </main>
     <script src="./../src/route.js"></script>

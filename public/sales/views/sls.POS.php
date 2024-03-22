@@ -12,11 +12,7 @@
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
 
     <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
-        import Swal from 'sweetalert2'
-
-        const Swal = require('sweetalert2')
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 
@@ -370,6 +366,51 @@
             }
         </script>
 
+    <!-- FOR NO STOCKS ALERT -->
+      
+        <div id="customAlertBox" class="fixed inset-0 z-30 items-center justify-center text-center bg-black bg-opacity-50 hidden shadow-lg border-gray-200 custom-alert-box">
+            <div class="bg-white p-6 rounded">
+                <img src="https://static.thenounproject.com/png/3407335-200.png" class="ml-6 p-10" alt="alternatetext">
+                <div class="font-bold text-2xl mb-4">Out of Stocks!</div>
+                <div class="mb-4">The amount of available stocks exceeded</div>
+                <div class="flex justify-end">
+                    <button onclick="closeAlertBox()" class="px-4 py-2 bg-green-800 text-white rounded hover:bg-green-900 hover:font-bold transition-all w-full">OK</button>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .custom-alert-box {
+                transition: opacity 0.3s ease;
+                opacity: 0;
+            }
+
+            .custom-alert-box.show {
+                opacity: 1;
+            }
+        </style>
+
+
+        <!-- CUSTOM ALERT BOX -->
+        <script>
+            function showAlertBox() {
+                const alertBox = document.getElementById('customAlertBox');
+                alertBox.style.display = 'flex';
+                setTimeout(() => {
+                    alertBox.classList.add('show');
+                }, 10);
+            }
+
+            function closeAlertBox() {
+                const alertBox = document.getElementById('customAlertBox');
+                alertBox.classList.remove('show');
+                setTimeout(() => {
+                    alertBox.style.display = 'none';
+                }, 300);
+            }
+        </script>
+
+
         <div class="flex flex-col items-center min-h-screen w-full sidebar-toggle3" :class="{ 'w-full': !cartOpen, 'w-9/12': cartOpen }">
             <?php
             // Assuming $products is an array of arrays where each inner array contains the product details including category
@@ -380,10 +421,11 @@
                 <div class="text-xl font-bold divide-y ml-3 mt-5"><?= $category ?></div>
                 <!-- Horizontal line -->
                 <hr class="w-full border-gray-300 my-2">
+
                 <div id="grid" class="mb-10" x-bind:class="cartOpen ? ' grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? ' grid-cols-5 gap-4' : (!cartOpen && !sidebarOpen) ? ' grid-cols-6 gap-4' : ' grid-cols-6 gap-4'" style="display: grid;">
                     <?php foreach ($products as $product) : ?>
                         <?php if ($product['Category'] === $category) : ?> <!-- Show products only for the current category -->
-                            <button type="button" flareFire class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out" x-for="(item, index) in cart" :key="index" @click="
+                            <button type="button" class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out" x-for="(item, index) in cart" :key="index" @click="
                                     if (<?= $product['Stocks'] ?> > 0) { 
                                       addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?>, stocks: <?= $product['Stocks'] ?>, priceWithTax: <?= $product['Price'] ?> * (1 + <?= $product['TaxRate'] ?>), TaxRate: <?= $product['TaxRate'] ?>, deliveryRequired: '<?= $product['DeliveryRequired'] ?>' }); cartOpen = true; 
                                     
@@ -408,6 +450,7 @@
                                     } else { 
                                         alert('This product is out of stock.'); 
                                     }">
+                                    
 
                                 <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
                                     <!-- SVG icon -->
@@ -434,16 +477,16 @@
         </div>
     </main>
     <script src="./../src/route.js"></script>
-</body>
 
-<script>
-    // Initialize Alpine.js data
+    <script>
+          
+
     document.addEventListener('alpine:init', () => {
         Alpine.data('main', () => ({
             sidebarOpen: true,
             cartOpen: false,
             isFullScreen: false,
-
+            
             // Load the cart items from localStorage when the page loads
             init() {
                 let savedCart = localStorage.getItem('cart');
@@ -452,23 +495,23 @@
                 }
                 // Update the cart quantity display when the page loads
                 updateCartQuantity();
+                
             },
 
             cart: [],
-            // Function to add product to cart
             addToCart(product) {
                 let item = this.cart.find(i => i.id === product.id);
                 if (item) {
+                    
                     if (item.quantity + 1 > product.stocks) {
-                        alert('The quantity you want to add is greater than the available stocks.');
+                        showAlertBox();
                     } else {
                         item.quantity++;
                     }
 
-
                 } else {
                     if (product.stocks < 1) {
-                        alert('The quantity you want to add is greater than the available stocks.');
+                        showAlertBox();
                     } else {
                         this.cart.push({
                             ...product,
@@ -613,5 +656,8 @@
     });
 </script>
 
+
+
+</body>
 
 </html>
