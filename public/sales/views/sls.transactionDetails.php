@@ -9,32 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
 
     <?php
-    require_once './src/dbconn.php';
-
-    // Fetch the sale ID from the URL
-    $saleId = $_GET['sale'];
-
-    // Get PDO instance
-    $database = Database::getInstance();
-    $pdo = $database->connect();
-
-    // Query for sale details
-    $sqlSale = "SELECT * FROM Sales WHERE SaleID = ?";
-    $stmtSale = $pdo->prepare($sqlSale);
-    $stmtSale->execute([$saleId]);
-    $sale = $stmtSale->fetch(PDO::FETCH_ASSOC);
-
-    // Query for customer details
-    $sqlCustomer = "SELECT * FROM Customers WHERE CustomerID = ?";
-    $stmtCustomer = $pdo->prepare($sqlCustomer);
-    $stmtCustomer->execute([$sale['CustomerID']]);
-    $customer = $stmtCustomer->fetch(PDO::FETCH_ASSOC);
-
-    // Query for sale items
-    $sqlItems = "SELECT * FROM SaleDetails INNER JOIN Products ON SaleDetails.ProductID = Products.ProductID WHERE SaleID = ?";
-    $stmtItems = $pdo->prepare($sqlItems);
-    $stmtItems->execute([$saleId]);
-    $items = $stmtItems->fetchAll(PDO::FETCH_ASSOC);
+    require_once 'function/fetchSaleDetails.php';
     ?>
 
 </head>
@@ -58,7 +33,7 @@
             <ul class="flex items-center text-md ml-4">
 
                 <li class="mr-2">
-                    <p class="text-black font-medium">Sales / Transaction History</p>
+                    <p class="text-black font-medium">Sales / Transaction Details</p>
                 </li>
 
             </ul>
@@ -99,10 +74,9 @@
 
 
                 <div class="p-6 rounded flex flex-row text-lg font-medium">
-
                     <div class="flex flex-col border-r-2 pr-8">
                         <span class="font-semibold text-gray-500">Transaction Date</span>
-                        <span class="mt-4"><?php echo $sale['SaleDate']; ?></span>
+                        <span class="mt-4"><?php echo date('F j, Y, g:i a', strtotime($sale['SaleDate'])); ?></span>
                     </div>
 
                     <div class="flex flex-col ml-4 pl-4 border-r-2 pr-8">
@@ -119,9 +93,6 @@
                         <span class="font-semibold text-gray-500">Payment Method</span>
                         <span class="mt-4"><?php echo $sale['PaymentMode']; ?></span>
                     </div>
-
-
-
                 </div>
 
                 <div class="p-6 pb-2 pt-2 rounded flex flex-row text-lg border-b">
@@ -144,15 +115,6 @@
                     </div>
                 </div>
 
-
-
-
-                <!-- <h2 class="mb-2 text-medium font-semibold text-gray-600">Name: </h2>
-                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Phone: </h2>
-                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Email: </h2>
-                    <h2 class="mb-2 text-medium font-semibold text-gray-600">Sale Preferences: </h2> -->
-
-
                 <hr class=" border-gray-300">
                 <h2 class="text-lg font-semibold text-center my-3 text-gray-700">Items</h2>
                 <div class="flex justify-center">
@@ -164,7 +126,7 @@
                                 </div>
                                 <div class="font-bold text-lg text-gray-700"><?php echo $item['ProductName']; ?></div>
                                 <div class="font-normal text-sm text-gray-500"><?php echo $item['Category']; ?></div>
-                                <div class="mt-6 text-lg font-semibold text-gray-700">Php<?php echo $item['UnitPrice'] * $item['Quantity'] * (1 + $item['TaxRate']); ?></div>
+                                <div class="mt-6 text-lg font-semibold text-gray-700">&#8369;<?php echo number_format($item['UnitPrice'] * $item['Quantity'] * (1 + $item['TaxRate']), 2); ?></div>
                                 <div class="text-gray-500 text-sm">Quantity: <?php echo $item['Quantity']; ?></div>
                             </div>
                         <?php endforeach; ?>
@@ -222,12 +184,21 @@
                     openButtons.forEach(button => {
                         button.addEventListener('click', () => {
                             const product = JSON.parse(button.dataset.product);
-                            modalProductName.textContent = product.ProductName;
-                            modalProductPrice.textContent = 'Php' + product.UnitPrice;
+                            selectedProduct = {
+                                id: product.ProductID,
+                                name: product.ProductName,
+                                price: Number(product.Price),
+                                stocks: product.Stocks,
+                                priceWithTax: Number(product.Price) * (1 + Number(product.TaxRate)),
+                                TaxRate: Number(product.TaxRate),
+                                deliveryRequired: product.DeliveryRequired
+                            };
+                            modalProductName.textContent = selectedProduct.name;
+                            modalProductPrice.textContent = '₱' + (selectedProduct.price * (1 + selectedProduct.TaxRate)).toFixed(2);
                             modalProductCategory.textContent = product.Category;
-                            modalProductDescription.textContent = product.Description; 
-                            modalProductQuantity.textContent = 'Quantity: ' + product.Quantity; 
-                            modalProductTotal.textContent = 'Total: Php ' + product.TotalAmount; 
+                            modalProductDescription.textContent = product.Description;
+                            modalProductQuantity.textContent = 'Quantity: ' + product.Quantity;
+                            modalProductTotal.textContent = 'Total: ₱' + (selectedProduct.price * product.Quantity * (1 + selectedProduct.TaxRate)).toFixed(2);
                             modal.showModal();
                         });
                     });
@@ -252,11 +223,11 @@
 
                     <div class="flex flex-col gap-4 font-semibold ">
                         <div class="p-2"><?php echo array_sum(array_column($items, 'Quantity')); ?></div>
-                        <span class="p-2">&#8369;<?php echo array_sum(array_column($items, 'Subtotal')); ?></span>
-                        <span class="p-2">&#8369;<?php echo array_sum(array_column($items, 'Tax')); ?></span>
-                        <span class="p-2">&#8369;<?php echo array_sum(array_column($items, 'ShippingFee')); ?></span>
+                        <span class="p-2">&#8369;<?php echo number_format(array_sum(array_column($items, 'Subtotal')), 2); ?></span>
+                        <span class="p-2">&#8369;<?php echo number_format(array_sum(array_column($items, 'Tax')), 2); ?></span>
+                        <span class="p-2">&#8369;<?php echo number_format(array_sum(array_column($items, 'ShippingFee')), 2); ?></span>
                         <span class="p-2">N/A</span>
-                        <span class="text-xl text-green-800 bg-gray-200 rounded-full p-1 px-8 text-center font-bold">&#8369;<?php echo array_sum(array_column($items, 'TotalAmount')); ?></span>
+                        <span class="text-xl text-green-800 bg-gray-200 rounded-full p-1 px-8 text-center font-bold">₱<?php echo number_format(array_sum(array_column($items, 'TotalAmount')), 2); ?></span>
                     </div>
                 </div>
                 <button class="border-t print-button mt-4 w-full rounded-full text-black text-xl py-4 px-4 hover:bg-gray-200 hover:font-bold transition-all ease-in-out">

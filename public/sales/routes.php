@@ -137,9 +137,10 @@ Router::post('/addSales', function () {
     $customer = new Customer();
     $customerId = $customer->create($_POST['customerFirstName'], $_POST['customerLastName'], $_POST['customerPhone'], $_POST['customerEmail']);
 
+    date_default_timezone_set('Asia/Manila');
     $sale = new Sale();
     $saleId = $sale->create(date('Y-m-d H:i:s'), $_POST['SalePreference'], $_POST['payment-mode'], $_POST['totalAmount'], '1', $customerId, $_POST['cardNumber'], $_POST['expiryDate'], $_POST['cvv']);
-
+   
     $saleDetail = new SaleDetail();
     $deliveryOrder = new DeliveryOrder();
     $product = new Product();

@@ -461,7 +461,7 @@
                     };
                     console.log('selectedProduct: ', selectedProduct);
                     modalProductName.textContent = product.ProductName;
-                    modalProductPrice.textContent = 'Php ' + (Number(product.Price) * (1 + Number(product.TaxRate))).toFixed(2);
+                    modalProductPrice.textContent = '₱' + (Number(product.Price) * (1 + Number(product.TaxRate))).toFixed(2);
                     modalProductCategory.textContent = product.Category;
                     modalProductDescription.textContent = product.Description;
                     modalProductStocks.textContent = 'Stocks: ' + product.Stocks + ' ' + product.UnitOfMeasurement;
