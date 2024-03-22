@@ -206,12 +206,6 @@
                     <i class="ri-delete-bin-7-fill text-xl"></i>
                 </button>
 
-
-
-
-
-
-
             </div>
 
             <!-- Cart items -->
@@ -229,8 +223,6 @@
                 // Parse the JSON string to a JavaScript object
                 var taxRates = JSON.parse('<?php echo $taxRatesJson; ?>');
 
-                // Use the taxRates in your Alpine.js code
-                // ...
             </script>
 
             <div class="flex justify-between px-3 py-2 overflow-y-auto " style="max-height: 26rem;">
