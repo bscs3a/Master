@@ -838,6 +838,11 @@ video {
   margin-right: 0px;
 }
 
+.mx-2{
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .mx-3{
   margin-left: 0.75rem;
   margin-right: 0.75rem;
@@ -1163,6 +1168,11 @@ video {
 .size-24{
   width: 6rem;
   height: 6rem;
+}
+
+.size-44{
+  width: 11rem;
+  height: 11rem;
 }
 
 .size-6{

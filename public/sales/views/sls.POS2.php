@@ -163,7 +163,7 @@
                 });
             </script>
 
-            <div class="right-0 fixed flex items-center border-2 border-gray-300 rounded-l-md bg-gray-200">
+            <div class="right-0 fixed flex items-center border-2 border-gray-300 rounded-l-md bg-gray-200 hidden">
                 <div class="flex items-center">
                     <!-- Button to toggle the cart view -->
                     <button type="button" @click="if (sidebarOpen) { sidebarOpen = false; cartOpen = !cartOpen; } else { cartOpen = !cartOpen; }" x-show="!cartOpen" class="items-center flex bg-gray-200 py-2 w-full justify-between sidebar-toggle2 hover:bg-gray-300 ease-in-out transition">
@@ -349,12 +349,14 @@
                 <div id="grid" class="mb-10" x-bind:class="cartOpen ? ' grid-cols-5 gap-4' : (!cartOpen && sidebarOpen) ? ' grid-cols-5 gap-4' : (!cartOpen && !sidebarOpen) ? ' grid-cols-6 gap-4' : ' grid-cols-6 gap-4'" style="display: grid;">
                     <?php foreach ($products as $product) : ?>
                         <?php if ($product['Category'] === $category) : ?> <!-- Show products only for the current category -->
-                            <button data-open-modal type="button" flareFire class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out" data-product='<?= json_encode($product) ?>'>
+                            <!-- Product Item Button -->
+                            <button id="product-item-button" data-open-modal type="button" flareFire class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out" data-product='<?= json_encode($product) ?>' @click="
+                                selectedProduct = { id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?>, stocks: <?= $product['Stocks'] ?>, priceWithTax: <?= $product['Price'] ?> * (1 + <?= $product['TaxRate'] ?>), TaxRate: <?= $product['TaxRate'] ?>, deliveryRequired: '<?= $product['DeliveryRequired'] ?>' };
+                            ">
 
                                 <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
                                     <!-- SVG icon -->
                                 </div>
-
 
                                 <!-- Horizontal line -->
                                 <hr class="w-full border-gray-300 my-2">
@@ -388,7 +390,6 @@
                                             <div id="modal-product-category" class="text-justify font-semibold text-gray-800"></div>
                                         </div>
                                         <div class="flex justify-between pt-4">
-                                            <div id="modal-product-id" class="pt-3 text-xl text-gray-500 font-medium"></div>
                                             <h3 id="modal-product-name" class="mb-5 text-2xl font-semibold text-gray-800 dark:text-gray-800"></h3>
                                             <h3 id="modal-product-price" class="mb-5 text-2xl font-semibold text-gray-800 dark:text-gray-800"></h3>
                                         </div>
@@ -400,10 +401,9 @@
                                         <div class="flex justify-between pt-6">
                                             <h3 id="modal-product-stocks" class="pt-3 text-xl text-gray-500 font-medium"></h3>
                                             <button class="p-3 border border-green-900 bg-green-800 text-white rounded-lg font-medium" @click="
-                                                    if (<?= $product['Stocks'] ?> > 0) { 
-                                                    addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?>, stocks: <?= $product['Stocks'] ?>, priceWithTax: <?= $product['Price'] ?> * (1 + <?= $product['TaxRate'] ?>), TaxRate: <?= $product['TaxRate'] ?>, deliveryRequired: '<?= $product['DeliveryRequired'] ?>' }); cartOpen = true; 
-                                                    
-                                                        const Toast = Swal.mixin({
+                                                if (selectedProduct['stocks'] > 0) { 
+                                                    addToCart(selectedProduct); 
+                                                    const Toast = Swal.mixin({
                                                         toast: true,
                                                         position: 'top-end',
                                                         showConfirmButton: false,
@@ -418,12 +418,11 @@
                                                     Toast.fire({
                                                         icon: 'success',
                                                         title: 'Item Added To Cart!'
-
                                                     });
-                                                    
-                                                    } else { 
-                                                        alert('This product is out of stock.'); 
-                                                    }">
+                                                } else { 
+                                                    alert('This product is out of stock.'); 
+                                                }
+                                            ">
                                                 Add to Cart
                                             </button>
                                         </div>
@@ -447,7 +446,6 @@
             const modalProductDescription = document.getElementById('modal-product-description');
             const modalProductCategory = document.getElementById('modal-product-category');
             const modalProductStocks = document.getElementById('modal-product-stocks');
-            const modalProductId = document.getElementById('modal-product-id');
 
             openButtons.forEach(button => {
                 button.addEventListener('click', () => {
@@ -457,7 +455,6 @@
                     modalProductCategory.textContent = product.Category;
                     modalProductDescription.textContent = product.Description;
                     modalProductStocks.textContent = 'Stocks: ' + product.Stocks + ' ' + product.UnitOfMeasurement;
-                    modalProductId.textContent = 'Product ID: ' + product.ProductID; // Show product ID
                     modal.showModal();
                 });
             });
@@ -471,12 +468,26 @@
 </body>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const addToCartButton = document.querySelector('#modal-add-to-cart-button');
+        const productItemButton = document.querySelector('#product-item-button');
+
+        addToCartButton.addEventListener('click', function() {
+            // Trigger click event of product item button
+            productItemButton.click();
+        });
+    });
+</script>
+
+
+<script>
     // Initialize Alpine.js data
     document.addEventListener('alpine:init', () => {
         Alpine.data('main', () => ({
             sidebarOpen: true,
             cartOpen: false,
             isFullScreen: false,
+            selectedProduct: null,
 
             // Load the cart items from localStorage when the page loads
             init() {
