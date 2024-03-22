@@ -663,8 +663,16 @@ video {
   position: fixed;
 }
 
+.\!absolute{
+  position: absolute !important;
+}
+
 .absolute{
   position: absolute;
+}
+
+.\!relative{
+  position: relative !important;
 }
 
 .relative{
@@ -698,6 +706,10 @@ video {
 
 .end-1{
   inset-inline-end: 0.25rem;
+}
+
+.end-2{
+  inset-inline-end: 0.5rem;
 }
 
 .left-0{
@@ -810,6 +822,10 @@ video {
 
 .clear-none{
   clear: none;
+}
+
+.m-1{
+  margin: 0.25rem;
 }
 
 .m-2{
@@ -1056,14 +1072,6 @@ video {
   margin-top: 2.25rem;
 }
 
-.mt-auto{
-  margin-top: auto;
-}
-
-.mt-20{
-  margin-top: 5rem;
-}
-
 .mt-16{
   margin-top: 4rem;
 }
@@ -1110,6 +1118,10 @@ video {
   display: inline-flex;
 }
 
+.\!table{
+  display: table !important;
+}
+
 .table{
   display: table;
 }
@@ -1154,6 +1166,10 @@ video {
   display: flow-root;
 }
 
+.\!grid{
+  display: grid !important;
+}
+
 .grid{
   display: grid;
 }
@@ -1186,21 +1202,6 @@ video {
 .size-8{
   width: 2rem;
   height: 2rem;
-}
-
-.size-28{
-  width: 7rem;
-  height: 7rem;
-}
-
-.size-52{
-  width: 13rem;
-  height: 13rem;
-}
-
-.size-64{
-  width: 16rem;
-  height: 16rem;
 }
 
 .size-72{
@@ -2047,10 +2048,6 @@ video {
   gap: 0.25rem;
 }
 
-.gap-16{
-  gap: 4rem;
-}
-
 .gap-2{
   gap: 0.5rem;
 }
@@ -2069,6 +2066,10 @@ video {
 
 .gap-6{
   gap: 1.5rem;
+}
+
+.gap-16{
+  gap: 4rem;
 }
 
 .space-x-0 > :not([hidden]) ~ :not([hidden]){
@@ -2889,16 +2890,6 @@ video {
   background-color: rgb(228 228 231 / var(--tw-bg-opacity));
 }
 
-.bg-gray-500{
-  --tw-bg-opacity: 1;
-  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
-}
-
-.bg-gray-400{
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
-}
-
 .bg-gray-300{
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
@@ -3065,6 +3056,14 @@ video {
   padding: 2.5rem;
 }
 
+.p-14{
+  padding: 3.5rem;
+}
+
+.p-16{
+  padding: 4rem;
+}
+
 .p-2{
   padding: 0.5rem;
 }
@@ -3087,6 +3086,10 @@ video {
 
 .p-6{
   padding: 1.5rem;
+}
+
+.p-8{
+  padding: 2rem;
 }
 
 .px-1{
@@ -3227,6 +3230,10 @@ video {
 
 .pr-6{
   padding-right: 1.5rem;
+}
+
+.pr-8{
+  padding-right: 2rem;
 }
 
 .ps-6{
@@ -3425,6 +3432,11 @@ video {
   font-variant-numeric: normal;
 }
 
+.\!ordinal{
+  --tw-ordinal: ordinal !important;
+  font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction) !important;
+}
+
 .ordinal{
   --tw-ordinal: ordinal;
   font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
@@ -3586,21 +3598,6 @@ video {
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-green-300{
-  --tw-text-opacity: 1;
-  color: rgb(134 239 172 / var(--tw-text-opacity));
-}
-
-.text-green-500{
-  --tw-text-opacity: 1;
-  color: rgb(34 197 94 / var(--tw-text-opacity));
-}
-
-.text-green-400{
-  --tw-text-opacity: 1;
-  color: rgb(74 222 128 / var(--tw-text-opacity));
 }
 
 .text-green-600{
@@ -4009,6 +4006,14 @@ video {
   forced-color-adjust: none;
 }
 
+.\!\[a-zA-Z\:_\]{
+  a-z-a--z:  !important;
+}
+
+.\[image\:\$img\|\$width\|\$height\|\$type\]{
+  image: $img|$width|$height|$type;
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;
@@ -4229,9 +4234,22 @@ video {
   text-align: center;
 }
 
+.focus\:border-l:focus{
+  border-left-width: 1px;
+}
+
+.focus\:border-r:focus{
+  border-right-width: 1px;
+}
+
 .focus\:border-blue-500:focus{
   --tw-border-opacity: 1;
   border-color: rgb(59 130 246 / var(--tw-border-opacity));
+}
+
+.focus\:border-gray-500:focus{
+  --tw-border-opacity: 1;
+  border-color: rgb(107 114 128 / var(--tw-border-opacity));
 }
 
 .focus\:border-transparent:focus{
@@ -4337,6 +4355,10 @@ video {
 }
 
 @media (min-width: 640px){
+  .sm\:mb-0{
+    margin-bottom: 0px;
+  }
+
   .sm\:mb-6{
     margin-bottom: 1.5rem;
   }
@@ -4380,6 +4402,15 @@ video {
   .sm\:rounded-l-none{
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
+  }
+
+  .sm\:rounded-r-none{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+
+  .sm\:border-r-0{
+    border-right-width: 0px;
   }
 
   .sm\:text-sm{
