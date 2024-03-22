@@ -86,7 +86,7 @@
                     <i class="ri-cash-line text-2xl"></i> <span class="font-regular text-green-800">AMOUNT</span>
                 </div>
                 <div class="p-2 pl-6 text-6xl font-semibold flex flex-row items-center border-b pb-4">
-                    <span>₱<?php echo array_sum(array_column($items, 'TotalAmount')); ?></span>
+                    <span>₱<?php echo number_format(array_sum(array_column($items, 'TotalAmount')), 2); ?></span>
                     <div>
                         <div class="bg-gray-200 flex justify-center p-2 px-4 rounded-full ml-4 shadow-md border-gray-200 border">
                             <div class="bg-green-800 size-6 rounded-full mr-2"></div>

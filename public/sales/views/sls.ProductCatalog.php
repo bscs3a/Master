@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Point of Sale (POS)</title>
+    <title>Product Catalog</title>
 
     <link href="./../src/tailwind.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -61,7 +61,7 @@
             <!-- Main title or heading -->
             <ul class="flex items-center text-md ml-4">
                 <li class="mr-2">
-                    <p class="text-black font-medium">Sales / Point of Sale(POS)</p>
+                    <p class="text-black font-medium">Sales / Product Catalog</p>
                 </li>
             </ul>
 
