@@ -405,7 +405,7 @@
                             </button>
 
                             <!-- Modal Section -->
-                            <dialog data-modal class="modalPop rounded-lg shadow-xl w-2/5 max-w-2/5 max-h-full elementToFade">
+                            <dialog data-modal class="modalPop rounded-lg shadow-xl w-2/5 max-h-full elementToFade">
 
                                 <!-- Modal Header -->
                                 <div class="w-full bg-green-800 h-10 flex flex-row-2 gap-60 text-center justify-end">
