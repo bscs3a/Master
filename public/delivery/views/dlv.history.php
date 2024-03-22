@@ -1,12 +1,15 @@
 <?php
-
-require_once __DIR__ . '/sql/dbconnection.php'; 
+//database connection
+require_once './src/dbconn.php';
 
 $db = Database::getInstance();
 $conn = $db->connect();
 if ($conn === null) {
     die('Failed to connect to the database.');
 }
+?>
+
+<?php
 $query = "SELECT * FROM deliveryorders WHERE DeliveryStatus = 'Delivered'";
 
 $result = $conn->query($query);

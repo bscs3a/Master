@@ -1,6 +1,6 @@
 <?php
-        // Start the session, Database connection
-require_once __DIR__ . '/sql/dbconnection.php'; 
+//database connection
+require_once './src/dbconn.php';
 
 $db = Database::getInstance();
 $conn = $db->connect();

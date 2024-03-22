@@ -1,15 +1,7 @@
 <?php
-//database connection
-require_once './src/dbconn.php';
+    //Connection to the database
+    require_once __DIR__ . '/sql/dbconnection.php'; 
 
-$db = Database::getInstance();
-$conn = $db->connect();
-if ($conn === null) {
-    die('Failed to connect to the database.');
-}
-?>
-
-<?php
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
@@ -52,7 +44,7 @@ if ($conn === null) {
         $stmt->execute();
         $saleId = $stmt->fetchColumn();
 
-        // Update all rows with the fetched SaleID
+        // Update all rows with the fetched SaleID in deliveryorders table
         $stmt = $conn->prepare("UPDATE deliveryorders SET DeliveryStatus = :status, ReceivedDate = :receivedDate WHERE SaleID = :saleId");
         $stmt->bindParam(':status', $status);
         $stmt->bindParam(':receivedDate', $receivedDate);
@@ -234,6 +226,6 @@ if ($conn === null) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script  src="./.././../src/route.js"></script>
-    <script  src="./.././../src/form.js"></script>
+    <script  src="./../src/form.js"></script>
     </body>
 </html>
