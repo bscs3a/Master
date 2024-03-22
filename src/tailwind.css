@@ -844,6 +844,10 @@ video {
   margin: 1.5rem;
 }
 
+.m-8{
+  margin: 2rem;
+}
+
 .-mx-2{
   margin-left: -0.5rem;
   margin-right: -0.5rem;
@@ -1074,6 +1078,10 @@ video {
 
 .mt-9{
   margin-top: 2.25rem;
+}
+
+.mt-16{
+  margin-top: 4rem;
 }
 
 .box-border{
@@ -4204,6 +4212,10 @@ video {
 
 .\!\[a-zA-Z\:_\]{
   a-z-a--z:  !important;
+}
+
+.\[image\:\$img\|\$width\|\$height\|\$type\]{
+  image: $img|$width|$height|$type;
 }
 
 @media (min-width: 640px){
