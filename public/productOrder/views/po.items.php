@@ -114,7 +114,7 @@
               echo '<tr class="hover:bg-gray-50 data-row" data-id="' . $row['ProductID'] . '" data-name="' . $row['ProductName'] . '" data-supplier="' . $row['Supplier'] . '" data-category="' . $row['Category'] . '" data-quality="5 stars..." data-price="' . $row['Price'] . '" data-description="' . $row['Description'] . '">';
               echo '<td class="flex gap-3 px-6 py-4 font-normal text-gray-900">';
               echo '<div class="flex flex-col font-medium text-gray-700 text-sm">';
-              echo '<img src="' . $imagePath . '" alt="">'; // Display the image using the URL
+              echo '<img src="' . $imagePath . '" alt="" width="80" height="80">';
               echo '</div>';
               echo '</td>';
               echo '<td class="px-6 py-4">';
