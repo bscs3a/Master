@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2024 at 11:16 AM
+-- Generation Time: Mar 23, 2024 at 11:59 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -61,22 +61,26 @@ CREATE TABLE `order_details` (
 --
 
 CREATE TABLE `products` (
-  `Product_ID` int(250) NOT NULL,
-  `Product_Image` varchar(250) NOT NULL,
-  `Product_Name` varchar(50) DEFAULT NULL,
-  `Product_Weight` int(50) DEFAULT NULL,
-  `Product_Price` int(50) DEFAULT NULL,
-  `Product_Description` text DEFAULT NULL,
-  `p_supplier` varchar(50) NOT NULL,
-  `p_category` varchar(50) NOT NULL
+  `ProductID` int(11) NOT NULL,
+  `ProductImage` varchar(250) NOT NULL,
+  `ProductName` varchar(100) DEFAULT NULL,
+  `Supplier` varchar(50) NOT NULL,
+  `Description` varchar(255) DEFAULT NULL,
+  `Category` varchar(50) DEFAULT NULL,
+  `DeliveryRequired` varchar(3) DEFAULT NULL,
+  `Price` decimal(10,2) DEFAULT NULL,
+  `Stocks` int(11) DEFAULT NULL,
+  `UnitOfMeasurement` varchar(20) DEFAULT NULL,
+  `TaxRate` decimal(5,2) DEFAULT NULL,
+  `ProductWeight` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`Product_ID`, `Product_Image`, `Product_Name`, `Product_Weight`, `Product_Price`, `Product_Description`, `p_supplier`, `p_category`) VALUES
-(123, 'C:\\xampp\\htdocs\\master\\public\\productOrder/uploads/1.jpg', '123', 123, 213, '123', 'xd', 'Bang');
+INSERT INTO `products` (`ProductID`, `ProductImage`, `ProductName`, `Supplier`, `Description`, `Category`, `DeliveryRequired`, `Price`, `Stocks`, `UnitOfMeasurement`, `TaxRate`, `ProductWeight`) VALUES
+(1, 'C:\\xampp\\htdocs\\master\\public\\productOrder/uploads/1.jpg', 'longn ose', 'test', 'awdaw1', 'Bang', NULL, 3123.00, NULL, NULL, NULL, 2312.00);
 
 -- --------------------------------------------------------
 
@@ -148,7 +152,7 @@ ALTER TABLE `order_details`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`Product_ID`);
+  ADD PRIMARY KEY (`ProductID`);
 
 --
 -- Indexes for table `requests`
@@ -183,6 +187,12 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `order_details`
   MODIFY `Order_ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `requests`
