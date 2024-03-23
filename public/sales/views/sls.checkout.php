@@ -90,7 +90,7 @@
                                     </li>
                                     <li id="shipping-fee" class="py-2 pb-4 text-gray-500 font-medium border-b mb-4 flex justify-between" x-show="salePreference === 'delivery'">
                                         <span x-text="'Shipping Fee:'"></span>
-                                        <span>₱00</span> <!-- Replace with the actual shipping fee -->
+                                        <span id="ShippingFee">₱0.00</span> <!-- Replace with the actual shipping fee -->
                                     </li>
                                     <li class="py-2 pb-4 text-gray-500 font-medium border-b mb-4 flex justify-between">
                                         <span x-text="'Tax:'"></span>
@@ -165,17 +165,39 @@
                                 // Get cart from local storage
                                 const cart = JSON.parse(localStorage.getItem('cart') || '[]');
 
-                                // Check if any product requires delivery
-                                const deliveryRequired = cart.some(item => item.deliveryRequired === 'Yes');
+                                // Compute weight for each item in the cart
+                                cart.forEach(item => item.totalWeight = item.ProductWeight * item.quantity);
+
+                                // Compute total weight of all products in the cart
+                                const totalWeight = cart.reduce((total, item) => total + item.totalWeight, 0);
+
+                                // Display total weight in the console
+                                console.log('Total weight:', totalWeight);
 
                                 const salePreference = document.getElementById('SalePreference');
-                                if (deliveryRequired) {
+                                if (totalWeight >= 300) { // Check if total weight is 300 or more
                                     salePreference.value = 'delivery';
                                     const pickupOption = salePreference.querySelector('option[value="pick-up"]');
                                     pickupOption.disabled = true;
                                 } else {
                                     salePreference.value = 'pick-up';
                                 }
+
+                                // Add shipping fee if customer chooses 'delivery' and total weight is less than 300
+                                salePreference.addEventListener('change', function() {
+                                    const shippingFeeElement = document.getElementById('ShippingFee');
+                                    const shippingFeeInput = document.getElementById('shippingFee');
+                                    if (this.value === 'delivery' && totalWeight < 300) {
+                                        // Compute shipping fee here
+                                        const shippingFee = 50; // Replace with your shipping fee calculation
+                                        shippingFeeElement.textContent = '₱' + shippingFee.toFixed(2);
+                                        shippingFeeInput.value = shippingFee; // Set the value of the new hidden input
+                                    } else {
+                                        shippingFeeElement.textContent = '';
+                                        shippingFeeInput.value = ''; // Clear the value of the new hidden input
+                                    }
+                                });
+
                                 toggleSaleDetails(salePreference.value);
 
                                 function toggleSaleDetails(salePreference) {
@@ -253,6 +275,7 @@
                             <input type="hidden" id="cartData" name="cartData">
                             <input type="hidden" id="subtotal" name="subtotal">
                             <input type="hidden" id="tax" name="tax">
+                            <input type="hidden" id="shippingFee" name="shippingFee">
 
                             <button type="submit" value="Submit" class="bg-green-800 text-white rounded px-4 py-2 mt-4 w-full hover:bg-gray-200 hover:text-green-800 hover:font-bold transition-colors ease-in-out">Complete Sale</button>
                         </form>

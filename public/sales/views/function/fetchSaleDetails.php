@@ -25,4 +25,10 @@ $sqlItems = "SELECT * FROM SaleDetails INNER JOIN Products ON SaleDetails.Produc
 $stmtItems = $pdo->prepare($sqlItems);
 $stmtItems->execute([$saleId]);
 $items = $stmtItems->fetchAll(PDO::FETCH_ASSOC);
+
+// Query for delivery details
+$sqlDelivery = "SELECT * FROM deliveryorders WHERE SaleID = ?";
+$stmt = $pdo->prepare($sqlDelivery);
+$stmt->execute([$saleId]);
+$deliveryOrder = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>

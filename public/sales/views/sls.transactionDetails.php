@@ -62,12 +62,12 @@
                 </div>
                 <div class="p-2 pl-6 text-6xl font-semibold flex flex-row items-center border-b pb-4">
                     <span>₱<?php echo number_format(array_sum(array_column($items, 'TotalAmount')), 2); ?></span>
-                    <div>
+                    <!-- <div>
                         <div class="bg-gray-200 flex justify-center p-2 px-4 rounded-full ml-4 shadow-md border-gray-200 border">
                             <div class="bg-green-800 size-6 rounded-full mr-2"></div>
                             <span class="text-xl font-medium">Order Delivered</span>
                         </div>
-                    </div>
+                    </div> -->
 
 
                 </div>
@@ -101,19 +101,63 @@
 
                 <div class="flex flex-row p-6 gap-44">
                     <div class="flex flex-col gap-4 text-gray-500">
-                        <span class="p-2 font-bold">Cargo Type</span>
+
                         <span class="p-2 font-bold">Name</span>
                         <span class="p-2 font-bold">Phone Number</span>
                         <span class="p-2 font-bold">Email</span>
                     </div>
 
                     <div class="flex flex-col gap-4 font-semibold ">
-                        <div class="bg-gray-200 rounded-full p-1 text-center font-bold">HEAVY</div>
+
                         <span class="p-2"><?php echo $customer['FirstName'] . ' ' . $customer['LastName']; ?></span>
                         <span class="p-2"><?php echo $customer['Phone']; ?></span>
                         <span class="p-2"><?php echo $customer['Email']; ?></span>
                     </div>
                 </div>
+
+                <?php if ($sale['SalePreference'] == 'Delivery') { ?>
+                    <div class="p-6 pb-2 pt-2 rounded flex flex-row text-lg border-b">
+                        <div class="text-lg text-gray-900 font-semibold">Delivery Details</div>
+                    </div>
+
+                    <div class="flex flex-row p-6 gap-44">
+                        <div class="flex flex-col gap-4 text-gray-500">
+                            <span class="p-2 font-bold">Cargo Type</span>
+                            <span class="p-2 font-bold">Delivery Address</span>
+                            <span class="p-2 font-bold">Delivery Date</span>
+                            <span class="p-2 font-bold">Delivery Status</span>
+                            <span class="p-2 font-bold">Received Date</span>
+                        </div>
+
+                        <div class="flex flex-col gap-4 font-semibold ">
+                            <div class="bg-gray-200 rounded-full p-2 text-center font-bold">Heavy</div>
+                            <span class="p-2"><?php echo $deliveryOrder['DeliveryAddress']; ?></span>
+                            <span class="p-2"><?php echo $deliveryOrder['DeliveryDate']; ?></span>
+                            <span class="p-2"><?php echo $deliveryOrder['DeliveryStatus']; ?></span>
+                            <span class="p-2"><?php echo $deliveryOrder['ReceivedDate']; ?></span>
+                        </div>
+                    </div>
+                <?php } ?>
+
+                <?php if ($sale['PaymentMode'] == 'Card') { ?>
+                    <div class="p-6 pb-2 pt-2 rounded flex flex-row text-lg border-b">
+                        <div class="text-lg text-gray-900 font-semibold">Card Details</div>
+                    </div>
+
+                    <div class="flex flex-row p-6 gap-44">
+                        <div class="flex flex-col gap-4 text-gray-500">
+                            <span class="p-2 font-bold">Card Number</span>
+                            <span class="p-2 font-bold">Expiry Date</span>
+                            <span class="p-2 font-bold">CVV/CVC</span>
+                        </div>
+
+                        <div class="flex flex-col gap-4 font-semibold ">
+                            <span class="p-2"><?php echo $sale['CardNumber']; ?></span>
+                            <span class="p-2"><?php echo $sale['ExpiryDate']; ?></span>
+                            <span class="p-2"><?php echo $sale['CVV']; ?></span>
+                        </div>
+                    </div>
+                <?php } ?>
 
                 <hr class=" border-gray-300">
                 <h2 class="text-lg font-semibold text-center my-3 text-gray-700">Items</h2>
