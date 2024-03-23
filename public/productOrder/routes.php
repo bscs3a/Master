@@ -31,7 +31,7 @@ Router::post('/po/addItem', function () {
     $weight = $_POST['weight']; // for product table
 
     // Check if all necessary data is provided
-    if (empty ($productName) || empty ($supplierName)) {
+    if (empty ($productID) || empty ($productName)) {  
         // Redirect if any required fields are empty
         $rootFolder = dirname($_SERVER['PHP_SELF']);
         header("Location: $rootFolder/po/items");
