@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2024 at 07:18 AM
+-- Generation Time: Mar 23, 2024 at 11:16 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -76,10 +76,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`Product_ID`, `Product_Image`, `Product_Name`, `Product_Weight`, `Product_Price`, `Product_Description`, `p_supplier`, `p_category`) VALUES
-(123, '12312', '123', 123, 123, '', '', ''),
-(213, '123', '123', 123, 123213, '', '', ''),
-(4131, '', '1tezst', 0, 0, 'adada', 'xd', 'Bang'),
-(12312, '0', 'awdwad', 0, 0, 'dawdawd', '', '');
+(123, 'C:\\xampp\\htdocs\\master\\public\\productOrder/uploads/1.jpg', '123', 123, 213, '123', 'xd', 'Bang');
 
 -- --------------------------------------------------------
 
