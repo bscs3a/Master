@@ -30,10 +30,10 @@
       </a>
 
       <a
-        route="/po/dashboard"
+        route='/po/requestOrder'
         class="flex justify-between items-center px-4 py-2 text-gray-100 hover:bg-violet-300">
         <span class="flex items-center">
-          <span class="mx-4 font-normal">Audit Trail</span>
+          <span class="mx-4 font-normal">Request Order</span>
         </span>
 
         <span>
@@ -102,10 +102,10 @@
       </a>
 
       <a
-        route='/po/orderRequest'
+        route='/po/orderDetail'
         class="flex justify-between items-center px-4 py-2 text-gray-100 hover:bg-violet-300">
         <span class="flex items-center">
-          <span class="mx-4 font-normal">Order Request</span>
+          <span class="mx-4 font-normal">Order Details</span>
         </span>
 
         <span>
@@ -150,7 +150,7 @@
       </a>
 
       <a
-        route="/po/dashboard"
+        route='/po/requestHistory'
         class="flex justify-between items-center px-4 py-2 text-gray-100 hover:bg-violet-300">
         <span class="flex items-center">
           <span class="mx-4 font-normal">Request History</span>
