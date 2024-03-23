@@ -27,7 +27,7 @@ if ($conn === null) {
 
     // To Get the details of the delivery order from other tables
     $stmt = $conn->prepare("
-        SELECT deliveryorders.*, customers.FirstName, customers.LastName, customers.Phone, Sales.CustomerID, Sales.TotalAmount, products.Price
+        SELECT deliveryorders.*, customers.FirstName, customers.LastName, customers.Phone, Sales.CustomerID, Sales.TotalAmount, products.Price, products.ProductName
         FROM deliveryorders 
         JOIN saledetails ON deliveryorders.SaleID = saledetails.SaleID 
         JOIN Sales ON deliveryorders.SaleID = Sales.SaleID
@@ -39,33 +39,6 @@ if ($conn === null) {
     $stmt->execute();
     $order = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // This is for Status update
-    function updateStatus($conn, $status, $orderId) {
-        $receivedDate = '0000-00-00';
-        if ($status == 'Delivered') {
-            $receivedDate = date('Y-m-d');
-        }
-
-        // Fetch the TruckID associated with the DeliveryOrderID
-        $stmt = $conn->prepare("SELECT TruckID FROM deliveryorders WHERE DeliveryOrderID = :orderId");
-        $stmt->bindParam(':orderId', $orderId);
-        $stmt->execute();
-        $truckId = $stmt->fetchColumn();
-
-        // Update all rows with the fetched TruckID
-        $stmt = $conn->prepare("UPDATE deliveryorders SET DeliveryStatus = :status, ReceivedDate = :receivedDate WHERE TruckID = :truckId");
-        $stmt->bindParam(':status', $status);
-        $stmt->bindParam(':receivedDate', $receivedDate);
-        $stmt->bindParam(':truckId', $truckId);
-        $stmt->execute();
-
-        header("Location: " . $_SERVER['REQUEST_URI']);
-        exit();
-    }
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        updateStatus($conn, $_POST['status'], $_POST['orderId']);
-    }
 ?>
 <!doctype html>
 <html>
@@ -166,6 +139,10 @@ if ($conn === null) {
                                 <td class="border px-4 py-2" style="width: 70%;">#<?php echo $order['ProductID']; ?></td>
                             </tr>
                             <tr>
+                                <td class="border font-bold px-4 py-2" style="width: 30%;">Product ID</td>
+                                <td class="border px-4 py-2" style="width: 70%;"><?php echo $order['ProductName']; ?></td>
+                            </tr>
+                            <tr>
                                 <td class="border font-bold px-4 py-2" style="width: 30%;">Quantity</td>
                                 <td class="border px-4 py-2" style="width: 70%;"><?php echo $order['Quantity']; ?></td>
                             </tr>
@@ -180,20 +157,20 @@ if ($conn === null) {
                         </tbody>
                     </table>
                 </div>
- <!--- This for dropdown selection -->
-<div class="flex justify-center items-center ">
-    <div class="relative inline-flex justify-center items-center">
-        <form method="POST" id="statusForm" action="/statusupdateview">
-            <input type="hidden" name="orderId" value="<?php echo $order['DeliveryOrderID']; ?>">
-            <select id="statusSelect" name="status" class="mt-4 mb-4 bg-blue-500 hover:bg-blue-700 text-sm text-white font-bold py-2 px-4 rounded-2xl" onchange="confirmStatusChange(this)">
-                <option value="" disabled selected>Change Status</option>
-                <option value="Pending">Pending</option>
-                <option value="In Transit">In Transit</option>
-                <option value="Delivered">Delivered</option>
-            </select>
-        </form>
-    </div>
-</div>
+                <!--- This for dropdown selection -->
+                <div class="flex justify-center items-center ">
+                    <div class="relative inline-flex justify-center items-center">
+                        <form method="POST" id="statusForm" action="/statusupdateview">
+                            <input type="hidden" name="orderId" value="<?php echo $order['DeliveryOrderID']; ?>">
+                            <select id="statusSelect" name="status" class="mt-4 mb-4 bg-blue-500 hover:bg-blue-700 text-sm text-white font-bold py-2 px-4 rounded-2xl" onchange="confirmStatusChange(this)">
+                                <option value="" disabled selected>Change Status</option>
+<!--                            <option value="Pending">Pending</option>
+                                <option value="In Transit">In Transit</option>  -->
+                                <option value="Delivered">Delivered</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
 
 <!-- JS function for sidebar -->
 <script>

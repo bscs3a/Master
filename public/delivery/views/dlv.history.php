@@ -99,7 +99,7 @@ $result = $conn->query($query);
                                 <td class="border px-4 py-2"><?php echo $row['DeliveryStatus']; ?></td>
                                 <td class="border px-4 py-2 flex justify-center"> 
                                 <button class="viewDetailsBtn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-2xl" 
-                                            route='/dlv/viewdetails/id=<?php echo $row['DeliveryOrderID']; ?>'>
+                                            route='/dlv/historydetails/id=<?php echo $row['DeliveryOrderID']; ?>'>
                                         View Details
                                     </button>   
                                 </td>

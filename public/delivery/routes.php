@@ -17,6 +17,10 @@ $dlv = [
         $_SESSION['id'] = $id;
         include $basePath . "viewdetails.php";
     },
+    '/dlv/historydetails/id={id}' => function($id) use ($basePath) {
+        $_SESSION['id'] = $id;
+        include $basePath . "historydetails.php";
+    },
 
     '/dlv/assign/truckId={truckId}' => function($truckId) use ($basePath) {
         $_SESSION['truckId'] = $truckId;
