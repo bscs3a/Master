@@ -46,17 +46,17 @@ if ($conn === null) {
             $receivedDate = date('Y-m-d');
         }
 
-        // Fetch the SaleID associated with the DeliveryOrderID
-        $stmt = $conn->prepare("SELECT SaleID FROM deliveryorders WHERE DeliveryOrderID = :orderId");
+        // Fetch the TruckID associated with the DeliveryOrderID
+        $stmt = $conn->prepare("SELECT TruckID FROM deliveryorders WHERE DeliveryOrderID = :orderId");
         $stmt->bindParam(':orderId', $orderId);
         $stmt->execute();
-        $saleId = $stmt->fetchColumn();
+        $truckId = $stmt->fetchColumn();
 
-        // Update all rows with the fetched SaleID
-        $stmt = $conn->prepare("UPDATE deliveryorders SET DeliveryStatus = :status, ReceivedDate = :receivedDate WHERE SaleID = :saleId");
+        // Update all rows with the fetched TruckID
+        $stmt = $conn->prepare("UPDATE deliveryorders SET DeliveryStatus = :status, ReceivedDate = :receivedDate WHERE TruckID = :truckId");
         $stmt->bindParam(':status', $status);
         $stmt->bindParam(':receivedDate', $receivedDate);
-        $stmt->bindParam(':saleId', $saleId);
+        $stmt->bindParam(':truckId', $truckId);
         $stmt->execute();
 
         header("Location: " . $_SERVER['REQUEST_URI']);
