@@ -366,9 +366,9 @@
             }
         </script>
 
-    <!-- FOR NO STOCKS ALERT -->
-      
-        <div id="customAlertBox" class="fixed inset-0 z-30 items-center justify-center text-center bg-black bg-opacity-50 hidden shadow-lg border-gray-200 custom-alert-box">
+        <!-- FOR NO STOCKS ALERT -->
+
+        <div id="customAlertBox" class="fixed inset-0 z-30 flex items-center justify-center text-center bg-black bg-opacity-50 hidden shadow-lg border-gray-200 custom-alert-box">
             <div class="bg-white p-6 rounded">
                 <img src="https://static.thenounproject.com/png/3407335-200.png" class="ml-6 p-10" alt="alternatetext">
                 <div class="font-bold text-2xl mb-4">Out of Stocks!</div>
@@ -428,29 +428,11 @@
                             <button type="button" class="product-item w-52 h-70 p-6 flex flex-col items-center justify-center border rounded-lg border-solid border-gray-300 shadow-lg focus:ring-4 active:scale-90 transform transition-transform ease-in-out" x-for="(item, index) in cart" :key="index" @click="
                                     if (<?= $product['Stocks'] ?> > 0) { 
                                       addToCart({ id: <?= $product['ProductID'] ?>, name: '<?= $product['ProductName'] ?>', price: <?= $product['Price'] ?>, stocks: <?= $product['Stocks'] ?>, priceWithTax: <?= $product['Price'] ?> * (1 + <?= $product['TaxRate'] ?>), TaxRate: <?= $product['TaxRate'] ?>, deliveryRequired: '<?= $product['DeliveryRequired'] ?>' }); cartOpen = true; 
-                                    
-                                        const Toast = Swal.mixin({
-                                        toast: true,
-                                        position: 'top-end',
-                                        showConfirmButton: false,
-                                        timer: 1000,
-                                        timerProgressBar: true,
-                                        didOpen: (toast) => {
-                                            toast.onmouseenter = Swal.stopTimer;
-                                            toast.onmouseleave = Swal.resumeTimer;
-                                        }
-                                    });
-
-                                    Toast.fire({
-                                        icon: 'success',
-                                        title: 'Item Added To Cart!'
-
-                                    });
-                                    
+                                
                                     } else { 
                                         alert('This product is out of stock.'); 
                                     }">
-                                    
+
 
                                 <div class="size-24 rounded-full shadow-md bg-yellow-200 mb-4">
                                     <!-- SVG icon -->
@@ -479,182 +461,203 @@
     <script src="./../src/route.js"></script>
 
     <script>
-          
+        // Listen for Alpine.js initialization event
+        document.addEventListener('alpine:init', () => {
+            // Define Alpine.js data
+            Alpine.data('main', () => ({
+                // Initial state variables
+                sidebarOpen: true,
+                cartOpen: false,
+                isFullScreen: false,
 
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('main', () => ({
-            sidebarOpen: true,
-            cartOpen: false,
-            isFullScreen: false,
-            
-            // Load the cart items from localStorage when the page loads
-            init() {
-                let savedCart = localStorage.getItem('cart');
-                if (savedCart) {
-                    this.cart = JSON.parse(savedCart);
-                }
-                // Update the cart quantity display when the page loads
-                updateCartQuantity();
-                
-            },
+                // Initialize function: loads cart items from localStorage when the page loads
+                init() {
+                    // Retrieve cart items from localStorage
+                    let savedCart = localStorage.getItem('cart');
+                    if (savedCart) {
+                        this.cart = JSON.parse(savedCart);
+                    }
+                    // Update the cart quantity display when the page loads
+                    updateCartQuantity();
+                },
 
-            cart: [],
-            addToCart(product) {
-                let item = this.cart.find(i => i.id === product.id);
-                if (item) {
-                    
-                    if (item.quantity + 1 > product.stocks) {
-                        showAlertBox();
+                // Cart data array
+                cart: [],
+
+                // Function to add a product to the cart
+                addToCart(product) {
+                    let item = this.cart.find(i => i.id === product.id);
+                    if (item) {
+                        // If item already exists in the cart
+                        if (item.quantity + 1 > product.stocks) {
+                            showAlertBox(); // Show alert if quantity exceeds available stocks
+                        } else {
+                            item.quantity++; // Increment item quantity
+                            // Show success message using SweetAlert
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 1000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Item Added To Cart!'
+                            });
+                        }
                     } else {
-                        item.quantity++;
+                        // If item doesn't exist in the cart
+                        if (product.stocks < 1) {
+                            showAlertBox(); // Show alert if product is out of stock
+                        } else {
+                            // Add product to the cart with quantity 1
+                            this.cart.push({
+                                ...product,
+                                quantity: 1
+                            });
+                        }
                     }
 
-                } else {
-                    if (product.stocks < 1) {
-                        showAlertBox();
-                    } else {
-                        this.cart.push({
-                            ...product,
-                            quantity: 1
-                        });
-                    }
+                    // Save the cart items to localStorage
+                    localStorage.setItem('cart', JSON.stringify(this.cart));
+
+                    // Update the cart quantity display
+                    updateCartQuantity();
+                },
+
+                // Function to remove product from cart
+                removeFromCart(index) {
+                    this.cart.splice(index, 1);
+                    localStorage.setItem('cart', JSON.stringify(this.cart));
+
+                    // Update the cart quantity display
+                    updateCartQuantity();
+                },
+
+                // Function to clear the cart
+                clearCart() {
+                    this.cart = [];
+                    localStorage.setItem('cart', JSON.stringify(this.cart));
+
+                    // Update the cart quantity display
+                    updateCartQuantity();
                 }
+            }));
+        });
 
 
-                // Save the cart items to localStorage
-                localStorage.setItem('cart', JSON.stringify(this.cart));
-
-                // Update the cart quantity display
-                updateCartQuantity();
-            },
-
-            // Function to remove product from cart
-            removeFromCart(index) {
-                this.cart.splice(index, 1);
-                localStorage.setItem('cart', JSON.stringify(this.cart));
-
-                // Update the cart quantity display
-                updateCartQuantity();
-            },
-
-            // Function to clear the cart
-            clearCart() {
-                this.cart = [];
-                localStorage.setItem('cart', JSON.stringify(this.cart));
-
-                // Update the cart quantity display
-                updateCartQuantity();
-            }
-        }));
-    });
-
-    // Toggle sidebar visibility and adjust grid columns
-    document.querySelector('.sidebar-toggle').addEventListener('click', function() {
-        // Toggle sidebar visibility and transformation
-        document.getElementById('sidebar-menu').classList.toggle('hidden');
-        document.getElementById('sidebar-menu').classList.toggle('transform');
-        document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
-        // Toggle main content width and margin
-        document.getElementById('mainContent').classList.toggle('md:w-full');
-        document.getElementById('mainContent').classList.toggle('md:ml-64');
-
-        // Adjust grid columns based on sidebar visibility
-        var sidebarMenu = document.getElementById('sidebar-menu');
-        var grid = document.querySelector('.grid');
-        if (sidebarMenu.classList.contains('hidden')) {
-            grid.classList.remove('grid-cols-5');
-            grid.classList.add('grid-cols-6');
-        } else {
-            grid.classList.remove('grid-cols-6');
-            grid.classList.add('grid-cols-5');
-        }
-    });
-
-    // Toggle sidebar visibility and adjust grid columns (alternative method)
-    document.querySelector('.sidebar-toggle2').addEventListener('click', function() {
-        var sidebarMenu = document.getElementById('sidebar-menu');
-        var grid = document.querySelector('.grid');
-
-        // Check if sidebar is not hidden
-        if (!sidebarMenu.classList.contains('hidden')) {
+        // Toggle sidebar visibility and adjust grid columns
+        document.querySelector('.sidebar-toggle').addEventListener('click', function() {
             // Toggle sidebar visibility and transformation
-            sidebarMenu.classList.toggle('hidden');
-            sidebarMenu.classList.toggle('transform');
-            sidebarMenu.classList.toggle('-translate-x-full');
+            document.getElementById('sidebar-menu').classList.toggle('hidden');
+            document.getElementById('sidebar-menu').classList.toggle('transform');
+            document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
             // Toggle main content width and margin
             document.getElementById('mainContent').classList.toggle('md:w-full');
             document.getElementById('mainContent').classList.toggle('md:ml-64');
 
             // Adjust grid columns based on sidebar visibility
-            if (!sidebarMenu.classList.contains('hidden')) {
-                grid.classList.remove('grid-cols-6');
-                grid.classList.add('grid-cols-5');
-            } else {
+            var sidebarMenu = document.getElementById('sidebar-menu');
+            var grid = document.querySelector('.grid');
+            if (sidebarMenu.classList.contains('hidden')) {
                 grid.classList.remove('grid-cols-5');
                 grid.classList.add('grid-cols-6');
+            } else {
+                grid.classList.remove('grid-cols-6');
+                grid.classList.add('grid-cols-5');
             }
-        }
-    });
+        });
 
-    // Toggle sidebar visibility and adjust grid columns (alternative method)
-    document.querySelector('.sidebar-toggle3').addEventListener('click', function() {
-        // Adjust grid columns based on sidebar visibility
-        var sidebarMenu = document.getElementById('sidebar-menu');
-        var grid = document.querySelector('.grid');
-        if (sidebarMenu.classList.contains('hidden')) {
-            grid.classList.remove('grid-cols-5');
-            grid.classList.add('grid-cols-6');
-            // Toggle sidebar visibility and transformation
-            document.getElementById('sidebar-menu').classList.toggle('hidden');
-            document.getElementById('sidebar-menu').classList.toggle('transform');
-            document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
-            // Toggle main content width and margin
-            document.getElementById('mainContent').classList.toggle('md:w-full');
-            document.getElementById('mainContent').classList.toggle('md:ml-64');
-        } else {
-            // Toggle sidebar visibility and transformation
-            document.getElementById('sidebar-menu').classList.toggle('hidden');
-            document.getElementById('sidebar-menu').classList.toggle('transform');
-            document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
-            // Toggle main content width and margin
-            document.getElementById('mainContent').classList.toggle('md:w-full');
-            document.getElementById('mainContent').classList.toggle('md:ml-64');
-            grid.classList.remove('grid-cols-6');
-            grid.classList.add('grid-cols-5');
-        }
-    });
+        // Toggle sidebar visibility and adjust grid columns (alternative method)
+        document.querySelector('.sidebar-toggle2').addEventListener('click', function() {
+            var sidebarMenu = document.getElementById('sidebar-menu');
+            var grid = document.querySelector('.grid');
 
-    // Toggle fullscreen mode
-    document.getElementById('fullscreenIcon').addEventListener('click', function() {
-        var header = document.getElementById('header');
-        var sidebarMenu = document.getElementById('sidebar-menu');
-
-        // Check if header is visible
-        if (header.style.display === 'none') {
-            // Show header
-            header.style.display = 'flex';
-            // Hide sidebar if it's not hidden
+            // Check if sidebar is not hidden
             if (!sidebarMenu.classList.contains('hidden')) {
+                // Toggle sidebar visibility and transformation
                 sidebarMenu.classList.toggle('hidden');
                 sidebarMenu.classList.toggle('transform');
                 sidebarMenu.classList.toggle('-translate-x-full');
+                // Toggle main content width and margin
                 document.getElementById('mainContent').classList.toggle('md:w-full');
                 document.getElementById('mainContent').classList.toggle('md:ml-64');
+
+                // Adjust grid columns based on sidebar visibility
+                if (!sidebarMenu.classList.contains('hidden')) {
+                    grid.classList.remove('grid-cols-6');
+                    grid.classList.add('grid-cols-5');
+                } else {
+                    grid.classList.remove('grid-cols-5');
+                    grid.classList.add('grid-cols-6');
+                }
             }
-        } else {
-            // Hide header
-            header.style.display = 'none';
-            // Hide sidebar if it's not hidden
-            if (!sidebarMenu.classList.contains('hidden')) {
-                sidebarMenu.classList.toggle('hidden');
-                sidebarMenu.classList.toggle('transform');
-                sidebarMenu.classList.toggle('-translate-x-full');
+        });
+
+        // Toggle sidebar visibility and adjust grid columns (alternative method)
+        document.querySelector('.sidebar-toggle3').addEventListener('click', function() {
+            // Adjust grid columns based on sidebar visibility
+            var sidebarMenu = document.getElementById('sidebar-menu');
+            var grid = document.querySelector('.grid');
+            if (sidebarMenu.classList.contains('hidden')) {
+                grid.classList.remove('grid-cols-5');
+                grid.classList.add('grid-cols-6');
+                // Toggle sidebar visibility and transformation
+                document.getElementById('sidebar-menu').classList.toggle('hidden');
+                document.getElementById('sidebar-menu').classList.toggle('transform');
+                document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
+                // Toggle main content width and margin
                 document.getElementById('mainContent').classList.toggle('md:w-full');
                 document.getElementById('mainContent').classList.toggle('md:ml-64');
+            } else {
+                // Toggle sidebar visibility and transformation
+                document.getElementById('sidebar-menu').classList.toggle('hidden');
+                document.getElementById('sidebar-menu').classList.toggle('transform');
+                document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
+                // Toggle main content width and margin
+                document.getElementById('mainContent').classList.toggle('md:w-full');
+                document.getElementById('mainContent').classList.toggle('md:ml-64');
+                grid.classList.remove('grid-cols-6');
+                grid.classList.add('grid-cols-5');
             }
-        }
-    });
-</script>
+        });
+
+        // Toggle fullscreen mode
+        document.getElementById('fullscreenIcon').addEventListener('click', function() {
+            var header = document.getElementById('header');
+            var sidebarMenu = document.getElementById('sidebar-menu');
+
+            // Check if header is visible
+            if (header.style.display === 'none') {
+                // Show header
+                header.style.display = 'flex';
+                // Hide sidebar if it's not hidden
+                if (!sidebarMenu.classList.contains('hidden')) {
+                    sidebarMenu.classList.toggle('hidden');
+                    sidebarMenu.classList.toggle('transform');
+                    sidebarMenu.classList.toggle('-translate-x-full');
+                    document.getElementById('mainContent').classList.toggle('md:w-full');
+                    document.getElementById('mainContent').classList.toggle('md:ml-64');
+                }
+            } else {
+                // Hide header
+                header.style.display = 'none';
+                // Hide sidebar if it's not hidden
+                if (!sidebarMenu.classList.contains('hidden')) {
+                    sidebarMenu.classList.toggle('hidden');
+                    sidebarMenu.classList.toggle('transform');
+                    sidebarMenu.classList.toggle('-translate-x-full');
+                    document.getElementById('mainContent').classList.toggle('md:w-full');
+                    document.getElementById('mainContent').classList.toggle('md:ml-64');
+                }
+            }
+        });
+    </script>
 
 
 
