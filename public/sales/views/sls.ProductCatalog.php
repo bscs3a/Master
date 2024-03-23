@@ -16,7 +16,10 @@
         import Swal from 'sweetalert2'
 
         const Swal = require('sweetalert2')
+        
     </script>
+
+    
 
 
 
@@ -32,7 +35,36 @@
         ::-webkit-scrollbar {
             display: none;
         }
+
+
+     .modalPop{
+        animation: fadeInUp 0.3s ease-in-out;
+                    }
+
+                    @keyframes fadeInUp {
+                        0% {
+                            opacity: 0;
+                            transform: translateY(20px);
+                        }
+                        100% {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+
+                    @keyframes fadeInDown{
+                        100%{
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                        
+
+                    }
     </style>
+
+
+
+               
 
     <?php
     require_once 'function/getProducts.php';
@@ -373,34 +405,39 @@
                             </button>
 
                             <!-- Modal Section -->
-                            <dialog data-modal class="rounded-lg shadow-xl  w-1/4 max-h-full">
+                            <dialog data-modal class="modalPop rounded-lg shadow-xl max-h-full elementToFade">
 
                                 <!-- Modal Header -->
-                                <div class="w-full bg-green-800 h-10 flex justify-end items-center">
+                                <div class="w-full bg-green-800 h-10 flex flex-row-2 gap-60 text-center justify-end">
+                                    <span class="text-white text-xl font-semibold p-2">Product Details</span>
                                     <button data-close-modal> <i class="ri-close-fill text-2xl font-bold text-white p-2"></i></button>
                                 </div>
 
+
                                 <!-- Modal Content -->
-                                <div class="relative p-4">
-                                    <div class="relative bg-white">
-                                        <div class="flex justify-center">
-                                            <div class="size-64 rounded-full shadow-lg bg-yellow-200 mb-4"></div>
+                                <div class="relative">
+                                    <div class=" bg-white flex-row flex gap-10 p-4 pt-6 pb-8">
+                                        <div class="">
+                                            <div class="size-64 rounded-full shadow-lg bg-yellow-200"></div>
                                         </div>
-                                        <div class="text-justify">
-                                            <div id="modal-product-category" class="text-justify font-semibold text-gray-800"></div>
+                                        
+                                     <div>
+                                        <div class="">
+                                            <div id="modal-product-category" class=" text-gray-400"></div>
                                         </div>
-                                        <div class="flex justify-between pt-4">
-                                            <h3 id="modal-product-name" class="mb-5 text-2xl font-semibold text-gray-800 dark:text-gray-800"></h3>
-                                            <h3 id="modal-product-price" class="mb-5 text-2xl font-semibold text-gray-800 dark:text-gray-800"></h3>
-                                        </div>
-
-                                        <div class="text-justify ">
-                                            <div id="modal-product-description" class="text-justify"></div>
+                                        <div class="flex justify-between items-center">
+                                            <h3 id="modal-product-name" class="mb-5 text-2xl font-bold text-gray-800 dark:text-gray-800 pr-10"></h3>
+                                            <h3 id="modal-product-price" class="mb-5 text-2xl font-bold text-gray-800 dark:text-gray-800 bg-gray-200 rounded-lg p-1 px-10 shadow-md border border-gray-300"></h3>
                                         </div>
 
-                                        <div class="flex justify-between pt-6">
-                                            <h3 id="modal-product-stocks" class="pt-3 text-xl text-gray-500 font-medium"></h3>
-                                            <button class="p-3 border border-green-900 bg-green-800 text-white rounded-lg font-medium" @click="
+                                        <div class="divide-y">
+                                            <div class="text-gray-400 pb-2">Product Description</div>
+                                            <div id="modal-product-description" class="text-lg pt-2"></div>
+                                        </div>
+
+                                        <div class="flex justify-between pt-6 mt-8">
+                                            <h3 id="modal-product-stocks" class="pt-3 text-xl text-gray-400"></h3>
+                                            <button class="p-3 border w-44 border-green-900 bg-green-800 text-white rounded-lg font-medium hover:shadow-lg hover:bg-green-950 hover:font-bold transition-all" @click="
                                                 if (selectedProduct['stocks'] > 0) { 
                                                     addToCart(selectedProduct); 
                                                     const Toast = Swal.mixin({
@@ -425,9 +462,12 @@
                                             ">
                                                 Add to Cart
                                             </button>
+                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
+                                  
                             </dialog>
                         <?php endif; ?>
                     <?php endforeach; ?>
@@ -470,8 +510,14 @@
             });
 
             closeButtons.addEventListener('click', () => {
-                modal.close();
+                modal.animate([{ opacity: 1 }, { opacity: 0 }], 250).onfinish = () => {
+                    modal.close();
+                };
             });
+
+            
+   
+
         </script>
     </main>
     <script src="./../src/route.js"></script>
