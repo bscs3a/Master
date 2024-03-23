@@ -32,6 +32,7 @@
     $total_price = $sale['TotalAmount'];
     $payment_method = $sale['PaymentMode'];
     $sale_preferences = $sale['SalePreference'];
+    $shippingFee = $sale['ShippingFee'];
 
     // Query the database for the sale items
     $sqlSaleItems = "SELECT SaleDetails.Quantity, SaleDetails.UnitPrice, Products.ProductName 
@@ -143,7 +144,7 @@
                                 <?php if ($sale_preferences === 'Delivery') : ?>
                                     <div id="shippingFee" class="flex justify-between border-b text-lg pb-2 mt-4 text-gray-400">
                                         <span>Shipping Fee</span>
-                                        <span>₱0</span>
+                                        <span>₱<?= number_format($shippingFee, 2) ?></span>
                                     </div>
                                 <?php endif; ?>
                                 <div id="total" class="flex justify-between font-semibold border-b text-xl pb-2 text-gray-400 mt-4">

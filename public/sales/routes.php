@@ -67,6 +67,9 @@ class Sale
         $db = Database::getInstance();
         $conn = $db->connect();
 
+        // Add the shippingFee to the totalAmount
+        $totalAmount += $shippingFee;
+
         $stmt = $conn->prepare("INSERT INTO Sales (SaleDate, SalePreference, PaymentMode, TotalAmount, CustomerID, CardNumber, ExpiryDate, CVV, ShippingFee) VALUES (:saleDate, :salePreference, :paymentMode, :totalAmount, :customerId, :cardNumber, :expiryDate, :cvv, :shippingFee)");
         $stmt->bindParam(':saleDate', $saleDate);
         $stmt->bindParam(':salePreference', $salePreference);
@@ -157,7 +160,7 @@ Router::post('/addSales', function () {
     date_default_timezone_set('Asia/Manila');
     $sale = new Sale();
     $saleId = $sale->create(date('Y-m-d H:i:s'), $_POST['SalePreference'], $_POST['payment-mode'], $_POST['totalAmount'], '1', $customerId, $_POST['cardNumber'], $_POST['expiryDate'], $_POST['cvv'], $_POST['shippingFee']);
-    
+
     $saleDetail = new SaleDetail();
     $deliveryOrder = new DeliveryOrder();
     $product = new Product();
