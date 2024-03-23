@@ -66,8 +66,8 @@ CREATE TABLE IF NOT EXISTS DeliveryOrders (
     DeliveryAddress TEXT,
     DeliveryDate DATE,
     ReceivedDate DATE,  -- New column for the date the delivery was received
-    TruckID INT,
     DeliveryStatus ENUM('Pending', 'In Transit', 'Delivered') DEFAULT 'Pending',
+    TruckID INT,
     FOREIGN KEY (SaleID) REFERENCES Sales(SaleID),
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID),
     FOREIGN KEY (TruckID) REFERENCES Truck(TruckID)
