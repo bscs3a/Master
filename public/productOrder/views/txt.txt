@@ -84,7 +84,7 @@
           try{
             require_once 'dbconn.php';
             // Query to retrieve all products
-            $query = "SELECT * FROM products";
+            $query = "SELECT FROM products";
             $statement = $conn->prepare($query);
             $statement->execute();
             //check if there are any rows or results
@@ -97,16 +97,16 @@
                   <thead class="bg-gray-200">
                     <tr class="border-b border-y-gray-300">
                       <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                        Product
+                        Product 
                       </th>
                       <th scope="col" class="px-6 py-4 font-medium text-gray-900">
                         ID
                       </th>
                       <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                        Company
+                        Company Name
                       </th>
                       <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                      Category
+                        Category
                       </th>
                       <th scope="col" class="px-6 py-4 font-medium text-gray-900">
                         Quality
@@ -127,18 +127,19 @@
                     <tr class="hover:bg-gray-50">
                       <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
                         <div class="flex flex-col font-medium text-gray-700 text-sm">
-                        '. $row["Product_Name"] .'
+                          <a>Stanley 84-073 Flat</a>
+                          <a>Nose Pliers 6"</a>
                         </div>
                       </th>
                       <td class="px-6 py-4">
-                        <div class="font-medium text-gray-700 text-sm">'. $row["Product_ID"] .'</div>
+                        <div class="font-medium text-gray-700 text-sm">1023141</div>
                       </td>
                       <td class="px-6 py-4">
-                        <div class="font-medium text-gray-700 text-sm">'. $row["p_supplier"] .'</div>
+                        <div class="font-medium text-gray-700 text-sm">Marc Toolbox</div>
                       </td>
                       <td class="px-6 py-4">
                         <div class="font-medium text-gray-700 text-sm">
-                        '. $row["p_category"] .'
+                          Hand Tool
                         </div>
                       </td>
                       <td class="px-6 py-4">
@@ -148,12 +149,12 @@
                       </td>
                       <td class="px-6 py-4">
                         <div class="font-medium text-gray-700 text-sm">
-                        '. $row["Product_Price"] .'
+                          Php 1000
                         </div>
                       </td>
                       <td class="px-6 py-4">
                         <div class="font-medium text-gray-700 text-sm">
-                        '. $row["Product_Description"] .'
+                          info
                         </div>
                       </td>
                       <td class="px-6 py-4">
@@ -187,4 +188,4 @@
     </div>
   </body>
   <script  src="./../src/route.js"></script>
-</html> 
+</html>
