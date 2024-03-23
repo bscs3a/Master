@@ -180,58 +180,56 @@ if ($conn === null) {
                         </tbody>
                     </table>
                 </div>
-                    <!--- This for dropdown selection -->
-                    <div class="flex justify-center items-center ">
-                        <div class="relative inline-flex justify-center items-center">
-                            <form method="POST" id="statusForm">
-                                <input type="hidden" name="orderId" value="<?php echo $order['DeliveryOrderID']; ?>">
-                                <select id="statusSelect" name="status" class="mt-4 mb-4 bg-blue-500 hover:bg-blue-700 text-sm text-white font-bold py-2 px-4 rounded-2xl" onchange="confirmStatusChange(this)">
-                                    <option value="" disabled selected>Change Status</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="In Transit">In Transit</option>
-                                    <option value="Delivered">Delivered</option>
-                                </select>
-                            </form>
-                        </div>
-                    </div>
-            </div>
-        </div>
+ <!--- This for dropdown selection -->
+<div class="flex justify-center items-center ">
+    <div class="relative inline-flex justify-center items-center">
+        <form method="POST" id="statusForm" action="/statusupdateview">
+            <input type="hidden" name="orderId" value="<?php echo $order['DeliveryOrderID']; ?>">
+            <select id="statusSelect" name="status" class="mt-4 mb-4 bg-blue-500 hover:bg-blue-700 text-sm text-white font-bold py-2 px-4 rounded-2xl" onchange="confirmStatusChange(this)">
+                <option value="" disabled selected>Change Status</option>
+                <option value="Pending">Pending</option>
+                <option value="In Transit">In Transit</option>
+                <option value="Delivered">Delivered</option>
+            </select>
+        </form>
+    </div>
+</div>
 
-    </main>
-            <!-- JS function for sidebar -->
-  <script>
-        document.querySelector('.sidebar-toggle').addEventListener('click', function() {
-            document.getElementById('sidebar-menu').classList.toggle('hidden');
-            document.getElementById('sidebar-menu').classList.toggle('transform');
-            document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
-            document.getElementById('mainContent').classList.toggle('md:w-full');
-            document.getElementById('mainContent').classList.toggle('md:ml-64');
-        });
-    </script>
-            <!-- This is for the Dialog box -->
-    <script>
-    function confirmStatusChange(selectElement) {
-        var status = selectElement.value;
-        Swal.fire({
-            title: 'Are you sure?',
-            text: `You want to change the status to ${status}?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, change it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // User clicked 'OK'.
-                document.getElementById("statusForm").submit();
-            } else {
-                // User clicked 'Cancel'.
-                selectElement.value = '';
-            }
-        })
-    }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- JS function for sidebar -->
+<script>
+    document.querySelector('.sidebar-toggle').addEventListener('click', function() {
+        document.getElementById('sidebar-menu').classList.toggle('hidden');
+        document.getElementById('sidebar-menu').classList.toggle('transform');
+        document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
+        document.getElementById('mainContent').classList.toggle('md:w-full');
+        document.getElementById('mainContent').classList.toggle('md:ml-64');
+    });
+</script>
+
+<!-- This is for the Dialog box -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+function confirmStatusChange(selectElement) {
+    var status = selectElement.value;
+    Swal.fire({
+        title: 'Are you sure?',
+        text: `You want to change the status to ${status}?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, change it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // User clicked 'OK'.
+            document.getElementById("statusForm").submit();
+        } else {
+            // User clicked 'Cancel'.
+            selectElement.value = '';
+        }
+    })
+}
+</script>
 
     <script  src="./.././../src/route.js"></script>
     <script  src="./.././../src/form.js"></script>

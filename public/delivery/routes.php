@@ -24,3 +24,32 @@ $dlv = [
     },
     
 ];
+
+Router::post('/statusupdateview', function () {
+    $db = Database::getInstance();
+    $conn = $db->connect();
+
+    $status = $_POST['status'];
+    $orderId = $_POST['orderId'];
+
+    $receivedDate = '0000-00-00';
+    if ($status == 'Delivered') {
+        $receivedDate = date('Y-m-d');
+    }
+
+    // Fetch the TruckID associated with the DeliveryOrderID
+    $stmt = $conn->prepare("SELECT TruckID FROM deliveryorders WHERE DeliveryOrderID = :orderId");
+    $stmt->bindParam(':orderId', $orderId);
+    $stmt->execute();
+    $truckId = $stmt->fetchColumn();
+
+    // Update all rows with the fetched TruckID
+    $stmt = $conn->prepare("UPDATE deliveryorders SET DeliveryStatus = :status, ReceivedDate = :receivedDate WHERE TruckID = :truckId");
+    $stmt->bindParam(':status', $status);
+    $stmt->bindParam(':receivedDate', $receivedDate);
+    $stmt->bindParam(':truckId', $truckId);
+    $stmt->execute();
+
+    $rootFolder = dirname($_SERVER['PHP_SELF']);
+    header("Location: $rootFolder/dlv/viewdetails/id=$orderId");
+});
