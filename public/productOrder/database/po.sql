@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2024 at 12:16 PM
+-- Generation Time: Mar 23, 2024 at 12:36 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -82,7 +82,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`ProductID`, `ProductImage`, `ProductName`, `Supplier`, `Description`, `Category`, `DeliveryRequired`, `Price`, `Stocks`, `UnitOfMeasurement`, `TaxRate`, `ProductWeight`) VALUES
-(1, 'C:\\xampp\\htdocs\\master\\public\\productOrder/uploads/1.jpg', 'longn ose', 'test', 'awdaw1', 'Bang', NULL, 3123.00, NULL, NULL, NULL, 2312.00);
+(1, 'C:\\xampp\\htdocs\\master\\public\\productOrder/uploads/1.jpg', 'longn ose', 'test', 'awdaw1', 'Bang', NULL, 3123.00, NULL, NULL, NULL, 2312.00),
+(69420, 'D:\\Programs\\xampp\\htdocs\\master\\public\\productOrder/uploads/edgarsus.jpg', 'edgar pogi', 'xd', 'edgar pogi', 'Bang', NULL, 420.00, NULL, NULL, NULL, 69.00);
 
 -- --------------------------------------------------------
 
@@ -194,7 +195,7 @@ ALTER TABLE `order_details`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69421;
 
 --
 -- AUTO_INCREMENT for table `requests`
