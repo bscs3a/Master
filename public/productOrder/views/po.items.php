@@ -79,112 +79,105 @@
             </div>
           </div>
 
-          <!-- table -->
-          <?php 
-          try{
-            require_once 'dbconn.php';
-            // Query to retrieve all products
-            $query = "SELECT * FROM products";
-            $statement = $conn->prepare($query);
-            $statement->execute();
-            //check if there are any rows or results
-            if($statement->rowCount() > 0){
-              while($row = $statement->fetch(PDO::FETCH_ASSOC)){
-                echo'<div
-                class="overflow-hidden rounded-lg border border-gray-300 shadow-md m-5">
-                <table
-                  class="w-full border-collapse bg-white text-left text-sm text-gray-500">
-                  <thead class="bg-gray-200">
-                    <tr class="border-b border-y-gray-300">
-                      <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                        Product
-                      </th>
-                      <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                        ID
-                      </th>
-                      <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                        Company
-                      </th>
-                      <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                      Category
-                      </th>
-                      <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                        Quality
-                      </th>
-                      <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                        Price
-                      </th>
-                      <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                        Description
-                      </th>
-                      <th
-                        scope="col"
-                        class="px-6 py-4 font-medium text-gray-900"></th>
-                    </tr>
-                  </thead>
-    
-                  <tbody class="divide-y divide-gray-100 border-b border-gray-300">
-                    <tr class="hover:bg-gray-50">
-                      <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
-                        <div class="flex flex-col font-medium text-gray-700 text-sm">
-                        '. $row["Product_Name"] .'
-                        </div>
-                      </th>
-                      <td class="px-6 py-4">
-                        <div class="font-medium text-gray-700 text-sm">'. $row["Product_ID"] .'</div>
-                      </td>
-                      <td class="px-6 py-4">
-                        <div class="font-medium text-gray-700 text-sm">'. $row["p_supplier"] .'</div>
-                      </td>
-                      <td class="px-6 py-4">
-                        <div class="font-medium text-gray-700 text-sm">
-                        '. $row["p_category"] .'
-                        </div>
-                      </td>
-                      <td class="px-6 py-4">
-                        <div class="font-medium text-gray-700 text-sm">
-                          5 starrrr......
-                        </div>
-                      </td>
-                      <td class="px-6 py-4">
-                        <div class="font-medium text-gray-700 text-sm">
-                        '. $row["Product_Price"] .'
-                        </div>
-                      </td>
-                      <td class="px-6 py-4">
-                        <div class="font-medium text-gray-700 text-sm">
-                        '. $row["Product_Description"] .'
-                        </div>
-                      </td>
-                      <td class="px-6 py-4">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          class="w-4 h-4">
-                          <path
-                            d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
-                        </svg>
-                      </td>
-                    </tr>
-                  </tbody>
+      <!-- table -->
+<?php 
+try {
+    require_once 'dbconn.php';
+    // Query to retrieve all products
+    $query = "SELECT * FROM products";
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    //check if there are any rows or results
+    if($statement->rowCount() > 0){
+        while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+            // Debugging statement to print image path
+            $imagePath = $row['Product_Image'];
+            $imageUrl = 'http://' . $_SERVER['HTTP_HOST'] . substr($imagePath, strlen($_SERVER['DOCUMENT_ROOT']));
+            
+            echo '<div class="overflow-hidden rounded-lg border border-gray-300 shadow-md m-5">
+                <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+                    <thead class="bg-gray-200">
+                        <tr class="border-b border-y-gray-300">
+                            <th scope="col" class="px-6 py-4 font-medium text-gray-900">
+                                Product Image <!-- Add a heading for the image -->
+                            </th>
+                            <th scope="col" class="px-6 py-4 font-medium text-gray-900">
+                                Product
+                            </th>
+                            <th scope="col" class="px-6 py-4 font-medium text-gray-900">
+                                ID
+                            </th>
+                            <th scope="col" class="px-6 py-4 font-medium text-gray-900">
+                                Company
+                            </th>
+                            <th scope="col" class="px-6 py-4 font-medium text-gray-900">
+                                Category
+                            </th>
+                            <th scope="col" class="px-6 py-4 font-medium text-gray-900">
+                                Quality
+                            </th>
+                            <th scope="col" class="px-6 py-4 font-medium text-gray-900">
+                                Price
+                            </th>
+                            <th scope="col" class="px-6 py-4 font-medium text-gray-900">
+                                Description
+                            </th>
+                            <th scope="col" class="px-6 py-4 font-medium text-gray-900"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 border-b border-gray-300">
+                        <tr class="hover:bg-gray-50">
+                            <td class="flex gap-3 px-6 py-4 font-normal text-gray-900">
+                                <div class="flex flex-col font-medium text-gray-700 text-sm">
+                                    <img src="'.$imageUrl.'" alt="Product Image" class="w-20 h-20"> <!-- Display the image using the URL -->
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="font-medium text-gray-700 text-sm">'.$row['Product_Name'].'</div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="font-medium text-gray-700 text-sm">'.$row['Product_ID'].'</div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="font-medium text-gray-700 text-sm">'.$row['p_supplier'].'</div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="font-medium text-gray-700 text-sm">'.$row['p_category'].'</div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="font-medium text-gray-700 text-sm">5 stars...</div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="font-medium text-gray-700 text-sm">'.$row['Product_Price'].'</div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="font-medium text-gray-700 text-sm">'.$row['Product_Description'].'</div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                                    <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
+                                </svg>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
-              </div>';
-          
-            }
-           } else {
-              echo "No products found.";
-            }
-          } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-          }
-          // Close the database connection
-          $conn = null;
-          ?>
-          <!-- //end -->
+            </div>';
+        }
+    } else {
+        echo "No products found.";
+    }
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
+// Close the database connection
+$conn = null;
+?>
+<!-- //end -->
         </div>
       </div>
     </div>
   </body>
   <script  src="./../src/route.js"></script>
+  <script src="./../src/form.js"></script>
+
 </html> 

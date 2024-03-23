@@ -39,7 +39,7 @@
         </div>
       </div>
 
-      <form action="/po/addItem" method="POST">
+      <form action="/po/addItem" method="POST" enctype="multipart/form-data">
         <!-- Add Item -->
         <div class="flex h-screen py-3 justify-center items-center">
           <div class="h-full w-1/2 border-2 border-gray-300 rounded-md drop-shadow-lg">
