@@ -1,7 +1,15 @@
 <?php
-    //Connection to the database
-    require_once __DIR__ . '/sql/dbconnection.php'; 
+//database connection
+require_once './src/dbconn.php';
 
+$db = Database::getInstance();
+$conn = $db->connect();
+if ($conn === null) {
+    die('Failed to connect to the database.');
+}
+?>
+
+<?php
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
@@ -19,7 +27,7 @@
 
     // To Get the details of the delivery order from other tables
     $stmt = $conn->prepare("
-        SELECT deliveryorders.*, customers.FirstName, customers.LastName, customers.Phone, Sales.CustomerID, Sales.TotalAmount, products.Price
+        SELECT deliveryorders.*, customers.FirstName, customers.LastName, customers.Phone, Sales.CustomerID, Sales.TotalAmount, products.Price, products.ProductName
         FROM deliveryorders 
         JOIN saledetails ON deliveryorders.SaleID = saledetails.SaleID 
         JOIN Sales ON deliveryorders.SaleID = Sales.SaleID
@@ -31,33 +39,6 @@
     $stmt->execute();
     $order = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // This is for Status update
-    function updateStatus($conn, $status, $orderId) {
-        $receivedDate = '0000-00-00';
-        if ($status == 'Delivered') {
-            $receivedDate = date('Y-m-d');
-        }
-
-        // Fetch the SaleID associated with the DeliveryOrderID
-        $stmt = $conn->prepare("SELECT SaleID FROM deliveryorders WHERE DeliveryOrderID = :orderId");
-        $stmt->bindParam(':orderId', $orderId);
-        $stmt->execute();
-        $saleId = $stmt->fetchColumn();
-
-        // Update all rows with the fetched SaleID in deliveryorders table
-        $stmt = $conn->prepare("UPDATE deliveryorders SET DeliveryStatus = :status, ReceivedDate = :receivedDate WHERE SaleID = :saleId");
-        $stmt->bindParam(':status', $status);
-        $stmt->bindParam(':receivedDate', $receivedDate);
-        $stmt->bindParam(':saleId', $saleId);
-        $stmt->execute();
-
-        header("Location: " . $_SERVER['REQUEST_URI']);
-        exit();
-    }
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        updateStatus($conn, $_POST['status'], $_POST['orderId']);
-    }
 ?>
 <!doctype html>
 <html>
@@ -88,7 +69,7 @@
             <ul class="flex items-center text-md ml-4">
 
                 <li class="mr-2">
-                    <p class="text-black font-medium">Delivery / Customer Details</p>
+                    <p class="text-black font-medium">Delivery / Customer History Order Details</p>
                 </li>
 
             </ul>
@@ -113,12 +94,12 @@
             <div class="h-auto p4 rounded-2xl shadow-xl" style="background-color: #262261;">
                 <div class="flex justify-between items-center">
                     <h1 class="pt-3 pr-4 pl-4 pb-3 text-lg font-bold text-white">Order Details</h1>
-                    <button route='/dlv/list' class="bg-blue-500 hover:bg-blue-700 text-xs text-white font-bold py-1 px-4 rounded-2xl mr-4">
+                    <button route='/dlv/history' class="bg-blue-500 hover:bg-blue-700 text-xs text-white font-bold py-1 px-4 rounded-2xl mr-4">
                         Close
                     </button>
                 </div>
+                
                 <div>
-
                     <table class="w-full" style="background-color: white;">
                         <tbody class="text-sm">
                             <tr>
@@ -154,8 +135,16 @@
                                 <td class="border px-4 py-2" style="width: 70%;"><?php echo $order['ReceivedDate']; ?></td>
                             </tr>
                             <tr>
+                                <td class="border font-bold px-4 py-2" style="width: 30%;">TruckID</td>
+                                <td class="border px-4 py-2" style="width: 70%;"><?php echo $order['TruckID']; ?></td>
+                            </tr>
+                            <tr>
                                 <td class="border font-bold px-4 py-2" style="width: 30%;">Product ID</td>
                                 <td class="border px-4 py-2" style="width: 70%;">#<?php echo $order['ProductID']; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="border font-bold px-4 py-2" style="width: 30%;">Product Name</td>
+                                <td class="border px-4 py-2" style="width: 70%;"><?php echo $order['ProductName']; ?></td>
                             </tr>
                             <tr>
                                 <td class="border font-bold px-4 py-2" style="width: 30%;">Quantity</td>
@@ -172,60 +161,27 @@
                         </tbody>
                     </table>
                 </div>
-                    <!--- This for dropdown selection -->
-                    <div class="flex justify-center items-center ">
-                        <div class="relative inline-flex justify-center items-center">
-                            <form method="POST" id="statusForm">
-                                <input type="hidden" name="orderId" value="<?php echo $order['DeliveryOrderID']; ?>">
-                                <select id="statusSelect" name="status" class="mt-4 mb-4 bg-blue-500 hover:bg-blue-700 text-sm text-white font-bold py-2 px-4 rounded-2xl" onchange="confirmStatusChange(this)">
-                                    <option value="" disabled selected>Change Status</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="In Transit">In Transit</option>
-                                    <option value="Delivered">Delivered</option>
-                                </select>
-                            </form>
-                        </div>
+                                <!--- This for dropdown selection -->
+                <div class="flex justify-center items-center ">
+                    <div class="relative inline-flex justify-center items-center">
+                        <button class="bg-blue-500  text-white font-bold py-2 px-4 my-4 rounded-2xl hover:bg-blue-700 hover:font-bold transition-colors ease-in-out" route='/dlv/history'>
+                            Back
+                        </button>
                     </div>
-            </div>
-        </div>
+                </div>
 
-    </main>
-            <!-- JS function for sidebar -->
-  <script>
-        document.querySelector('.sidebar-toggle').addEventListener('click', function() {
-            document.getElementById('sidebar-menu').classList.toggle('hidden');
-            document.getElementById('sidebar-menu').classList.toggle('transform');
-            document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
-            document.getElementById('mainContent').classList.toggle('md:w-full');
-            document.getElementById('mainContent').classList.toggle('md:ml-64');
-        });
-    </script>
-            <!-- This is for the Dialog box -->
-    <script>
-    function confirmStatusChange(selectElement) {
-        var status = selectElement.value;
-        Swal.fire({
-            title: 'Are you sure?',
-            text: `You want to change the status to ${status}?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, change it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // User clicked 'OK'.
-                document.getElementById("statusForm").submit();
-            } else {
-                // User clicked 'Cancel'.
-                selectElement.value = '';
-            }
-        })
-    }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- JS function for sidebar -->
+<script>
+    document.querySelector('.sidebar-toggle').addEventListener('click', function() {
+        document.getElementById('sidebar-menu').classList.toggle('hidden');
+        document.getElementById('sidebar-menu').classList.toggle('transform');
+        document.getElementById('sidebar-menu').classList.toggle('-translate-x-full');
+        document.getElementById('mainContent').classList.toggle('md:w-full');
+        document.getElementById('mainContent').classList.toggle('md:ml-64');
+    });
+</script>
 
     <script  src="./.././../src/route.js"></script>
-    <script  src="./../src/form.js"></script>
+    <script  src="./.././../src/form.js"></script>
     </body>
 </html>
