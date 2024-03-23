@@ -82,7 +82,7 @@
             <div class="grid grid-cols-3 gap-6">
               <div class="h-72 w-96 border border-gray-400 rounded-lg drop-shadow-md">
                 <div class="flex flex-col gap-2 ml-3 my-8">
-                  <a class="text-2xl">Rank 1</a>
+                  <a class="text-2xl">No Rank Yet</a>
                   <div class="flex flex-row">
                     <a>Company Name:</a>
                     <a class="ml-3 text-gray-500">' . $row["Supplier_Name"] . '</a>
