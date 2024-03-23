@@ -68,8 +68,6 @@
                             <span class="text-xl font-medium">Order Delivered</span>
                         </div>
                     </div> -->
-
-
                 </div>
 
 
