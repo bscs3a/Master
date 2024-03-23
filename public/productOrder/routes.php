@@ -29,7 +29,7 @@ Router::post('/po/addItem', function () {
     $weight = $_POST['weight']; // for product table
 
     // Check if all necessary data is provided
-    if (empty($productName) || empty($supplierName)) {
+    if (empty ($productName) || empty ($supplierName)) {
         // Redirect if any required fields are empty
         $rootFolder = dirname($_SERVER['PHP_SELF']);
         header("Location: $rootFolder/po/items");
@@ -37,12 +37,19 @@ Router::post('/po/addItem', function () {
     }
 
     // Handle image upload
-    if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+    if (isset ($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
         $fileName = $_FILES['file']['name'];
         $fileTmpName = $_FILES['file']['tmp_name'];
-        
+
         // Define the relative path to the "uploads" directory
-        $uploadDir = __DIR__ . '/uploads/';
+        $uploadDir = 'uploads/';
+
+        // Ensure the upload directory exists and is writable
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+            // Set appropriate permissions if needed (not recommended for production)
+// chmod($uploadDir, 0777);
+        }
 
         // Define the file destination path
         $fileDestination = $uploadDir . $fileName;
@@ -59,14 +66,14 @@ Router::post('/po/addItem', function () {
             $stmt1->bindParam(4, $supplierName, PDO::PARAM_STR);
             $stmt1->bindParam(5, $description, PDO::PARAM_STR);
             $stmt1->bindParam(6, $category, PDO::PARAM_STR);
-            $stmt1->bindParam(7, $price, PDO::PARAM_INT); // Store the relative file path in the database
+            $stmt1->bindParam(7, $price, PDO::PARAM_INT);
             $stmt1->bindParam(8, $weight, PDO::PARAM_INT);
             $stmt1->execute();
 
             // Redirect after successful insertion
             $rootFolder = dirname($_SERVER['PHP_SELF']);
             header("Location: $rootFolder/po/items");
-            exit(); // Terminate script execution after redirection
+            exit (); // Terminate script execution after redirection
         } else {
             // Failed to move uploaded file
             echo "Failed to move uploaded file.";
@@ -78,4 +85,3 @@ Router::post('/po/addItem', function () {
         return;
     }
 });
-
