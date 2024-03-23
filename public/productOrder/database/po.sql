@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2024 at 12:36 PM
+-- Generation Time: Mar 23, 2024 at 02:00 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -82,8 +82,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`ProductID`, `ProductImage`, `ProductName`, `Supplier`, `Description`, `Category`, `DeliveryRequired`, `Price`, `Stocks`, `UnitOfMeasurement`, `TaxRate`, `ProductWeight`) VALUES
-(1, 'C:\\xampp\\htdocs\\master\\public\\productOrder/uploads/1.jpg', 'longn ose', 'test', 'awdaw1', 'Bang', NULL, 3123.00, NULL, NULL, NULL, 2312.00),
-(69420, 'D:\\Programs\\xampp\\htdocs\\master\\public\\productOrder/uploads/edgarsus.jpg', 'edgar pogi', 'xd', 'edgar pogi', 'Bang', NULL, 420.00, NULL, NULL, NULL, 69.00);
+(2, 'uploads/1.jpg', 'fsf', 'xd', 'fsefse', 'Bang', NULL, 2.00, NULL, NULL, NULL, 22.00);
 
 -- --------------------------------------------------------
 
