@@ -48,7 +48,7 @@
               <option value="">Filter</option>
               <option value="id">ID</option>
               <option value="name">Name</option>
-              <option value="company">Company</option>
+              <option value="supplier">Supplier</option>
               <option value="category">Category</option>
               <option value="quality">Quality</option>
               <option value="price">Price</option>
@@ -77,7 +77,7 @@
           if ($statement->rowCount() > 0) {
             while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
               // Debugging statement to print image path
-              $imagePath = $row['Product_Image'];
+              $imagePath = $row['ProductImage'];
               $imageUrl = 'http://' . $_SERVER['HTTP_HOST'] . substr($imagePath, strlen($_SERVER['DOCUMENT_ROOT']));
 
               echo '<div class="overflow-hidden rounded-lg border border-gray-300 shadow-md m-5">
@@ -94,7 +94,7 @@
                                   Product Name
                               </th>
                               <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                                  Company
+                                  Supplier
                               </th>
                               <th scope="col" class="px-6 py-4 font-medium text-gray-900">
                                   Category
@@ -112,32 +112,32 @@
                           </tr>
                       </thead>
                       <tbody class="divide-y divide-gray-100 border-b border-gray-300">
-                          <tr class="hover:bg-gray-50 data-row" data-id="' . $row['Product_ID'] . '" data-name="' . $row['Product_Name'] . '" data-company="' . $row['p_supplier'] . '" data-category="' . $row['p_category'] . '" data-quality="5 stars..." data-price="' . $row['Product_Price'] . '" data-description="' . $row['Product_Description'] . '">
+                          <tr class="hover:bg-gray-50 data-row" data-id="' . $row['ProductID'] . '" data-name="' . $row['ProductName'] . '" data-supplier="' . $row['Supplier'] . '" data-category="' . $row['Category'] . '" data-quality="5 stars..." data-price="' . $row['Price'] . '" data-description="' . $row['Description'] . '">
                               <td class="flex gap-3 px-6 py-4 font-normal text-gray-900">
                                   <div class="flex flex-col font-medium text-gray-700 text-sm">
                                       <img src="' . $imageUrl . '" alt="Product Image" class="w-20 h-20"> <!-- Display the image using the URL -->
                                   </div>
                               </td>
                               <td class="px-6 py-4">
-                                  <div class="font-medium text-gray-700 text-sm">' . $row['Product_ID'] . '</div>
+                                  <div class="font-medium text-gray-700 text-sm">' . $row['ProductID'] . '</div>
                               </td>
                               <td class="px-6 py-4">
-                                  <div class="font-medium text-gray-700 text-sm">' . $row['Product_Name'] . '</div>
+                                  <div class="font-medium text-gray-700 text-sm">' . $row['ProductName'] . '</div>
                               </td>
                               <td class="px-6 py-4">
-                                  <div class="font-medium text-gray-700 text-sm">' . $row['p_supplier'] . '</div>
+                                  <div class="font-medium text-gray-700 text-sm">' . $row['Supplier'] . '</div>
                               </td>
                               <td class="px-6 py-4">
-                                  <div class="font-medium text-gray-700 text-sm">' . $row['p_category'] . '</div>
+                                  <div class="font-medium text-gray-700 text-sm">' . $row['Category'] . '</div>
                               </td>
                               <td class="px-6 py-4">
                                   <div class="font-medium text-gray-700 text-sm">No rating yet</div>
                               </td>
                               <td class="px-6 py-4">
-                                  <div class="font-medium text-gray-700 text-sm">' . $row['Product_Price'] . '</div>
+                                  <div class="font-medium text-gray-700 text-sm">' . $row['Price'] . '</div>
                               </td>
                               <td class="px-6 py-4">
-                                  <div class="font-medium text-gray-700 text-sm">' . $row['Product_Description'] . '</div>
+                                  <div class="font-medium text-gray-700 text-sm">' . $row['Description'] . '</div>
                               </td>
                             <td class="px-6 py-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
@@ -180,8 +180,8 @@
           case "name":
             display = row.dataset.name.toLowerCase().includes(searchValue) ? "" : "none";
             break;
-          case "company":
-            display = row.dataset.company.toLowerCase().includes(searchValue) ? "" : "none";
+          case "supplier":
+            display = row.dataset.supplier.toLowerCase().includes(searchValue) ? "" : "none";
             break;
           case "category":
             display = row.dataset.category.toLowerCase().includes(searchValue) ? "" : "none";

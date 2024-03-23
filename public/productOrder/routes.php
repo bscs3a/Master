@@ -20,13 +20,13 @@ Router::post('/po/addItem', function () {
     $db = Database::getInstance();
     $conn = $db->connect();
 
-    $productName = $_POST['productname']; // for product table
     $productID = $_POST['productid']; // for product table
+    $productName = $_POST['productname']; // for product table
     $supplierName = $_POST['supplier']; // for supplier table
-    $category = $_POST['category']; // for category table
-    $weight = $_POST['weight']; // for product table
-    $price = $_POST['price']; // for product table 
     $description = $_POST['description']; // for product table
+    $category = $_POST['category']; // for product table
+    $price = $_POST['price']; // for product table 
+    $weight = $_POST['weight']; // for product table
 
     // Check if all necessary data is provided
     if (empty($productName) || empty($supplierName)) {
@@ -52,15 +52,15 @@ Router::post('/po/addItem', function () {
             // File uploaded successfully, proceed with insertion
 
             // Insert data into product table
-            $stmt1 = $conn->prepare("INSERT INTO products (Product_Name, Product_ID, Product_Weight, Product_Price, Product_Description, Product_Image, p_supplier, p_category) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt1->bindParam(1, $productName, PDO::PARAM_STR);
-            $stmt1->bindParam(2, $productID, PDO::PARAM_STR);
-            $stmt1->bindParam(3, $weight, PDO::PARAM_INT);
-            $stmt1->bindParam(4, $price, PDO::PARAM_INT);
+            $stmt1 = $conn->prepare("INSERT INTO products (ProductID, ProductImage, ProductName, Supplier, Description, Category, Price, ProductWeight) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt1->bindParam(1, $productID, PDO::PARAM_INT);
+            $stmt1->bindParam(2, $fileDestination, PDO::PARAM_STR);
+            $stmt1->bindParam(3, $productName, PDO::PARAM_STR);
+            $stmt1->bindParam(4, $supplierName, PDO::PARAM_STR);
             $stmt1->bindParam(5, $description, PDO::PARAM_STR);
-            $stmt1->bindParam(6, $fileDestination, PDO::PARAM_STR); // Store the relative file path in the database
-            $stmt1->bindParam(7, $supplierName, PDO::PARAM_STR);
-            $stmt1->bindParam(8, $category, PDO::PARAM_STR);
+            $stmt1->bindParam(6, $category, PDO::PARAM_STR);
+            $stmt1->bindParam(7, $price, PDO::PARAM_INT); // Store the relative file path in the database
+            $stmt1->bindParam(8, $weight, PDO::PARAM_INT);
             $stmt1->execute();
 
             // Redirect after successful insertion
