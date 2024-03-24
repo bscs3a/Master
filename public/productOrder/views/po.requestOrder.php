@@ -4,30 +4,30 @@ require_once 'dbconn.php';
 
 function getProductDetails($productID, $conn)
 {
-    try {
-        // Prepare the SQL statement to fetch product details including the image path
-        $query = "SELECT p.ProductImage, p.ProductName, p.Supplier, p.Category, p.Price, r.Product_Quantity, r.Product_Total_Price
+  try {
+    // Prepare the SQL statement to fetch product details including the image path
+    $query = "SELECT p.ProductImage, p.ProductName, p.Supplier, p.Category, p.Price, r.Product_Quantity, r.Product_Total_Price
                   FROM products p
                   INNER JOIN requests r ON p.ProductID = r.Product_ID
                   WHERE p.ProductID = :product_id";
-        $statement = $conn->prepare($query);
-        $statement->bindParam(':product_id', $productID);
-        $statement->execute();
+    $statement = $conn->prepare($query);
+    $statement->bindParam(':product_id', $productID);
+    $statement->execute();
 
-        // Fetch the product details
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
+    // Fetch the product details
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-        // Check if a result is returned
-        if ($result) {
-            return $result; // Return an associative array containing all product details
-        } else {
-            return false; // Return false if no result found
-        }
-    } catch (PDOException $e) {
-        // Handle the exception
-        echo "Error: " . $e->getMessage();
-        return false; // Return false in case of an error
+    // Check if a result is returned
+    if ($result) {
+      return $result; // Return an associative array containing all product details
+    } else {
+      return false; // Return false if no result found
     }
+  } catch (PDOException $e) {
+    // Handle the exception
+    echo "Error: " . $e->getMessage();
+    return false; // Return false in case of an error
+  }
 }
 
 ?>
@@ -90,43 +90,43 @@ function getProductDetails($productID, $conn)
           </thead>
 
           <tbody class="divide-y divide-gray-100 border-b border-gray-300">
-     
+
             <?php
             try {
-                // Query to retrieve all requests
-                $query = "SELECT * FROM requests";
-                $statement = $conn->prepare($query);
-                $statement->execute();
-            
-                while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-                    $productID = $row['Product_ID']; // Assuming Product_ID is the correct column
-                    $productDetails = getProductDetails($productID, $conn);
-            
-                    // Displaying the fetched data
-                    echo '<tr class="hover:bg-gray-50">';
-                    echo '<td class="px-6 py-10">' . $productID . '</td>';
-                    echo '<td class="flex gap-3 px-6 py-10 font-normal text-gray-900">';
-                    echo '<div class="font-medium text-gray-700 text-sm flex items-center">';
-                    echo '<img src="../' . $productDetails['ProductImage'] . '" alt="Product Image" class="w-8 h-8 mr-2">';
-                    echo '<a>' . $productDetails['ProductName'] . '</a>';
-                    echo '</div>';
-                    echo '</td>';
-                    echo '<td class="px-6 py-10">' . $productDetails['Supplier'] . '</td>';
-                    echo '<td class="px-6 py-10">' . $productDetails['Category'] . '</td>';
-                    echo '<td class="px-6 py-10">' . $productDetails['Price'] . '</td>';
-                    echo '<td class="px-6 py-10">' . $row["Product_Quantity"] . '</td>';
-                    echo '<td class="px-6 py-10">' . $row["Product_Total_Price"] . '</td>';
-                    echo '<td class="px-6 py-10">';
-                  // Add a form with a hidden input for productID and a submit button for delete
-                  echo '<form id="deleteForm" action="/po/requestOrder" method="POST" enctype="multipart/form-data">';
-echo '<input type="hidden" id="productID" name="productID" value="' . $productID . '">';
-echo '<button type="button" onclick="confirmDelete()" class="px-4 py-2 border border-red-600 text-red-600 rounded-md font-semibold tracking-wide cursor-pointer">Delete</button>';
-echo '</form>';
-                    echo '</td>';
-                    echo '</tr>';
-                }
+              // Query to retrieve all requests
+              $query = "SELECT * FROM requests";
+              $statement = $conn->prepare($query);
+              $statement->execute();
+
+              while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+                $requestID = $row['Request_ID'];
+                $productID = $row['Product_ID']; // Assuming Product_ID is the correct column
+                $productDetails = getProductDetails($productID, $conn);
+                // Displaying the fetched data
+                echo '<tr class="hover:bg-gray-50">';
+                echo '<td class="px-6 py-10">' . $productID . '</td>';
+                echo '<td class="flex gap-3 px-6 py-10 font-normal text-gray-900">';
+                echo '<div class="font-medium text-gray-700 text-sm flex items-center">';
+                echo '<img src="../' . $productDetails['ProductImage'] . '" alt="Product Image" class="w-8 h-8 mr-2">';
+                echo '<a>' . $productDetails['ProductName'] . '</a>';
+                echo '</div>';
+                echo '</td>';
+                echo '<td class="px-6 py-10">' . $productDetails['Supplier'] . '</td>';
+                echo '<td class="px-6 py-10">' . $productDetails['Category'] . '</td>';
+                echo '<td class="px-6 py-10">' . $productDetails['Price'] . '</td>';
+                echo '<td class="px-6 py-10">' . $row["Product_Quantity"] . '</td>';
+                echo '<td class="px-6 py-10">' . $row["Product_Total_Price"] . '</td>';
+                echo '<td class="px-6 py-10">';
+                // Add a form with a hidden input for productID and a submit button for delete
+                echo '<form id="deleteForm" action="/po/requestOrder" method="POST" enctype="multipart/form-data">';
+                echo '<input type="hidden" id="productID" name="requestID" value="' . $requestID . '">';
+                echo '<button type="button" onclick="confirmDelete()" class="px-4 py-2 border border-red-600 text-red-600 rounded-md font-semibold tracking-wide cursor-pointer">Delete</button>';
+                echo '</form>';
+                echo '</td>';
+                echo '</tr>';
+              }
             } catch (PDOException $e) {
-                echo "Connection failed: " . $e->getMessage();
+              echo "Connection failed: " . $e->getMessage();
             }
             ?>
           </tbody>
@@ -169,13 +169,14 @@ echo '</form>';
     </div>
   </div>
   <script>
-function confirmDelete() {
-    if (confirm("Are you sure you want to delete this data?")) {
+    function confirmDelete() {
+      if (confirm("Are you sure you want to delete this data?")) {
         document.getElementById("deleteForm").submit();
+      }
     }
-}
-</script>
+  </script>
 </body>
 <script src="./../src/route.js"></script>
 <script src="./../src/form.js"></script>
+
 </html>

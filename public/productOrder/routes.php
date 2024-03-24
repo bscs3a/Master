@@ -95,17 +95,19 @@ Router::post('/po/requestOrder', function () {
     $db = Database::getInstance();
     $conn = $db->connect();
 
-    $productID = $_POST['productID'];
+    $requestID = $_POST['requestID'];
 
-    $stmt = $conn->prepare("DELETE FROM requests WHERE Product_ID = :productID");
-    $stmt->bindParam(':productID', $productID);
+    $stmt = $conn->prepare("DELETE FROM requests WHERE Request_ID = :requestID");
+    $stmt->bindParam(':requestID', $requestID);
 
     // Execute the statement
     $stmt->execute();
 
+    // Redirect back to the request order page after deletion
     $rootFolder = dirname($_SERVER['PHP_SELF']);
     header("Location: $rootFolder/po/requestOrder");
 });
+
 
 
 //testing chit
