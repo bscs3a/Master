@@ -56,44 +56,7 @@ function displayProducts($conn)
     }
 }
 
-// // Check if the request is sent via POST method
-// if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['requestBtn'])) {
-//     // Retrieve data from the form
-//     $productID = $_POST['productID'];
-//     $quantity = $_POST['quantity'];
 
-//     // Insert data into the "request" table
-//     try {
-//         // Get product price
-//         $query = "SELECT Price FROM products WHERE ProductID = :productID";
-//         $statement = $conn->prepare($query);
-//         $statement->bindParam(':productID', $productID);
-//         $statement->execute();
-//         $row = $statement->fetch(PDO::FETCH_ASSOC);
-//         $price = $row['Price'];
-
-//         // Calculate total price
-//         $totalPrice = $price * $quantity;
-
-//         // Prepare the SQL statement
-//         $query = "INSERT INTO requests (Product_ID, Product_Quantity, Product_Total_Price) VALUES (:productID, :quantity, :totalPrice)";
-//         $statement = $conn->prepare($query);
-
-//         // Bind parameters
-//         $statement->bindParam(':productID', $productID);
-//         $statement->bindParam(':quantity', $quantity);
-//         $statement->bindParam(':totalPrice', $totalPrice);
-
-//         // Execute the statement
-//         if ($statement->execute()) {
-//             echo "Request saved successfully.";
-//         } else {
-//             echo "Failed to save request.";
-//         }
-//     } catch (PDOException $e) {
-//         echo "Error: " . $e->getMessage();
-//     }
-// }
 
 ?>
 <div class="p-4">
@@ -101,3 +64,5 @@ function displayProducts($conn)
         <?php displayProducts($conn); ?>
     </div>
 </div>
+<script src="./../src/route.js"></script>
+<script src="./../src/form.js"></script>
