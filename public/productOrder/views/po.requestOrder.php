@@ -118,10 +118,10 @@ function getProductDetails($productID, $conn)
                     echo '<td class="px-6 py-10">' . $row["Product_Total_Price"] . '</td>';
                     echo '<td class="px-6 py-10">';
                   // Add a form with a hidden input for productID and a submit button for delete
-                    echo '<form action="/po/requestOrder" method="POST" enctype="multipart/form-data">';
-                    echo '<input type="hidden" id="productID" name="productID" value="' . $productID . '">';
-                    echo '<input type="submit" value="Delete" class="px-4 py-2 border border-red-600 text-red-600 rounded-md font-semibold tracking-wide cursor-pointer">';
-                    echo '</form>';
+                  echo '<form id="deleteForm" action="/po/requestOrder" method="POST" enctype="multipart/form-data">';
+echo '<input type="hidden" id="productID" name="productID" value="' . $productID . '">';
+echo '<button type="button" onclick="confirmDelete()" class="px-4 py-2 border border-red-600 text-red-600 rounded-md font-semibold tracking-wide cursor-pointer">Delete</button>';
+echo '</form>';
                     echo '</td>';
                     echo '</tr>';
                 }
@@ -163,12 +163,18 @@ function getProductDetails($productID, $conn)
       <!-- View All Button -->
       <div class="flex justify-end border-none">
         <button class="mr-5 py-3 px-4 border-2 border-black text-sm rounded-md bg-[#FFC955]">
-          view all
+          Send to finance
         </button>
       </div>
     </div>
   </div>
-
+  <script>
+function confirmDelete() {
+    if (confirm("Are you sure you want to delete this data?")) {
+        document.getElementById("deleteForm").submit();
+    }
+}
+</script>
 </body>
 <script src="./../src/route.js"></script>
 <script src="./../src/form.js"></script>
