@@ -19,7 +19,7 @@ $po = [
 
 
 ];
-
+//function to add items/product to the database
 Router::post('/po/addItem', function () {
     $db = Database::getInstance();
     $conn = $db->connect();
@@ -90,29 +90,62 @@ Router::post('/po/addItem', function () {
     }
 });
 
-Router::post('test', function () {
+//function to delete/remove requested orders of the Inventory Team 
+Router::post('/po/requestOrder', function () {
     $db = Database::getInstance();
     $conn = $db->connect();
 
-    $productID = $_POST['productID']; // Corrected casing
-    $quantity = $_POST['quantity'];
+    $productID = $_POST['productID'];
 
-    $stmt = $conn->prepare("INSERT INTO requests (Product_ID, Product_Quantity) VALUES (:productID, :quantity)");
+    $stmt = $conn->prepare("DELETE FROM requests WHERE Product_ID = :productID");
     $stmt->bindParam(':productID', $productID);
-    $stmt->bindParam(':quantity', $quantity);
-
-
-    $rootFolder = dirname($_SERVER['PHP_SELF']);
-
-    if (empty($name)) {
-        header("Location: $rootFolder/test");
-        return;
-    }
 
     // Execute the statement
     $stmt->execute();
 
-    header("Location: $rootFolder/test");
+    $rootFolder = dirname($_SERVER['PHP_SELF']);
+    header("Location: $rootFolder/po/requestOrder");
 });
+
+
+//testing chit
+Router::post('/po/test', function () {
+    $db = Database::getInstance();
+    $conn = $db->connect();
+
+    $productID = $_POST['productID'];
+    $quantity = $_POST['quantity'];
+
+    $query = "SELECT Price FROM products WHERE ProductID = :productID";
+        $statement = $conn->prepare($query);
+        $statement->bindParam(':productID', $productID);
+        $statement->execute();
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        $price = $row['Price'];
+
+    $rootFolder = dirname($_SERVER['PHP_SELF']);
+ // Calculate total price
+ $totalPrice = $price * $quantity;
+
+ // Prepare the SQL statement
+ $query = "INSERT INTO requests (Product_ID, Product_Quantity, Product_Total_Price) VALUES (:productID, :quantity, :totalPrice)";
+ $statement = $conn->prepare($query);
+
+ // Bind parameters
+ $statement->bindParam(':productID', $productID);
+ $statement->bindParam(':quantity', $quantity);
+ $statement->bindParam(':totalPrice', $totalPrice);
+
+ // Execute the statement
+ if ($statement->execute()) {
+     echo "Request saved successfully.";
+ } else {
+     echo "Failed to save request.";
+  
+    // Execute the statement
+
+
+    header("Location: $rootFolder/test");
+}});
 
 

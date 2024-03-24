@@ -18,7 +18,8 @@ function displayProducts($conn)
             echo '<tr class="border-b border-y-gray-300">';
             echo '<th scope="col" class="px-6 py-4 font-medium text-gray-900">Product ID</th>';
             echo '<th scope="col" class="px-6 py-4 font-medium text-gray-900">Product Name</th>';
-            echo '<th scope="col" class="px-6 py-4 font-medium text-gray-900">Company</th>';
+            echo '<th scope="col" class="px-6 py-4 font-medium text-gray-900">Supplier</th>';
+            echo '<th scope="col" class="px-6 py-4 font-medium text-gray-900">Category</th>';
             echo '<th scope="col" class="px-6 py-4 font-medium text-gray-900">Price</th>';
             echo '<th scope="col" class="px-6 py-4 font-medium text-gray-900">Quantity</th>';
             echo '<th scope="col" class="px-6 py-4 font-medium text-gray-900"></th>'; // Empty header for the request button
@@ -31,15 +32,15 @@ function displayProducts($conn)
                 echo '<td class="px-6 py-4">' . $row['ProductID'] . '</td>';
                 echo '<td class="px-6 py-4">' . $row['ProductName'] . '</td>';
                 echo '<td class="px-6 py-4">' . $row['Supplier'] . '</td>';
+                echo '<td class="px-6 py-4">' . $row['Category'] . '</td>';
                 echo '<td class="px-6 py-4">' . $row['Price'] . '</td>';
                 echo '<td class="px-6 py-4">';
-                echo '<form action="test" method="POST" enctype="multipart/form-data">
-                ';
-                echo '<input type="hidden" id="quantity" name="productID" value="' . $row['ProductID'] . '">';
-                echo '<input type="number" id="quantity" name="quantity" value="1" min="1" class="w-12 text-center">';
+                echo '<form action="/po/test" method="POST">';
+                echo '<input type="hidden" name="productID" value="' . $row['ProductID'] . '">';
+                echo '<input type="number" name="quantity" value="1" min="1" class="w-12 text-center">';
                 echo '</td>';
                 echo '<td class="px-6 py-4">';
-                echo '<input type="submit"  value="Submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">';
+                echo '<input type="submit" name="requestBtn" value="Request" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">';
                 echo '</form>';
                 echo '</td>';
                 echo '</tr>';
@@ -63,13 +64,25 @@ function displayProducts($conn)
 
 //     // Insert data into the "request" table
 //     try {
+//         // Get product price
+//         $query = "SELECT Price FROM products WHERE ProductID = :productID";
+//         $statement = $conn->prepare($query);
+//         $statement->bindParam(':productID', $productID);
+//         $statement->execute();
+//         $row = $statement->fetch(PDO::FETCH_ASSOC);
+//         $price = $row['Price'];
+
+//         // Calculate total price
+//         $totalPrice = $price * $quantity;
+
 //         // Prepare the SQL statement
-//         $query = "INSERT INTO requests (Product_ID, Product_Quantity) VALUES (:productID, :quantity)";
+//         $query = "INSERT INTO requests (Product_ID, Product_Quantity, Product_Total_Price) VALUES (:productID, :quantity, :totalPrice)";
 //         $statement = $conn->prepare($query);
 
 //         // Bind parameters
 //         $statement->bindParam(':productID', $productID);
 //         $statement->bindParam(':quantity', $quantity);
+//         $statement->bindParam(':totalPrice', $totalPrice);
 
 //         // Execute the statement
 //         if ($statement->execute()) {
@@ -88,5 +101,3 @@ function displayProducts($conn)
         <?php displayProducts($conn); ?>
     </div>
 </div>
-<script src="./../src/route.js"></script>
-<script src="./../src/form.js"></script>

@@ -117,7 +117,11 @@ function getProductDetails($productID, $conn)
                     echo '<td class="px-6 py-10">' . $row["Product_Quantity"] . '</td>';
                     echo '<td class="px-6 py-10">' . $row["Product_Total_Price"] . '</td>';
                     echo '<td class="px-6 py-10">';
-                    echo '<button class="px-4 py-2 border border-red-600 text-red-600 rounded-md font-semibold tracking-wide cursor-pointer">Delete</button>';
+                  // Add a form with a hidden input for productID and a submit button for delete
+                    echo '<form action="/po/requestOrder" method="POST" enctype="multipart/form-data">';
+                    echo '<input type="hidden" id="productID" name="productID" value="' . $productID . '">';
+                    echo '<input type="submit" value="Delete" class="px-4 py-2 border border-red-600 text-red-600 rounded-md font-semibold tracking-wide cursor-pointer">';
+                    echo '</form>';
                     echo '</td>';
                     echo '</tr>';
                 }
@@ -163,3 +167,9 @@ function getProductDetails($productID, $conn)
         </button>
       </div>
     </div>
+  </div>
+
+</body>
+<script src="./../src/route.js"></script>
+<script src="./../src/form.js"></script>
+</html>
