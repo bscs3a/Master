@@ -2,164 +2,34 @@
 // Include your database connection file
 require_once 'dbconn.php';
 
-// Function to fetch total product price from the 'requests' table for a specific product
-// function getTotalProductPrice($productID, $conn) {
-//   try {
-//       // Prepare the SQL statement to fetch the total product price for the given product ID
-//       $query = "SELECT Product_Total_Price 
-//                 FROM requests 
-//                 WHERE Product_ID = :product_id";
-//       $statement = $conn->prepare($query);
-//       $statement->bindParam(':product_id', $productID);
-//       $statement->execute();
-
-//       // Fetch the total price
-//       $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-//       // Check if a result is returned
-//       if ($result) {
-//           return $result['Product_Total_Price'];
-//       } else {
-//           return 0; // Return 0 if no result found
-//       }
-//   } catch (PDOException $e) {
-//       // Handle the exception
-//       echo "Error: " . $e->getMessage();
-//       return 0; // Return 0 in case of an error
-//   }
-// }
-
-//function to get the product name in my "products" table based on the product ID they both have
-function getProductName($productID, $conn)
+function getProductDetails($productID, $conn)
 {
-  try {
-    // Prepare the SQL statement to fetch the total product price for the given product ID
-    $query = "SELECT ProductName
-                FROM products 
-                WHERE ProductID = :product_id";
-    $statement = $conn->prepare($query);
-    $statement->bindParam(':product_id', $productID);
-    $statement->execute();
+    try {
+        // Prepare the SQL statement to fetch product details including the image path
+        $query = "SELECT p.ProductImage, p.ProductName, p.Supplier, p.Category, p.Price, r.Product_Quantity, r.Product_Total_Price
+                  FROM products p
+                  INNER JOIN requests r ON p.ProductID = r.Product_ID
+                  WHERE p.ProductID = :product_id";
+        $statement = $conn->prepare($query);
+        $statement->bindParam(':product_id', $productID);
+        $statement->execute();
 
-    // Fetch the total price
-    $result = $statement->fetch(PDO::FETCH_ASSOC);
+        // Fetch the product details
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-    // Check if a result is returned
-    if ($result) {
-      return $result['ProductName'];
-    } else {
-      return 0; // Return 0 if no result found
+        // Check if a result is returned
+        if ($result) {
+            return $result; // Return an associative array containing all product details
+        } else {
+            return false; // Return false if no result found
+        }
+    } catch (PDOException $e) {
+        // Handle the exception
+        echo "Error: " . $e->getMessage();
+        return false; // Return false in case of an error
     }
-  } catch (PDOException $e) {
-    // Handle the exception
-    echo "Error: " . $e->getMessage();
-    return 0; // Return 0 in case of an error
-  }
 }
-function getSupplier($productID, $conn)
-{
-  try {
-    // Prepare the SQL statement to fetch the total product price for the given product ID
-    $query = "SELECT Supplier
-                FROM products 
-                WHERE ProductID = :product_id";
-    $statement = $conn->prepare($query);
-    $statement->bindParam(':product_id', $productID);
-    $statement->execute();
 
-    // Fetch the total price
-    $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-    // Check if a result is returned
-    if ($result) {
-      return $result['Supplier'];
-    } else {
-      return 0; // Return 0 if no result found
-    }
-  } catch (PDOException $e) {
-    // Handle the exception
-    echo "Error: " . $e->getMessage();
-    return 0; // Return 0 in case of an error
-  }
-}
-function getCategory($productID, $conn)
-{
-  try {
-    // Prepare the SQL statement to fetch the total product price for the given product ID
-    $query = "SELECT Category
-                FROM products 
-                WHERE ProductID = :product_id";
-    $statement = $conn->prepare($query);
-    $statement->bindParam(':product_id', $productID);
-    $statement->execute();
-
-    // Fetch the total price
-    $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-    // Check if a result is returned
-    if ($result) {
-      return $result['Category'];
-    } else {
-      return 0; // Return 0 if no result found
-    }
-  } catch (PDOException $e) {
-    // Handle the exception
-    echo "Error: " . $e->getMessage();
-    return 0; // Return 0 in case of an error
-  }
-}
-function getPrice($productID, $conn)
-{
-  try {
-    // Prepare the SQL statement to fetch the total product price for the given product ID
-    $query = "SELECT Price
-                FROM products 
-                WHERE ProductID = :product_id";
-    $statement = $conn->prepare($query);
-    $statement->bindParam(':product_id', $productID);
-    $statement->execute();
-
-    // Fetch the total price
-    $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-    // Check if a result is returned
-    if ($result) {
-      return $result['Price'];
-    } else {
-      return 0; // Return 0 if no result found
-    }
-  } catch (PDOException $e) {
-    // Handle the exception
-    echo "Error: " . $e->getMessage();
-    return 0; // Return 0 in case of an error
-  }
-}
-function getImage($productID, $conn)
-{
-  try {
-    // Prepare the SQL statement to fetch the total product price for the given product ID
-    $query = "SELECT ProductImage
-                FROM products 
-                WHERE ProductID = :product_id";
-    $statement = $conn->prepare($query);
-    $statement->bindParam(':product_id', $productID);
-    $statement->execute();
-
-    // Fetch the total price
-    $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-    // Check if a result is returned
-    if ($result) {
-      return $result['ProductImage'];
-    } else {
-      return 0; // Return 0 if no result found
-    }
-  } catch (PDOException $e) {
-    // Handle the exception
-    echo "Error: " . $e->getMessage();
-    return 0; // Return 0 in case of an error
-  }
-}
 ?>
 
 <!DOCTYPE html>
@@ -220,46 +90,39 @@ function getImage($productID, $conn)
           </thead>
 
           <tbody class="divide-y divide-gray-100 border-b border-gray-300">
+     
             <?php
             try {
-              // Query to retrieve all requests
-              $query = "SELECT * FROM requests";
-              $statement = $conn->prepare($query);
-              $statement->execute();
-
-              while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-                $productID = $row['Product_ID']; // Assuming Product_ID is the correct column
-                $ProductName = getProductName($productID, $conn);
-                $Supplier = getSupplier($productID, $conn);
-                $Category = getCategory($productID, $conn);
-                $Price = getPrice($productID, $conn);
-                // $imagePath = '../' . $row['ProductImage']; // This line is corrected
-
-                // Displaying the fetched data
-                echo '<tr class="hover:bg-gray-50">';
-                echo '<td class="px-6 py-10">' . $productID . '</td>';
-                echo '<td class="flex gap-3 px-6 py-10 font-normal text-gray-900">';
-                echo '<div class="font-medium text-gray-700 text-sm flex items-center">';
-                // echo '<img src="' . $imagePath . '" alt="Product Image" class="w-8 h-8 mr-2">';
-                echo '<a>' . $ProductName . '</a>';
-                echo '</div>';
-                echo '</td>';
-                echo '<td class="px-6 py-10">' . $Supplier . '</td>';
-                echo '<td class="px-6 py-10">' . $Category . '</td>';
-                echo '<td class="px-6 py-10">' . $Price . '</td>';
-                // echo '<td class="px-6 py-10">';
-                // Input field for quantity selection
-                echo '<td class="px-6 py-10">' . $row["Product_Quantity"] . '</td>';
-                echo '</td>';
-                // Display total product price here
-                echo '<td class="px-6 py-10">' . $row["Product_Total_Price"] . '</td>';
-                echo '<td class="px-6 py-10">';
-                echo '<button class="px-4 py-2 border border-red-600 text-red-600 rounded-md font-semibold tracking-wide cursor-pointer">Delete</button>';
-                echo '</td>';
-                echo '</tr>';
-              }
+                // Query to retrieve all requests
+                $query = "SELECT * FROM requests";
+                $statement = $conn->prepare($query);
+                $statement->execute();
+            
+                while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+                    $productID = $row['Product_ID']; // Assuming Product_ID is the correct column
+                    $productDetails = getProductDetails($productID, $conn);
+            
+                    // Displaying the fetched data
+                    echo '<tr class="hover:bg-gray-50">';
+                    echo '<td class="px-6 py-10">' . $productID . '</td>';
+                    echo '<td class="flex gap-3 px-6 py-10 font-normal text-gray-900">';
+                    echo '<div class="font-medium text-gray-700 text-sm flex items-center">';
+                    echo '<img src="../' . $productDetails['ProductImage'] . '" alt="Product Image" class="w-8 h-8 mr-2">';
+                    echo '<a>' . $productDetails['ProductName'] . '</a>';
+                    echo '</div>';
+                    echo '</td>';
+                    echo '<td class="px-6 py-10">' . $productDetails['Supplier'] . '</td>';
+                    echo '<td class="px-6 py-10">' . $productDetails['Category'] . '</td>';
+                    echo '<td class="px-6 py-10">' . $productDetails['Price'] . '</td>';
+                    echo '<td class="px-6 py-10">' . $row["Product_Quantity"] . '</td>';
+                    echo '<td class="px-6 py-10">' . $row["Product_Total_Price"] . '</td>';
+                    echo '<td class="px-6 py-10">';
+                    echo '<button class="px-4 py-2 border border-red-600 text-red-600 rounded-md font-semibold tracking-wide cursor-pointer">Delete</button>';
+                    echo '</td>';
+                    echo '</tr>';
+                }
             } catch (PDOException $e) {
-              echo "Connection failed: " . $e->getMessage();
+                echo "Connection failed: " . $e->getMessage();
             }
             ?>
           </tbody>
