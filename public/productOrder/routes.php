@@ -13,6 +13,8 @@ $po = [
     '/po/orderDetail' => $basePath . "orderDetail.php",
     '/po/transactionHistory' => $basePath . "transactionHistory.php",
     '/po/requestHistory' => $basePath . "requestHistory.php",
+    '/po/test' => $basePath . "test.php",
+    
 
 
 
@@ -87,3 +89,30 @@ Router::post('/po/addItem', function () {
         return;
     }
 });
+
+Router::post('test', function () {
+    $db = Database::getInstance();
+    $conn = $db->connect();
+
+    $productID = $_POST['productID']; // Corrected casing
+    $quantity = $_POST['quantity'];
+
+    $stmt = $conn->prepare("INSERT INTO requests (Product_ID, Product_Quantity) VALUES (:productID, :quantity)");
+    $stmt->bindParam(':productID', $productID);
+    $stmt->bindParam(':quantity', $quantity);
+
+
+    $rootFolder = dirname($_SERVER['PHP_SELF']);
+
+    if (empty($name)) {
+        header("Location: $rootFolder/test");
+        return;
+    }
+
+    // Execute the statement
+    $stmt->execute();
+
+    header("Location: $rootFolder/test");
+});
+
+
