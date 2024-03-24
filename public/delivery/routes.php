@@ -54,6 +54,13 @@ Router::post('/statusupdateview', function () {
     $stmt->bindParam(':truckId', $truckId);
     $stmt->execute();
 
+    // If the status is 'Delivered', set the TruckStatus to 'Available'
+    if ($status == 'Delivered') {
+        $stmt = $conn->prepare("UPDATE trucks SET TruckStatus = 'Available' WHERE TruckID = :truckId");
+        $stmt->bindParam(':truckId', $truckId);
+        $stmt->execute();
+    }
+
     $rootFolder = dirname($_SERVER['PHP_SELF']);
     header("Location: $rootFolder/dlv/viewdetails/id=$orderId");
 });

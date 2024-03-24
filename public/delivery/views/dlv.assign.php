@@ -39,7 +39,7 @@ $stmt->execute();
 
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<!-- You could provide a form here to assign the truck to an order -->
+
 <!doctype html>
 <html>
 
@@ -104,6 +104,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </button>
                 </div>
                 <!-- content -->
+                <!-- You could provide a form here to assign the truck to an order -->
                 <div class="m-4 font-bold text-lg flex flex-col space-y-4">
                     <div class="flex justify-start space-x-20">
                         <p>Plate Number: <span class="font-normal text-gray-500"><?php echo $truck['PlateNumber']; ?></span></p>
@@ -167,7 +168,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         });
     </script>
     <script src="/master/src/route.js"></script>
-    <script src="./../src/form.js"></script>
+    <script src="/master/src/form.js"></script>
 </body>
 
 </html>
