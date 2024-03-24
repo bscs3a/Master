@@ -66,9 +66,10 @@ CREATE TABLE IF NOT EXISTS SaleDetails (
 -- Trucks Table
 CREATE TABLE IF NOT EXISTS Trucks (
     TruckID INT AUTO_INCREMENT PRIMARY KEY,
-    TruckName VARCHAR(100),
-    TruckType VARCHAR(50),
+    PlateNumber VARCHAR(20),
+    TruckType ENUM('Light-Duty', 'Heavy-Duty'),
     Capacity DECIMAL(10, 2)
+    TruckStatus ENUM('Available', 'In Transit', 'Unavailable') DEFAULT 'Available'
 );
 
 -- DeliveryOrders Table
@@ -108,3 +109,11 @@ VALUES
     ('Galvanized Nails (5 lbs)', 'Galvanized nails for various construction applications', 'Building Materials', 'Yes', 10.00, 100, 0.12, 'lbs', 2.26796),  -- Converted 5 lbs to kg
     ('Drywall (4x8 feet)', 'Drywall sheets for interior wall finishing', 'Building Materials', 'Yes', 12.00, 200, 0.12, 'sheet', 22.6796),  -- Converted 50 lbs to kg
     ('Concrete Mix (50 lb)', 'Pre-mixed concrete for small-scale construction projects', 'Building Materials', 'Yes', 8.00, 150, 0.12, 'lb', 22.6796);  -- Converted 50 lbs to kg
+
+INSERT INTO trucks (TruckType, PlateNumber) VALUES ('Light-Duty', 'ALD123');
+INSERT INTO trucks (TruckType, PlateNumber) VALUES ('Light-Duty', 'DUY234');
+INSERT INTO trucks (TruckType, PlateNumber) VALUES ('Light-Duty', 'VRR125');
+
+INSERT INTO trucks (TruckType, PlateNumber) VALUES ('Heavy-Duty', 'DJD233');
+INSERT INTO trucks (TruckType, PlateNumber) VALUES ('Heavy-Duty', 'PGD994');
+INSERT INTO trucks (TruckType, PlateNumber) VALUES ('Heavy-Duty', 'UHD535');
