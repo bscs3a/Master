@@ -100,7 +100,7 @@
           <?php
           try {
             // Query to retrieve all requests and calculate total quantity and total price
-            $query = "SELECT SUM(Product_Quantity) AS total_quantity, SUM(Product_Total_Price) AS total_price FROM requests";
+            $query = "SELECT SUM(Product_Quantity) AS total_quantity, SUM(Product_Total_Price) AS total_price FROM requests WHERE request_Status = 'pending'";
             $statement = $conn->prepare($query);
             $statement->execute();
             $totals = $statement->fetch(PDO::FETCH_ASSOC);
