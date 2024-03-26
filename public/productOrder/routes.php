@@ -91,63 +91,115 @@ Router::post('/po/addItem', function () {
 });
 
 //function to delete/remove requested orders of the Inventory Team 
-Router::post('/master/po/requestOrder', function () {
-    $db = Database::getInstance();
-    $conn = $db->connect();
+Router::post('/po/requestOrder', function () {
+    try {
+        $db = Database::getInstance();
+        $conn = $db->connect();
 
-    $requestID = $_POST['requestID'];
+        // Check if the requestID is provided in the POST data
+        if(isset($_POST['requestID'])) {
+            $requestID = $_POST['requestID'];
 
-    $stmt = $conn->prepare("DELETE FROM requests WHERE Request_ID = :requestID");
-    $stmt->bindParam(':requestID', $requestID);
+            $stmt = $conn->prepare("DELETE FROM requests WHERE Request_ID = :requestID");
+            $stmt->bindParam(':requestID', $requestID);
 
-    // Execute the statement
-    $stmt->execute();
+            // Execute the statement
+            $stmt->execute();
 
-    // Redirect back to the request order page after deletion
-    $rootFolder = dirname($_SERVER['PHP_SELF']);
-    header("Location: $rootFolder/po/requestOrder");
+            // Check if any rows were affected
+            $rowsAffected = $stmt->rowCount();
+            if($rowsAffected > 0) {
+                // Redirect back to the request order page after successful deletion
+                $rootFolder = dirname($_SERVER['PHP_SELF']);
+                header("Location: $rootFolder/po/requestOrder");
+                exit(); // Ensure script execution stops after redirection
+            } else {
+                // No rows were affected, handle this case accordingly
+                echo "No rows were deleted.";
+            }
+        } else {
+            // Handle case where requestID is not provided
+            echo "No requestID provided for deletion.";
+        }
+    } catch (PDOException $e) {
+        // Handle any PDO exceptions
+        echo "Database error: " . $e->getMessage();
+    } catch (Exception $e) {
+        // Handle any other exceptions
+        echo "Error: " . $e->getMessage();
+    }
 });
 
 
 
-//testing chit
-Router::post('/po/test', function () {
-    $db = Database::getInstance();
-    $conn = $db->connect();
+// //testing chit
+// Router::post('/po/test', function () {
+//     $db = Database::getInstance();
+//     $conn = $db->connect();
 
-    $productID = $_POST['productID'];
-    $quantity = $_POST['quantity'];
+//     $productID = $_POST['productID'];
+//     $quantity = $_POST['quantity'];
 
-    $query = "SELECT Price FROM products WHERE ProductID = :productID";
-        $statement = $conn->prepare($query);
-        $statement->bindParam(':productID', $productID);
-        $statement->execute();
-        $row = $statement->fetch(PDO::FETCH_ASSOC);
-        $price = $row['Price'];
+//     $query = "SELECT Price FROM products WHERE ProductID = :productID";
+//         $statement = $conn->prepare($query);
+//         $statement->bindParam(':productID', $productID);
+//         $statement->execute();
+//         $row = $statement->fetch(PDO::FETCH_ASSOC);
+//         $price = $row['Price'];
 
-    $rootFolder = dirname($_SERVER['PHP_SELF']);
- // Calculate total price
- $totalPrice = $price * $quantity;
+//     $rootFolder = dirname($_SERVER['PHP_SELF']);
+//  // Calculate total price
+//  $totalPrice = $price * $quantity;
 
- // Prepare the SQL statement
- $query = "INSERT INTO requests (Product_ID, Product_Quantity, Product_Total_Price) VALUES (:productID, :quantity, :totalPrice)";
- $statement = $conn->prepare($query);
+//  // Prepare the SQL statement
+//  $query = "INSERT INTO requests (Product_ID, Product_Quantity, Product_Total_Price) VALUES (:productID, :quantity, :totalPrice)";
+//  $statement = $conn->prepare($query);
 
- // Bind parameters
- $statement->bindParam(':productID', $productID);
- $statement->bindParam(':quantity', $quantity);
- $statement->bindParam(':totalPrice', $totalPrice);
+//  // Bind parameters
+//  $statement->bindParam(':productID', $productID);
+//  $statement->bindParam(':quantity', $quantity);
+//  $statement->bindParam(':totalPrice', $totalPrice);
 
- // Execute the statement
- if ($statement->execute()) {
-     echo "Request saved successfully.";
- } else {
-     echo "Failed to save request.";
+//  // Execute the statement
+//  if ($statement->execute()) {
+//      echo "Request saved successfully.";
+//  } else {
+//      echo "Failed to save request.";
   
-    // Execute the statement
+//     // Execute the statement
 
 
-    header("Location: $rootFolder/test");
-}});
+//     header("Location: $rootFolder/test");
+// }});
 
+
+
+
+function getProductDetails($productID, $conn)
+{
+  try {
+    // Prepare the SQL statement to fetch product details including the image path
+    $query = "SELECT p.ProductImage, p.ProductName, p.Supplier, p.Category, p.Price, r.Product_Quantity, r.Product_Total_Price
+                  FROM products p
+                  INNER JOIN requests r ON p.ProductID = r.Product_ID
+                  WHERE p.ProductID = :product_id";
+    $statement = $conn->prepare($query);
+    $statement->bindParam(':product_id', $productID);
+    $statement->execute();
+
+    // Fetch the product details
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+    // Check if a result is returned
+    if ($result) {
+      return $result; // Return an associative array containing all product details
+    } else {
+      return false; // Return false if no result found
+    }
+  } catch (PDOException $e) {
+    // Handle the exception
+    echo "Error: " . $e->getMessage();
+    return false; // Return false in case of an error
+  }
+}
 
