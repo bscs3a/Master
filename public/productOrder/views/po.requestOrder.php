@@ -84,7 +84,7 @@
                 echo '<td class="px-6 py-10">' . $row["Product_Quantity"] . '</td>';
                 echo '<td class="px-6 py-10">' . $row["Product_Total_Price"] . '</td>';
                 echo '<td class="px-6 py-10">';
-                echo '<form action="/master/po/requestOrder" method="POST" enctype="multipart/form-data">';
+                echo '<form action="/master/delete/requestOrder" method="POST" enctype="multipart/form-data">';
                 echo '<input type="hidden" name="requestID" value="' . $requestID . '">';
                 echo '<input type="submit" value="Delete"class="px-4 py-2 border border-red-600 text-red-600 rounded-md font-semibold tracking-wide cursor-pointer">';
                 echo '</form>';
@@ -129,9 +129,13 @@
       </div>
       <!-- View All Button -->
       <div class="flex justify-end border-none">
-        <button class="mr-5 py-3 px-4 border-2 border-black text-sm rounded-md bg-[#FFC955]">
-          Send to finance
-        </button>
+
+        <form action="/master/update/requestOrder" method="POST" enctype="multipart/form-data">
+          <button type="submit" class="mr-5 py-3 px-4 border-2 border-black text-sm rounded-md bg-[#FFC955]"
+            name="order_now">
+            Order now
+          </button>
+        </form>
       </div>
     </div>
   </div>

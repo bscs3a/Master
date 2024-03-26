@@ -14,7 +14,7 @@ $po = [
     '/po/transactionHistory' => $basePath . "transactionHistory.php",
     '/po/requestHistory' => $basePath . "requestHistory.php",
     '/po/test' => $basePath . "test.php",
-    
+    '/po/updateRequestStatus' => $basePath . "updateRequestStatus.php",
 
 
 
@@ -33,7 +33,7 @@ Router::post('/po/addItem', function () {
     $weight = $_POST['weight']; // for product table
 
     // Check if all necessary data is provided
-    if (empty ($supplierName) || empty ($productName)) {  
+    if (empty ($supplierName) || empty ($productName)) {
         // Redirect if any required fields are empty
         $rootFolder = dirname($_SERVER['PHP_SELF']);
         header("Location: $rootFolder/po/items");
@@ -91,13 +91,13 @@ Router::post('/po/addItem', function () {
 });
 
 //function to delete/remove requested orders of the Inventory Team 
-Router::post('/po/requestOrder', function () {
+Router::post('/delete/requestOrder', function () {
     try {
         $db = Database::getInstance();
         $conn = $db->connect();
 
         // Check if the requestID is provided in the POST data
-        if(isset($_POST['requestID'])) {
+        if (isset ($_POST['requestID'])) {
             $requestID = $_POST['requestID'];
 
             $stmt = $conn->prepare("DELETE FROM requests WHERE Request_ID = :requestID");
@@ -108,11 +108,11 @@ Router::post('/po/requestOrder', function () {
 
             // Check if any rows were affected
             $rowsAffected = $stmt->rowCount();
-            if($rowsAffected > 0) {
+            if ($rowsAffected > 0) {
                 // Redirect back to the request order page after successful deletion
                 $rootFolder = dirname($_SERVER['PHP_SELF']);
                 header("Location: $rootFolder/po/requestOrder");
-                exit(); // Ensure script execution stops after redirection
+                exit (); // Ensure script execution stops after redirection
             } else {
                 // No rows were affected, handle this case accordingly
                 echo "No rows were deleted.";
@@ -165,7 +165,7 @@ Router::post('/po/requestOrder', function () {
 //      echo "Request saved successfully.";
 //  } else {
 //      echo "Failed to save request.";
-  
+
 //     // Execute the statement
 
 
@@ -177,29 +177,64 @@ Router::post('/po/requestOrder', function () {
 
 function getProductDetails($productID, $conn)
 {
-  try {
-    // Prepare the SQL statement to fetch product details including the image path
-    $query = "SELECT p.ProductImage, p.ProductName, p.Supplier, p.Category, p.Price, r.Product_Quantity, r.Product_Total_Price
+    try {
+        // Prepare the SQL statement to fetch product details including the image path
+        $query = "SELECT p.ProductImage, p.ProductName, p.Supplier, p.Category, p.Price, r.Product_Quantity, r.Product_Total_Price
                   FROM products p
                   INNER JOIN requests r ON p.ProductID = r.Product_ID
                   WHERE p.ProductID = :product_id";
-    $statement = $conn->prepare($query);
-    $statement->bindParam(':product_id', $productID);
-    $statement->execute();
+        $statement = $conn->prepare($query);
+        $statement->bindParam(':product_id', $productID);
+        $statement->execute();
 
-    // Fetch the product details
-    $result = $statement->fetch(PDO::FETCH_ASSOC);
+        // Fetch the product details
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-    // Check if a result is returned
-    if ($result) {
-      return $result; // Return an associative array containing all product details
-    } else {
-      return false; // Return false if no result found
+        // Check if a result is returned
+        if ($result) {
+            return $result; // Return an associative array containing all product details
+        } else {
+            return false; // Return false if no result found
+        }
+    } catch (PDOException $e) {
+        // Handle the exception
+        echo "Error: " . $e->getMessage();
+        return false; // Return false in case of an error
     }
-  } catch (PDOException $e) {
-    // Handle the exception
-    echo "Error: " . $e->getMessage();
-    return false; // Return false in case of an error
-  }
 }
 
+
+
+
+function updateRequestStatusToAccepted()
+{
+    try {
+        $db = Database::getInstance();
+        $conn = $db->connect();
+
+        // Prepare the SQL statement to update the request status
+        $stmt = $conn->prepare("UPDATE requests SET request_Status = 'accepted' WHERE request_Status = 'pending'");
+
+        // Execute the statement
+        $stmt->execute();
+        $rootFolder = dirname($_SERVER['PHP_SELF']);
+
+        // Check if any rows were affected
+        $rowsAffected = $stmt->rowCount();
+        if ($rowsAffected > 0) {
+            echo "Request status updated to 'accepted' for $rowsAffected rows.";
+            header("Location: $rootFolder/po/requestOrder");
+            exit(); // Stop script execution after redirection
+        } else {
+            echo "No rows were updated.";
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+
+// Route to handle the update request status action
+Router::post('/update/requestOrder', function () {
+    // Call the function to update request status
+    updateRequestStatusToAccepted();
+});
