@@ -24,7 +24,7 @@ Router::post('/po/addItem', function () {
     $db = Database::getInstance();
     $conn = $db->connect();
 
-    $productID = $_POST['productid']; // for product table
+    // $productID = $_POST['productid']; // for product table
     $productName = $_POST['productname']; // for product table
     $supplierName = $_POST['supplier']; // for supplier table
     $description = $_POST['description']; // for product table
@@ -33,7 +33,7 @@ Router::post('/po/addItem', function () {
     $weight = $_POST['weight']; // for product table
 
     // Check if all necessary data is provided
-    if (empty ($productID) || empty ($productName)) {  
+    if (empty ($supplierName) || empty ($productName)) {  
         // Redirect if any required fields are empty
         $rootFolder = dirname($_SERVER['PHP_SELF']);
         header("Location: $rootFolder/po/items");
@@ -63,15 +63,15 @@ Router::post('/po/addItem', function () {
             // File uploaded successfully, proceed with insertion
 
             // Insert data into product table
-            $stmt1 = $conn->prepare("INSERT INTO products (ProductID, ProductImage, ProductName, Supplier, Description, Category, Price, ProductWeight) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt1->bindParam(1, $productID, PDO::PARAM_INT);
-            $stmt1->bindParam(2, $fileDestination, PDO::PARAM_STR);
-            $stmt1->bindParam(3, $productName, PDO::PARAM_STR);
-            $stmt1->bindParam(4, $supplierName, PDO::PARAM_STR);
-            $stmt1->bindParam(5, $description, PDO::PARAM_STR);
-            $stmt1->bindParam(6, $category, PDO::PARAM_STR);
-            $stmt1->bindParam(7, $price, PDO::PARAM_INT);
-            $stmt1->bindParam(8, $weight, PDO::PARAM_INT);
+            $stmt1 = $conn->prepare("INSERT INTO products (ProductImage, ProductName, Supplier, Description, Category, Price, ProductWeight) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            // $stmt1->bindParam(1, $productID, PDO::PARAM_INT);
+            $stmt1->bindParam(1, $fileDestination, PDO::PARAM_STR);
+            $stmt1->bindParam(2, $productName, PDO::PARAM_STR);
+            $stmt1->bindParam(3, $supplierName, PDO::PARAM_STR);
+            $stmt1->bindParam(4, $description, PDO::PARAM_STR);
+            $stmt1->bindParam(5, $category, PDO::PARAM_STR);
+            $stmt1->bindParam(6, $price, PDO::PARAM_INT);
+            $stmt1->bindParam(7, $weight, PDO::PARAM_INT);
             $stmt1->execute();
 
             // Redirect after successful insertion
@@ -91,7 +91,7 @@ Router::post('/po/addItem', function () {
 });
 
 //function to delete/remove requested orders of the Inventory Team 
-Router::post('/po/requestOrder', function () {
+Router::post('/master/po/requestOrder', function () {
     $db = Database::getInstance();
     $conn = $db->connect();
 

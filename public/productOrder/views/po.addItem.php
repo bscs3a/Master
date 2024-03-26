@@ -70,9 +70,9 @@
                 </div>
                 <!-- Forms for product name and id, suppliers name -->
                 <div class="flex flex-col mr-8">
-                  <label for="productid">Product ID</label>
+                  <!-- <label for="productid">Product ID</label>
                   <input type="number" id="productid" name="productid"
-                    class="h-8 w-80 border-2 bg-white mb-3 rounded-md" required>
+                    class="h-8 w-80 border-2 bg-white mb-3 rounded-md" required> -->
 
                   <label for="productname">Product Name</label>
                   <input type="text" id="productname" name="productname"
