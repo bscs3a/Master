@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,7 +61,7 @@
             try {
               require_once 'dbconn.php';
               // Query to retrieve all requests
-              $query = "SELECT * FROM requests";
+              $query = "SELECT * FROM requests WHERE request_Status = 'pending'";
               $statement = $conn->prepare($query);
               $statement->execute();
 
@@ -136,8 +135,8 @@
       </div>
     </div>
   </div>
-<script  src="./../src/route.js"></script>
-<script  src="./../src/form.js"></script>
+  <script src="./../src/route.js"></script>
+  <script src="./../src/form.js"></script>
 </body>
 
 
