@@ -85,10 +85,10 @@
                     Supplier Name
                   </th>
                   <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                    Date Order
+                    Order Date
                   </th>
                   <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                    Time 
+                    Delivery Time 
                   </th>
                   <th scope="col" class="px-6 py-4 font-medium text-gray-900">
                     Status
@@ -113,13 +113,14 @@
                   </td>
                   <td class="px-6 py-4">
                     <div class="font-medium text-gray-700 text-sm">
-                      04/26/2024
+                      09:24:03 PM
                     </div>
                   </td>
                   <td class="px-6 py-4">
-                    <div class="font-medium text-gray-700 text-sm">
-                      Cancel
-                    </div>
+                    <select class="rounded-lg border border-gray-400 border-b block px-3 py-1 bg-gray-300 text-sm placeholder-gray-400 text-black focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none">
+                      <option value="id">Cancel</option>
+                      <option value="name">Completed</option>
+                    </select>
                   </td>
                   <td class="px-6 py-4">
                     <div class="font-medium text-gray-700 text-sm">

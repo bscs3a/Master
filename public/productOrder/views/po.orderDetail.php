@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
+    <title>Order Details</title>
     <link href="./../src/tailwind.css" rel="stylesheet" />
   </head>
-  
   <body>
     <div class="flex h-screen bg-gray-100">
       
@@ -33,7 +32,7 @@
                   d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
-            <h1 class="text-2xl font-semibold px-5">Dashboard</h1>
+            <h1 class="text-2xl font-semibold px-5">Product Order / Order Details</h1>
           </div>
 
           <div class="flex items-center pr-4 text-xl font-semibold">
@@ -58,69 +57,75 @@
 
         <!-- Main Content -->
         <div class="h-screen">
-          <div class="flex flex-row justify-center gap-16 drop-shadow-md my-8">
-            <div class="flex border-2 border-gray-400 rounded-md w-80 h-40 justify-center items-center">
-              <a class="text-lg">Suppliers</a>
+          <div class="flex flex-row gap-16 drop-shadow-md ml-5 my-8">
+            <div class="flex flex-col pl-3 border-2 border-gray-400 rounded-md w-80 h-40 justify-center">
+              <a class="text-3xl">5350</a>
+              <a class="text-lg">Total Delivery</a>
             </div>
-            <div class="flex border-2 border-gray-400 rounded-md w-80 h-40 justify-center items-center">
-              <a class="text-lg">Items</a>
-            </div>
-            <div class="flex border-2 border-gray-400 rounded-md w-80 h-40 justify-center items-center">
-              <a class="text-lg">Order Request</a>
+            <div class="flex flex-col pl-3 border-2 border-gray-400 rounded-md w-80 h-40 justify-center">
+              <a class="text-3xl">1214</a>
+              <a class="text-lg">To Receive</a>
             </div>
           </div>
+          
+          <a class="text-3xl ml-5">Order Details</a>
 
           <!-- table -->
           <div
             class="overflow-hidden rounded-lg border border-gray-300 shadow-md m-5">
+
             <table
               class="w-full border-collapse bg-white text-left text-sm text-gray-500">
               <thead class="bg-gray-200">
                 <tr class="border-b border-y-gray-300">
                   <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                    Date
+                    ID
                   </th>
                   <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                    User  
+                    Supplier Name
                   </th>
                   <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                    Time In
+                    Date Order
                   </th>
                   <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                    Time Out
+                    Time 
                   </th>
                   <th scope="col" class="px-6 py-4 font-medium text-gray-900">
-                    Action
+                    Status
+                  </th>
+                  <th scope="col" class="px-6 py-4 font-medium text-gray-900">
                   </th>
                 </tr>
               </thead>
 
               <tbody class="divide-y divide-gray-100 border-b border-gray-300">
                 <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4">
-                    <div class="font-medium text-gray-700 text-sm">
-                      2024-16-03
-                    </div>
-                  </td>
-                  <th class="px-6 py-4">
-                    <div class="font-medium text-gray-700 text-sm">
-                      POAdmin@gmail.com
-                    </div>
+                  <th class="px-6 py-4 font-normal text-gray-900">
+                    <div class="font-medium text-gray-700 text-sm">1023141</div>
                   </th>
                   <td class="px-6 py-4">
+                    <div class="font-medium text-gray-700 text-sm">Marc Toolbox</div>
+                  </td>
+                  <td class="px-6 py-4">
                     <div class="font-medium text-gray-700 text-sm">
-                      07:30:15 AM
+                      04/23/2024
                     </div>
                   </td>
                   <td class="px-6 py-4">
                     <div class="font-medium text-gray-700 text-sm">
-                      06:45:15 PM
+                      04/26/2024
                     </div>
                   </td>
-                  <td class="flex gap-3 px-6 py-4 font-normal text-gray-900">
-                    <div class="flex flex-col font-medium text-gray-700 text-sm">
-                      <a>Send Request to Finance</a>
-                      <a>06:45:15 PM</a>
+                  <td class="px-6 py-4">
+                    <select class="rounded-lg border border-gray-400 border-b block px-3 py-1 bg-gray-300 text-sm placeholder-gray-400 text-black focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none">
+                      <option value="id">Pending</option>
+                      <option value="name">Completed</option>
+                      <option value="name">To Receive</option>
+                    </select>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="font-medium text-gray-700 text-sm">
+                      View
                     </div>
                   </td>
                 </tr>
